@@ -27,6 +27,10 @@ NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
 NOS_UTILITY_LIB = -L$(LIBnos) -lnosutil
 INCS  = $(INC) $(NETCDF_INC)
 
+# Testing .so libs
+#JASPER_LIB = -L/usr/lib64 -ljasper
+#Z_LIB = -L/usr/lib64 -lz
+#PNG_LIB = -L/usr/lib64 -lpng
 
 LIB  =   ${G2_LIB4} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BUFR_LIB4}\
    $(NOS_UTILITY_LIB) ${JASPER_LIB} ${PNG_LIB}  ${Z_LIB4} ${BACIO_LIB4}

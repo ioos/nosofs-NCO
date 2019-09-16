@@ -15,11 +15,15 @@ OBJS=nos_creofs_wl_offset_correction.o
 EXECnos=../../exec
 LIBnos=../../lib
 
-FC =           ifort 
+CC = $(COMP_CC)
+FC = $(COMP_F)
+
+# FC =           ifort 
 #use for extensive compilation error reporting
 #LDFLAGS = -p -bnoquiet -bloadmap:mug
-LDFLAGS =	
 #INC = -I/nwprod/lib/incmod/g2_4
+#LDFLAGS = 
+
 INC = -I${G2_INC4}
 NETCDF_INC = -I$(NETCDF)/include
 NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
@@ -29,12 +33,13 @@ NOS_UTILITY_LIB = -L$(LIBnos) -lnosutil
 
 INCS  = $(INC) $(NETCDF_INC)
 
-LIB  =   ${G2_LIB4} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BUFR_LIB4}\
-   ${JASPER_LIB} ${PNG_LIB}  ${Z_LIB4} ${BACIO_LIB4}
+LIB  =   ${G2_LIB4} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BACIO_LIB4} ${BUFR_LIB4}\
+   $(NOS_UTILITY_LIB) ${JASPER_LIB} ${PNG_LIB} ${Z_LIB4}
 
-LIBS  = $(NETCDF_LIB) $(NOS_UTILITY_LIB) $(LIB)
-CMD =            $(EXECnos)/nos_creofs_wl_offset_correction
-PROFLIB =       -lprof
+LIBS = $(LIB) $(NETCDF_LIB)
+
+CMD =  $(EXECnos)/nos_creofs_wl_offset_correction
+PROFLIB =      -lprof
 
 # To perform the default compilation, use the first line
 # To compile with flowtracing turned on, use the second line

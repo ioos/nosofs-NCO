@@ -37,6 +37,7 @@ fi
 
 export pgm="$USHnos/nos_ofs_launch.sh $OFS prep"
 echo "run the launch script to set the NOS configuration"
+
 . $USHnos/nos_ofs_launch.sh $OFS prep
 export err=$?
 if [ $err -ne 0 ]
@@ -83,6 +84,8 @@ if [ -s MET_DBASE.NOWCAST ]; then
     export DBASE_MET_NOW
   fi
 fi
+
+
 echo "Generating the river forcing"
 export pgm=nos_ofs_create_forcing_river.sh
 . prep_step

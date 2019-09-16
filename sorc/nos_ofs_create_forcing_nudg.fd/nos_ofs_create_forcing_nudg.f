@@ -1336,7 +1336,7 @@ c------------------------------------------------------------------
      &               NNMODEL,XOUT,YOUT,ZOUT,weightnodes,weights,1)
     	          ELSEIF (IGRD .EQ. 4)THEN                               !! using nature neighbors
                      call INTERP_NNEIGHBORS(NDATA,XINP,YINP,ZINP,
-     &               ,ZOUT)
+     &               ZOUT)
                   ENDIF
                   CALL ONE2TWOD(ZOUT,TMP2D,IROMS,JROMS)
                   DO J=1,JROMS
@@ -2010,7 +2010,8 @@ c  Output:
 c  nselect is the numbe of search grids which are selected to interpolate
 c  II and JJ are the I- and J-indexes of search grids what are selected
 
-DEL,XOUT,YOUT,
+c ??? DEL,XOUT,YOUT,
+
 	subroutine search_output(im,jm,lon_rtf,lat_rtf,nn,
      .	           lon_ob,lat_ob,nselect,II,JJ)
         parameter (NMAX=90000)

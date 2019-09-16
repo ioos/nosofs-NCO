@@ -22,29 +22,22 @@ setenv COMP_CC gcc
 setenv COMP_CPP g++
 setenv COMP_MPCC mpigcc
 
-module purge
-module load produtil
 module load mpi/intel/2018.5.274
-#module load mpi/openmpi
-#module load mkl/2019.4.243
 
 # Loding nceplibs modules
 module load bacio/v2.1.0
-module load bufr/v11.0.2
-#module load bufr/v11.2.0
-#module load bufr/v11.3.0
+module load bufr/v11.2.0
 module load w3nco/v2.0.6
 module load w3emc/v2.2.0
-#module load g2/v2.5.0
-module load g2/v3.1.0
+module load g2/v2.5.0
 
-module load jasper/v1.900.1
-module load z/v1.2.8
-module load png/v1.2.49
+#module load jasper/v1.900.1
+#module load z/v1.2.6
+#module load png/v1.2.44
 
 #Set other library variables
 module load netcdf/4.2
 setenv NETCDF_INCDIR  "$env(NETCDF)/include"
 setenv NETCDF_LIBDIR  "$env(NETCDF)/lib"
-setenv NETCDF_LDFLAGS "-L$env(NETCDF_LIBDIR) -lnetcdff -lnetcdf"
+setenv NETCDF_LDFLAGS "-L$env(NETCDF_LIBDIR) -lnetcdf -lnetcdff"
 

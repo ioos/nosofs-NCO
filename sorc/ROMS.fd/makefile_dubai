@@ -58,7 +58,7 @@ $(if $(filter $(MAKE_VERSION),$(NEED_VERSION)),,        \
 #  the .h extension. For example, the upwelling application includes the
 #  "upwelling.h" header file.
 
-ROMS_APPLICATION ?= CBOFS
+ROMS_APPLICATION ?= DUBAI
 
 #  If application header files is not located in "ROMS/Include",
 #  provide an alternate directory FULL PATH.
@@ -88,12 +88,12 @@ MY_CPP_FLAGS ?=
 
 #  Activate debugging compiler options:
 
-   USE_DEBUG ?=
+  USE_DEBUG ?=
 
 #  If parallel applications, use at most one of these definitions
 #  (leave both definitions blank in serial applications):
 
-     USE_MPI ?= on
+  USE_MPI ?= on
   USE_OpenMP ?=
 
 #  If distributed-memory, turn on compilation via the script "mpif90".
@@ -108,12 +108,16 @@ MY_CPP_FLAGS ?=
 
 #  If applicable, activate 64-bit compilation:
 
-   USE_LARGE ?= on
+  USE_LARGE ?= on
 
 #  If applicable, link with NetCDF-4 library. Notice that the NetCDF-4
 #  library needs both the HDF5 and MPI libraries.
 
- USE_NETCDF4 ?=
+  USE_NETCDF4 ?=
+
+  USE_AVX512 ?= 
+  USE_AVX2   ?= on
+  USE_MKL ?=
 
 #--------------------------------------------------------------------------
 #  We are going to include a file with all the settings that depend on
@@ -295,7 +299,7 @@ ifdef USE_DEBUG
   BIN := $(BINDIR)/oceanG
 else
  ifdef USE_MPI
-   BIN := $(BINDIR)/cbofs_roms_mpi
+   BIN := $(BINDIR)/dubai_roms_mpi
  endif
  ifdef USE_OpenMP
    BIN := $(BINDIR)/oceanO

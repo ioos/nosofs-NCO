@@ -65,6 +65,8 @@ RUNTYPE=$1
 
 echo "The script nos_ofs_create_forcing_met.sh $RUNTYPE starts at time: " `date `
 echo "The script nos_ofs_create_forcing_met.sh $RUNTYPE starts at time: " `date ` >> $jlogfile
+
+
 if [ $OCEAN_MODEL == 'ROMS' -o $OCEAN_MODEL == 'roms' ]
 then
   export EXFILE='nos_ofs_create_forcing_met'
@@ -72,6 +74,8 @@ elif [ $OCEAN_MODEL == 'FVCOM' -o $OCEAN_MODEL == 'SELFE' ]
 then
   export EXFILE='nos_ofs_create_forcing_met_fvcom'
 fi  
+
+
 if [ $RUNTYPE == "NOWCAST" -o $RUNTYPE == "nowcast" ]
 then
   DBASE=$DBASE_MET_NOW
@@ -82,8 +86,11 @@ then
   HH=00
   HHH=000
   CYCLE_ORI=`echo $TIME_END |cut -c9-10 `
+
 elif [ $RUNTYPE == "FORECAST" -o $RUNTYPE == "forecast" ]
 then
+
+
   DBASE=$DBASE_MET_FOR
   TIME_START=${time_nowcastend}
   TIME_END=$time_forecastend
@@ -93,6 +100,7 @@ then
   HHH=060
   CYCLE_ORI=`echo $TIME_START |cut -c9-10 `
 fi
+
 # make sure to get enough data, two additional hours will be acquired.
 TIME_START_TMP=` $NDATE -3 $TIME_START `
 TIME_END=` $NDATE +3 $TIME_END `
@@ -105,10 +113,12 @@ YYYY=`echo $TIME_START_TMP | cut -c1-4 `
 MM=`echo $TIME_START_TMP |cut -c5-6 `
 DD=`echo $TIME_START_TMP |cut -c7-8 `
 CYCLE=`echo $TIME_START_TMP |cut -c9-10 `
+
 LENGTH=` $NHOUR $TIME_END $TIME_START_TMP `
 if [ $LENGTH -gt 60 ]; then
   LENGTH=60
 fi
+
 if [ $RUNTYPE == "FORECAST" -o $RUNTYPE == "forecast" ]
 then
   LENGTH=60
@@ -265,9 +275,9 @@ do
       fi
     elif [ $DBASE == "NAM4" ]; then
       if [ $OFS != "ciofs" ]; then
-      ls -l ${COMINnam}/nam.${TMPDATE}/nam.t*.conusnest.hiresf*tm00.grib2_nos | awk '{print $NF}' >> tmp.out
+        ls -l ${COMINnam}/nam.${TMPDATE}/nam.t*.conusnest.hiresf*tm00.grib2_nos | awk '{print $NF}' >> tmp.out
       elif [ $OFS == "ciofs" ]; then
-      ls -l ${COMINnam}/nam.${TMPDATE}/nam.t*.alaskanest.hiresf*tm00.grib2 | awk '{print $NF}' >> tmp.out
+        ls -l ${COMINnam}/nam.${TMPDATE}/nam.t*.alaskanest.hiresf*tm00.grib2 | awk '{print $NF}' >> tmp.out
       fi
     elif [ $DBASE == "GFS" ];  then
       ls -l ${COMINgfs}/gfs.${TMPDATE}/??/gfs.t*.pgrb2.0p50.f??? | awk '{print $NF}' >> tmp.out
@@ -630,7 +640,9 @@ do
       # Store the VARNAME and LEV arrays to a file which will be sourced by the MPMD processes
       declare -p VARNAME LEV > var_lev_arrays
 
-      mpirun.lsf cfp cmdfile
+      chmod u+x cmdfile
+      #mpirun.lsf cfp cmdfile
+      mpirun -np $NPP cmdfile
       export err=$?; err_chk
 
       LAST_TMPDIR=""

@@ -203,12 +203,15 @@ if [ $DBASE_TS == 'RTOFS' ]; then
   DD=`echo $TIME_STARTm1 |cut -c7-8 `
   HH=`echo $TIME_STARTm1 |cut -c9-10 `
   CYCLE=00
+
   reg="reg1"
   if [ $OFS == "CREOFS" -o $OFS == "creofs" -o $OFS == "SFBOFS" -o $OFS == "sfbofs" -o $OFS == "WCOFS" -o $OFS == "wcofs" ]; then
       reg="reg2"
   elif [ $OFS == "CIOFS" -o $OFS == "ciofs" ]; then
       reg="reg3"
   fi
+  # else reg="reg1"
+  
   FILESIZE=800000000
   if [ $reg == "reg1" ]; then
       FILESIZE=800000000
@@ -258,6 +261,8 @@ if [ $DBASE_TS == 'RTOFS' ]; then
   NFILE9=`ls -l ${NCEPPRODDIR}/rtofs_glo_3dz_f*_6hrly_hvr_${reg}.nc | wc -l`
   if [ $NFILE9 -le 0 ]; then
     echo 'No 3D RTOFS is found in '${NCEPPRODDIR}
+
+    # Check previous day
     CURRENTTIME=`$NDATE -24 $CURRENTTIME`
     YYYY=`echo $CURRENTTIME |cut -c1-4 `
     MM=`echo $CURRENTTIME |cut -c5-6 `
@@ -266,6 +271,8 @@ if [ $DBASE_TS == 'RTOFS' ]; then
     NFILE9=`ls -l ${NCEPPRODDIR}/rtofs_glo_3dz_f*_6hrly_hvr_${reg}.nc | wc -l`
     if [ $NFILE9 -le 0 ]; then
       echo 'No 3D RTOFS is found in '${NCEPPRODDIR}
+
+      # Check previous day
       CURRENTTIME=`$NDATE -24 $YYYY$MM${DD}00 `
       YYYY=`echo $CURRENTTIME |cut -c1-4 `
       MM=`echo $CURRENTTIME |cut -c5-6 `
@@ -274,6 +281,7 @@ if [ $DBASE_TS == 'RTOFS' ]; then
       NFILE9=`ls -l ${NCEPPRODDIR}/rtofs_glo_3dz_f*_6hrly_hvr_${reg}.nc | wc -l`
     fi
   fi
+
   while [ $CURRENTTIME -le $TIME_NOW ]
   do 
      YYYY=`echo $CURRENTTIME |cut -c1-4 `
@@ -283,6 +291,7 @@ if [ $DBASE_TS == 'RTOFS' ]; then
     NCEPPRODDIR=${COMINrtofs_3d}'/rtofs.'$YYYY$MM$DD
     N=1
     while (( N <= 144))
+    #while (( N <= 48))
     do
 #      fhr=$N
       fhr=`echo $N |  awk '{printf("%03i",$1)}'`
@@ -680,7 +689,7 @@ if [ $DBASE_WL == RTOFS ]; then
   fi
 fi
 
-
+# CBOFS 
 #  create subtidal water level open Boundary forcing File from ETSS
 if [ $DBASE_WL == "ETSS" ]; then
   if [ -s ETSS_FILE ]; then
@@ -804,7 +813,11 @@ if [ $DBASE_WL == "ETSS" ]; then
      (( N++ ))
    done
 
-   mpirun.lsf cfp cmdfile
+   chmod u+x cmdfile
+   #mpirun cfp cmdfile
+   # This is not MPMD - need to set this up for cloud environment, most likely modify the cmdfile - see Intel mpirun mpmd documentation
+   #mpirun -np $NPP cmdfile
+   mpirun cmdfile
    export err=$?; err_chk
 
    N=1

@@ -4,6 +4,7 @@ suite prod00
     edit ECF_FILES '/ecf/ecfnets/scripts/nosofs'
     edit ECF_JOB_CMD '/ecf/ecfutils/unixsubmit %ECF_JOB% %ECF_JOBOUT% ibmsp'
     edit PROJ 'NMO'
+
     family cbofs
       task nos_prep
         time 00:57
@@ -11,6 +12,8 @@ suite prod00
         trigger nos_prep == complete
         edit NTASK '240'
     endfamily
+
+
     family dbofs
       task nos_prep
         time 00:57

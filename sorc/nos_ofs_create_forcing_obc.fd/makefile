@@ -15,7 +15,9 @@ OBJS=nos_ofs_create_forcing_obc.o  nos_ofs_obc_write_netcdf_ROMS.o
 # CMD		Name of the executable
 # PROFLIB	Library needed for profiling
 
-FC =           ifort 
+#
+FC = $(COMP_F)
+#FC =           ifort 
 #use for extensive compilation error reporting
 #LDFLAGS = -p -bnoquiet -bloadmap:mug
 LDFLAGS =	
@@ -36,8 +38,9 @@ INCS  = $(INC) $(NETCDF_INC)
 ##      -L/usrx/local/64bit/lib -ljasper -lpng -lz 
 
 
-LIB  =   ${G2_LIB4} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BUFR_LIB4}\
-   $(NOS_UTILITY_LIB) ${JASPER_LIB} ${PNG_LIB}  ${Z_LIB4} ${BACIO_LIB4}
+# LIB  =   ${G2_LIB4} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BUFR_LIB4}\
+   # $(NOS_UTILITY_LIB) ${JASPER_LIB} ${PNG_LIB}  ${Z_LIB4} ${BACIO_LIB4}
+LIB  = $(NOS_UTILITY_LIB) ${BUFR_LIB4}
 
 
 
@@ -55,7 +58,8 @@ PROFLIB =       -lprof
 # To compile with flowtracing turned on, use the second line
 # To compile giving profile additonal information, use the third line
 # WARNING:  SIMULTANEOUSLY PROFILING AND FLOWTRACING IS NOT RECOMMENDED
-FFLAGS =        -O3  $(INCS) -extend-source
+FFLAGS =        -O2 -g  $(INCS) -ffixed-line-length-none
+#FFLAGS =        -O3  $(INCS) -extend-source
 #FFLAGS =        -O3 -qnosave -qport=mod -qintsize=4 -qrealsize=4
 #FFLAGS =	 -F
 #FFLAGS =	 -Wf"-ez"

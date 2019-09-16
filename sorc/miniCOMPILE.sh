@@ -6,9 +6,6 @@ export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
 
 echo $HOMEnos
 
-# TODO - enable module support for this platform
-####################################################
-
 module purge
 module use $HOMEnos/modulefiles
 module load nosofs
@@ -31,6 +28,15 @@ fi
 
 cd $SORCnos
 
+# OKAY
+cd $SORCnos/nos_ofs_create_forcing_obc.fd
+#rm -f *.o *.a
+gmake -f makefile
+
+
+exit 0
+
+# OKAY
 cd $SORCnos/nos_ofs_utility.fd
 rm -f *.o *.a
 gmake -f makefile
@@ -41,84 +47,125 @@ then
 fi
 gmake clean
 
-cd $SORCnos/nos_ofs_combine_field_netcdf_selfe.fd
-rm -f *.o *.a
-gmake -f makefile
+# SKIP
+#cd $SORCnos/nos_ofs_combine_field_netcdf_selfe.fd
+#rm -f *.o *.a
+#gmake -f makefile
 
-cd $SORCnos/nos_ofs_combine_station_netcdf_selfe.fd
-rm -f *.o *.a
-gmake -f makefile
+# SKIP
+#cd $SORCnos/nos_ofs_combine_station_netcdf_selfe.fd
+#rm -f *.o *.a
+#gmake -f makefile
 
-cd $SORCnos/nos_ofs_combine_hotstart_out_selfe.fd
-rm -f *.o *.a
-gmake -f makefile
+# SKIP
+#cd $SORCnos/nos_ofs_combine_hotstart_out_selfe.fd
+#rm -f *.o *.a
+#gmake -f makefile
 
-
+# OKAY
 cd $SORCnos/nos_ofs_create_forcing_met.fd
 rm -f *.o *.a
 gmake -f makefile
 
-cd $SORCnos/nos_ofs_create_forcing_met_fvcom.fd
-rm -f *.o *.a
-gmake -f makefile
+# SKIP
+#cd $SORCnos/nos_ofs_create_forcing_met_fvcom.fd
+#rm -f *.o *.a
+#gmake -f makefile
 
+# OKAY
 cd $SORCnos/nos_ofs_create_forcing_obc_tides.fd
 rm -f *.o *.a
 gmake -f makefile
 
+# OKAY
 cd $SORCnos/nos_ofs_create_forcing_obc.fd
 rm -f *.o *.a
 gmake -f makefile
 
-cd $SORCnos/nos_ofs_create_forcing_obc_fvcom.fd
-rm -f *.o *.a
-gmake -f makefile
+# SKIP
+#cd $SORCnos/nos_ofs_create_forcing_obc_fvcom.fd
+#rm -f *.o *.a
+#gmake -f makefile
 
-cd $SORCnos/nos_ofs_create_forcing_obc_fvcom_gl.fd
-rm -f *.o *.a
-gmake -f makefile
+# SKIP
+#cd $SORCnos/nos_ofs_create_forcing_obc_fvcom_gl.fd
+#rm -f *.o *.a
+#gmake -f makefile
 
+# SKIP
+#cd $SORCnos/nos_ofs_create_forcing_obc_fvcom_nest.fd
+#rm -f *.o *.a
+#gmake -f makefile
 
-cd $SORCnos/nos_ofs_create_forcing_obc_fvcom_nest.fd
-rm -f *.o *.a
-gmake -f makefile
+# SKIP
+#cd $SORCnos/nos_ofs_create_forcing_obc_selfe.fd
+#rm -f *.o *.a
+#gmake -f makefile
 
-cd $SORCnos/nos_ofs_create_forcing_obc_selfe.fd
-rm -f *.o *.a
-gmake -f makefile
-
+# OKAY
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/RPSDEV/nceplibs/bufr/v11.0.2
 cd $SORCnos/nos_ofs_create_forcing_river.fd
 rm -f *.o *.a
 gmake -f makefile
 
+# OKAY
 cd $SORCnos/nos_ofs_met_file_search.fd
 rm -f *.o *.a
 gmake -f makefile
 
+# OKAY
 cd $SORCnos/nos_ofs_read_restart.fd
 rm -f *.o *.a
 gmake -f makefile
 
-cd $SORCnos/nos_ofs_read_restart_fvcom.fd
-rm -f *.o *.a
-gmake -f makefile
 
-cd $SORCnos/nos_ofs_read_restart_selfe.fd
-rm -f *.o *.a
-gmake -f makefile
+# SKIP
+#cd $SORCnos/nos_ofs_read_restart_fvcom.fd
+#rm -f *.o *.a
+#gmake -f makefile
 
+# SKIP
+#cd $SORCnos/nos_ofs_read_restart_selfe.fd
+#rm -f *.o *.a
+#gmake -f makefile
+
+# OKAY
 cd $SORCnos/nos_ofs_reformat_ROMS_CTL.fd
 rm -f *.o *.a
 gmake -f makefile
 
-cd $SORCnos/nos_creofs_wl_offset_correction.fd
-gmake clean
-gmake -f makefile
 
-cd $SORCnos/nos_ofs_create_forcing_nudg.fd
+# WONT BUILD - BUFR Lib issue - DONT need it for CBOFS
+# cd $SORCnos/nos_creofs_wl_offset_correction.fd
+# gmake clean
+# gmake -f makefile
 
+# OKAY - not needed for cbofs
+#cd $SORCnos/nos_ofs_create_forcing_nudg.fd
+#gmake clean
+#gmake -f makefile
+
+## Compile DUBAI
+
+#echo "Start: " > ~/compiletime
+#echo `date` >> ~/compiletime
+
+
+
+cd $SORCnos/ROMS.fd
 gmake clean
-gmake -f makefile
+gmake -f makefile_dubai
+if [ -s  dubai_roms_mpi ]; then
+  mv dubai_roms_mpi $EXECnos/.
+else
+  echo 'roms executable for DUBAI is not created'
+fi
+
+# Build time is 1 minute on EC2 w/ 1 CPU
+#echo "Finish: " >> ~/compiletime
+#echo `date` >> ~/compiletime
+
+
 ##  Compile ocean model of ROMS for CBOFS
 cd $SORCnos/ROMS.fd
 gmake clean
@@ -128,6 +175,13 @@ if [ -s  cbofs_roms_mpi ]; then
 else
   echo 'roms executable for CBOFS is not created'
 fi
+
+
+
+exit 0
+
+
+
 ##  Compile ocean model of ROMS for DBOFS
 cd $SORCnos/ROMS.fd
 gmake clean

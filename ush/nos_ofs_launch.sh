@@ -70,6 +70,11 @@ echo 'The script nos_ofs_launch.sh has started at UTC' `date ` >> $nosjlogfile
 
 # set from system PDY variable for operations
 export time_nowcastend=$PDY${cyc}
+echo "*******************************************************************"
+echo "*******************************************************************"
+echo "time_nowcastend is $time_nowcastend"
+echo "*******************************************************************"
+echo "*******************************************************************"
 
 #------------------------------------------------'
 #  COPY Files into Work Directory
@@ -614,13 +619,36 @@ fi
  export NQCK=`expr $NQCK / ${DELT_MODEL}`
  export NDEFQCK=`expr $NDEFQCK / ${DELT_MODEL}`
  fi
- export NH_NOWCAST=`$NHOUR $time_nowcastend $time_hotstart`
+
+ #PT export NH_NOWCAST=`$NHOUR $time_nowcastend $time_hotstart`
+ echo " ****** HARDCODING NH_NOWCAST *******"
+
+ export NH_NOWCAST=6
  export NSTEP_NOWCAST=`expr $NH_NOWCAST \* 3600 / ${DELT_MODEL}`
  export NTIMES_NOWCAST=$NSTEP_NOWCAST
- export NH_FORECAST=`$NHOUR $time_forecastend $time_nowcastend `
+
+echo "*******************************************************************"
+echo "*******************************************************************"
+echo "NH_NOWCAST=$NH_NOWCAST"
+echo "NTIMES_NOWCAST=$NSTEP_NOWCAST"
+echo "*******************************************************************"
+echo "*******************************************************************"
+
+ echo " ****** HARDCODING NH_FORECAST *******"
+ #export NH_FORECAST=`$NHOUR $time_forecastend $time_nowcastend `
+ export NH_FORECAST=48
+
  export NSTEP_FORECAST=`expr $NH_FORECAST \* 3600 / ${DELT_MODEL}`
 # export NTIMES_FORECAST=`expr $NTIMES_NOWCAST + $NSTEP_FORECAST`  # For older ROMS version than 859
  export NTIMES_FORECAST=$NSTEP_FORECAST      #for newer version than 859
+
+echo "*******************************************************************"
+echo "*******************************************************************"
+echo "NH_FORECAST=$NH_FORECAST"
+echo "NTIMES_FORECAST=$NSTEP_NOWCAST"
+echo "*******************************************************************"
+echo "*******************************************************************"
+
  export PDY1=$YYYY$MM$DD
 
  if [ $NH_NOWCAST -lt 1 ]
@@ -648,6 +676,10 @@ fi
 fi
 
 ## -- End of prep Only --------------------------------'
+
+
+
+
 
 export OBC_FORCING_FILE=${NET}.${RUN}.obc.$PDY1.t${HH}z.nc
 export OBC_FORCING_FILE_EL=${NET}.${RUN}.obc.el.$PDY1.t${HH}z.nc
@@ -679,6 +711,7 @@ export MODEL_LOG_NOWCAST=${NET}.${RUN}.nowcast.$PDY1.t${HH}z.log
 export MODEL_LOG_FORECAST=${NET}.${RUN}.forecast.$PDY1.t${HH}z.log
 export RUNTIME_CTL_NOWCAST=${NET}.${RUN}.nowcast.$PDY1.t${HH}z.in
 export RUNTIME_CTL_FORECAST=${NET}.${RUN}.forecast.$PDY1.t${HH}z.in
+
 if [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
 then
   export MET_NETCDF_1_NOWCAST=${NET}.${RUN}.met.nowcast.$PDY1.t${HH}z.nc.tar

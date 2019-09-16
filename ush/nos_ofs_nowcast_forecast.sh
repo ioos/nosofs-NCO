@@ -625,7 +625,8 @@ then
 # 2   Execute ocean model of ROMS; where ${RUN}_roms_nowcast.in is created by nos_ofs_reformat_roms_ctl.sh
   if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]
   then 
-    mpirun.lsf $EXECnos/${RUN}_roms_mpi ${RUN}_${OCEAN_MODEL}_nowcast.in >> ${MODEL_LOG_NOWCAST}
+    #mpirun.lsf $EXECnos/${RUN}_roms_mpi ${RUN}_${OCEAN_MODEL}_nowcast.in >> ${MODEL_LOG_NOWCAST}
+    mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ${RUN}_${OCEAN_MODEL}_nowcast.in >> ${MODEL_LOG_NOWCAST}
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -710,7 +711,8 @@ then
 
   elif [ ${OCEAN_MODEL} == "FVCOM" -o ${OCEAN_MODEL} == "fvcom" ]
   then
-    mpirun.lsf $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    # mpirun.lsf $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    mpirun $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -786,7 +788,8 @@ then
   elif [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
   then
     echo "nowcast simulation began at:  `date`" >> $nosjlogfile
-    mpirun.lsf $EXECnos/selfe_${RUN} > $MODEL_LOG_NOWCAST
+    #mpirun.lsf $EXECnos/selfe_${RUN} > $MODEL_LOG_NOWCAST
+    mpirun $EXECnos/selfe_${RUN} > $MODEL_LOG_NOWCAST
     export err=$?
     rm -f corms.now corms.fcst 
     if [ -s $DATA/mirror.out ]
@@ -1430,7 +1433,8 @@ then
 # --------------------------------------------------------------------------- #
 # 2   Execute ocean model of ROMS; where ${RUN}_roms_forecast.in is created by nos_ofs_reformat_roms_ctl.sh
   if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]; then
-     mpirun.lsf $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+     # mpirun.lsf $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+     mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -1517,7 +1521,8 @@ then
   elif [ ${OCEAN_MODEL} == "FVCOM" -o ${OCEAN_MODEL} == "fvcom" ]
   then
     rm -f $MODEL_LOG_FORECAST
-    mpirun.lsf $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
+    # mpirun.lsf $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
+    mpirun $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -1602,7 +1607,8 @@ then
   elif [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
   then
     echo "forecast simulation began at:  `date`" >> $nosjlogfile
-    mpirun.lsf $EXECnos/selfe_${OFS} > $MODEL_LOG_FORECAST
+    #mpirun.lsf $EXECnos/selfe_${OFS} > $MODEL_LOG_FORECAST
+    mpirun $EXECnos/selfe_${OFS} > $MODEL_LOG_FORECAST
     export err=$?
     rm -f corms.now corms.fcst 
     if [ -s $DATA/mirror.out ]
