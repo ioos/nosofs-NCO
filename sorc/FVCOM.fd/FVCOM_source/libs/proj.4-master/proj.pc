@@ -1,0 +1,11 @@
+prefix=/nwtest2/nosofs.v3.1.6.0/sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: proj
+Description: Cartographic Projections Library.
+Requires:
+Version: 4.9.1
+Libs: -L${libdir} -lproj
+Cflags: -I${includedir}

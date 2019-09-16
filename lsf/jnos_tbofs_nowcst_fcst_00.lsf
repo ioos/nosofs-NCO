@@ -1,0 +1,44 @@
+#BSUB -L /bin/sh
+#BSUB -P NMO-T2O
+#BSUB -a poe
+#BSUB -q devmax
+#BSUB -J tbofs_nf_1_00
+#BSUB -o rpt/tbofs_nf_00.out.%J
+#BSUB -e rpt/tbofs_nf_00.err.%J
+#BSUB -w 'done (tbofs_prep_1_00)'
+##BSUB -x
+#BSUB -n 144
+#BSUB -R "span[ptile=16]"
+#BSUB -W 2:30
+#BSUB -cwd /ptmpp1/%U
+
+module use /nwprod2/modulefiles
+
+. /nos/save/$LOGNAME/nwprod/versions/nosofs.ver
+
+module switch ics/${ics_ver:?}
+module load prod_util/${prod_util_ver:?}
+module load grib_util/${grib_util_ver:?}
+module load NetCDF/${netcdf_ver:?}
+module load cfp/${cfp_ver:?}
+module load ibmpe
+
+export MP_EUIDEVICE=sn_all
+export MP_EUILIB=us
+export MP_MPILIB=mpich2
+export MP_TASK_AFFINITY=core
+export MP_USE_BULK_XFER=yes
+export MP_PULSE=0
+export MP_TIMEOUT=9000
+export MP_SHARED_MEMORY=yes
+
+export envir=dev
+export OFS=tbofs
+export cyc=00
+export job=tbofs_nf_00
+export platform=Phase1
+
+
+# CALL executable job script here
+
+/nos/save/$LOGNAME/nwprod/nosofs.${nosofs_ver}/jobs/JNOS_OFS_NOWCST_FCST.${envir}

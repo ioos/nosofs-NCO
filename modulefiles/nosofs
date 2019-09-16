@@ -1,0 +1,42 @@
+#%Module
+
+##############################################################
+###     Machuan Peng and Aijun Zhang Aijun.Zhang@noaa.gov
+###     NOS' Center for Operational Oceanographic Products and Services (CO-OPS)
+### NOS_SHARED
+##############################################################
+proc ModulesHelp { } {
+puts stderr "Set environment veriables for NOSOFS"
+puts stderr "This module initializes the enviro nment "
+puts stderr "for the Intel Compiler Suite composer_xe_2011_sp1.11.339\n"
+}
+module-whatis "This module sets the environment variables for \
+               nosofs_shared production utilities:"
+
+setenv COMP_F ifort
+setenv COMP_F_MPI90 mpif90
+setenv COMP_F_MPI mpfort
+setenv COMP_ICC icc
+setenv COMP_CC cc
+setenv COMP_CPP cpp
+setenv COMP_MPCC mpcc
+
+module load ibmpe/1.3.0.12
+# Loading Intel Compiler Suite
+module load ics/12.1
+# Loding nceplibs modules
+module load bacio/v2.0.2
+module load w3nco/v2.0.6
+module load w3emc/v2.2.0
+module load g2/v2.5.0
+module load jasper/v1.900.1
+module load z/v1.2.6
+module load png/v1.2.44
+module load bufr/v11.0.2
+
+#Set other library variables
+module load NetCDF/4.2/serial
+setenv NETCDF_INCDIR "$env(NETCDF)/include"
+setenv NETCDF_LIBDIR "$env(NETCDF)/lib"
+setenv NETCDF_LDFLAGS "-L$env(NETCDF_LIBDIR) -lnetcdff"
+

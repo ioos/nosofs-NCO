@@ -1,0 +1,340 @@
+suite prod00
+  family nosofs
+    edit QUEUE 'prod2'
+    edit ECF_FILES '/ecf/ecfnets/scripts/nosofs'
+    edit ECF_JOB_CMD '/ecf/ecfutils/unixsubmit %ECF_JOB% %ECF_JOBOUT% ibmsp'
+    edit PROJ 'NMO'
+    family cbofs
+      task nos_prep
+        time 00:57
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '240'
+    endfamily
+    family dbofs
+      task nos_prep
+        time 00:57
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '192'
+    endfamily
+    family tbofs
+      task nos_prep
+        time 00:57
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '144'
+    endfamily
+    #family leofs
+    #  task nos_prep
+    #    time 01:05
+    #  task nos_nowcst_fcst
+    #    trigger nos_prep == complete
+    #    edit NTASK '48'
+    #endfamily
+    family gomofs
+      task nos_prep
+        time 01:15
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '1440'
+    endfamily
+    family ngofs
+      edit CYC '03'
+      task nos_prep
+        time 02:47
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family sfbofs
+      edit CYC '03'
+      task nos_prep
+        time 03:25
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family negofs
+      edit CYC '03'
+      task nos_prep
+        trigger ../ngofs/nos_nowcst_fcst == complete
+        time 03:47
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family nwgofs
+      edit CYC '03'
+      task nos_prep
+        trigger ../ngofs/nos_nowcst_fcst == complete
+        time 03:47
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family creofs
+      edit CYC '03'
+      task nos_prep
+        time 03:50
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+  endfamily
+endsuite
+suite prod06
+  family nosofs
+    edit QUEUE 'prod2'
+    edit ECF_FILES '/ecf/ecfnets/scripts/nosofs'
+    edit ECF_JOB_CMD '/ecf/ecfutils/unixsubmit %ECF_JOB% %ECF_JOBOUT% ibmsp'
+    edit PROJ 'NMO'
+    family cbofs
+      task nos_prep
+        time 06:57
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '240'
+    endfamily
+    family dbofs
+      task nos_prep
+        time 06:57
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '192'
+    endfamily
+    family tbofs
+      task nos_prep
+        time 06:57
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '144'
+    endfamily
+    #family leofs
+    #  task nos_prep
+    #    time 07:05
+    #  task nos_nowcst_fcst
+    #    trigger nos_prep == complete
+    #    edit NTASK '48'
+    #endfamily
+    family gomofs
+      task nos_prep
+        time 07:15
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '1440'
+    endfamily
+    family ngofs
+      edit CYC '09'
+      task nos_prep
+        time 08:47
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family sfbofs
+      edit CYC '09'
+      task nos_prep
+        time 09:25
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family negofs
+      edit CYC '09'
+      task nos_prep
+        trigger ../ngofs/nos_nowcst_fcst == complete
+        time 09:47
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family nwgofs
+      edit CYC '09'
+      task nos_prep
+        trigger ../ngofs/nos_nowcst_fcst == complete
+        time 09:47
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family creofs
+      edit CYC '09'
+      task nos_prep
+        time 09:50
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+  endfamily
+endsuite
+suite prod12
+  family nosofs
+    edit QUEUE 'prod2'
+    edit ECF_FILES '/ecf/ecfnets/scripts/nosofs'
+    edit ECF_JOB_CMD '/ecf/ecfutils/unixsubmit %ECF_JOB% %ECF_JOBOUT% ibmsp'
+    edit PROJ 'NMO'
+    family cbofs
+      task nos_prep
+        time 12:57
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '240'
+    endfamily
+    family dbofs
+      task nos_prep
+        time 12:57
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '192'
+    endfamily
+    family tbofs
+      task nos_prep
+        time 12:57
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '144'
+    endfamily
+    #family leofs
+    #  task nos_prep
+    #    time 13:05
+    #  task nos_nowcst_fcst
+    #    trigger nos_prep == complete
+    #    edit NTASK '48'
+    #endfamily
+    family gomofs
+      task nos_prep
+        time 13:15
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '1440'
+    endfamily
+    family ngofs
+      edit CYC '15'
+      task nos_prep
+        time 14:47
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family sfbofs
+      edit CYC '15'
+      task nos_prep
+        time 15:25
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family negofs
+      edit CYC '15'
+      task nos_prep
+        trigger ../ngofs/nos_nowcst_fcst == complete
+        time 15:47
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family nwgofs
+      edit CYC '15'
+      task nos_prep
+        trigger ../ngofs/nos_nowcst_fcst == complete
+        time 15:47
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family creofs
+      edit CYC '15'
+      task nos_prep
+        time 15:50
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+  endfamily
+endsuite
+suite prod18
+  family nosofs
+    edit QUEUE 'prod2'
+    edit ECF_FILES '/ecf/ecfnets/scripts/nosofs'
+    edit ECF_JOB_CMD '/ecf/ecfutils/unixsubmit %ECF_JOB% %ECF_JOBOUT% ibmsp'
+    edit PROJ 'NMO'
+    family cbofs
+      task nos_prep
+        time 18:57
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '240'
+    endfamily
+    family dbofs
+      task nos_prep
+        time 18:57
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '192'
+    endfamily
+    family tbofs
+      task nos_prep
+        time 18:57
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '144'
+    endfamily
+    #family leofs
+    #  task nos_prep
+    #    time 19:05
+    #  task nos_nowcst_fcst
+    #    trigger nos_prep == complete
+    #    edit NTASK '48'
+    #endfamily
+    family gomofs
+      task nos_prep
+        time 19:15
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '1440'
+    endfamily
+    family ngofs
+      edit CYC '21'
+      task nos_prep
+        time 20:47
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family sfbofs
+      edit CYC '21'
+      task nos_prep
+        time 21:25
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family negofs
+      edit CYC '21'
+      task nos_prep
+        trigger ../ngofs/nos_nowcst_fcst == complete
+        time 21:47
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family nwgofs
+      edit CYC '21'
+      task nos_prep
+        trigger ../ngofs/nos_nowcst_fcst == complete
+        time 21:47
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+    family creofs
+      edit CYC '21'
+      task nos_prep
+        time 21:50
+      task nos_nowcst_fcst
+        trigger nos_prep == complete
+        edit NTASK '120'
+    endfamily
+  endfamily
+endsuite
