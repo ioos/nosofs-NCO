@@ -133,7 +133,11 @@ env
 ########################################################
 # Execute the script.
 ########################################################
-$SCRIPTSnos/exnos_ofs_nowcast_forecast.sh $OFS
+#$SCRIPTSnos/exnos_ofs_nowcast.sh $OFS
+
+
+
+$SCRIPTSnos/exnos_ofs_forecast.sh $OFS
 ########################################################
 
 cat $pgmout

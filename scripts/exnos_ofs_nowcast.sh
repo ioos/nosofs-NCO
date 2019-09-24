@@ -111,68 +111,6 @@ else
 fi
 
 # if [ $envir = "dev" ]; then
-#   $USHnos/nos_ofs_sftp.sh $runtype
-# fi
- echo "end of $runtype"
-
-
-echo "PT - TESTING - NOT RUNNING FORECAST STEP THIS TIME"
-echo "PT - EXITING"
-exit 0
-
-####    Run forecast simulation
-runtype='forecast'
-
-echo "     " >> $jlogfile 
-echo "     " >> $nosjlogfile 
-echo " Start nos_ofs_nowcast_forecast.sh $runtype at : `date`" >> $jlogfile
-echo " Start nos_ofs_nowcast_forecast.sh $runtype at : `date`" >> $nosjlogfile
-echo "Running nos_ofs_nowcast_forecast.sh $runtype at : `date`" >> $jlogfile
-echo "Running nos_ofs_nowcast_forecast.sh $runtype at : `date`" >> $nosjlogfile
-echo " Start nos_ofs_nowcast_forecast.sh $runtype at : `date`" 
-export pgm="$USHnos/nos_ofs_nowcast_forecast.sh $runtype"
-$USHnos/nos_ofs_nowcast_forecast.sh $runtype 
-export err=$?
-if [ $err -ne 0 ]
-then
-   echo "Execution of $pgm did not complete normally, FATAL ERROR!"
-   echo "Execution of $pgm did not complete normally, FATAL ERROR!" >> $cormslogfile
-   msg=" Execution of $pgm did not complete normally, FATAL ERROR!"
-   postmsg "$jlogfile" "$msg"
-   postmsg "$nosjlogfile" "$msg"
-   err_chk
-else
-   echo "Execution of $pgm completed normally" >> $cormslogfile
-   echo "Execution of $pgm completed normally"
-   msg=" Execution of $pgm completed normally"
-   postmsg "$jlogfile" "$msg"
-   postmsg "$nosjlogfile" "$msg"
-fi
-
-echo "end of nos_ofs_nowcast_forecast.sh $runtype"
-
-##  archive forecast outputs 
-export pgm="$USHnos/nos_ofs_archive.sh $runtype"
-#$USHnos/nos_ofs_archive.sh $runtype 
-export err=0
-export err=$?
-if [ $err -ne 0 ]
-then
-   echo "Execution of $pgm did not complete normally, FATAL ERROR!"
-   echo "Execution of $pgm did not complete normally, FATAL ERROR!" >> $cormslogfile
-   msg=" Execution of $pgm did not complete normally, FATAL ERROR!"
-   postmsg "$jlogfile" "$msg"
-   postmsg "$nosjlogfile" "$msg"
-   err_chk
-else
-   echo "Execution of $pgm completed normally" >> $cormslogfile
-   echo "Execution of $pgm completed normally"
-   msg=" Execution of $pgm completed normally"
-   postmsg "$jlogfile" "$msg"
-   postmsg "$nosjlogfile" "$msg"
-fi
-
-# if [ $envir = "dev" ]; then
 #  # for development copy outputs to CO-OPS via sftp push 
 #   $USHnos/nos_ofs_sftp.sh $runtype
 # fi

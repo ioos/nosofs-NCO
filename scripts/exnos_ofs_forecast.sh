@@ -41,9 +41,13 @@ else
   err_chk
 fi
 
+#PT - Removed nos_ofs_launch.sh $OFS nowcast - section
+#PT - Removed nos_ofs_nowcast_forecast.sh $runtype  - section
+#PT - Removed nos_ofs_archive.sh $runtype - section
+
 echo "run the launch script to set the NOS configuration"
-. $USHnos/nos_ofs_launch.sh $OFS nowcast
-export pgm="$USHnos/nos_ofs_launch.sh $OFS nowcast"
+. $USHnos/nos_ofs_launch.sh $OFS forecastjibberishjibberjabber-butnotprep
+export pgm="$USHnos/nos_ofs_launch.sh $OFS ifnotprep-couldbeanything-else"
 export err=$?
 if [ $err -ne 0 ]
 then
@@ -60,65 +64,6 @@ else
    postmsg "$jlogfile" "$msg"
    postmsg "$nosjlogfile" "$msg"
 fi
-
-#####     Run nowcast simulation
-runtype='nowcast'
-echo "     " >> $jlogfile 
-echo "     " >> $nosjlogfile 
-echo " Start $runtype " >> $jlogfile
-echo " Start $runtype " >> $nosjlogfile
-echo "Making $runtype at : `date`" >> $jlogfile
-echo "Making $runtype at : `date`" >> $nosjlogfile
-echo "Making $runtype at : `date`"
-export pgm="$USHnos/nos_ofs_nowcast_forecast.sh $runtype"
-$USHnos/nos_ofs_nowcast_forecast.sh $runtype 
-export err=$?
-if [ $err -ne 0 ]
-then
-   echo "Execution of $pgm did not complete normally, FATAL ERROR!"
-   echo "Execution of $pgm did not complete normally, FATAL ERROR!" >> $cormslogfile
-   msg=" Execution of $pgm did not complete normally, FATAL ERROR!"
-   postmsg "$jlogfile" "$msg"
-   postmsg "$nosjlogfile" "$msg"
-   err_chk
-else
-   echo "Execution of $pgm completed normally" >> $cormslogfile
-   echo "Execution of $pgm completed normally"
-   msg=" Execution of $pgm completed normally"
-   postmsg "$jlogfile" "$msg"
-   postmsg "$nosjlogfile" "$msg"
-fi
-
-###  archive nowcast outputs
-export pgm="$USHnos/nos_ofs_archive.sh $runtype"
-#$USHnos/nos_ofs_archive.sh $runtype
-#export err=$?
-err=0
-if [ $err -ne 0 ]
-then
-   echo "Execution of $pgm did not complete normally, FATAL ERROR!"
-   echo "Execution of $pgm did not complete normally, FATAL ERROR!" >> $cormslogfile
-   msg=" Execution of $pgm did not complete normally, FATAL ERROR!"
-   postmsg "$jlogfile" "$msg"
-   postmsg "$nosjlogfile" "$msg"
-   err_chk
-else
-   echo "Execution of $pgm completed normally" >> $cormslogfile
-   echo "Execution of $pgm completed normally"
-   msg=" Execution of $pgm completed normally"
-   postmsg "$jlogfile" "$msg"
-   postmsg "$nosjlogfile" "$msg"
-fi
-
-# if [ $envir = "dev" ]; then
-#   $USHnos/nos_ofs_sftp.sh $runtype
-# fi
- echo "end of $runtype"
-
-
-echo "PT - TESTING - NOT RUNNING FORECAST STEP THIS TIME"
-echo "PT - EXITING"
-exit 0
 
 ####    Run forecast simulation
 runtype='forecast'
