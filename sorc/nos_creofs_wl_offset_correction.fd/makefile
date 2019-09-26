@@ -26,7 +26,7 @@ FC = $(COMP_F)
 
 INC = -I${G2_INC4}
 NETCDF_INC = -I$(NETCDF)/include
-NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
+NETCDF_LIB = -L$(NETCDF_LIBDIR) -lnetcdff -lnetcdf
 
 ## NOS COMF unitility library
 NOS_UTILITY_LIB = -L$(LIBnos) -lnosutil

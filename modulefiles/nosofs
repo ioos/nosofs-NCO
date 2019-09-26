@@ -14,7 +14,7 @@ puts stderr "for the Intel Compiler Suite composer_xe_2011_sp1.11.339\n"
 module-whatis "This module sets the environment variables for \
                nosofs_shared production utilities:"
 
-setenv COMP_F gfortran
+setenv COMP_F /usrx/gcc/6.5.0/bin/gfortran
 setenv COMP_F_MPI90 mpif90
 setenv COMP_F_MPI mpifc
 setenv COMP_ICC gcc
@@ -42,6 +42,6 @@ module load libpng/1.2.59
 #Set other library variables
 module load netcdf/4.2
 setenv NETCDF_INCDIR  "$env(NETCDF)/include"
-setenv NETCDF_LIBDIR  "$env(NETCDF)/lib"
+setenv NETCDF_LIBDIR  "$env(NETCDF)/lib64"
 setenv NETCDF_LDFLAGS "-L$env(NETCDF_LIBDIR) -lnetcdff -lnetcdf"
 

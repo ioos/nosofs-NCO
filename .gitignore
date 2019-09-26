@@ -1,0 +1,4 @@
+*.o
+lib/*.a
+exec/
+sorc/ROMS.fd/Build/

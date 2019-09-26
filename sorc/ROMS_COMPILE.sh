@@ -28,11 +28,6 @@ fi
 
 cd $SORCnos
 
-cd $SORCnos/nos_ofs_create_forcing_obc.fd
-#rm -f *.o *.a
-gmake -f makefile
-
-
 cd $SORCnos/nos_ofs_utility.fd
 rm -f *.o *.a
 gmake -f makefile
@@ -71,6 +66,7 @@ gmake -f makefile
 cd $SORCnos/nos_ofs_create_forcing_obc_tides.fd
 rm -f *.o *.a
 gmake -f makefile
+
 
 # OKAY
 cd $SORCnos/nos_ofs_create_forcing_obc.fd
