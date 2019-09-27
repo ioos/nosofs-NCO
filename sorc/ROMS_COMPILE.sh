@@ -9,6 +9,7 @@ echo $HOMEnos
 module purge
 module use $HOMEnos/modulefiles
 module load nosofs
+
 module list 2>&1
 
 export SORCnos=$HOMEnos/sorc
@@ -28,6 +29,7 @@ fi
 
 cd $SORCnos
 
+
 cd $SORCnos/nos_ofs_utility.fd
 rm -f *.o *.a
 gmake -f makefile
@@ -36,7 +38,6 @@ then
   chmod 755 $SORCnos/nos_ofs_utility.fd/libnosutil.a
   mv $SORCnos/nos_ofs_utility.fd/libnosutil.a ${LIBnos}
 fi
-gmake clean
 
 # SKIP
 #cd $SORCnos/nos_ofs_combine_field_netcdf_selfe.fd
@@ -56,6 +57,7 @@ gmake clean
 cd $SORCnos/nos_ofs_create_forcing_met.fd
 rm -f *.o *.a
 gmake -f makefile
+
 
 # SKIP
 #cd $SORCnos/nos_ofs_create_forcing_met_fvcom.fd

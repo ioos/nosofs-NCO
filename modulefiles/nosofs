@@ -14,7 +14,7 @@ puts stderr "for the Intel Compiler Suite composer_xe_2011_sp1.11.339\n"
 module-whatis "This module sets the environment variables for \
                nosofs_shared production utilities:"
 
-setenv COMP_F /usrx/gcc/6.5.0/bin/gfortran
+setenv COMP_F gfortran
 setenv COMP_F_MPI90 mpif90
 setenv COMP_F_MPI mpifc
 setenv COMP_ICC gcc
@@ -24,6 +24,7 @@ setenv COMP_MPCC mpigcc
 
 module purge
 module load produtil
+module load gcc/6.5.0
 module load mpi/intel/2018.5.274
 #module load mpi/openmpi
 #module load mkl/2019.4.243
@@ -37,7 +38,7 @@ module load g2/v3.1.0
 
 module load jasper/1.900.1
 module load zlib/1.2.11
-module load libpng/1.2.59
+module load libpng/1.5.30
 
 #Set other library variables
 module load netcdf/4.2
