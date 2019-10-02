@@ -123,18 +123,22 @@ if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]
 then 
   #  if [ ! -s ${FIXnos}/$VARINFOFILE_ROMS ]
   #  then
-  if [ ! -s ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat ]; then
+  #if [ ! -s ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat ]; then
+  VARINFO=${FIXnos}/varinfo.dat
+
+  if [ ! -s ${VARINFO} ]; then
     echo "ROMS varinfo.dat is not found"
-    echo "please provide file of ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat"
-    echo "please provide file of ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat" >> $cormslogfile
-    msg="FATAL ERROR: ${HOMEnos}/ROMS.fd/sorc/ROMS/External/varinfo.dat does not exist, FATAL ERROR!"
+    echo "please provide file of ${VARINFO}"
+    echo "please provide file of ${VARINFO}" >> $cormslogfile
+    msg="FATAL ERROR: ${VARINFO} does not exist, FATAL ERROR!"
     postmsg "$jlogfile" "$msg"
     postmsg "$nosjlogfile" "$msg"
     exit 2
   else
-    cp -p ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat $DATA/.
+    #cp -p ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat $DATA/.
+    cp -p ${VARINFO} $DATA/.
     export err=$?; err_chk
-    echo " ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat was copied into working dir"
+    echo "${VARINFO} was copied into working dir"
   fi
 fi
 
