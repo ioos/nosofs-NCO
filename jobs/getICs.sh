@@ -1,87 +1,76 @@
 #!/bin/sh
+#set -x
 
-#https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/cbofs.$PDY/
+. /usr/share/Modules/init/sh
+module load produtil
 
-NOMADS=https://nomads.ncep.noaa.gov/pub/data/nccf
-#cd $COMOUT
+#CDATE=20191001
+#cyc=00
 
-# Get current cycle forcing data
-PDY=20190906
+# https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/cbofs.20191001/
 
-# Get previous cycle for init time, need some overlap
-#PDY=20190905
+url=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/cbofs.$CDATE
 
-#ETSS - storm surge
-product=etss
-COM=/save/com/$product/ec2/$product.$PDY
-mkdir -p $COM
-cd $COM
+#ICDIR=/noscrub/$USER/ICs/cbofs.$CDATE
+ICDIR=$COMIN
+mkdir -p $ICDIR
+cd $ICDIR
 
-# 00z to 18z available
-FHList='00 06 12 18'
+# nos.cbofs.met.forecast.20190906.t00z.nc
+# nos.cbofs.obc.20190906.t00z.nc
+# nos.cbofs.river.20190906.t00z.nc
+# nos.cbofs.roms.tides.20190906.t00z.nc
+# nos.cbofs.rst.nowcast.20190906.t00z.nc
+# nos.cbofs.forecast.20191001.t00z.in 
 
-for FH in $FHList
+pfx=nos.cbofs
+sfx=${CDATE}.t${cyc}z.nc
+
+icfiles="
+$pfx.met.forecast.$sfx
+$pfx.obc.$sfx
+$pfx.river.$sfx
+$pfx.roms.tides.$sfx
+$pfx.forecast.${CDATE}.t${cyc}z.in
+"
+
+for file in $icfiles
 do
-  # etss.t18z.stormsurge.con2p5km.grib2  
-  wget -nc $NOMADS/com/$product/prod/${product}.$PDY/$product.t${FH}z.stormsurge.con2p5km.grib2
+  wget -nc ${url}/$file
+  if [[ $? -ne 0 ]] ; then
+    echo "ERROR: Unable to retrieve $file from \n $url"
+  fi
 done
 
-#RTOFS  v1.2
-product=rtofs
+# Need to prep the tides - not on nomads
 
-mkdir -p /save/com/$product/ec2/$product.$PDY
-cd /save/com/$product/ec2/$product.$PDY
-#rtofs.20190903/rtofs_glo_3dz_f*_6hrly_hvr_US_east.nc
+#cp -pf $pfx.roms.tides.$sfx nos.cbofs.roms.tides.nc 
 
-# FH - every 6 hours 006 to 192
-FHList='006 012 018 024 030 036 042 048 054 060'
-for FH in $FHList
-do
-  echo "$NOMADS/com/$product/prod/${product}.$PDY/rtofs_glo_3dz_f${FH}_6hrly_hvr_US_east.nc"
-  wget -nc $NOMADS/com/$product/prod/${product}.$PDY/rtofs_glo_3dz_f${FH}_6hrly_hvr_US_east.nc
+# Fetch the restart/init file
+# ININAME == nos.cbofs.rst.nowcast.20191001.t00z.nc
 
-done
-#              com/rtofs/prod/rtofs.20190904/
+# Get $cdate$cyc +6 hours init file, rename it to $cdate$cyc restart file
+NEXT=$NDATE +6 ${CDATE}${cyc}
+NCDATE=`echo $NEXT | cut -c1-8`
+ncyc=`echo $NEXT | cut -c9-10`
 
-#CBOFS Restart - IS THE .INIT. the RESTART from PREVIOUS Cycle? Maybe!
-mkdir -p /save/com/nos/ec2/cbofs.$PDY
-cd /save/com/nos/ec2/cbofs.$PDY
-HHList=''
-HHList='00 06 12 18'
+nsfx=${NCDATE}.t${ncyc}z.nc
 
+if [ $cyc == 18 ] ; then
+  url=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/cbofs.$NCDATE 
+fi
 
-# nos.cbofs.init.nowcast.20190904.t00z.nc 
-# cbofs restart/init
+ifile=${pfx}.init.nowcast.${nsfx}
+rfile=${pfx}.rst.nowcast.${sfx}
 
-for HH in $HHList
-do
+wget -nc ${url}/$ifile
+if [[ $? -ne 0 ]] ; then
+  echo "ERROR: Unable to retrieve $file from \n $url"
+fi
 
-  wget -nc https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/cbofs.$PDY/nos.cbofs.init.nowcast.$PDY.t${HH}z.nc
-  #ln -f  nos.cbofs.init.nowcast.$PDY.t${HH}z.nc nos.cbofs.rst.nowcast.$PDY.t${HH}z.nc
-
-done
+# Rename it
+cp -p $ifile $rfile
 
 
 
-# NAM
-#/save/com/nos/ec2/cbofs.$PDY/nam/nam.$PDY/nam.t*.conusnest.hiresf*tm00.grib2_nos
 
-# Forecast cycle
-#HHList='00 06 12 18'  
-#HH='18'
-HH='00'
-
-## FH 00-60 avail every 6 hours 00-18z
-#FHList='00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24'
-FHList='00 06 12 18 24 30 36 42 48 54 60'
-#FHList=''
-
-mkdir -p /save/com/nam/ec2/nam.$PDY
-cd /save/com/nam/ec2/nam.$PDY
-
-for FH in $FHList
-do
-  wget -nc $NOMADS/com/nam/prod/nam.$PDY/nam.t${HH}z.conusnest.hiresf${FH}.tm00.grib2
-  ln -f nam.t${HH}z.conusnest.hiresf${FH}.tm00.grib2 nam.t${HH}z.conusnest.hiresf${FH}.tm00.grib2_nos
-
-done

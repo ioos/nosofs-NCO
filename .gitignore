@@ -1,4 +1,5 @@
 *.o
 lib/*.a
+fix/
 exec/
 sorc/ROMS.fd/Build/

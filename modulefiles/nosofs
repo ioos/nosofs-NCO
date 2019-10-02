@@ -25,7 +25,7 @@ setenv COMP_MPCC mpigcc
 module purge
 module load produtil
 module load gcc/6.5.0
-module load mpi/intel/2018.5.274
+module load mpi/intel
 #module load mpi/openmpi
 #module load mkl/2019.4.243
 

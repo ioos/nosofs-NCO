@@ -24,21 +24,21 @@ module load netcdf
 module load mpi/intel
 module load produtil
 
-export NPP=96    # Number of processors
+export NPP=4    # Number of processors
 export KEEPDATA=YES
 
-export envir=ec2
+#export envir=ec2
 export SENDDBN=NO
 export OFS=cbofs
 
-export CDATE=20190906     # The hindcast date
+export CDATE=20191001     # The hindcast date
 export cyc='00'
 export cycle=t${cyc}z
 export nosofs_ver=v3.1.9.1
-export NWROOT=/RPSDEV
-export COMROOT=/save/com
+export NWROOT=/save/$USER
+export COMROOT=/noscrub/com
 #export COMIN=$COMROOT
-export jobid=testfcst
+export jobid=fcst.$$
 
 ###########################################
 # Run setpdy and initialize PDY variables
@@ -52,7 +52,8 @@ else
   . ./PDY
 fi
 
-export DATA=/save/DATA/cbofsrun.$PDY
+export DATA=/ptmp/$USER/cbofsrun.$PDY
+
 export jlogfile=$DATA/jlogfile.$$
 
 ###################################
@@ -70,6 +71,41 @@ export DBN_ALERT_TYPE_NETCDF_LRG=${DBN_ALERT_TYPE_NETCDF_LRG:-NOS_OFS_FCST_NETCD
 export DBN_ALERT_TYPE_TEXT=${DBN_ALERT_TYPE_TEXT:-NOS_OFS_FCST_TEXT}
 
 
+############################################
+#   Determine Job Output Name on System
+############################################
+export pgmout="OUTPUT.$$"
+
+####################################
+# Specify Execution Areas
+####################################
+export HOMEnos=${NWROOT}/nosofs-NCO
+
+#export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
+export EXECnos=${EXECnos:-${HOMEnos}/exec}
+export FIXnos=${FIXnos:-${HOMEnos}/fix/shared}
+export FIXofs=${FIXofs:-${HOMEnos}/fix/${OFS}}
+export PARMnos=${PARMnos:-${HOMEnos}/parm}
+export USHnos=${USHnos:-${HOMEnos}/ush}
+export SCRIPTSnos=${SCRIPTSnos:-${HOMEnos}/scripts}
+
+
+##############################################
+# Define COM directories
+##############################################
+export COMIN=${COMIN:-${COMROOT}/${NET}/${RUN}.${PDY}}          # input directory
+
+export COMOUTroot=${COMOUTroot:-${COMROOT}/${NET}}              # output directory
+export COMOUT=${COMOUT:-${COMOUTroot}/${RUN}.${PDY}}                     # output directory
+
+echo $COMIN
+echo $COMOUT
+
+mkdir -m 775 -p $COMOUT
+
+# Fetch/Copy the ICs
+# ./getICs.sh
+
 ########################################################
 # Make working directory
 ########################################################
@@ -83,35 +119,6 @@ else
   rm -fr $DATA/*
 fi
 
-############################################
-#   Determine Job Output Name on System
-############################################
-export pgmout="OUTPUT.$$"
-
-####################################
-# Specify Execution Areas
-####################################
-export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
-export EXECnos=${EXECnos:-${HOMEnos}/exec}
-export FIXnos=${FIXnos:-${HOMEnos}/fix/shared}
-export FIXofs=${FIXofs:-${HOMEnos}/fix/${OFS}}
-export PARMnos=${PARMnos:-${HOMEnos}/parm}
-export USHnos=${USHnos:-${HOMEnos}/ush}
-export SCRIPTSnos=${SCRIPTSnos:-${HOMEnos}/scripts}
-
-
-##############################################
-# Define COM directories
-##############################################
-export COMIN=${COMIN:-${COMROOT}/${NET}/${envir}/${RUN}.${PDY}}          # input directory
-
-export COMOUTroot=${COMOUTroot:-${COMROOT}/${NET}/${envir}}              # output directory
-export COMOUT=${COMOUT:-${COMOUTroot}/${RUN}.${PDY}}                     # output directory
-
-echo $COMIN
-echo $COMOUT
-
-mkdir -m 775 -p $COMOUT
 
 ##############################################
 ####  Log File To Sys Report  
@@ -130,11 +137,11 @@ set -x
 
 env  
 
+
 ########################################################
 # Execute the script.
 ########################################################
-#$SCRIPTSnos/exnos_ofs_nowcast.sh $OFS
-
+# $SCRIPTSnos/exnos_ofs_nowcast.sh $OFS
 
 
 $SCRIPTSnos/exnos_ofs_forecast.sh $OFS
