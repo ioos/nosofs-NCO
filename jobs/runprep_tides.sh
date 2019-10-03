@@ -34,7 +34,7 @@ export cyc='00'
 
 export cycle=t${cyc}z
 export nosofs_ver=v3.1.9.1
-export NWROOT=/save/$USER
+export NWROOT=/save
 export COMROOT=/noscrub/com
 export COMIN=$COMROOT
 export jobid=test
