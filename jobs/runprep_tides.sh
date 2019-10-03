@@ -47,7 +47,7 @@ else
   . ./PDY
 fi
 
-export HOMEnos=${NWROOT}/nosofs-NCO
+#export HOMEnos=${NWROOT}/nosofs-cbofs.${nosofs_ver:?}
 export DATA=/ptmp/$USER/cbofsrun.$PDY
 
 

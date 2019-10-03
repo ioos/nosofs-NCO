@@ -79,9 +79,9 @@ export pgmout="OUTPUT.$$"
 ####################################
 # Specify Execution Areas
 ####################################
-export HOMEnos=${NWROOT}/nosofs-NCO
+#export HOMEnos=${NWROOT}/nosofs-cbofs.${nosofs_ver:?}
 
-#export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
+export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
 export EXECnos=${EXECnos:-${HOMEnos}/exec}
 export FIXnos=${FIXnos:-${HOMEnos}/fix/shared}
 export FIXofs=${FIXofs:-${HOMEnos}/fix/${OFS}}
