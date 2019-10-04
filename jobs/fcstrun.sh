@@ -1,5 +1,10 @@
 #!/bin/sh
-set -x
+#set -x
+
+if [ $# -ne 2 ] ; then
+  echo "Usage: $0 YYYYMMDD HH"
+  exit 1
+fi
 
 ########################################
 # NOS_OFS_PREP 
@@ -32,8 +37,11 @@ export KEEPDATA=YES
 export SENDDBN=NO
 export OFS=cbofs
 
-export CDATE=20191001     # The hindcast date
-export cyc='00'
+#export CDATE=20191001     # The hindcast date
+#export cyc='00'
+export CDATE=$1
+export cyc=$2
+
 export cycle=t${cyc}z
 export nosofs_ver=v3.1.9.1
 export NWROOT=/save
