@@ -4,15 +4,22 @@
 . /usr/share/Modules/init/sh
 module load produtil
 
-#CDATE=20191001
-#cyc=00
+if [ $# -ne 2 ] ; then
+  echo "Usage: $0 YYYYMMDD HH"
+  exit 1
+fi
 
+CDATE=$1
+cyc=$2
+
+#cyc=00
 # https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/cbofs.20191001/
 
 url=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/cbofs.$CDATE
 
 #ICDIR=/noscrub/$USER/ICs/cbofs.$CDATE
-ICDIR=$COMIN
+#ICDIR=$COMIN
+ICDIR=/noscrub/com/nos/cbofs.$CDATE
 mkdir -p $ICDIR
 cd $ICDIR
 
@@ -38,7 +45,7 @@ for file in $icfiles
 do
   wget -nc ${url}/$file
   if [[ $? -ne 0 ]] ; then
-    echo "ERROR: Unable to retrieve $file from \n $url"
+    echo "ERROR: Unable to retrieve $file from $url"
   fi
 done
 
@@ -50,7 +57,7 @@ done
 # ININAME == nos.cbofs.rst.nowcast.20191001.t00z.nc
 
 # Get $cdate$cyc +6 hours init file, rename it to $cdate$cyc restart file
-NEXT=$NDATE +6 ${CDATE}${cyc}
+NEXT=`$NDATE +6 ${CDATE}${cyc}`
 NCDATE=`echo $NEXT | cut -c1-8`
 ncyc=`echo $NEXT | cut -c9-10`
 
