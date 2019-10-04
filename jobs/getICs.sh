@@ -3,6 +3,7 @@
 
 . /usr/share/Modules/init/sh
 module load produtil
+module load gcc
 
 if [ $# -ne 2 ] ; then
   echo "Usage: $0 YYYYMMDD HH"
