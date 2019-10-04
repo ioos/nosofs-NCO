@@ -21,6 +21,7 @@ export NET=${NET:-nos}
 export RUN=${RUN:-$OFS}
 export envir=
 
+module load gcc/6.5.0
 module load netcdf
 module load mpi/intel
 module load produtil

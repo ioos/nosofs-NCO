@@ -20,6 +20,7 @@ date
 #export MP_TIMEOUT=9000
 #export MP_SHARED_MEMORY=yes
 
+module load gcc/6.5.0
 module load netcdf
 module load mpi/intel
 module load produtil
