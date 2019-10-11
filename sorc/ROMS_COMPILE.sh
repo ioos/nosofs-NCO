@@ -30,14 +30,28 @@ fi
 cd $SORCnos
 
 
-cd $SORCnos/nos_ofs_utility.fd
-rm -f *.o *.a
-gmake -f makefile
-if [ -s $SORCnos/nos_ofs_utility.fd/libnosutil.a ]
-then
-  chmod 755 $SORCnos/nos_ofs_utility.fd/libnosutil.a
-  mv $SORCnos/nos_ofs_utility.fd/libnosutil.a ${LIBnos}
+##  Compile ocean model of ROMS for CBOFS
+cd $SORCnos/ROMS.fd
+gmake clean
+gmake -f makefile_cbofs
+if [ -s  cbofs_roms_mpi ]; then
+  mv cbofs_roms_mpi $EXECnos/.
+else
+  echo 'roms executable for CBOFS is not created'
 fi
+
+echo "Only compiling ROMS model for cbofs"
+exit 0
+
+
+#cd $SORCnos/nos_ofs_utility.fd
+#rm -f *.o *.a
+#gmake -f makefile
+#if [ -s $SORCnos/nos_ofs_utility.fd/libnosutil.a ]
+#then
+#  chmod 755 $SORCnos/nos_ofs_utility.fd/libnosutil.a
+#  mv $SORCnos/nos_ofs_utility.fd/libnosutil.a ${LIBnos}
+#fi
 
 # SKIP
 #cd $SORCnos/nos_ofs_combine_field_netcdf_selfe.fd
@@ -153,16 +167,14 @@ gmake -f makefile
 #echo `date` >> ~/compiletime
 
 ##  Compile ocean model of ROMS for CBOFS
-cd $SORCnos/ROMS.fd
-gmake clean
-gmake -f makefile_cbofs
-if [ -s  cbofs_roms_mpi ]; then
-  mv cbofs_roms_mpi $EXECnos/.
-else
-  echo 'roms executable for CBOFS is not created'
-fi
-
-
+#cd $SORCnos/ROMS.fd
+#gmake clean
+#gmake -f makefile_cbofs
+#if [ -s  cbofs_roms_mpi ]; then
+#  mv cbofs_roms_mpi $EXECnos/.
+#else
+#  echo 'roms executable for CBOFS is not created'
+#fi
 
 exit 0
 
