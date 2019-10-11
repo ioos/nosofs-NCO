@@ -30,8 +30,8 @@ module load netcdf
 module load mpi/intel
 module load produtil
 
-export NPP=4    # Number of processors
-export KEEPDATA=YES
+export NPP=${NPP-:4}    # Number of processors
+export KEEPDATA=NO
 
 #export envir=ec2
 export SENDDBN=NO

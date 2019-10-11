@@ -1,5 +1,5 @@
-*.o
-lib/*.a
+**/*.o
+**/*.a
 fix/
 exec/
 sorc/ROMS.fd/Build/
