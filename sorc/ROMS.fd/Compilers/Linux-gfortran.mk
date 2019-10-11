@@ -24,7 +24,7 @@
 #
                FC := gfortran
            FFLAGS := -frepack-arrays 
-              CPP := /usr/bin/cpp
+              CPP := cpp
          CPPFLAGS := -P -traditional
           LDFLAGS :=
                AR := ar
