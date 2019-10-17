@@ -2,7 +2,7 @@
 
 # libtool - Provide generalized library-building support services.
 # Generated automatically by config.status (proj) 4.9.1
-# Libtool was configured on host t21a3:
+# Libtool was configured on host ip-172-31-10-124.ec2.internal:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 #
 #   Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005,
@@ -75,19 +75,19 @@ build=x86_64-unknown-linux-gnu
 build_os=linux-gnu
 
 # A sed program that does not truncate output.
-SED="/bin/sed"
+SED="/usr/bin/sed"
 
 # Sed that helps us avoid accidentally triggering echo(1) options like -n.
 Xsed="$SED -e 1s/^X//"
 
 # A grep program that handles long lines.
-GREP="/bin/grep"
+GREP="/usr/bin/grep"
 
 # An ERE matcher.
-EGREP="/bin/grep -E"
+EGREP="/usr/bin/grep -E"
 
 # A literal string matcher.
-FGREP="/bin/grep -F"
+FGREP="/usr/bin/grep -F"
 
 # A BSD- or MS-compatible name lister.
 NM="/usr/bin/nm -B"
@@ -96,7 +96,7 @@ NM="/usr/bin/nm -B"
 LN_S="ln -s"
 
 # What is the maximum length of a command?
-max_cmd_len=3458764513820540925
+max_cmd_len=1572864
 
 # Object file suffix (normally "o").
 objext=o
@@ -272,10 +272,10 @@ finish_eval=""
 hardcode_into_libs=yes
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="/usr/lib/gcc/x86_64-redhat-linux/4.4.7 /usr/lib64 /lib64 /usrx/local/intel/composer_xe_2011_sp1.11.339/compiler/lib/intel64 /usrx/local/intel/composerxe/mkl/lib/intel64 /usrx/local/intel/composerxe/ipp/lib/intel64 /usrx/local/intel/composerxe/tbb/lib/intel64/cc4.1.0_libc2.4_kernel2.6.16.21 "
+sys_lib_search_path_spec="/usrx/gcc/6.5.0/lib/gcc/x86_64-pc-linux-gnu/6.5.0 /usrx/gcc/6.5.0/lib64 /lib64 /usr/lib64 /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/libfabric/lib "
 
 # Run-time system search path for libraries.
-sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib64/atlas /opt/mellanox/fca/lib /opt/ibutils/lib64 /opt/mellanox/libibprof/lib /opt/mellanox/mxm/lib /usr/lib64/mysql /usr/lib64/qt-3.3/lib /usr/lib64/xulrunner "
+sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib64/dyninst /usr/lib64/mysql "
 
 # Whether dlopen is supported.
 dlopen_support=unknown
