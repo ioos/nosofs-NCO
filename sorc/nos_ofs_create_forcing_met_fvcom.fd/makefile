@@ -16,7 +16,7 @@ LIBnos=../../lib
 # CMD		Name of the executable
 # PROFLIB	Library needed for profiling
 
-FC =           ${COMP_F} 
+FC = ${COMP_F} 
 #use for extensive compilation error reporting
 #LDFLAGS = -p -bnoquiet -bloadmap:mug
 LDFLAGS =	
@@ -53,7 +53,8 @@ PROFLIB =       -lprof
 # To compile with flowtracing turned on, use the second line
 # To compile giving profile additonal information, use the third line
 # WARNING:  SIMULTANEOUSLY PROFILING AND FLOWTRACING IS NOT RECOMMENDED
-FFLAGS =        -O3  -extend-source  $(INCS)
+FFLAGS =        -O3  -ffixed-line-length-none  $(INCS)
+#FFLAGS =        -O3  -extend-source  $(INCS)
 #FFLAGS =        -O3 -qnosave -qport=mod -qintsize=4 -qrealsize=4
 #FFLAGS =	 -F
 #FFLAGS =	 -Wf"-ez"

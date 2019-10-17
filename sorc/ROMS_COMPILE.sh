@@ -1,10 +1,7 @@
 #!/bin/sh
-cd ..
 
-HOMEnos=`pwd`
+HOMEnos=$(dirname $PWD)
 export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
-
-echo $HOMEnos
 
 module purge
 module use $HOMEnos/modulefiles

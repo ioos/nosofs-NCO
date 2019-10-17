@@ -19,7 +19,7 @@ setenv COMP_F_MPI90 mpif90
 setenv COMP_F_MPI mpifc
 setenv COMP_ICC gcc
 setenv COMP_CC gcc
-setenv COMP_CPP g++
+setenv COMP_CPP cpp
 setenv COMP_MPCC mpigcc
 
 module purge

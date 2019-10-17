@@ -64,7 +64,7 @@ C       integer, save ::  weight_node_id
 
       logical, save ::  h_L
 C       logical, save ::  hyw_L
-C       logical, save ::  iint_L
+      logical, save ::  iint_L
       logical, save ::  latc_L
       logical, save ::  lonc_L
 C       logical, save ::  nprocs_L
@@ -88,7 +88,7 @@ C       logical, save ::  weight_node_L
 
 
 * data variables
-      character Times(time_len)*DateStrLen_len 
+      character Times(time_len*DateStrLen_len)
       integer  Itime(time_len)
       integer  Itime2(time_len)
 C       integer  IINT(time_len)
@@ -145,7 +145,7 @@ C      IF (h(1) .le. 0) h_L = .FALSE.
        latc_L = .FALSE.
        lonc_L = .FALSE.
       ENDIF
-      IF(nv(1,1)) nv_L = .FALSE.
+      IF(nv(1,1) .ne. 0) nv_L = .FALSE.
       IF(elevation(1,1) .le. 0) elevation_L = .FALSE. 
       IF(obc_temp(1,1,1) .le. 0) obc_temp_L = .FALSE.
       IF(obc_salinity(1,1,1) .le. 0) obc_salinity_L = .FALSE.

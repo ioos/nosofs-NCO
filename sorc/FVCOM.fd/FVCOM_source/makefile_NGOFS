@@ -30,10 +30,12 @@
             SHELL         = /bin/sh
             EXEC          = fvcom_ngofs
 
+            # FFLAGS = -ffree-form
 #--------------------------------------------------------------------------
 #  Preprocessing and Compilation Directives
 #--------------------------------------------------------------------------
 .SUFFIXES: .o .f90 .F .F90 
+
 
 .c.o:
 	$(CC) -c $(CFLAGS) $(INCS) $*.c

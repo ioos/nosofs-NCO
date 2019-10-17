@@ -1,10 +1,7 @@
 #!/bin/sh
-cd ..
 
-HOMEnos=`pwd`
+HOMEnos=$(dirname $PWD)
 export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
-
-echo $HOMEnos
 
 module purge
 module use $HOMEnos/modulefiles
@@ -27,29 +24,29 @@ then
   mkdir -p $LIBnos
 fi
 
-cd $SORCnos
+#cd $SORCnos
 
+# OK
+#cd $SORCnos/nos_ofs_utility.fd
+#rm -f *.o *.a
+#gmake -f makefile
+#if [ -s $SORCnos/nos_ofs_utility.fd/libnosutil.a ]
+#then
+#  chmod 755 $SORCnos/nos_ofs_utility.fd/libnosutil.a
+#  mv $SORCnos/nos_ofs_utility.fd/libnosutil.a ${LIBnos}
+#fi
 
-cd $SORCnos/nos_ofs_utility.fd
-rm -f *.o *.a
-gmake -f makefile
-if [ -s $SORCnos/nos_ofs_utility.fd/libnosutil.a ]
-then
-  chmod 755 $SORCnos/nos_ofs_utility.fd/libnosutil.a
-  mv $SORCnos/nos_ofs_utility.fd/libnosutil.a ${LIBnos}
-fi
-
-# SKIP
+# SELFE
 #cd $SORCnos/nos_ofs_combine_field_netcdf_selfe.fd
 #rm -f *.o *.a
 #gmake -f makefile
 
-# SKIP
+# SELFE
 #cd $SORCnos/nos_ofs_combine_station_netcdf_selfe.fd
 #rm -f *.o *.a
 #gmake -f makefile
 
-# SKIP
+# SELFE
 #cd $SORCnos/nos_ofs_combine_hotstart_out_selfe.fd
 #rm -f *.o *.a
 #gmake -f makefile
@@ -59,7 +56,7 @@ fi
 #gmake -f makefile
 
 
-# SKIP
+# OK FVCOM
 #cd $SORCnos/nos_ofs_create_forcing_met_fvcom.fd
 #rm -f *.o *.a
 #gmake -f makefile
@@ -75,20 +72,22 @@ fi
 #rm -f *.o *.a
 #gmake -f makefile
 
-# SKIP
+# OK FVCOM
 #cd $SORCnos/nos_ofs_create_forcing_obc_fvcom.fd
 #rm -f *.o *.a
 #gmake -f makefile
 
-# SKIP
+
+# OK FVCOM
 #cd $SORCnos/nos_ofs_create_forcing_obc_fvcom_gl.fd
 #rm -f *.o *.a
 #gmake -f makefile
 
-# SKIP
+# OK FVCOM
 #cd $SORCnos/nos_ofs_create_forcing_obc_fvcom_nest.fd
 #rm -f *.o *.a
 #gmake -f makefile
+
 
 # SKIP
 #cd $SORCnos/nos_ofs_create_forcing_obc_selfe.fd
@@ -109,25 +108,22 @@ fi
 #gmake -f makefile
 
 
-# SKIP
+# OK FVCOM
 #cd $SORCnos/nos_ofs_read_restart_fvcom.fd
 #rm -f *.o *.a
 #gmake -f makefile
+
 
 # SKIP
 #cd $SORCnos/nos_ofs_read_restart_selfe.fd
 #rm -f *.o *.a
 #gmake -f makefile
 
-#cd $SORCnos/nos_ofs_reformat_ROMS_CTL.fd
-#rm -f *.o *.a
+
+# OK
+#cd $SORCnos/nos_creofs_wl_offset_correction.fd
+#gmake clean
 #gmake -f makefile
-
-
-# SKIP
-# cd $SORCnos/nos_creofs_wl_offset_correction.fd
-# gmake clean
-# gmake -f makefile
 
 # OKAY - not needed for cbofs?
 #cd $SORCnos/nos_ofs_create_forcing_nudg.fd
@@ -163,70 +159,46 @@ fi
 #fi
 
 
-
-
-
-
-##  Compile ocean model of ROMS for DBOFS
-#cd $SORCnos/ROMS.fd
-#gmake clean
-#gmake -f makefile_dbofs
-#if [ -s  dbofs_roms_mpi ]; then
-#  mv dbofs_roms_mpi $EXECnos/.
-#else
-#  echo 'roms executable for DBOFS is not created'
-#fi
-###  Compile ocean model of ROMS for TBOFS
-#cd $SORCnos/ROMS.fd
-#gmake clean
-#gmake -f makefile_tbofs
-#if [ -s  tbofs_roms_mpi ]; then
-#  mv tbofs_roms_mpi $EXECnos/.
-#else
-#  echo 'roms executable for TBOFS is not created'
-#fi
-
-##  Compile ocean model of ROMS for GoMOFS
-#cd $SORCnos/ROMS.fd
-#gmake clean
-#gmake -f makefile_gomofs
-#if [ -s  gomofs_roms_mpi ]; then
-#  mv gomofs_roms_mpi $EXECnos/.
-#else
-#  echo 'roms executable for GoMOFS is not created'
-#fi
-
+# OK
 ##  Compile ocean model of FVCOM for NGOFS
-cd  $SORCnos/FVCOM.fd/FVCOM_source/libs/julian
-gmake clean
-gmake -f makefile
-rm -f *.o
+#cd  $SORCnos/FVCOM.fd/FVCOM_source/libs/julian
+#gmake clean
+#gmake -f makefile
+#rm -f *.o
 
-cd  $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
-gmake clean
-./configure  --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
-gmake
-gmake install
+# OK
+#cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
+#gmake clean
+#./configure  --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
+#gmake
+#gmake install
 
-cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
-gmake clean
-./configure  CC=icc FC=ifort CFLAGS='-DIFORT -g -O2' proj4=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
-gmake
-gmake install
+# OK
+#cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
+#gmake clean
+#./configure  CC=gcc FC=fortran CFLAGS='-DGFORTRAN -g -O2' proj4=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
+#gmake
+#gmake install
 
-cd $SORCnos/FVCOM.fd/METIS_source
-gmake clean
-gmake -f makefile
-rm -f *.o
+
+# OK
+#cd $SORCnos/FVCOM.fd/METIS_source
+#gmake clean
+#gmake -f makefile
+#rm -f *.o
+
 
 cd $SORCnos/FVCOM.fd/FVCOM_source
-gmake clean
-gmake -f makefile_NGOFS
-if [ -s  fvcom_ngofs ]; then
-  mv fvcom_ngofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi  
+
+#gmake clean
+#gmake -f makefile_NGOFS
+#if [ -s  fvcom_ngofs ]; then
+  #mv fvcom_ngofs $EXECnos/.
+#else
+  #echo 'fvcom executable is not created'
+#fi  
+
+
 gmake clean
 gmake -f makefile_NEGOFS
 if [ -s  fvcom_negofs ]; then
@@ -234,6 +206,10 @@ if [ -s  fvcom_negofs ]; then
 else
   echo 'fvcom executable is not created'
 fi
+
+exit 0
+
+
 gmake clean
 gmake -f makefile_NWGOFS
 if [ -s  fvcom_nwgofs ]; then

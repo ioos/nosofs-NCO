@@ -410,7 +410,9 @@
 #define RandomPermute			__RandomPermute
 #define ispow2				__ispow2
 #define InitRandom			__InitRandom
-#define log2				__log2
+//#ifndef log2
+//#define log2				__log2
+//#endif
 
 
 

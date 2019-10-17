@@ -2995,16 +2995,18 @@ END SUBROUTINE GET_VAL
 
   real(sp) a,b,alpha
 
-  lim = 0.5_sp*(sign(1.,a)+sign(1.,b))*max(min(alpha*abs(a),abs(b)),min(abs(a),alpha*abs(b)))
+  lim = 0.5_sp*(sign(real(1.0,sp),a)+sign(real(1.0,sp),b))*max(min(alpha*abs(a),abs(b)),min(abs(a),alpha*abs(b)))
 
   End Function LimLED1
+
+
 
   Real(sp) Function LimLED2(a,b,alpha) Result(lim)
   IMPLICIT NONE
 
   real(sp) a,b,alpha
 
-  lim = 0.5_sp*(sign(1.,a)+sign(1.,b))*min(0.5_sp*abs(a+b),alpha*abs(a),alpha*abs(b))
+  lim = 0.5_sp*(sign(real(1.0,sp),a)+sign(real(1.0,sp),b))*min(0.5_sp*abs(a+b),alpha*abs(a),alpha*abs(b))
 
   End Function LimLED2
 
