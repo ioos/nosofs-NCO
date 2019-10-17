@@ -541,10 +541,14 @@ dashL= $(empty) -L
 #  gfortran defs 
 #--------------------------------------------------------------------------
 #         CPP      = /usr/bin/cpp 
-#         COMPILER = -DGFORTRAN
-#         FC       = gfortran  -O3 
+          DEF_FLAGS     = -P -traditional-cpp
+          COMPILER = -DGFORTRAN
+          FC       = $(COMP_F_MPI)
+          CC       = $(COMP_MPCC)
+          CPP      = $(COMP_CPP)
+          CXX      = $(COMP_CC)
+          OPT      = -O3
 #         DEBFLGS  = 
-#         OPT      = 
 #         CLIB     = 
 #--------------------------------------------------------------------------
 #  absoft / mac os x defs
@@ -558,13 +562,13 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #  IBM/AIX Definitionss NOAA CCS (stratus and cirrus)
 #--------------------------------------------------------------------------
-          CPPFLAGS = $(DEF_FLAGS) -DAIX
-          COMPILER = -DIFORT
-          FC       = $(COMP_F_MPI)
-          CC       = $(COMP_MPCC)
-          CPP      = $(COMP_CPP)
-          CXX      = $(COMP_CC)
-          OPT      = -O3  -fp-model precise
+#          CPPFLAGS = $(DEF_FLAGS) -DAIX
+#          COMPILER = -DIFORT
+#          FC       = $(COMP_F_MPI)
+#          CC       = $(COMP_MPCC)
+#          CPP      = $(COMP_CPP)
+#          CXX      = $(COMP_CC)
+#          OPT      = -O3  -fp-model precise
 
 #--------------------------------------------------------------------------
 #  APPLE OS X/XLF Definitions (G5)

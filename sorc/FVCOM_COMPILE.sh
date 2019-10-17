@@ -41,6 +41,8 @@ fi
 #rm -f *.o *.a
 #gmake -f makefile
 
+#exit
+
 # SELFE
 #cd $SORCnos/nos_ofs_combine_station_netcdf_selfe.fd
 #rm -f *.o *.a
@@ -190,48 +192,49 @@ fi
 
 cd $SORCnos/FVCOM.fd/FVCOM_source
 
+gmake clean
+gmake -f makefile_NGOFS
+if [ -s  fvcom_ngofs ]; then
+  mv fvcom_ngofs $EXECnos/.
+else
+  echo 'fvcom executable is not created'
+fi  
+
+
 #gmake clean
-#gmake -f makefile_NGOFS
-#if [ -s  fvcom_ngofs ]; then
-  #mv fvcom_ngofs $EXECnos/.
+#gmake -f makefile_NEGOFS
+#if [ -s  fvcom_negofs ]; then
+#  mv fvcom_negofs $EXECnos/.
 #else
-  #echo 'fvcom executable is not created'
-#fi  
+#  echo 'fvcom executable is not created'
+#fi
 
 
-gmake clean
-gmake -f makefile_NEGOFS
-if [ -s  fvcom_negofs ]; then
-  mv fvcom_negofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-
-exit 0
+#gmake clean
+#gmake -f makefile_NWGOFS
+#if [ -s  fvcom_nwgofs ]; then
+#  mv fvcom_nwgofs $EXECnos/.
+#else
+#  echo 'fvcom executable is not created'
+#fi
 
 
-gmake clean
-gmake -f makefile_NWGOFS
-if [ -s  fvcom_nwgofs ]; then
-  mv fvcom_nwgofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-gmake clean
-gmake -f makefile_SFBOFS
-if [ -s  fvcom_sfbofs ]; then
-  mv fvcom_sfbofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
+#gmake clean
+#gmake -f makefile_SFBOFS
+#if [ -s  fvcom_sfbofs ]; then
+#  mv fvcom_sfbofs $EXECnos/.
+#else
+#  echo 'fvcom executable is not created'
+#fi
 
-gmake clean
-gmake -f makefile_LEOFS
-if [ -s  fvcom_leofs ]; then
-  mv fvcom_leofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
+#gmake clean
+#gmake -f makefile_LEOFS
+#if [ -s  fvcom_leofs ]; then
+#  mv fvcom_leofs $EXECnos/.
+#else
+#  echo 'fvcom executable is not created'
+#fi
+
 
 ##  Compile ocean model of SELFE.fd for CREOFS
 cd $SORCnos/SELFE.fd/ParMetis-3.1-64bit

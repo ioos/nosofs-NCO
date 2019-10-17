@@ -82,8 +82,8 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #	STANDARD LIBRARIES FOR DATA AND TIME IN fVCOM:
 #
-	    DTLIBS	= -L./libs/julian -ljulian
-	    DTINCS	= -I./libs/julian 
+            DTLIBS       = -L./libs/julian -ljulian
+            DTINCS       = -I./libs/julian 
 #
 #--------------------------------------------------------------------------
 #        NETCDF OUTPUT      NETCDF IS NOW REQUIRED TO COMPILE FVCOM
@@ -152,7 +152,7 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 
              FLAG_4 = -DMULTIPROCESSOR
-            PARLIB = -L../METIS_source -lmetis
+             PARLIB = -L../METIS_source -lmetis
 
 
 #--------------------------------------------------------------------------
@@ -546,11 +546,10 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #         CPP      = /usr/bin/cpp 
           COMPILER = -DGFORTRAN
-          FC       = $(COMP_F_MPI)
+          FC       = $(COMP_F_MPI) 
           CC       = $(COMP_MPCC)
           CPP      = $(COMP_CPP)
           CXX      = $(COMP_CC)
-          FFLAGS   = -ffree-form
           OPT      = -O3
 #         DEBFLGS  = 
 #         CLIB     = 
