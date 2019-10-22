@@ -46,7 +46,7 @@ fi
 #PT - Removed nos_ofs_archive.sh $runtype - section
 
 echo "run the launch script to set the NOS configuration"
-. $USHnos/nos_ofs_launch.sh $OFS forecastjibberishjibberjabber-butnotprep
+. $USHnos/nos_ofs_launch.sh $OFS forecast_this-paramater-ignored-unless-prep
 export pgm="$USHnos/nos_ofs_launch.sh $OFS ifnotprep-couldbeanything-else"
 export err=$?
 if [ $err -ne 0 ]

@@ -1,6 +1,7 @@
 **/*.o
 **/*.a
 **/*.mod
+lib/
 fix/
 exec/
 sorc/ROMS.fd/Build/

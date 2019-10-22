@@ -91,6 +91,8 @@ fi
 #./configure  --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
 #gmake
 #gmake install
+# Copy shared libraries
+cp -Rp $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master/lib/* $LIBnos
 
 
 #cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
@@ -116,6 +118,7 @@ else
   echo 'fvcom executable is not created'
 fi  
 
+exit
 
 #gmake clean
 #gmake -f makefile_NEGOFS

@@ -116,10 +116,6 @@ fi
  echo "end of $runtype"
 
 
-echo "PT - TESTING - NOT RUNNING FORECAST STEP THIS TIME"
-echo "PT - EXITING"
-exit 0
-
 ####    Run forecast simulation
 runtype='forecast'
 

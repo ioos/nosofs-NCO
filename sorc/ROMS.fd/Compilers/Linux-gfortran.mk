@@ -121,7 +121,8 @@ endif
 #
 # Use full path of compiler.
 #
-               FC := $(shell which ${FC})
+# which does not exist in Centos image for Docker.
+#               FC := $(shell which ${FC})
                LD := $(FC)
 
 #

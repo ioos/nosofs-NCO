@@ -30,6 +30,7 @@ module load netcdf
 module load mpi/intel
 module load produtil
 
+#export NPP=140
 export NPP=${NPP:-16}    # Number of processors
 export KEEPDATA=NO
 
@@ -50,6 +51,8 @@ export COMROOT=/noscrub/com
 #export COMIN=$COMROOT
 export jobid=fcst.$$
 
+export LD_LIBRARY_PATH=$HOMEnos/lib:$LD_LIBRARY_PATH
+
 ###########################################
 # Run setpdy and initialize PDY variables
 ###########################################
@@ -62,7 +65,7 @@ else
   . ./PDY
 fi
 
-export DATA=/ptmp/$USER/cbofsrun.$PDY
+export DATA=/ptmp/$USER/$OFS.$PDY
 
 export jlogfile=$DATA/jlogfile.$$
 

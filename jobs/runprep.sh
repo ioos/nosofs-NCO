@@ -48,7 +48,7 @@ else
   . ./PDY
 fi
 
-export DATA=/save/DATA/cbofsrun.$PDY
+export DATA=/save/DATA/$OFS.$PDY
 
 ###############################################################
 # Specify DBN_ALERT_TYPE_???? for different Production envir.
