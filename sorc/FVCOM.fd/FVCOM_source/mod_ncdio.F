@@ -66,7 +66,7 @@ MODULE MOD_NCDIO
   !==============================================================================!
 
 ! For Unstructred CF standard file - beta test!
-!# define UCF
+! # define UCF
 
   USE ALL_VARS
   USE MOD_PREC
@@ -2081,7 +2081,7 @@ CONTAINS
 
 # if defined(UCF)
        allocate(EL1(NGL),stat=status)
-       IF (STATUS /=0 ) CALL FATAL_ERROR("COULD NOT ALLOCATE MEMORY ON IO PROC FOR OUTPUT DATA:EL1"
+       IF (STATUS /=0 ) CALL FATAL_ERROR("COULD NOT ALLOCATE MEMORY ON IO PROC FOR OUTPUT DATA:EL1")
        EL1 = 0.0_SP
 # endif
     END IF

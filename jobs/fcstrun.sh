@@ -1,5 +1,11 @@
 #!/bin/sh
 set -x
+ulimit -s unlimited
+ulimit -c unlimited
+
+export HYDRA_TOPO_DEBUG=1
+
+# NGOFS 20191017 03
 
 if [ $# -ne 2 ] ; then
   echo "Usage: $0 YYYYMMDD HH"
@@ -21,6 +27,8 @@ date
 #export jlogfile=${jlogfile:-/com2/logs/jlogfiles/jlogfile.$jobid}
 #export SENDECF=${SENDECF:-YES}
 #export SENDDBN=${SENDDBN:-YES}
+
+# IBM POE settings
 #export MP_PULSE=0
 #export MP_TIMEOUT=9000
 #export MP_SHARED_MEMORY=yes
@@ -68,14 +76,18 @@ export I_MPI_DEBUG=1
 export NODES=1
 export NPP=36
 export NPP=${NPP:-16}    # Number of processors
+HOMEnos=$(dirname $PWD)
+# This is needed for Intel MPI 2019+
+#export I_MPI_FABRICS=shm
 
 export PPN=$((NPP/NODES))
 
 export HOSTFILE=$PWD/hosts
 #export envir=ec2
 export SENDDBN=NO
-export OFS=cbofs
 export KEEPDATA=NO
+#export OFS=cbofs
+export OFS=ngofs
 
 #export CDATE=20191001     # The hindcast date
 #export cyc='00'
@@ -86,6 +98,8 @@ export cycle=t${cyc}z
 export nosofs_ver=v3.1.9.1
 export NWROOT=/save
 export COMROOT=/com
+#export COMROOT=/noscrub/com
+#export COMROOT=/data/com
 #export COMIN=$COMROOT
 export jobid=fcst.$$
 
@@ -105,6 +119,7 @@ fi
 
 #export DATA=/ptmp/$USER/$OFS.$PDY
 export DATA=/ptmp/$OFS.$PDY
+#export DATA=/data/temp/$OFS.$PDY
 
 export jlogfile=$DATA/jlogfile.$$
 
@@ -193,10 +208,32 @@ env
 ########################################################
 # Execute the script.
 ########################################################
-# $SCRIPTSnos/exnos_ofs_nowcast.sh $OFS
+$SCRIPTSnos/exnos_ofs_nowcast.sh $OFS
 
+exit
+
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"
+#echo "    FINISHED NOWCAST FOR $CDATE $cycle               "
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"
 
 $SCRIPTSnos/exnos_ofs_forecast.sh $OFS
+
+
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"
+echo "    FINISHED FORECAST FOR $CDATE $cycle               "
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"
 ########################################################
 
 cat $pgmout

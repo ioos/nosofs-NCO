@@ -96,7 +96,7 @@ NM="/usr/bin/nm -B"
 LN_S="ln -s"
 
 # What is the maximum length of a command?
-max_cmd_len=1572864
+max_cmd_len=3458764513820540925
 
 # Object file suffix (normally "o").
 objext=o
@@ -272,7 +272,7 @@ finish_eval=""
 hardcode_into_libs=yes
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="/usrx/gcc/6.5.0/lib/gcc/x86_64-pc-linux-gnu/6.5.0 /usrx/gcc/6.5.0/lib64 /lib64 /usr/lib64 /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/libfabric/lib "
+sys_lib_search_path_spec="/usrx/gcc/6.5.0/lib/gcc/x86_64-pc-linux-gnu/6.5.0 /usrx/gcc/6.5.0/lib64 /lib64 /usr/lib64 "
 
 # Run-time system search path for libraries.
 sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib64/dyninst /usr/lib64/mysql "

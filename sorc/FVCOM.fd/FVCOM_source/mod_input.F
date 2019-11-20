@@ -79,7 +79,8 @@ CONTAINS
 
     ! Initialize values from in variables 
     CaseName="empty"//nlc ! declared in mod_main - all_vars
-    dbg_lvl=0 ! declared in mod_dbg
+    ! dbg_lvl=DBG_SBRIO ! declared in mod_dbg
+    dbg_lvl=dbg_vrb ! declared in mod_dbg
     INFOFILE="screen"//nlc ! Get output file parameter
     NameList_Name = "empty"//nlc ! Name of blank name list file-
     ! declared in mod_main
@@ -233,15 +234,15 @@ CONTAINS
     IREPORT = 0
     VISIT_ALL_VARS = .False.
     WAIT_FOR_VISIT = .False.
-    USE_MPI_IO_MODE = .FALSE.
+    USE_MPI_IO_MODE = .False.
 
 
     !--Parameters in NameList NML_INTEGRATION
     ExtStep_Seconds = 0.0
     ISplit = 0
     IRamp = 0 
-    Static_SSH_Adj = 0.0
     Min_Depth = 0.0
+    Static_SSH_Adj = 0.0
 
     !--Parameters in NameList NML_RESTART
     RST_ON            = .False.

@@ -634,15 +634,31 @@ do
       while read GRB2FILE
       do
         read YYYY MM DD CYC HH
+        #echo "-n 1 $USHnos/nos_ofs_create_forcing_met_mpmd.sh $GRB2FILE $HH $NPP" >>cmdfile
         echo "$USHnos/nos_ofs_create_forcing_met_mpmd.sh $GRB2FILE $HH $NPP" >>cmdfile
       done 3<&-
+
+#$ cat ./mpmd_config
+#-n 1 -host node1 ./io <io_args>
+#-n 4 -host node2 ./compute <compute_args_1>
+#-n 4 -host node3 ./compute <compute_args_2>
+#$ mpirun -configfile mpmd_config
 
       # Store the VARNAME and LEV arrays to a file which will be sourced by the MPMD processes
       declare -p VARNAME LEV > var_lev_arrays
 
       chmod u+x cmdfile
       #mpirun.lsf cfp cmdfile
-      mpirun -np $NPP cmdfile
+      #mpirun -np $NPP cmdfile
+      echo "PT DEBUG ------ IN $0 Line 646"
+      echo "PT DEBUG ------ IN $0 Line 646"
+      echo "PT DEBUG ------ IN $0 Line 646"
+      echo "PT DEBUG ------ IN $0 Line 646"
+      echo "PT DEBUG ------ IN $0 Line 646"
+      echo "PT DEBUG ------ IN $PWD"
+      pwd
+      #mpirun -configfile $PWD/cmdfile
+      mpirun $PWD/cmdfile
       export err=$?; err_chk
 
       LAST_TMPDIR=""

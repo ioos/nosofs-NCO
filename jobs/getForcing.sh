@@ -6,7 +6,7 @@ NOMADS=https://nomads.ncep.noaa.gov/pub/data/nccf
 #cd $COMOUT
 
 # Get current cycle forcing data
-PDY=20190906
+PDY=20191028
 
 # Get previous cycle for init time, need some overlap
 #PDY=20190905
@@ -73,8 +73,8 @@ HH='00'
 
 ## FH 00-60 avail every 6 hours 00-18z
 #FHList='00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24'
-FHList='00 06 12 18 24 30 36 42 48 54 60'
 #FHList=''
+
 
 mkdir -p /save/com/nam/ec2/nam.$PDY
 cd /save/com/nam/ec2/nam.$PDY

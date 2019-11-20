@@ -809,15 +809,20 @@ if [ $DBASE_WL == "ETSS" ]; then
    while (( N <= 97 ))
    do
      rm -f tmp${N}.csv
-     echo "$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp${N}.csv" >>cmdfile
+     echo "-n 1 $WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp${N}.csv" >>cmdfile
      (( N++ ))
    done
 
    chmod u+x cmdfile
    #mpirun cfp cmdfile
    # This is not MPMD - need to set this up for cloud environment, most likely modify the cmdfile - see Intel mpirun mpmd documentation
+   echo "PT DEBUG ------------------------------- we are in $0 Line 819"
+   echo "PT DEBUG ------------------------------- we are in $0 Line 819"
+   echo "PT DEBUG ------------------------------- we are in $0 Line 819"
+   echo "PT DEBUG ------------------------------- we are in $0 Line 819"
    #mpirun -np $NPP cmdfile
-   mpirun cmdfile
+#$ mpirun -configfile mpmd_config
+   mpirun -configfile cmdfile
    export err=$?; err_chk
 
    N=1

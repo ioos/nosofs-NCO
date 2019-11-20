@@ -6777,6 +6777,11 @@ SUBROUTINE NC_READ_VAR(VAR,STKCNT,STKRNG,IOSTART,IOCOUNT,IOSTRIDE,DEALERID,PARAL
   ! BASED ON CODE WRITE THE DATA
   errmsg="NC_READ_VAR: VARIABLE: "//VAR%varname//"; Can not be read by nf90_get_var!"
 
+  IF(DBG_SET(DBG_SBRIO)) THEN
+     write(IPT,*) "PT DEBUG: About to enter SELECT CASE(CODE)"
+     write(IPT,*) "PT DEBUG: CODE is :: ", CODE
+  END IF
+
   SELECT CASE(CODE)
 !********************************************************************
 ! =====   SCALAR FLOATING POINT DATA
@@ -6795,7 +6800,7 @@ SUBROUTINE NC_READ_VAR(VAR,STKCNT,STKRNG,IOSTART,IOCOUNT,IOSTRIDE,DEALERID,PARAL
            IF(size(VAR%FDA_FLT)==1) VAR%SCL_FLT=>VAR%FDA_FLT(1,1,1,1)
         ELSE        
            CALL PRINT_VAR(VAR)
-           CALL FATAL_ERROR("NC_READ_VAR: Variable objects SCL_FLT data is NOT assocaited!")
+           CALL FATAL_ERROR("NC_READ_VAR: Variable objects SCL_FLT data is NOT associated!")
         END IF
 
      END IF
@@ -9687,6 +9692,14 @@ END SUBROUTINE UPDATE_FILE_BRACKET
              CALL NC_POINT_VAR(VNEXT,VARRP)              
              CALL INTERP_BILINEAR_P(VARRP,INTERP,VVECP)
           END IF
+
+        !  if(DBG_SET(dbg_sbr)) &
+        ! & write(IPT,*) "PT DEBUG: About to call NC_READ_VAR(VPREV,FTM%PREV_STKCNT)"
+
+        ! INTEGER VARID
+        ! CHARACTER(Len=NF90_MAX_NAME+1) VARNAME
+        !  if(DBG_SET(dbg_sbr)) &
+        ! & write(IPT,*) "PT DEBUG: ", VPREV%VARNAME," ", FTM%PREV_STKCNT
 
           CALL NC_READ_VAR(VPREV,FTM%PREV_STKCNT)
 

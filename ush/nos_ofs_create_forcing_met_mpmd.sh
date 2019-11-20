@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# PT 10/29/2019
+# This script has major flaws!!!
+#
+# In order to work as intended, NPP must be set to the correct number
+# depending on the number of levels (see non-mpmd driver)
+#
 GRB2FILE=${1:?}
 HH=${2:?}
 NPP=${3:?}

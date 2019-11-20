@@ -16,27 +16,29 @@ export KEEPDATA=YES
 ###################################
 # Specify NET and RUN Name and model
 ####################################
-export OFS=cbofs
+export OFS=ngofs
 export NET=${NET:-nos}
 export RUN=${RUN:-$OFS}
-export envir=ec2
+export envir=''
 
 module load gcc/6.5.0
 module load netcdf
-module load mpi/intel
+#module load mpi/intel
+module load mpi/mpich
 module load produtil
-export NPP=96
+module load wgrib2
+export NPP=8
 
-export CDATE=20190906     # The hindcast date
-export cyc='00'
+export CDATE=20191030
+export cyc='09'
 
 #export CDATE=20190905     # The hindcast date
 #export cyc='18'
 
 export cycle=t${cyc}z
 export nosofs_ver=v3.1.9.1
-export NWROOT=/save
-export COMROOT=/save/com
+export NWROOT=/save/$USER
+export COMROOT=/data/com
 export COMIN=$COMROOT
 export jobid=test
 
@@ -48,7 +50,7 @@ else
   . ./PDY
 fi
 
-export DATA=/save/DATA/$OFS.$PDY
+export DATA=/data/temp/$OFS.$PDY
 
 ###############################################################
 # Specify DBN_ALERT_TYPE_???? for different Production envir.

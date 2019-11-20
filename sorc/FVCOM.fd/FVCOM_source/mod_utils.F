@@ -67,6 +67,7 @@ module mod_utils
   CHARACTER(LEN=80) :: prg_nm ! used in mod_sng and mod_input
   integer :: dbg_lvl ! [enm] Debugging level, initialized in input
   logical :: dbg_par=.false.
+  ! logical :: dbg_par=.true.
 
   INTERFACE SHUTDOWN_CHECK
      MODULE PROCEDURE SHUTDOWN_CHECK_1D

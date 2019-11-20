@@ -27,8 +27,7 @@ uname -v = #1 SMP Thu Nov 29 14:49:43 UTC 2018
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
-PATH: /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/libfabric/bin
-PATH: /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/bin
+PATH: /opt/intel/compilers_and_libraries_2018.6.288/linux/mpi/intel64/bin
 PATH: /usrx/gcc/6.5.0/bin
 PATH: /usr/local/bin
 PATH: /usr/bin
@@ -209,7 +208,7 @@ configure:5503: output
 0000000000000000 B some_variable
 configure:5510: result: BSD nm
 configure:5514: checking the maximum length of command line arguments
-configure:5645: result: 1572864
+configure:5645: result: 3458764513820540925
 configure:5662: checking whether the shell understands some XSI constructs
 configure:5672: result: yes
 configure:5676: checking whether the shell understands "+="
@@ -462,6 +461,7 @@ config.status:1102: creating jniwrap/Makefile
 config.status:1102: creating jniwrap/org/Makefile
 config.status:1102: creating jniwrap/org/proj4/Makefile
 config.status:1102: creating src/proj_config.h
+config.status:1283: src/proj_config.h is unchanged
 config.status:1331: executing depfiles commands
 config.status:1331: executing libtool commands
 configure:15174: checking that generated files are newer than configure
@@ -584,7 +584,7 @@ lt_cv_sys_global_symbol_pipe='sed -n -e '\''s/^.*[	 ]\([ABCDGIRSTW][ABCDGIRSTW]*
 lt_cv_sys_global_symbol_to_c_name_address='sed -n -e '\''s/^: \([^ ]*\)[ ]*$/  {\"\1\", (void *) 0},/p'\'' -e '\''s/^[ABCDGIRSTW]* \([^ ]*\) \([^ ]*\)$/  {"\2", (void *) \&\2},/p'\'''
 lt_cv_sys_global_symbol_to_c_name_address_lib_prefix='sed -n -e '\''s/^: \([^ ]*\)[ ]*$/  {\"\1\", (void *) 0},/p'\'' -e '\''s/^[ABCDGIRSTW]* \([^ ]*\) \(lib[^ ]*\)$/  {"\2", (void *) \&\2},/p'\'' -e '\''s/^[ABCDGIRSTW]* \([^ ]*\) \([^ ]*\)$/  {"lib\2", (void *) \&\2},/p'\'''
 lt_cv_sys_global_symbol_to_cdecl='sed -n -e '\''s/^T .* \(.*\)$/extern int \1();/p'\'' -e '\''s/^[ABCDGIRSTW]* .* \(.*\)$/extern char \1;/p'\'''
-lt_cv_sys_max_cmd_len=1572864
+lt_cv_sys_max_cmd_len=3458764513820540925
 lt_cv_to_host_file_cmd=func_convert_file_noop
 lt_cv_to_tool_file_cmd=func_convert_file_noop
 

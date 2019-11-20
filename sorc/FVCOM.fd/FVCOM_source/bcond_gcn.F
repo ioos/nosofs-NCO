@@ -629,6 +629,7 @@
       
       IF (WIND_ON) THEN
          IF (WIND_TYPE == SPEED)THEN
+
             CALL UPDATE_WIND(IntTime,UUWIND,VVWIND)
             
             CALL ASIMPLE_DRAG(UUWIND,VVWIND,WUSURF,WVSURF)

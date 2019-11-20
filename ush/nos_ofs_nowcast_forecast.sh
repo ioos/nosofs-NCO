@@ -59,6 +59,8 @@
 # 0.  Preparations
 # 0.a Basic modes of operation
 
+
+
 function seton {
   set -x
 }
@@ -66,6 +68,10 @@ function setoff {
   set +x
 }
 seton
+
+echo "PT DEBUG: ulimits   ================================"
+ulimit -a
+echo "PT DEBUG: ulimits   ================================"
 
 cd $DATA
 
@@ -636,7 +642,7 @@ then
 # 2   Execute ocean model of ROMS; where ${RUN}_roms_nowcast.in is created by nos_ofs_reformat_roms_ctl.sh
   if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]
   then 
-    #mpirun.lsf $EXECnos/${RUN}_roms_mpi ${RUN}_${OCEAN_MODEL}_nowcast.in >> ${MODEL_LOG_NOWCAST}
+    # nowccast
     mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ${RUN}_${OCEAN_MODEL}_nowcast.in >> ${MODEL_LOG_NOWCAST}
     export err=$?
     if [ $err -ne 0 ]
@@ -722,8 +728,20 @@ then
 
   elif [ ${OCEAN_MODEL} == "FVCOM" -o ${OCEAN_MODEL} == "fvcom" ]
   then
-    # mpirun.lsf $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
-    mpirun $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    # nowcast
+    # mpirun -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    #mpirun --oversubscribe -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    #export MPIR_CVAR_PRINT_ERROR_STACK=1
+    #export MPIR_CVAR_ERROR_CHECKING=1
+    #export MPIR_CVAR_BCAST_MIN_PROCS=2
+    #export MPIR_CVAR_BCAST_SHORT_MSG_SIZE=1024
+    #export MPIR_CVAR_BCAST_LONG_MSG_SIZE=2048
+    # numa{:<n>}
+    mpirun -verbose -np $NPP -bind-to core:$NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    #mpirun -verbose -np $NPP -bind-to numa:2 -map-by C $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    #mpirun -verbose  -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    #mpirun -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    #mpirun -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -733,6 +751,8 @@ then
       postmsg "$nosjlogfile" "$msg"
       err_exit "$msg"
     fi
+
+    exit 0
 
     rm -f corms.now corms.fcst 
     if [ -s ${MODEL_LOG_NOWCAST} ]
@@ -799,9 +819,13 @@ then
   elif [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
   then
     echo "nowcast simulation began at:  `date`" >> $nosjlogfile
-    #mpirun.lsf $EXECnos/selfe_${RUN} > $MODEL_LOG_NOWCAST
-    mpirun $EXECnos/selfe_${RUN} > $MODEL_LOG_NOWCAST
+    mpirun -np $NPP $EXECnos/selfe_${RUN} > $MODEL_LOG_NOWCAST
     export err=$?
+    echo "PT DEBUG: Exiting before a possibly bad restart file is copied over to /com"
+    echo "err: $err"
+    exit $err
+
+
     rm -f corms.now corms.fcst 
     if [ -s $DATA/mirror.out ]
     then
@@ -1456,12 +1480,16 @@ then
 # --------------------------------------------------------------------------- #
 # 2   Execute ocean model of ROMS; where ${RUN}_roms_forecast.in is created by nos_ofs_reformat_roms_ctl.sh
   if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]; then
+<<<<<<< Updated upstream
      # mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
      #mpirun -np $NPP -bind-to numa:2 -map-by C $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
      # mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
      mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
      #mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
      #mpirun -np $NPP -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+=======
+     mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+>>>>>>> Stashed changes
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -1550,9 +1578,9 @@ then
   elif [ ${OCEAN_MODEL} == "FVCOM" -o ${OCEAN_MODEL} == "fvcom" ]
   then
     rm -f $MODEL_LOG_FORECAST
-    # mpirun.lsf $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
     #mpirun -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
-    mpiexec -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
+    mpirun -np $NPP -bind-to core:$NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
+    #mpirun -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -1637,7 +1665,6 @@ then
   elif [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
   then
     echo "forecast simulation began at:  `date`" >> $nosjlogfile
-    #mpirun.lsf $EXECnos/selfe_${OFS} > $MODEL_LOG_FORECAST
     mpirun $EXECnos/selfe_${OFS} > $MODEL_LOG_FORECAST
     export err=$?
     rm -f corms.now corms.fcst 

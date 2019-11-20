@@ -24,7 +24,7 @@
 
             EXEC     = tconvert
             LIB      = libjulian
-            JOPT     = -O3
+            JOPT     = -O0
 
 #--------------------------------------------------------------------------
 #  Preprocessing and Compilation Directives

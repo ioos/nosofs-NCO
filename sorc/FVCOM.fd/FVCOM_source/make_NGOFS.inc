@@ -122,7 +122,7 @@ dashL= $(empty) -L
 
 #            FLAG_1 =  -DDOUBLE_PRECISION 
 
-## SINGLE PRECISION OUTPUT FOR VISIT
+# SINGLE PRECISION OUTPUT FOR VISIT
              FLAG_1 =  -DDOUBLE_PRECISION -DSINGLE_OUTPUT
 
 #--------------------------------------------------------------------------
@@ -550,8 +550,14 @@ dashL= $(empty) -L
           CC       = $(COMP_MPCC)
           CPP      = $(COMP_CPP)
           CXX      = $(COMP_CC)
-          OPT      = -O3
-#         DEBFLGS  = 
+          #OPT      = -O1
+          OPT      = -O2
+          DEBFLGS  = -g
+          #DEBFLGS  = -g -frecursive
+          #DEBFLGS  = -g -fstack-arrays  -fcheck=all
+          #DEBFLGS  = -g
+          #DEBFLGS  = -g -fcheck=all -Wall
+          #DEBFLGS  = -g -fcheck=all
 #         CLIB     = 
 #--------------------------------------------------------------------------
 #  absoft / mac os x defs
@@ -612,7 +618,7 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #  CAT Preprocessing Flags
 #--------------------------------------------------------------------------
-           CPPARGS =  $(CPPFLAGS) $(DEF_FLAGS) $(FLAG_1) $(FLAG_2) \
+           CPPARGS =  $(CPPFLAGS) $(FLAG_1) $(FLAG_2) \
    $(FLAG_3) $(FLAG_4) $(FLAG_5) $(FLAG_6)  \
    $(FLAG_7) $(FLAG_8) $(FLAG_9) $(FLAG_10) \
    $(FLAG_11) $(FLAG_12) $(FLAG_13) $(FLAG_14) \

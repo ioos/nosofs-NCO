@@ -641,7 +641,7 @@ MODULE Mod_Time
 
      TYPE(TIME) :: mjd
      TYPE(TIME) :: DZONE
-     integer	:: dutc, pos
+     integer    :: dutc, pos
      real(DP)   :: secs, tai,rmjd
      logical    :: statl
      
