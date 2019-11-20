@@ -1,0 +1,3082 @@
+Fri Nov  1 17:34:22 UTC 2019
+/data/com/nos/ngofs.20191030
+/data/com/nos/ngofs.20191030
+ 0 + env
+USHnos=/save/centos/nosofs.v3.1.9.1/ush
+REMOTEHOST=wsip-184-180-13-92.ri.ri.cox.net
+MANPATH=/usrx/mpich-3.1rc4/share/man:/usrx/gcc/6.5.0/share/man:/usr/share/man:/usr/local/share/man
+XDG_SESSION_ID=6
+cyc=09
+HOSTNAME=ip-172-31-10-124.ec2.internal
+SELINUX_ROLE_REQUESTED=
+PDY=20191030
+HOST=ip-172-31-10-124.ec2.internal
+SHELL=/bin/bash
+TERM=xterm-256color
+HISTSIZE=1000
+SSH_CLIENT=184.180.13.92 24999 22
+NET=nos
+SELINUX_USE_CURRENT_RANGE=
+OLDPWD=/save/centos/nosofs.v3.1.9.1/jobs
+SSH_TTY=/dev/pts/3
+COMROOT=/data/com
+HOMEnos=/save/centos/nosofs.v3.1.9.1
+nosofs_ver=v3.1.9.1
+GROUP=centos
+USER=centos
+nosjlogfile=/data/com/nos/ngofs.20191030/nos.ngofs.jlogfile.20191030.t09z.log
+OFS=ngofs
+LD_LIBRARY_PATH=/save/centos/nosofs.v3.1.9.1/lib:/usrx/mpich-3.1rc4/lib:/usrx/zlib/1.2.11/lib:/usrx/gcc/6.5.0/lib64:/usrx/gcc/6.5.0/lib:/usrx/netcdf/4.2/lib64
+LS_COLORS=rs=0:di=38;5;27:ln=38;5;51:mh=44;38;5;15:pi=40;38;5;11:so=38;5;13:do=38;5;5:bd=48;5;232;38;5;11:cd=48;5;232;38;5;3:or=48;5;232;38;5;9:mi=05;48;5;232;38;5;15:su=48;5;196;38;5;15:sg=48;5;11;38;5;16:ca=48;5;196;38;5;226:tw=48;5;10;38;5;16:ow=48;5;10;38;5;21:st=48;5;21;38;5;15:ex=38;5;34:*.tar=38;5;9:*.tgz=38;5;9:*.arc=38;5;9:*.arj=38;5;9:*.taz=38;5;9:*.lha=38;5;9:*.lz4=38;5;9:*.lzh=38;5;9:*.lzma=38;5;9:*.tlz=38;5;9:*.txz=38;5;9:*.tzo=38;5;9:*.t7z=38;5;9:*.zip=38;5;9:*.z=38;5;9:*.Z=38;5;9:*.dz=38;5;9:*.gz=38;5;9:*.lrz=38;5;9:*.lz=38;5;9:*.lzo=38;5;9:*.xz=38;5;9:*.bz2=38;5;9:*.bz=38;5;9:*.tbz=38;5;9:*.tbz2=38;5;9:*.tz=38;5;9:*.deb=38;5;9:*.rpm=38;5;9:*.jar=38;5;9:*.war=38;5;9:*.ear=38;5;9:*.sar=38;5;9:*.rar=38;5;9:*.alz=38;5;9:*.ace=38;5;9:*.zoo=38;5;9:*.cpio=38;5;9:*.7z=38;5;9:*.rz=38;5;9:*.cab=38;5;9:*.jpg=38;5;13:*.jpeg=38;5;13:*.gif=38;5;13:*.bmp=38;5;13:*.pbm=38;5;13:*.pgm=38;5;13:*.ppm=38;5;13:*.tga=38;5;13:*.xbm=38;5;13:*.xpm=38;5;13:*.tif=38;5;13:*.tiff=38;5;13:*.png=38;5;13:*.svg=38;5;13:*.svgz=38;5;13:*.mng=38;5;13:*.pcx=38;5;13:*.mov=38;5;13:*.mpg=38;5;13:*.mpeg=38;5;13:*.m2v=38;5;13:*.mkv=38;5;13:*.webm=38;5;13:*.ogm=38;5;13:*.mp4=38;5;13:*.m4v=38;5;13:*.mp4v=38;5;13:*.vob=38;5;13:*.qt=38;5;13:*.nuv=38;5;13:*.wmv=38;5;13:*.asf=38;5;13:*.rm=38;5;13:*.rmvb=38;5;13:*.flc=38;5;13:*.avi=38;5;13:*.fli=38;5;13:*.flv=38;5;13:*.gl=38;5;13:*.dl=38;5;13:*.xcf=38;5;13:*.xwd=38;5;13:*.yuv=38;5;13:*.cgm=38;5;13:*.emf=38;5;13:*.axv=38;5;13:*.anx=38;5;13:*.ogv=38;5;13:*.ogx=38;5;13:*.aac=38;5;45:*.au=38;5;45:*.flac=38;5;45:*.mid=38;5;45:*.midi=38;5;45:*.mka=38;5;45:*.mp3=38;5;45:*.mpc=38;5;45:*.ogg=38;5;45:*.ra=38;5;45:*.wav=38;5;45:*.axa=38;5;45:*.oga=38;5;45:*.spx=38;5;45:*.xspf=38;5;45:
+FIXnos=/save/centos/nosofs.v3.1.9.1/fix/shared
+HOSTTYPE=x86_64-linux
+CDATE=20191030
+DATA=/data/temp/ngofs.20191030
+NDATE=/usrx/produtil/1.0.18/exec/ndate
+KEEPDATA=YES
+FIXofs=/save/centos/nosofs.v3.1.9.1/fix/ngofs
+EXECnos=/save/centos/nosofs.v3.1.9.1/exec
+PATH=/usrx/mpich-3.1rc4/bin:/usrx/gcc/6.5.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/centos/.local/bin:/home/centos/bin:/usrx/netcdf/4.2/bin:/usrx/produtil/1.0.18/ush:/usrx/produtil/1.0.18/exec
+MAIL=/var/spool/mail/centos
+Z_LIB=-L/usrx/zlib/1.2.11/lib -lz
+DBN_ALERT_TYPE_NETCDF=NOS_OFS_FCST_NETCDF
+MDATE=/usrx/produtil/1.0.18/exec/mdate
+PWD=/data/temp/ngofs.20191030
+_LMFILES_=/usrx/modulefiles/gcc/6.5.0:/usrx/modulefiles/zlib/1.2.11:/usrx/modulefiles/netcdf/4.2:/usrx/modulefiles/mpi/mpich/3.1rc4:/usrx/modulefiles/produtil/1.0.18
+pgmout=OUTPUT.16707
+DBN_ALERT_TYPE_TEXT=NOS_OFS_FCST_TEXT
+LANG=en_US.UTF-8
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles:/usrx/modulefiles
+LOADEDMODULES=gcc/6.5.0:zlib/1.2.11:netcdf/4.2:mpi/mpich/3.1rc4:produtil/1.0.18
+cormslogfile=/data/com/nos/ngofs.20191030/nos.ngofs.corms.20191030.t09z.log
+NHOUR=/usrx/produtil/1.0.18/exec/nhour
+SELINUX_LEVEL_REQUESTED=
+NWROOT=/save
+PARMnos=/save/centos/nosofs.v3.1.9.1/parm
+jobid=fcst.16707
+cycle=t09z
+HISTCONTROL=ignoredups
+COMOUT=/data/com/nos/ngofs.20191030
+PS4= $SECONDS + 
+HOME=/home/centos
+SHLVL=3
+OSTYPE=linux
+COMIN=/data/com/nos/ngofs.20191030
+NETCDF=/usrx/netcdf/4.2
+VENDOR=unknown
+DBN_ALERT_TYPE_NETCDF_LRG=NOS_OFS_FCST_NETCDF_LP
+HYDRA_TOPO_DEBUG=1
+MACHTYPE=x86_64
+LOGNAME=centos
+SSH_CONNECTION=184.180.13.92 24999 172.31.10.124 22
+jlogfile=/data/temp/ngofs.20191030/jlogfile.16707
+MODULESHOME=/usr/share/Modules
+RUN=ngofs
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+COMOUTroot=/data/com/nos
+SENDDBN=NO
+XDG_RUNTIME_DIR=/run/user/1000
+SCRIPTSnos=/save/centos/nosofs.v3.1.9.1/scripts
+NPP=16
+BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}
+_=/usr/bin/env
+ 0 + /save/centos/nosofs.v3.1.9.1/scripts/exnos_ofs_nowcast.sh ngofs
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.ctl ']'
+ 0 + . /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.ctl
+  0 + export DBASE_MET_NOW=NAM4
+  0 + DBASE_MET_NOW=NAM4
+  0 + export DBASE_MET_FOR=NAM4
+  0 + DBASE_MET_FOR=NAM4
+  0 + export DBASE_WL_NOW=RTOFS
+  0 + DBASE_WL_NOW=RTOFS
+  0 + export DBASE_WL_FOR=RTOFS
+  0 + DBASE_WL_FOR=RTOFS
+  0 + export DBASE_TS_NOW=RTOFS
+  0 + DBASE_TS_NOW=RTOFS
+  0 + export DBASE_TS_FOR=RTOFS
+  0 + DBASE_TS_FOR=RTOFS
+  0 + export OCEAN_MODEL=FVCOM
+  0 + OCEAN_MODEL=FVCOM
+  0 + export LEN_FORECAST=54
+  0 + LEN_FORECAST=54
+  0 + export IGRD_MET=2
+  0 + IGRD_MET=2
+  0 + export IGRD_OBC=2
+  0 + IGRD_OBC=2
+  0 + export BASE_DATE=1858111700
+  0 + BASE_DATE=1858111700
+  0 + export TIME_START=2011010100
+  0 + TIME_START=2011010100
+  0 + export MINLON=-99.0
+  0 + MINLON=-99.0
+  0 + export MINLAT=25.0
+  0 + MINLAT=25.0
+  0 + export MAXLON=-82.0
+  0 + MAXLON=-82.0
+  0 + export MAXLAT=32.0
+  0 + MAXLAT=32.0
+  0 + export THETA_S=4.5d0
+  0 + THETA_S=4.5d0
+  0 + export THETA_B=0.95d0
+  0 + THETA_B=0.95d0
+  0 + export TCLINE=10.0d0
+  0 + TCLINE=10.0d0
+  0 + export SCALE_HFLUX=1.0
+  0 + SCALE_HFLUX=1.0
+  0 + export CREATE_TIDEFORCING=0
+  0 + CREATE_TIDEFORCING=0
+  0 + export GRIDFILE=nos.ngofs.grid.dat
+  0 + GRIDFILE=nos.ngofs.grid.dat
+  0 + export HC_FILE_OBC=nos.ngofs.HC.nc
+  0 + HC_FILE_OBC=nos.ngofs.HC.nc
+  0 + export HC_FILE_OFS=nos.ngofs.HC.nc
+  0 + HC_FILE_OFS=nos.ngofs.HC.nc
+  0 + export RIVER_CTL_FILE=nos.ngofs.river.ctl
+  0 + RIVER_CTL_FILE=nos.ngofs.river.ctl
+  0 + export RIVER_CLIM_FILE=nos.ofs.river.clim.usgs.nc
+  0 + RIVER_CLIM_FILE=nos.ofs.river.clim.usgs.nc
+  0 + export OBC_CTL_FILE=nos.ngofs.obc.ctl
+  0 + OBC_CTL_FILE=nos.ngofs.obc.ctl
+  0 + export OBC_CLIM_FILE=nos.ofs.clim.WOA05.nc
+  0 + OBC_CLIM_FILE=nos.ofs.clim.WOA05.nc
+  0 + export STA_OUT_CTL=nos.ngofs_station.dat
+  0 + STA_OUT_CTL=nos.ngofs_station.dat
+  0 + export VGRID_CTL=nos.ngofs.vgrid.dat
+  0 + VGRID_CTL=nos.ngofs.vgrid.dat
+  0 + export RUNTIME_CTL=nos.ngofs.fvcom.nml
+  0 + RUNTIME_CTL=nos.ngofs.fvcom.nml
+  0 + export HC_FILE_NWLON=nos.ofs.HC_NWLON.nc
+  0 + HC_FILE_NWLON=nos.ofs.HC_NWLON.nc
+  0 + export OBC_FILE_TEMPLATE=nos.ngofs.obc.template.nc
+  0 + OBC_FILE_TEMPLATE=nos.ngofs.obc.template.nc
+  0 + export NNODE=90267
+  0 + NNODE=90267
+  0 + export NELE=174474
+  0 + NELE=174474
+  0 + export KBm=40
+  0 + KBm=40
+  0 + export DELT_MODEL=3
+  0 + DELT_MODEL=3
+  0 + export EXTSTEP_SECONDS=3.0
+  0 + EXTSTEP_SECONDS=3.0
+  0 + export ISPLIT=3
+  0 + ISPLIT=3
+  0 + export RST_OUT_INTERVAL=21600.0
+  0 + RST_OUT_INTERVAL=21600.0
+  0 + export IREPORT=100
+  0 + IREPORT=100
+  0 + export NC_OUT_INTERVAL=3600.0
+  0 + NC_OUT_INTERVAL=3600.0
+  0 + export NC_STA_INTERVAL=360.0
+  0 + NC_STA_INTERVAL=360.0
+  0 + export NRIVERS=44
+  0 + NRIVERS=44
+  0 + export MIN_DEPTH=0.5
+  0 + MIN_DEPTH=0.5
+  0 + export HEATING_LONGWAVE_LENGTHSCALE=1.4
+  0 + HEATING_LONGWAVE_LENGTHSCALE=1.4
+  0 + export HEATING_LONGWAVE_PERCTAGE=0.78
+  0 + HEATING_LONGWAVE_PERCTAGE=0.78
+  0 + export HEATING_SHORTWAVE_LENGTHSCALE=6.3
+  0 + HEATING_SHORTWAVE_LENGTHSCALE=6.3
+  0 + export NESTING_BLOCKSIZE=5
+  0 + NESTING_BLOCKSIZE=5
+  0 + export RIVER_NAMELIST=nos.ngofs.RIVERS_NAMELIST.nml
+  0 + RIVER_NAMELIST=nos.ngofs.RIVERS_NAMELIST.nml
+  0 + export CORIOLISFILE=nos.ngofs.cor.dat
+  0 + CORIOLISFILE=nos.ngofs.cor.dat
+  0 + export DEPTHFILE=nos.ngofs.dep.dat
+  0 + DEPTHFILE=nos.ngofs.dep.dat
+  0 + export RUNGRIDFILE=nos.ngofs.grd.dat
+  0 + RUNGRIDFILE=nos.ngofs.grd.dat
+  0 + export MODELOBCFILE=nos.ngofs.obc.dat
+  0 + MODELOBCFILE=nos.ngofs.obc.dat
+  0 + export SIGMA_LEVEL=nos.ngofs.sigma.dat
+  0 + SIGMA_LEVEL=nos.ngofs.sigma.dat
+  0 + export SPONGEFILE=nos.ngofs.spg.dat
+  0 + SPONGEFILE=nos.ngofs.spg.dat
+  0 + export STATIONFILE=nos.ngofs.station.dat
+  0 + STATIONFILE=nos.ngofs.station.dat
+  0 + export InputNodeFile=nos.ngofs.node.dat
+  0 + InputNodeFile=nos.ngofs.node.dat
+  0 + export InputNode2LFile=nos.ngofs.node.2LayerNd.dat
+  0 + InputNode2LFile=nos.ngofs.node.2LayerNd.dat
+  0 + export NRST=3600
+  0 + NRST=3600
+  0 + export NSTA=360
+  0 + NSTA=360
+  0 + export NFLT=3600
+  0 + NFLT=3600
+  0 + export NHIS=3600
+  0 + NHIS=3600
+  0 + export NAVG=3600
+  0 + NAVG=3600
+  0 + export 'DCRIT=0.10d0     !m'
+  0 + DCRIT='0.10d0     !m'
+  0 + export TOTAL_TASKS=240
+  0 + TOTAL_TASKS=240
+ 0 + '[' -n '' ']'
+ 0 + echo 'run the launch script to set the NOS configuration'
+run the launch script to set the NOS configuration
+ 0 + . /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast
+  0 + set -x
+  0 + '[' 2 -lt 2 ']'
+  0 + export OFS=ngofs
+  0 + OFS=ngofs
+  0 + export runtype=nowcast
+  0 + runtype=nowcast
+   0 + date
+  0 + echo 'The script nos_ofs_launch.sh has started at UTC' Fri Nov 1 17:34:22 UTC 2019
+The script nos_ofs_launch.sh has started at UTC Fri Nov 1 17:34:22 UTC 2019
+   0 + date
+  0 + echo 'The script nos_ofs_launch.sh has started at UTC' Fri Nov 1 17:34:22 UTC 2019
+   0 + date
+  0 + echo 'The script nos_ofs_launch.sh has started at UTC' Fri Nov 1 17:34:22 UTC 2019
+   0 + date
+  0 + echo 'The script nos_ofs_launch.sh has started at UTC' Fri Nov 1 17:34:22 UTC 2019
+  0 + export time_nowcastend=2019103009
+  0 + time_nowcastend=2019103009
+  0 + echo '*******************************************************************'
+*******************************************************************
+  0 + echo '*******************************************************************'
+*******************************************************************
+  0 + echo 'time_nowcastend is 2019103009'
+time_nowcastend is 2019103009
+  0 + echo '*******************************************************************'
+*******************************************************************
+  0 + echo '*******************************************************************'
+*******************************************************************
+  0 + '[' '!' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.grid.dat ']'
+  0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.grid.dat /data/temp/ngofs.20191030/.
+  0 + export err=0
+  0 + err=0
+  0 + err_chk
+  0 + echo '/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.grid.dat is copied into working dir'
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.grid.dat is copied into working dir
+  0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+  0 + '[' FVCOM == ROMS -o FVCOM == roms ']'
+  0 + '[' 0 -gt 0 -a RTOFS '!=' OBS ']'
+  0 + '[' -d /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.vgrid.dat -o '!' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.vgrid.dat ']'
+  0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.vgrid.dat /data/temp/ngofs.20191030/.
+  0 + export pgm=/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy
+  0 + pgm=/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy
+  0 + . prep_step
+   0 + '[' -n /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy ']'
+   0 + '[' -n OUTPUT.16707 ']'
+   0 + echo /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy
+   0 + '[' -f errfile ']'
+   0 + export FORT01=0
+   0 + FORT01=0
+    0 + env
+    0 + grep '^FORT[0-9]\{1,\}='
+    0 + awk -F= '{print $1}'
+   0 + unset FORT01
+  0 + '[' '!' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat ']'
+  0 + '[' '!' -d /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat -a -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat ']'
+  0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat /data/temp/ngofs.20191030/.
+  0 + export err=0
+  0 + err=0
+  0 + err_chk
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy completed cleanly
+  0 + echo '/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat was copied into working dir'
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat was copied into working dir
+  0 + '[' '!' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml -o '!' -f /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml ']'
+  0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml /data/temp/ngofs.20191030/.
+  0 + export err=0
+  0 + err=0
+  0 + err_chk
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy completed cleanly
+  0 + echo '/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml was copied into working dir'
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml was copied into working dir
+  0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/ -a -f /save/centos/nosofs.v3.1.9.1/fix/ngofs/ ']'
+  0 + BIO_MODULE=0
+  0 + '[' 0 -eq 1 ']'
+  0 + TS_NUDGING=0
+  0 + '[' 0 -eq 1 ']'
+  0 + export HH=09
+  0 + HH=09
+  0 + export PDY1=20191030
+  0 + PDY1=20191030
+  0 + '[' nowcast = prep ']'
+  0 + '[' nowcast = PREP ']'
+  0 + export OBC_FORCING_FILE=nos.ngofs.obc.20191030.t09z.nc
+  0 + OBC_FORCING_FILE=nos.ngofs.obc.20191030.t09z.nc
+  0 + export OBC_FORCING_FILE_EL=nos.ngofs.obc.el.20191030.t09z.nc
+  0 + OBC_FORCING_FILE_EL=nos.ngofs.obc.el.20191030.t09z.nc
+  0 + export OBC_FORCING_FILE_TS=nos.ngofs.obc.ts.20191030.t09z.nc
+  0 + OBC_FORCING_FILE_TS=nos.ngofs.obc.ts.20191030.t09z.nc
+  0 + export RIVER_FORCING_FILE=nos.ngofs.river.20191030.t09z.nc
+  0 + RIVER_FORCING_FILE=nos.ngofs.river.20191030.t09z.nc
+  0 + export OBC_TIDALFORCING_FILE=nos.ngofs.roms.tides.20191030.t09z.nc
+  0 + OBC_TIDALFORCING_FILE=nos.ngofs.roms.tides.20191030.t09z.nc
+  0 + export NUDG_FORCING_FILE=nos.ngofs.clim.20191030.t09z.nc
+  0 + NUDG_FORCING_FILE=nos.ngofs.clim.20191030.t09z.nc
+  0 + export OBC_FORCING_FILE_EL=nos.ngofs.obc.20191030.t09z.nc
+  0 + OBC_FORCING_FILE_EL=nos.ngofs.obc.20191030.t09z.nc
+  0 + export OBC_FORCING_FILE_TS=nos.ngofs.obc.20191030.t09z.nc
+  0 + OBC_FORCING_FILE_TS=nos.ngofs.obc.20191030.t09z.nc
+  0 + export INI_FILE_NOWCAST=nos.ngofs.init.nowcast.20191030.t09z.nc
+  0 + INI_FILE_NOWCAST=nos.ngofs.init.nowcast.20191030.t09z.nc
+  0 + export HIS_OUT_NOWCAST=nos.ngofs.fields.nowcast.20191030.t09z.nc
+  0 + HIS_OUT_NOWCAST=nos.ngofs.fields.nowcast.20191030.t09z.nc
+  0 + export STA_OUT_NOWCAST=nos.ngofs.stations.nowcast.20191030.t09z.nc
+  0 + STA_OUT_NOWCAST=nos.ngofs.stations.nowcast.20191030.t09z.nc
+  0 + export RST_OUT_NOWCAST=nos.ngofs.rst.nowcast.20191030.t09z.nc
+  0 + RST_OUT_NOWCAST=nos.ngofs.rst.nowcast.20191030.t09z.nc
+  0 + export MET_NETCDF_1_NOWCAST=nos.ngofs.met.nowcast.20191030.t09z.nc
+  0 + MET_NETCDF_1_NOWCAST=nos.ngofs.met.nowcast.20191030.t09z.nc
+  0 + export MET_NETCDF_2_NOWCAST=nos.ngofs.hflux.nowcast.20191030.t09z.nc
+  0 + MET_NETCDF_2_NOWCAST=nos.ngofs.hflux.nowcast.20191030.t09z.nc
+  0 + export HIS_2D_NOWCAST=nos.ngofs.surface.nowcast.20191030.t09z.nc
+  0 + HIS_2D_NOWCAST=nos.ngofs.surface.nowcast.20191030.t09z.nc
+  0 + export HIS_2D_FORECAST=nos.ngofs.surface.forecast.20191030.t09z.nc
+  0 + HIS_2D_FORECAST=nos.ngofs.surface.forecast.20191030.t09z.nc
+  0 + export INI_FILE_FORECAST=nos.ngofs.rst.nowcast.20191030.t09z.nc
+  0 + INI_FILE_FORECAST=nos.ngofs.rst.nowcast.20191030.t09z.nc
+  0 + export HIS_OUT_FORECAST=nos.ngofs.fields.forecast.20191030.t09z.nc
+  0 + HIS_OUT_FORECAST=nos.ngofs.fields.forecast.20191030.t09z.nc
+  0 + export STA_OUT_FORECAST=nos.ngofs.stations.forecast.20191030.t09z.nc
+  0 + STA_OUT_FORECAST=nos.ngofs.stations.forecast.20191030.t09z.nc
+  0 + export RST_OUT_FORECAST=nos.ngofs.rst.forecast.20191030.t09z.nc
+  0 + RST_OUT_FORECAST=nos.ngofs.rst.forecast.20191030.t09z.nc
+  0 + export MET_NETCDF_1_FORECAST=nos.ngofs.met.forecast.20191030.t09z.nc
+  0 + MET_NETCDF_1_FORECAST=nos.ngofs.met.forecast.20191030.t09z.nc
+  0 + export MET_NETCDF_2_FORECAST=nos.ngofs.hflux.forecast.20191030.t09z.nc
+  0 + MET_NETCDF_2_FORECAST=nos.ngofs.hflux.forecast.20191030.t09z.nc
+  0 + export MODEL_LOG_NOWCAST=nos.ngofs.nowcast.20191030.t09z.log
+  0 + MODEL_LOG_NOWCAST=nos.ngofs.nowcast.20191030.t09z.log
+  0 + export MODEL_LOG_FORECAST=nos.ngofs.forecast.20191030.t09z.log
+  0 + MODEL_LOG_FORECAST=nos.ngofs.forecast.20191030.t09z.log
+  0 + export RUNTIME_CTL_NOWCAST=nos.ngofs.nowcast.20191030.t09z.in
+  0 + RUNTIME_CTL_NOWCAST=nos.ngofs.nowcast.20191030.t09z.in
+  0 + export RUNTIME_CTL_FORECAST=nos.ngofs.forecast.20191030.t09z.in
+  0 + RUNTIME_CTL_FORECAST=nos.ngofs.forecast.20191030.t09z.in
+  0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+  0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+  0 + export RIVER_FORCING_FILE=nos.ngofs.river.20191030.t09z.nc.tar
+  0 + RIVER_FORCING_FILE=nos.ngofs.river.20191030.t09z.nc.tar
+  0 + echo 'Variable and parameter setup has been completed'
+  0 + echo 'Variable and parameter setup has been completed'
+ 0 + export 'pgm=/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast'
+ 0 + pgm='/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast'
+ 0 + export err=0
+ 0 + err=0
+ 0 + '[' 0 -ne 0 ']'
+ 0 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast completed normally'
+ 0 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast completed normally'
+Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast completed normally
+ 0 + msg=' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast completed normally'
+ 0 + postmsg /data/temp/ngofs.20191030/jlogfile.16707 ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast completed normally'
+ 0 + postmsg /data/com/nos/ngofs.20191030/nos.ngofs.jlogfile.20191030.t09z.log ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast completed normally'
+ 0 + runtype=nowcast
+ 0 + echo '     '
+ 0 + echo '     '
+ 0 + echo ' Start nowcast '
+ 0 + echo ' Start nowcast '
+  0 + date
+ 0 + echo 'Making nowcast at : Fri Nov  1 17:34:22 UTC 2019'
+  0 + date
+ 0 + echo 'Making nowcast at : Fri Nov  1 17:34:22 UTC 2019'
+  0 + date
+ 0 + echo 'Making nowcast at : Fri Nov  1 17:34:22 UTC 2019'
+Making nowcast at : Fri Nov  1 17:34:22 UTC 2019
+ 0 + export 'pgm=/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast'
+ 0 + pgm='/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast'
+ 0 + /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast
+ 0 + echo 'PT DEBUG: ulimits   ================================'
+PT DEBUG: ulimits   ================================
+ 0 + ulimit -a
+core file size          (blocks, -c) unlimited
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 377308
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) unlimited
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 4096
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+ 0 + echo 'PT DEBUG: ulimits   ================================'
+PT DEBUG: ulimits   ================================
+ 0 + cd /data/temp/ngofs.20191030
+ 0 + echo ' '
+ 
+ 0 + echo '  		    ****************************************'
+  		    ****************************************
+ 0 + echo '  		    *** NOS OFS  NOWCAST/FORECAST SCRIPT ***'
+  		    *** NOS OFS  NOWCAST/FORECAST SCRIPT ***
+ 0 + echo '  		    ****************************************'
+  		    ****************************************
+ 0 + echo ' '
+ 
+  0 + date
+ 0 + echo 'Starting nos_ofs_nowcast_forecast.sh at : Fri Nov  1 17:34:22 UTC 2019'
+Starting nos_ofs_nowcast_forecast.sh at : Fri Nov  1 17:34:22 UTC 2019
+ 0 + RUNTYPE=nowcast
+ 0 + RUN=ngofs
+ 0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_brf.nc ']'
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_cor.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_cor.dat /data/temp/ngofs.20191030/ngofs_cor.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_dep.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_dep.dat /data/temp/ngofs.20191030/ngofs_dep.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_grd.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_grd.dat /data/temp/ngofs.20191030/ngofs_grd.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_obc.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_obc.dat /data/temp/ngofs.20191030/ngofs_obc.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_sigma.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_sigma.dat /data/temp/ngofs.20191030/ngofs_sigma.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_spg.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_spg.dat /data/temp/ngofs.20191030/ngofs_spg.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat /data/temp/ngofs.20191030/ngofs_station.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_rivernamelist.nml ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_rivernamelist.nml /data/temp/ngofs.20191030/RIVERS_NAMELIST.nml
+ 0 + '[' ngofs == NGOFS -o ngofs == ngofs ']'
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos_ngofs_nestnode_negofs.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos_ngofs_nestnode_negofs.dat /data/temp/ngofs.20191030/nos_ngofs_nestnode_negofs.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos_ngofs_nestnode_nwgofs.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos_ngofs_nestnode_nwgofs.dat /data/temp/ngofs.20191030/nos_ngofs_nestnode_nwgofs.dat
+ 0 + '[' ngofs == NWGOFS -o ngofs == nwgofs ']'
+ 0 + echo 'Preparing input files for ngofs nowcast '
+Preparing input files for ngofs nowcast 
+ 0 + echo -----------------------
+-----------------------
+ 0 + seton
+ 0 + set -x
+ 0 + '[' nowcast == NOWCAST -o nowcast == nowcast ']'
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' FVCOM == ROMS -o FVCOM == roms ']'
+ 0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+ 0 + '[' '!' -r /data/temp/ngofs.20191030/RIVER ']'
+ 0 + '[' -s /data/temp/ngofs.20191030/nos.ngofs.river.20191030.t09z.nc.tar ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.river.20191030.t09z.nc.tar ']'
+ 0 + rm -fr /data/temp/ngofs.20191030/RIVER
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.river.20191030.t09z.nc.tar /data/temp/ngofs.20191030/.
+ 0 + tar -xvf /data/temp/ngofs.20191030/nos.ngofs.river.20191030.t09z.nc.tar
+RIVER/
+RIVER/24153.nc
+RIVER/23097.nc
+RIVER/23098.nc
+RIVER/32482.nc
+RIVER/38798.nc
+RIVER/89538.nc
+RIVER/89664.nc
+RIVER/88931.nc
+RIVER/61006.nc
+RIVER/64011.nc
+RIVER/64019.nc
+RIVER/67480.nc
+RIVER/79585.nc
+RIVER/79586.nc
+RIVER/79587.nc
+RIVER/62740.nc
+RIVER/53084.nc
+RIVER/52236.nc
+RIVER/52235.nc
+RIVER/27893.nc
+RIVER/27892.nc
+RIVER/26886.nc
+RIVER/23744.nc
+RIVER/22631.nc
+RIVER/20378.nc
+RIVER/21497.nc
+RIVER/20383.nc
+RIVER/14115.nc
+RIVER/14116.nc
+RIVER/14117.nc
+RIVER/14118.nc
+RIVER/32096.nc
+RIVER/32097.nc
+RIVER/88869.nc
+RIVER/88169.nc
+RIVER/88090.nc
+RIVER/85595.nc
+RIVER/70887.nc
+RIVER/86790.nc
+RIVER/87516.nc
+RIVER/40692.nc
+RIVER/76267.nc
+RIVER/50759.nc
+RIVER/75834.nc
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' -f /data/temp/ngofs.20191030/nos.ngofs.obc.20191030.t09z.nc ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.obc.20191030.t09z.nc ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.obc.20191030.t09z.nc nos.ngofs.obc.20191030.t09z.nc
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' -s /data/temp/ngofs.20191030/nos.ngofs.met.nowcast.20191030.t09z.nc ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.met.nowcast.20191030.t09z.nc ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.met.nowcast.20191030.t09z.nc nos.ngofs.met.nowcast.20191030.t09z.nc
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' -f /data/temp/ngofs.20191030/nos.ngofs.init.nowcast.20191030.t09z.nc ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.init.nowcast.20191030.t09z.nc ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.init.nowcast.20191030.t09z.nc nos.ngofs.init.nowcast.20191030.t09z.nc
+ 0 + '[' -f /data/temp/ngofs.20191030/nos.ngofs.hflux.nowcast.20191030.t09z.nc ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.hflux.nowcast.20191030.t09z.nc ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.hflux.nowcast.20191030.t09z.nc nos.ngofs.hflux.nowcast.20191030.t09z.nc
+ 1 + '[' -f /data/temp/ngofs.20191030/ngofs_FVCOM_nowcast.in ']'
+ 1 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.nowcast.20191030.t09z.in ']'
+ 1 + echo '/data/com/nos/ngofs.20191030/nos.ngofs.nowcast.20191030.t09z.in is found '
+/data/com/nos/ngofs.20191030/nos.ngofs.nowcast.20191030.t09z.in is found 
+ 1 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 1 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+ 1 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.nowcast.20191030.t09z.in /data/temp/ngofs.20191030/ngofs_run.nml
+ 1 + '[' -f /data/temp/ngofs.20191030/nos.ngofs.HC.nc ']'
+ 1 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.HC.nc ']'
+ 1 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.HC.nc nos.ngofs.HC.nc
+ 1 + TS_NUDGING=0
+ 1 + '[' 0 -eq 1 ']'
+  1 + date
+ 1 + echo 'Ocean Model run starts at time: ' Fri Nov 1 17:34:23 UTC 2019
+Ocean Model run starts at time:  Fri Nov 1 17:34:23 UTC 2019
+ 1 + '[' FVCOM == ROMS -o FVCOM == roms ']'
+ 1 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+ 1 + mpirun -verbose -np 16 -bind-to core:16 /save/centos/nosofs.v3.1.9.1/exec/fvcom_ngofs --casename=ngofs
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+ 4255 + export err=0
+ 4255 + err=0
+ 4255 + '[' 0 -ne 0 ']'
+ 4255 + rm -f corms.now corms.fcst
+ 4255 + '[' -s nos.ngofs.nowcast.20191030.t09z.log ']'
+ 4255 + grep NaN nos.ngofs.nowcast.20191030.t09z.log
+ 4256 + grep STOP nos.ngofs.nowcast.20191030.t09z.log
+ 4257 + grep failed nos.ngofs.nowcast.20191030.t09z.log
+ 4257 + grep Failed nos.ngofs.nowcast.20191030.t09z.log
+ 4258 + grep Blowing-up nos.ngofs.nowcast.20191030.t09z.log
+ 4258 + grep 'Abnormal termination: BLOWUP' nos.ngofs.nowcast.20191030.t09z.log
+ 4259 + '[' -s corms.now ']'
+ 4259 + echo 'ngofs NOWCAST RUN OF CYCLE t09z ON 20191030 COMPLETED SUCCESSFULLY 100'
+ 4259 + echo 'NOWCAST_RUN DONE 100'
+ 4259 + '[' -f /data/temp/ngofs.20191030/ngofs_restart_0001.nc ']'
+ 4259 + mv /data/temp/ngofs.20191030/ngofs_restart_0001.nc /data/temp/ngofs.20191030/nos.ngofs.rst.nowcast.20191030.t09z.nc
+ 4259 + cp -p /data/temp/ngofs.20191030/nos.ngofs.rst.nowcast.20191030.t09z.nc /data/com/nos/ngofs.20191030/nos.ngofs.rst.nowcast.20191030.t09z.nc
+ 4259 + echo '   nos.ngofs.rst.nowcast.20191030.t09z.nc saved '
+   nos.ngofs.rst.nowcast.20191030.t09z.nc saved 
+ 4259 + '[' -f /data/temp/ngofs.20191030/ngofs_station_timeseries.nc ']'
+ 4259 + mv /data/temp/ngofs.20191030/ngofs_station_timeseries.nc /data/temp/ngofs.20191030/nos.ngofs.stations.nowcast.20191030.t09z.nc
+ 4259 + Im1=0
+ 4259 + I=1
+ 4259 + ((  I < 100  ))
+  4259 + echo 1
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0001
+ 4259 + file=ngofs_0001.nc
+ 4259 + '[' -s ngofs_0001.nc ']'
+  4259 + echo 0
+  4259 + awk '{printf("%03i",$1)}'
+ 4259 + fhr3=000
+ 4259 + fileout=nos.ngofs.fields.n000.20191030.t09z.nc
+ 4259 + mv ngofs_0001.nc nos.ngofs.fields.n000.20191030.t09z.nc
+  4259 + expr 0 + 1
+ 4259 + Im1=1
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 2
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0002
+ 4259 + file=ngofs_0002.nc
+ 4259 + '[' -s ngofs_0002.nc ']'
+  4259 + echo 1
+  4259 + awk '{printf("%03i",$1)}'
+ 4259 + fhr3=001
+ 4259 + fileout=nos.ngofs.fields.n001.20191030.t09z.nc
+ 4259 + mv ngofs_0002.nc nos.ngofs.fields.n001.20191030.t09z.nc
+  4259 + expr 1 + 1
+ 4259 + Im1=2
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 3
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0003
+ 4259 + file=ngofs_0003.nc
+ 4259 + '[' -s ngofs_0003.nc ']'
+  4259 + echo 2
+  4259 + awk '{printf("%03i",$1)}'
+ 4259 + fhr3=002
+ 4259 + fileout=nos.ngofs.fields.n002.20191030.t09z.nc
+ 4259 + mv ngofs_0003.nc nos.ngofs.fields.n002.20191030.t09z.nc
+  4259 + expr 2 + 1
+ 4259 + Im1=3
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 4
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0004
+ 4259 + file=ngofs_0004.nc
+ 4259 + '[' -s ngofs_0004.nc ']'
+  4259 + echo 3
+  4259 + awk '{printf("%03i",$1)}'
+ 4259 + fhr3=003
+ 4259 + fileout=nos.ngofs.fields.n003.20191030.t09z.nc
+ 4259 + mv ngofs_0004.nc nos.ngofs.fields.n003.20191030.t09z.nc
+  4259 + expr 3 + 1
+ 4259 + Im1=4
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 5
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0005
+ 4259 + file=ngofs_0005.nc
+ 4259 + '[' -s ngofs_0005.nc ']'
+  4259 + echo 4
+  4259 + awk '{printf("%03i",$1)}'
+ 4259 + fhr3=004
+ 4259 + fileout=nos.ngofs.fields.n004.20191030.t09z.nc
+ 4259 + mv ngofs_0005.nc nos.ngofs.fields.n004.20191030.t09z.nc
+  4259 + expr 4 + 1
+ 4259 + Im1=5
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 6
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0006
+ 4259 + file=ngofs_0006.nc
+ 4259 + '[' -s ngofs_0006.nc ']'
+  4259 + echo 5
+  4259 + awk '{printf("%03i",$1)}'
+ 4259 + fhr3=005
+ 4259 + fileout=nos.ngofs.fields.n005.20191030.t09z.nc
+ 4259 + mv ngofs_0006.nc nos.ngofs.fields.n005.20191030.t09z.nc
+  4259 + expr 5 + 1
+ 4259 + Im1=6
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 7
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0007
+ 4259 + file=ngofs_0007.nc
+ 4259 + '[' -s ngofs_0007.nc ']'
+  4259 + echo 6
+  4259 + awk '{printf("%03i",$1)}'
+ 4259 + fhr3=006
+ 4259 + fileout=nos.ngofs.fields.n006.20191030.t09z.nc
+ 4259 + mv ngofs_0007.nc nos.ngofs.fields.n006.20191030.t09z.nc
+  4259 + expr 6 + 1
+ 4259 + Im1=7
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 8
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0008
+ 4259 + file=ngofs_0008.nc
+ 4259 + '[' -s ngofs_0008.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 9
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0009
+ 4259 + file=ngofs_0009.nc
+ 4259 + '[' -s ngofs_0009.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 10
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0010
+ 4259 + file=ngofs_0010.nc
+ 4259 + '[' -s ngofs_0010.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 11
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0011
+ 4259 + file=ngofs_0011.nc
+ 4259 + '[' -s ngofs_0011.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 12
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0012
+ 4259 + file=ngofs_0012.nc
+ 4259 + '[' -s ngofs_0012.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 13
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0013
+ 4259 + file=ngofs_0013.nc
+ 4259 + '[' -s ngofs_0013.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 14
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0014
+ 4259 + file=ngofs_0014.nc
+ 4259 + '[' -s ngofs_0014.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 15
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0015
+ 4259 + file=ngofs_0015.nc
+ 4259 + '[' -s ngofs_0015.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 16
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0016
+ 4259 + file=ngofs_0016.nc
+ 4259 + '[' -s ngofs_0016.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 17
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0017
+ 4259 + file=ngofs_0017.nc
+ 4259 + '[' -s ngofs_0017.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 18
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0018
+ 4259 + file=ngofs_0018.nc
+ 4259 + '[' -s ngofs_0018.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 19
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0019
+ 4259 + file=ngofs_0019.nc
+ 4259 + '[' -s ngofs_0019.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 20
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0020
+ 4259 + file=ngofs_0020.nc
+ 4259 + '[' -s ngofs_0020.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 21
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0021
+ 4259 + file=ngofs_0021.nc
+ 4259 + '[' -s ngofs_0021.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 22
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0022
+ 4259 + file=ngofs_0022.nc
+ 4259 + '[' -s ngofs_0022.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 23
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0023
+ 4259 + file=ngofs_0023.nc
+ 4259 + '[' -s ngofs_0023.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 24
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0024
+ 4259 + file=ngofs_0024.nc
+ 4259 + '[' -s ngofs_0024.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 25
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0025
+ 4259 + file=ngofs_0025.nc
+ 4259 + '[' -s ngofs_0025.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 26
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0026
+ 4259 + file=ngofs_0026.nc
+ 4259 + '[' -s ngofs_0026.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 27
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0027
+ 4259 + file=ngofs_0027.nc
+ 4259 + '[' -s ngofs_0027.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 28
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0028
+ 4259 + file=ngofs_0028.nc
+ 4259 + '[' -s ngofs_0028.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 29
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0029
+ 4259 + file=ngofs_0029.nc
+ 4259 + '[' -s ngofs_0029.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 30
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0030
+ 4259 + file=ngofs_0030.nc
+ 4259 + '[' -s ngofs_0030.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 31
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0031
+ 4259 + file=ngofs_0031.nc
+ 4259 + '[' -s ngofs_0031.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 32
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0032
+ 4259 + file=ngofs_0032.nc
+ 4259 + '[' -s ngofs_0032.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 33
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0033
+ 4259 + file=ngofs_0033.nc
+ 4259 + '[' -s ngofs_0033.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 34
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0034
+ 4259 + file=ngofs_0034.nc
+ 4259 + '[' -s ngofs_0034.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 35
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0035
+ 4259 + file=ngofs_0035.nc
+ 4259 + '[' -s ngofs_0035.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 36
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0036
+ 4259 + file=ngofs_0036.nc
+ 4259 + '[' -s ngofs_0036.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 37
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0037
+ 4259 + file=ngofs_0037.nc
+ 4259 + '[' -s ngofs_0037.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 38
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0038
+ 4259 + file=ngofs_0038.nc
+ 4259 + '[' -s ngofs_0038.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 39
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0039
+ 4259 + file=ngofs_0039.nc
+ 4259 + '[' -s ngofs_0039.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 40
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0040
+ 4259 + file=ngofs_0040.nc
+ 4259 + '[' -s ngofs_0040.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 41
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0041
+ 4259 + file=ngofs_0041.nc
+ 4259 + '[' -s ngofs_0041.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 42
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0042
+ 4259 + file=ngofs_0042.nc
+ 4259 + '[' -s ngofs_0042.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 43
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0043
+ 4259 + file=ngofs_0043.nc
+ 4259 + '[' -s ngofs_0043.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 44
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0044
+ 4259 + file=ngofs_0044.nc
+ 4259 + '[' -s ngofs_0044.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 45
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0045
+ 4259 + file=ngofs_0045.nc
+ 4259 + '[' -s ngofs_0045.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 46
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0046
+ 4259 + file=ngofs_0046.nc
+ 4259 + '[' -s ngofs_0046.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 47
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0047
+ 4259 + file=ngofs_0047.nc
+ 4259 + '[' -s ngofs_0047.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 48
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0048
+ 4259 + file=ngofs_0048.nc
+ 4259 + '[' -s ngofs_0048.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 49
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0049
+ 4259 + file=ngofs_0049.nc
+ 4259 + '[' -s ngofs_0049.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 50
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0050
+ 4259 + file=ngofs_0050.nc
+ 4259 + '[' -s ngofs_0050.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 51
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0051
+ 4259 + file=ngofs_0051.nc
+ 4259 + '[' -s ngofs_0051.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 52
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0052
+ 4259 + file=ngofs_0052.nc
+ 4259 + '[' -s ngofs_0052.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 53
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0053
+ 4259 + file=ngofs_0053.nc
+ 4259 + '[' -s ngofs_0053.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 54
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0054
+ 4259 + file=ngofs_0054.nc
+ 4259 + '[' -s ngofs_0054.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 55
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0055
+ 4259 + file=ngofs_0055.nc
+ 4259 + '[' -s ngofs_0055.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 56
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0056
+ 4259 + file=ngofs_0056.nc
+ 4259 + '[' -s ngofs_0056.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 57
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0057
+ 4259 + file=ngofs_0057.nc
+ 4259 + '[' -s ngofs_0057.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 58
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0058
+ 4259 + file=ngofs_0058.nc
+ 4259 + '[' -s ngofs_0058.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 59
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0059
+ 4259 + file=ngofs_0059.nc
+ 4259 + '[' -s ngofs_0059.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 60
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0060
+ 4259 + file=ngofs_0060.nc
+ 4259 + '[' -s ngofs_0060.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 61
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0061
+ 4259 + file=ngofs_0061.nc
+ 4259 + '[' -s ngofs_0061.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 62
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0062
+ 4259 + file=ngofs_0062.nc
+ 4259 + '[' -s ngofs_0062.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 63
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0063
+ 4259 + file=ngofs_0063.nc
+ 4259 + '[' -s ngofs_0063.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 64
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0064
+ 4259 + file=ngofs_0064.nc
+ 4259 + '[' -s ngofs_0064.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 65
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0065
+ 4259 + file=ngofs_0065.nc
+ 4259 + '[' -s ngofs_0065.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 66
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0066
+ 4259 + file=ngofs_0066.nc
+ 4259 + '[' -s ngofs_0066.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 67
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0067
+ 4259 + file=ngofs_0067.nc
+ 4259 + '[' -s ngofs_0067.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 68
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0068
+ 4259 + file=ngofs_0068.nc
+ 4259 + '[' -s ngofs_0068.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 69
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0069
+ 4259 + file=ngofs_0069.nc
+ 4259 + '[' -s ngofs_0069.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 70
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0070
+ 4259 + file=ngofs_0070.nc
+ 4259 + '[' -s ngofs_0070.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 71
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0071
+ 4259 + file=ngofs_0071.nc
+ 4259 + '[' -s ngofs_0071.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 72
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0072
+ 4259 + file=ngofs_0072.nc
+ 4259 + '[' -s ngofs_0072.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 73
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0073
+ 4259 + file=ngofs_0073.nc
+ 4259 + '[' -s ngofs_0073.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 74
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0074
+ 4259 + file=ngofs_0074.nc
+ 4259 + '[' -s ngofs_0074.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 75
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0075
+ 4259 + file=ngofs_0075.nc
+ 4259 + '[' -s ngofs_0075.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 76
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0076
+ 4259 + file=ngofs_0076.nc
+ 4259 + '[' -s ngofs_0076.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 77
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0077
+ 4259 + file=ngofs_0077.nc
+ 4259 + '[' -s ngofs_0077.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 78
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0078
+ 4259 + file=ngofs_0078.nc
+ 4259 + '[' -s ngofs_0078.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 79
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0079
+ 4259 + file=ngofs_0079.nc
+ 4259 + '[' -s ngofs_0079.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 80
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0080
+ 4259 + file=ngofs_0080.nc
+ 4259 + '[' -s ngofs_0080.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 81
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0081
+ 4259 + file=ngofs_0081.nc
+ 4259 + '[' -s ngofs_0081.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 82
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0082
+ 4259 + file=ngofs_0082.nc
+ 4259 + '[' -s ngofs_0082.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 83
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0083
+ 4259 + file=ngofs_0083.nc
+ 4259 + '[' -s ngofs_0083.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 84
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0084
+ 4259 + file=ngofs_0084.nc
+ 4259 + '[' -s ngofs_0084.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 85
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0085
+ 4259 + file=ngofs_0085.nc
+ 4259 + '[' -s ngofs_0085.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 86
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0086
+ 4259 + file=ngofs_0086.nc
+ 4259 + '[' -s ngofs_0086.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 87
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0087
+ 4259 + file=ngofs_0087.nc
+ 4259 + '[' -s ngofs_0087.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 88
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0088
+ 4259 + file=ngofs_0088.nc
+ 4259 + '[' -s ngofs_0088.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 89
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0089
+ 4259 + file=ngofs_0089.nc
+ 4259 + '[' -s ngofs_0089.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 90
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0090
+ 4259 + file=ngofs_0090.nc
+ 4259 + '[' -s ngofs_0090.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4259 + echo 91
+  4259 + awk '{printf("%04i",$1)}'
+ 4259 + fhr4=0091
+ 4259 + file=ngofs_0091.nc
+ 4259 + '[' -s ngofs_0091.nc ']'
+ 4259 + ((  I = I + 1  ))
+ 4259 + ((  I < 100  ))
+  4260 + echo 92
+  4260 + awk '{printf("%04i",$1)}'
+ 4260 + fhr4=0092
+ 4260 + file=ngofs_0092.nc
+ 4260 + '[' -s ngofs_0092.nc ']'
+ 4260 + ((  I = I + 1  ))
+ 4260 + ((  I < 100  ))
+  4260 + echo 93
+  4260 + awk '{printf("%04i",$1)}'
+ 4260 + fhr4=0093
+ 4260 + file=ngofs_0093.nc
+ 4260 + '[' -s ngofs_0093.nc ']'
+ 4260 + ((  I = I + 1  ))
+ 4260 + ((  I < 100  ))
+  4260 + echo 94
+  4260 + awk '{printf("%04i",$1)}'
+ 4260 + fhr4=0094
+ 4260 + file=ngofs_0094.nc
+ 4260 + '[' -s ngofs_0094.nc ']'
+ 4260 + ((  I = I + 1  ))
+ 4260 + ((  I < 100  ))
+  4260 + echo 95
+  4260 + awk '{printf("%04i",$1)}'
+ 4260 + fhr4=0095
+ 4260 + file=ngofs_0095.nc
+ 4260 + '[' -s ngofs_0095.nc ']'
+ 4260 + ((  I = I + 1  ))
+ 4260 + ((  I < 100  ))
+  4260 + echo 96
+  4260 + awk '{printf("%04i",$1)}'
+ 4260 + fhr4=0096
+ 4260 + file=ngofs_0096.nc
+ 4260 + '[' -s ngofs_0096.nc ']'
+ 4260 + ((  I = I + 1  ))
+ 4260 + ((  I < 100  ))
+  4260 + echo 97
+  4260 + awk '{printf("%04i",$1)}'
+ 4260 + fhr4=0097
+ 4260 + file=ngofs_0097.nc
+ 4260 + '[' -s ngofs_0097.nc ']'
+ 4260 + ((  I = I + 1  ))
+ 4260 + ((  I < 100  ))
+  4260 + echo 98
+  4260 + awk '{printf("%04i",$1)}'
+ 4260 + fhr4=0098
+ 4260 + file=ngofs_0098.nc
+ 4260 + '[' -s ngofs_0098.nc ']'
+ 4260 + ((  I = I + 1  ))
+ 4260 + ((  I < 100  ))
+  4260 + echo 99
+  4260 + awk '{printf("%04i",$1)}'
+ 4260 + fhr4=0099
+ 4260 + file=ngofs_0099.nc
+ 4260 + '[' -s ngofs_0099.nc ']'
+ 4260 + ((  I = I + 1  ))
+ 4260 + ((  I < 100  ))
+ 4260 + '[' ngofs == NGOFS -o ngofs == ngofs ']'
+ 4260 + '[' -s nos_ngofs_nestnode_negofs.nc ']'
+ 4260 + '[' -s nos_ngofs_nestnode_nwgofs.nc ']'
+  4260 + ls /data/temp/ngofs.20191030/nos.ngofs.fields.n000.20191030.t09z.nc /data/temp/ngofs.20191030/nos.ngofs.fields.n001.20191030.t09z.nc /data/temp/ngofs.20191030/nos.ngofs.fields.n002.20191030.t09z.nc /data/temp/ngofs.20191030/nos.ngofs.fields.n003.20191030.t09z.nc /data/temp/ngofs.20191030/nos.ngofs.fields.n004.20191030.t09z.nc /data/temp/ngofs.20191030/nos.ngofs.fields.n005.20191030.t09z.nc /data/temp/ngofs.20191030/nos.ngofs.fields.n006.20191030.t09z.nc
+ 4260 + for combinefields in '`ls ${DATA}/nos.${RUN}.fields.n*.nc`'
+ 4260 + cp -p /data/temp/ngofs.20191030/nos.ngofs.fields.n000.20191030.t09z.nc /data/com/nos/ngofs.20191030/.
+ 4260 + for combinefields in '`ls ${DATA}/nos.${RUN}.fields.n*.nc`'
+ 4260 + cp -p /data/temp/ngofs.20191030/nos.ngofs.fields.n001.20191030.t09z.nc /data/com/nos/ngofs.20191030/.
+ 4260 + for combinefields in '`ls ${DATA}/nos.${RUN}.fields.n*.nc`'
+ 4260 + cp -p /data/temp/ngofs.20191030/nos.ngofs.fields.n002.20191030.t09z.nc /data/com/nos/ngofs.20191030/.
+ 4260 + for combinefields in '`ls ${DATA}/nos.${RUN}.fields.n*.nc`'
+ 4260 + cp -p /data/temp/ngofs.20191030/nos.ngofs.fields.n003.20191030.t09z.nc /data/com/nos/ngofs.20191030/.
+ 4260 + for combinefields in '`ls ${DATA}/nos.${RUN}.fields.n*.nc`'
+ 4260 + cp -p /data/temp/ngofs.20191030/nos.ngofs.fields.n004.20191030.t09z.nc /data/com/nos/ngofs.20191030/.
+ 4260 + for combinefields in '`ls ${DATA}/nos.${RUN}.fields.n*.nc`'
+ 4260 + cp -p /data/temp/ngofs.20191030/nos.ngofs.fields.n005.20191030.t09z.nc /data/com/nos/ngofs.20191030/.
+ 4260 + for combinefields in '`ls ${DATA}/nos.${RUN}.fields.n*.nc`'
+ 4260 + cp -p /data/temp/ngofs.20191030/nos.ngofs.fields.n006.20191030.t09z.nc /data/com/nos/ngofs.20191030/.
+ 4260 + cp -p /data/temp/ngofs.20191030/nos.ngofs.stations.nowcast.20191030.t09z.nc /data/com/nos/ngofs.20191030/nos.ngofs.stations.nowcast.20191030.t09z.nc
+  4260 + date
+ 4260 + echo 'Ocean Model run ends at time: ' Fri Nov 1 18:45:22 UTC 2019
+Ocean Model run ends at time:  Fri Nov 1 18:45:22 UTC 2019
+ 4260 + '[' nowcast == FORECAST -o nowcast == forecast ']'
+ 4260 + setoff
+ 4260 + set +x
+ 
+Ending nos_ofs_nowcast_forecast.sh at : Fri Nov  1 18:45:22 UTC 2019
+ 
+                     *** End of NOS OFS NOWCAST/FORECAST SIMULATIONS ***
+ 
+ 4260 + export err=0
+ 4260 + err=0
+ 4260 + '[' 0 -ne 0 ']'
+ 4260 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast completed normally'
+ 4260 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast completed normally'
+Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast completed normally
+ 4260 + msg=' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast completed normally'
+ 4260 + postmsg /data/temp/ngofs.20191030/jlogfile.16707 ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast completed normally'
+ 4260 + postmsg /data/com/nos/ngofs.20191030/nos.ngofs.jlogfile.20191030.t09z.log ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast completed normally'
+ 4260 + export 'pgm=/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast'
+ 4260 + pgm='/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast'
+ 4260 + err=0
+ 4260 + '[' 0 -ne 0 ']'
+ 4260 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast completed normally'
+ 4260 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast completed normally'
+Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast completed normally
+ 4260 + msg=' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast completed normally'
+ 4260 + postmsg /data/temp/ngofs.20191030/jlogfile.16707 ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast completed normally'
+ 4260 + postmsg /data/com/nos/ngofs.20191030/nos.ngofs.jlogfile.20191030.t09z.log ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast completed normally'
+ 4260 + '[' NO = YES ']'
+ 4260 + echo '                                    '
+                                    
+ 4260 + echo 'END OF NOWCAST/FORECAST SUCCESSFULLY'
+END OF NOWCAST/FORECAST SUCCESSFULLY
+ 4260 + echo '                                    '
+                                    
+ 4260 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 4260 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 4260 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 4260 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 4260 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 4260 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 4260 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 4260 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 4260 + /save/centos/nosofs.v3.1.9.1/scripts/exnos_ofs_forecast.sh ngofs
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.ctl ']'
+ 0 + . /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.ctl
+  0 + export DBASE_MET_NOW=NAM4
+  0 + DBASE_MET_NOW=NAM4
+  0 + export DBASE_MET_FOR=NAM4
+  0 + DBASE_MET_FOR=NAM4
+  0 + export DBASE_WL_NOW=RTOFS
+  0 + DBASE_WL_NOW=RTOFS
+  0 + export DBASE_WL_FOR=RTOFS
+  0 + DBASE_WL_FOR=RTOFS
+  0 + export DBASE_TS_NOW=RTOFS
+  0 + DBASE_TS_NOW=RTOFS
+  0 + export DBASE_TS_FOR=RTOFS
+  0 + DBASE_TS_FOR=RTOFS
+  0 + export OCEAN_MODEL=FVCOM
+  0 + OCEAN_MODEL=FVCOM
+  0 + export LEN_FORECAST=54
+  0 + LEN_FORECAST=54
+  0 + export IGRD_MET=2
+  0 + IGRD_MET=2
+  0 + export IGRD_OBC=2
+  0 + IGRD_OBC=2
+  0 + export BASE_DATE=1858111700
+  0 + BASE_DATE=1858111700
+  0 + export TIME_START=2011010100
+  0 + TIME_START=2011010100
+  0 + export MINLON=-99.0
+  0 + MINLON=-99.0
+  0 + export MINLAT=25.0
+  0 + MINLAT=25.0
+  0 + export MAXLON=-82.0
+  0 + MAXLON=-82.0
+  0 + export MAXLAT=32.0
+  0 + MAXLAT=32.0
+  0 + export THETA_S=4.5d0
+  0 + THETA_S=4.5d0
+  0 + export THETA_B=0.95d0
+  0 + THETA_B=0.95d0
+  0 + export TCLINE=10.0d0
+  0 + TCLINE=10.0d0
+  0 + export SCALE_HFLUX=1.0
+  0 + SCALE_HFLUX=1.0
+  0 + export CREATE_TIDEFORCING=0
+  0 + CREATE_TIDEFORCING=0
+  0 + export GRIDFILE=nos.ngofs.grid.dat
+  0 + GRIDFILE=nos.ngofs.grid.dat
+  0 + export HC_FILE_OBC=nos.ngofs.HC.nc
+  0 + HC_FILE_OBC=nos.ngofs.HC.nc
+  0 + export HC_FILE_OFS=nos.ngofs.HC.nc
+  0 + HC_FILE_OFS=nos.ngofs.HC.nc
+  0 + export RIVER_CTL_FILE=nos.ngofs.river.ctl
+  0 + RIVER_CTL_FILE=nos.ngofs.river.ctl
+  0 + export RIVER_CLIM_FILE=nos.ofs.river.clim.usgs.nc
+  0 + RIVER_CLIM_FILE=nos.ofs.river.clim.usgs.nc
+  0 + export OBC_CTL_FILE=nos.ngofs.obc.ctl
+  0 + OBC_CTL_FILE=nos.ngofs.obc.ctl
+  0 + export OBC_CLIM_FILE=nos.ofs.clim.WOA05.nc
+  0 + OBC_CLIM_FILE=nos.ofs.clim.WOA05.nc
+  0 + export STA_OUT_CTL=nos.ngofs_station.dat
+  0 + STA_OUT_CTL=nos.ngofs_station.dat
+  0 + export VGRID_CTL=nos.ngofs.vgrid.dat
+  0 + VGRID_CTL=nos.ngofs.vgrid.dat
+  0 + export RUNTIME_CTL=nos.ngofs.fvcom.nml
+  0 + RUNTIME_CTL=nos.ngofs.fvcom.nml
+  0 + export HC_FILE_NWLON=nos.ofs.HC_NWLON.nc
+  0 + HC_FILE_NWLON=nos.ofs.HC_NWLON.nc
+  0 + export OBC_FILE_TEMPLATE=nos.ngofs.obc.template.nc
+  0 + OBC_FILE_TEMPLATE=nos.ngofs.obc.template.nc
+  0 + export NNODE=90267
+  0 + NNODE=90267
+  0 + export NELE=174474
+  0 + NELE=174474
+  0 + export KBm=40
+  0 + KBm=40
+  0 + export DELT_MODEL=3
+  0 + DELT_MODEL=3
+  0 + export EXTSTEP_SECONDS=3.0
+  0 + EXTSTEP_SECONDS=3.0
+  0 + export ISPLIT=3
+  0 + ISPLIT=3
+  0 + export RST_OUT_INTERVAL=21600.0
+  0 + RST_OUT_INTERVAL=21600.0
+  0 + export IREPORT=100
+  0 + IREPORT=100
+  0 + export NC_OUT_INTERVAL=3600.0
+  0 + NC_OUT_INTERVAL=3600.0
+  0 + export NC_STA_INTERVAL=360.0
+  0 + NC_STA_INTERVAL=360.0
+  0 + export NRIVERS=44
+  0 + NRIVERS=44
+  0 + export MIN_DEPTH=0.5
+  0 + MIN_DEPTH=0.5
+  0 + export HEATING_LONGWAVE_LENGTHSCALE=1.4
+  0 + HEATING_LONGWAVE_LENGTHSCALE=1.4
+  0 + export HEATING_LONGWAVE_PERCTAGE=0.78
+  0 + HEATING_LONGWAVE_PERCTAGE=0.78
+  0 + export HEATING_SHORTWAVE_LENGTHSCALE=6.3
+  0 + HEATING_SHORTWAVE_LENGTHSCALE=6.3
+  0 + export NESTING_BLOCKSIZE=5
+  0 + NESTING_BLOCKSIZE=5
+  0 + export RIVER_NAMELIST=nos.ngofs.RIVERS_NAMELIST.nml
+  0 + RIVER_NAMELIST=nos.ngofs.RIVERS_NAMELIST.nml
+  0 + export CORIOLISFILE=nos.ngofs.cor.dat
+  0 + CORIOLISFILE=nos.ngofs.cor.dat
+  0 + export DEPTHFILE=nos.ngofs.dep.dat
+  0 + DEPTHFILE=nos.ngofs.dep.dat
+  0 + export RUNGRIDFILE=nos.ngofs.grd.dat
+  0 + RUNGRIDFILE=nos.ngofs.grd.dat
+  0 + export MODELOBCFILE=nos.ngofs.obc.dat
+  0 + MODELOBCFILE=nos.ngofs.obc.dat
+  0 + export SIGMA_LEVEL=nos.ngofs.sigma.dat
+  0 + SIGMA_LEVEL=nos.ngofs.sigma.dat
+  0 + export SPONGEFILE=nos.ngofs.spg.dat
+  0 + SPONGEFILE=nos.ngofs.spg.dat
+  0 + export STATIONFILE=nos.ngofs.station.dat
+  0 + STATIONFILE=nos.ngofs.station.dat
+  0 + export InputNodeFile=nos.ngofs.node.dat
+  0 + InputNodeFile=nos.ngofs.node.dat
+  0 + export InputNode2LFile=nos.ngofs.node.2LayerNd.dat
+  0 + InputNode2LFile=nos.ngofs.node.2LayerNd.dat
+  0 + export NRST=3600
+  0 + NRST=3600
+  0 + export NSTA=360
+  0 + NSTA=360
+  0 + export NFLT=3600
+  0 + NFLT=3600
+  0 + export NHIS=3600
+  0 + NHIS=3600
+  0 + export NAVG=3600
+  0 + NAVG=3600
+  0 + export 'DCRIT=0.10d0     !m'
+  0 + DCRIT='0.10d0     !m'
+  0 + export TOTAL_TASKS=240
+  0 + TOTAL_TASKS=240
+ 0 + '[' -n '' ']'
+ 0 + echo 'run the launch script to set the NOS configuration'
+run the launch script to set the NOS configuration
+ 0 + . /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs forecast_this-paramater-ignored-unless-prep
+  0 + set -x
+  0 + '[' 2 -lt 2 ']'
+  0 + export OFS=ngofs
+  0 + OFS=ngofs
+  0 + export runtype=forecast_this-paramater-ignored-unless-prep
+  0 + runtype=forecast_this-paramater-ignored-unless-prep
+   0 + date
+  0 + echo 'The script nos_ofs_launch.sh has started at UTC' Fri Nov 1 18:45:22 UTC 2019
+The script nos_ofs_launch.sh has started at UTC Fri Nov 1 18:45:22 UTC 2019
+   0 + date
+  0 + echo 'The script nos_ofs_launch.sh has started at UTC' Fri Nov 1 18:45:22 UTC 2019
+   0 + date
+  0 + echo 'The script nos_ofs_launch.sh has started at UTC' Fri Nov 1 18:45:22 UTC 2019
+   0 + date
+  0 + echo 'The script nos_ofs_launch.sh has started at UTC' Fri Nov 1 18:45:22 UTC 2019
+  0 + export time_nowcastend=2019103009
+  0 + time_nowcastend=2019103009
+  0 + echo '*******************************************************************'
+*******************************************************************
+  0 + echo '*******************************************************************'
+*******************************************************************
+  0 + echo 'time_nowcastend is 2019103009'
+time_nowcastend is 2019103009
+  0 + echo '*******************************************************************'
+*******************************************************************
+  0 + echo '*******************************************************************'
+*******************************************************************
+  0 + '[' '!' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.grid.dat ']'
+  0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.grid.dat /data/temp/ngofs.20191030/.
+  0 + export err=0
+  0 + err=0
+  0 + err_chk
+  0 + echo '/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.grid.dat is copied into working dir'
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.grid.dat is copied into working dir
+  0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+  0 + '[' FVCOM == ROMS -o FVCOM == roms ']'
+  0 + '[' 0 -gt 0 -a RTOFS '!=' OBS ']'
+  0 + '[' -d /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.vgrid.dat -o '!' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.vgrid.dat ']'
+  0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.vgrid.dat /data/temp/ngofs.20191030/.
+  0 + export pgm=/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy
+  0 + pgm=/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy
+  0 + . prep_step
+   0 + '[' -n /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy ']'
+   0 + '[' -n OUTPUT.16707 ']'
+   0 + echo /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy
+   0 + '[' -f errfile ']'
+   0 + export FORT01=0
+   0 + FORT01=0
+    0 + env
+    0 + grep '^FORT[0-9]\{1,\}='
+    0 + awk -F= '{print $1}'
+   0 + unset FORT01
+  0 + '[' '!' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat ']'
+  0 + '[' '!' -d /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat -a -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat ']'
+  0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat /data/temp/ngofs.20191030/.
+  0 + export err=0
+  0 + err=0
+  0 + err_chk
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy completed cleanly
+  0 + echo '/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat was copied into working dir'
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat was copied into working dir
+  0 + '[' '!' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml -o '!' -f /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml ']'
+  0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml /data/temp/ngofs.20191030/.
+  0 + export err=0
+  0 + err=0
+  0 + err_chk
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy completed cleanly
+  0 + echo '/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml was copied into working dir'
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml was copied into working dir
+  0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/ -a -f /save/centos/nosofs.v3.1.9.1/fix/ngofs/ ']'
+  0 + BIO_MODULE=0
+  0 + '[' 0 -eq 1 ']'
+  0 + TS_NUDGING=0
+  0 + '[' 0 -eq 1 ']'
+  0 + export HH=09
+  0 + HH=09
+  0 + export PDY1=20191030
+  0 + PDY1=20191030
+  0 + '[' forecast_this-paramater-ignored-unless-prep = prep ']'
+  0 + '[' forecast_this-paramater-ignored-unless-prep = PREP ']'
+  0 + export OBC_FORCING_FILE=nos.ngofs.obc.20191030.t09z.nc
+  0 + OBC_FORCING_FILE=nos.ngofs.obc.20191030.t09z.nc
+  0 + export OBC_FORCING_FILE_EL=nos.ngofs.obc.el.20191030.t09z.nc
+  0 + OBC_FORCING_FILE_EL=nos.ngofs.obc.el.20191030.t09z.nc
+  0 + export OBC_FORCING_FILE_TS=nos.ngofs.obc.ts.20191030.t09z.nc
+  0 + OBC_FORCING_FILE_TS=nos.ngofs.obc.ts.20191030.t09z.nc
+  0 + export RIVER_FORCING_FILE=nos.ngofs.river.20191030.t09z.nc
+  0 + RIVER_FORCING_FILE=nos.ngofs.river.20191030.t09z.nc
+  0 + export OBC_TIDALFORCING_FILE=nos.ngofs.roms.tides.20191030.t09z.nc
+  0 + OBC_TIDALFORCING_FILE=nos.ngofs.roms.tides.20191030.t09z.nc
+  0 + export NUDG_FORCING_FILE=nos.ngofs.clim.20191030.t09z.nc
+  0 + NUDG_FORCING_FILE=nos.ngofs.clim.20191030.t09z.nc
+  0 + export OBC_FORCING_FILE_EL=nos.ngofs.obc.20191030.t09z.nc
+  0 + OBC_FORCING_FILE_EL=nos.ngofs.obc.20191030.t09z.nc
+  0 + export OBC_FORCING_FILE_TS=nos.ngofs.obc.20191030.t09z.nc
+  0 + OBC_FORCING_FILE_TS=nos.ngofs.obc.20191030.t09z.nc
+  0 + export INI_FILE_NOWCAST=nos.ngofs.init.nowcast.20191030.t09z.nc
+  0 + INI_FILE_NOWCAST=nos.ngofs.init.nowcast.20191030.t09z.nc
+  0 + export HIS_OUT_NOWCAST=nos.ngofs.fields.nowcast.20191030.t09z.nc
+  0 + HIS_OUT_NOWCAST=nos.ngofs.fields.nowcast.20191030.t09z.nc
+  0 + export STA_OUT_NOWCAST=nos.ngofs.stations.nowcast.20191030.t09z.nc
+  0 + STA_OUT_NOWCAST=nos.ngofs.stations.nowcast.20191030.t09z.nc
+  0 + export RST_OUT_NOWCAST=nos.ngofs.rst.nowcast.20191030.t09z.nc
+  0 + RST_OUT_NOWCAST=nos.ngofs.rst.nowcast.20191030.t09z.nc
+  0 + export MET_NETCDF_1_NOWCAST=nos.ngofs.met.nowcast.20191030.t09z.nc
+  0 + MET_NETCDF_1_NOWCAST=nos.ngofs.met.nowcast.20191030.t09z.nc
+  0 + export MET_NETCDF_2_NOWCAST=nos.ngofs.hflux.nowcast.20191030.t09z.nc
+  0 + MET_NETCDF_2_NOWCAST=nos.ngofs.hflux.nowcast.20191030.t09z.nc
+  0 + export HIS_2D_NOWCAST=nos.ngofs.surface.nowcast.20191030.t09z.nc
+  0 + HIS_2D_NOWCAST=nos.ngofs.surface.nowcast.20191030.t09z.nc
+  0 + export HIS_2D_FORECAST=nos.ngofs.surface.forecast.20191030.t09z.nc
+  0 + HIS_2D_FORECAST=nos.ngofs.surface.forecast.20191030.t09z.nc
+  0 + export INI_FILE_FORECAST=nos.ngofs.rst.nowcast.20191030.t09z.nc
+  0 + INI_FILE_FORECAST=nos.ngofs.rst.nowcast.20191030.t09z.nc
+  0 + export HIS_OUT_FORECAST=nos.ngofs.fields.forecast.20191030.t09z.nc
+  0 + HIS_OUT_FORECAST=nos.ngofs.fields.forecast.20191030.t09z.nc
+  0 + export STA_OUT_FORECAST=nos.ngofs.stations.forecast.20191030.t09z.nc
+  0 + STA_OUT_FORECAST=nos.ngofs.stations.forecast.20191030.t09z.nc
+  0 + export RST_OUT_FORECAST=nos.ngofs.rst.forecast.20191030.t09z.nc
+  0 + RST_OUT_FORECAST=nos.ngofs.rst.forecast.20191030.t09z.nc
+  0 + export MET_NETCDF_1_FORECAST=nos.ngofs.met.forecast.20191030.t09z.nc
+  0 + MET_NETCDF_1_FORECAST=nos.ngofs.met.forecast.20191030.t09z.nc
+  0 + export MET_NETCDF_2_FORECAST=nos.ngofs.hflux.forecast.20191030.t09z.nc
+  0 + MET_NETCDF_2_FORECAST=nos.ngofs.hflux.forecast.20191030.t09z.nc
+  0 + export MODEL_LOG_NOWCAST=nos.ngofs.nowcast.20191030.t09z.log
+  0 + MODEL_LOG_NOWCAST=nos.ngofs.nowcast.20191030.t09z.log
+  0 + export MODEL_LOG_FORECAST=nos.ngofs.forecast.20191030.t09z.log
+  0 + MODEL_LOG_FORECAST=nos.ngofs.forecast.20191030.t09z.log
+  0 + export RUNTIME_CTL_NOWCAST=nos.ngofs.nowcast.20191030.t09z.in
+  0 + RUNTIME_CTL_NOWCAST=nos.ngofs.nowcast.20191030.t09z.in
+  0 + export RUNTIME_CTL_FORECAST=nos.ngofs.forecast.20191030.t09z.in
+  0 + RUNTIME_CTL_FORECAST=nos.ngofs.forecast.20191030.t09z.in
+  0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+  0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+  0 + export RIVER_FORCING_FILE=nos.ngofs.river.20191030.t09z.nc.tar
+  0 + RIVER_FORCING_FILE=nos.ngofs.river.20191030.t09z.nc.tar
+  0 + echo 'Variable and parameter setup has been completed'
+  0 + echo 'Variable and parameter setup has been completed'
+ 0 + export 'pgm=/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs ifnotprep-couldbeanything-else'
+ 0 + pgm='/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs ifnotprep-couldbeanything-else'
+ 0 + export err=0
+ 0 + err=0
+ 0 + '[' 0 -ne 0 ']'
+ 0 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs ifnotprep-couldbeanything-else completed normally'
+ 0 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs ifnotprep-couldbeanything-else completed normally'
+Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs ifnotprep-couldbeanything-else completed normally
+ 0 + msg=' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs ifnotprep-couldbeanything-else completed normally'
+ 0 + postmsg /data/temp/ngofs.20191030/jlogfile.16707 ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs ifnotprep-couldbeanything-else completed normally'
+ 0 + postmsg /data/com/nos/ngofs.20191030/nos.ngofs.jlogfile.20191030.t09z.log ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs ifnotprep-couldbeanything-else completed normally'
+ 0 + runtype=forecast
+ 0 + echo '     '
+ 0 + echo '     '
+  0 + date
+ 0 + echo ' Start nos_ofs_nowcast_forecast.sh forecast at : Fri Nov  1 18:45:22 UTC 2019'
+  0 + date
+ 0 + echo ' Start nos_ofs_nowcast_forecast.sh forecast at : Fri Nov  1 18:45:22 UTC 2019'
+  0 + date
+ 0 + echo 'Running nos_ofs_nowcast_forecast.sh forecast at : Fri Nov  1 18:45:22 UTC 2019'
+  0 + date
+ 0 + echo 'Running nos_ofs_nowcast_forecast.sh forecast at : Fri Nov  1 18:45:22 UTC 2019'
+  0 + date
+ 0 + echo ' Start nos_ofs_nowcast_forecast.sh forecast at : Fri Nov  1 18:45:22 UTC 2019'
+ Start nos_ofs_nowcast_forecast.sh forecast at : Fri Nov  1 18:45:22 UTC 2019
+ 0 + export 'pgm=/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh forecast'
+ 0 + pgm='/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh forecast'
+ 0 + /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh forecast
+ 0 + echo 'PT DEBUG: ulimits   ================================'
+PT DEBUG: ulimits   ================================
+ 0 + ulimit -a
+core file size          (blocks, -c) unlimited
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 377308
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) unlimited
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 4096
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+ 0 + echo 'PT DEBUG: ulimits   ================================'
+PT DEBUG: ulimits   ================================
+ 0 + cd /data/temp/ngofs.20191030
+ 0 + echo ' '
+ 
+ 0 + echo '  		    ****************************************'
+  		    ****************************************
+ 0 + echo '  		    *** NOS OFS  NOWCAST/FORECAST SCRIPT ***'
+  		    *** NOS OFS  NOWCAST/FORECAST SCRIPT ***
+ 0 + echo '  		    ****************************************'
+  		    ****************************************
+ 0 + echo ' '
+ 
+  0 + date
+ 0 + echo 'Starting nos_ofs_nowcast_forecast.sh at : Fri Nov  1 18:45:22 UTC 2019'
+Starting nos_ofs_nowcast_forecast.sh at : Fri Nov  1 18:45:22 UTC 2019
+ 0 + RUNTYPE=forecast
+ 0 + RUN=ngofs
+ 0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_brf.nc ']'
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_cor.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_cor.dat /data/temp/ngofs.20191030/ngofs_cor.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_dep.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_dep.dat /data/temp/ngofs.20191030/ngofs_dep.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_grd.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_grd.dat /data/temp/ngofs.20191030/ngofs_grd.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_obc.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_obc.dat /data/temp/ngofs.20191030/ngofs_obc.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_sigma.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_sigma.dat /data/temp/ngofs.20191030/ngofs_sigma.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_spg.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_spg.dat /data/temp/ngofs.20191030/ngofs_spg.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat /data/temp/ngofs.20191030/ngofs_station.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_rivernamelist.nml ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_rivernamelist.nml /data/temp/ngofs.20191030/RIVERS_NAMELIST.nml
+ 0 + '[' ngofs == NGOFS -o ngofs == ngofs ']'
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos_ngofs_nestnode_negofs.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos_ngofs_nestnode_negofs.dat /data/temp/ngofs.20191030/nos_ngofs_nestnode_negofs.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos_ngofs_nestnode_nwgofs.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos_ngofs_nestnode_nwgofs.dat /data/temp/ngofs.20191030/nos_ngofs_nestnode_nwgofs.dat
+ 0 + '[' ngofs == NWGOFS -o ngofs == nwgofs ']'
+ 0 + echo 'Preparing input files for ngofs forecast '
+Preparing input files for ngofs forecast 
+ 0 + echo -----------------------
+-----------------------
+ 0 + seton
+ 0 + set -x
+ 0 + '[' forecast == NOWCAST -o forecast == nowcast ']'
+ 0 + '[' forecast == FORECAST -o forecast == forecast ']'
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' FVCOM == ROMS -o FVCOM == roms ']'
+ 0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+ 0 + '[' -s /data/temp/ngofs.20191030/nos.ngofs.river.20191030.t09z.nc.tar ']'
+ 0 + echo ' /data/temp/ngofs.20191030/nos.ngofs.river.20191030.t09z.nc.tar existed '
+ /data/temp/ngofs.20191030/nos.ngofs.river.20191030.t09z.nc.tar existed 
+ 0 + rm -fr /data/temp/ngofs.20191030/RIVER
+ 0 + tar -xvf /data/temp/ngofs.20191030/nos.ngofs.river.20191030.t09z.nc.tar
+RIVER/
+RIVER/24153.nc
+RIVER/23097.nc
+RIVER/23098.nc
+RIVER/32482.nc
+RIVER/38798.nc
+RIVER/89538.nc
+RIVER/89664.nc
+RIVER/88931.nc
+RIVER/61006.nc
+RIVER/64011.nc
+RIVER/64019.nc
+RIVER/67480.nc
+RIVER/79585.nc
+RIVER/79586.nc
+RIVER/79587.nc
+RIVER/62740.nc
+RIVER/53084.nc
+RIVER/52236.nc
+RIVER/52235.nc
+RIVER/27893.nc
+RIVER/27892.nc
+RIVER/26886.nc
+RIVER/23744.nc
+RIVER/22631.nc
+RIVER/20378.nc
+RIVER/21497.nc
+RIVER/20383.nc
+RIVER/14115.nc
+RIVER/14116.nc
+RIVER/14117.nc
+RIVER/14118.nc
+RIVER/32096.nc
+RIVER/32097.nc
+RIVER/88869.nc
+RIVER/88169.nc
+RIVER/88090.nc
+RIVER/85595.nc
+RIVER/70887.nc
+RIVER/86790.nc
+RIVER/87516.nc
+RIVER/40692.nc
+RIVER/76267.nc
+RIVER/50759.nc
+RIVER/75834.nc
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' -f /data/temp/ngofs.20191030/nos.ngofs.obc.20191030.t09z.nc ']'
+ 0 + echo '   /data/temp/ngofs.20191030/nos.ngofs.obc.20191030.t09z.nc existed '
+   /data/temp/ngofs.20191030/nos.ngofs.obc.20191030.t09z.nc existed 
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' -f /data/temp/ngofs.20191030/nos.ngofs.met.forecast.20191030.t09z.nc ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.met.forecast.20191030.t09z.nc ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.met.forecast.20191030.t09z.nc nos.ngofs.met.forecast.20191030.t09z.nc
+ 0 + '[' -s /data/temp/ngofs.20191030/nos.ngofs.hflux.forecast.20191030.t09z.nc ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.hflux.forecast.20191030.t09z.nc ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.hflux.forecast.20191030.t09z.nc nos.ngofs.hflux.forecast.20191030.t09z.nc
+ 0 + '[' -f /data/temp/ngofs.20191030/ngofs_FVCOM_forecast.in ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.forecast.20191030.t09z.in ']'
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.forecast.20191030.t09z.in /data/temp/ngofs.20191030/ngofs_run.nml
+ 0 + '[' FVCOM == ROMS -o FVCOM == roms ']'
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' -f /data/temp/ngofs.20191030/nos.ngofs.rst.nowcast.20191030.t09z.nc ']'
+ 0 + echo '   /data/temp/ngofs.20191030/nos.ngofs.rst.nowcast.20191030.t09z.nc existed '
+   /data/temp/ngofs.20191030/nos.ngofs.rst.nowcast.20191030.t09z.nc existed 
+ 0 + '[' FVCOM == ROMS -o FVCOM == roms ']'
+ 0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+ 0 + rm -f nos.ngofs.forecast.20191030.t09z.log
+ 0 + mpirun -np 16 -bind-to core:16 /save/centos/nosofs.v3.1.9.1/exec/fvcom_ngofs --casename=ngofs
+ 108 + export err=0
+ 108 + err=0
+ 108 + '[' 0 -ne 0 ']'
+ 108 + rm -f corms.fcst
+ 108 + '[' -s nos.ngofs.forecast.20191030.t09z.log ']'
+ 108 + grep NaN nos.ngofs.forecast.20191030.t09z.log
+ 108 + grep STOP nos.ngofs.forecast.20191030.t09z.log
+ 108 + grep failed nos.ngofs.forecast.20191030.t09z.log
+ 108 + grep Failed nos.ngofs.forecast.20191030.t09z.log
+ 108 + grep Blowing-up nos.ngofs.forecast.20191030.t09z.log
+ 108 + grep 'Abnormal termination: BLOWUP' nos.ngofs.forecast.20191030.t09z.log
+ 108 + '[' -s corms.fcst ']'
+ 108 + echo 'ngofs FORECAST RUN  OF CYCLE t09z ON  COMPLETED SUCCESSFULLY 100'
+ 108 + echo 'FORECAST_RUN DONE 100'
+ 108 + rm -f ngofs.status
+  108 + echo 2019103009
+  108 + cut -c1-4
+ 108 + YYYY=2019
+  108 + echo 2019103009
+  108 + cut -c5-6
+ 108 + MM=10
+  108 + echo 2019103009
+  108 + cut -c7-8
+ 108 + DD=30
+  108 + echo 2019103009
+  108 + cut -c9-10
+ 108 + HH=09
+ 108 + echo 2019103009
+ 108 + cp ngofs.status /data/com/nos/ngofs.20191030/.
+ 108 + '[' -f /data/temp/ngofs.20191030/ngofs_station_timeseries.nc ']'
+ 108 + mv /data/temp/ngofs.20191030/ngofs_station_timeseries.nc /data/temp/ngofs.20191030/nos.ngofs.stations.forecast.20191030.t09z.nc
+ 108 + echo '  nos.ngofs.stations.forecast.20191030.t09z.nc  saved '
+  nos.ngofs.stations.forecast.20191030.t09z.nc  saved 
+ 108 + Im1=0
+ 108 + I=1
+ 108 + ((  I < 169  ))
+  108 + echo 1
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0001
+ 108 + file=ngofs_0001.nc
+ 108 + '[' -s ngofs_0001.nc ']'
+  108 + echo 0
+  108 + awk '{printf("%03i",$1)}'
+ 108 + fhr3=000
+ 108 + fileout=nos.ngofs.fields.f000.20191030.t09z.nc
+ 108 + mv ngofs_0001.nc nos.ngofs.fields.f000.20191030.t09z.nc
+  108 + expr 0 + 1
+ 108 + Im1=1
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 2
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0002
+ 108 + file=ngofs_0002.nc
+ 108 + '[' -s ngofs_0002.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 3
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0003
+ 108 + file=ngofs_0003.nc
+ 108 + '[' -s ngofs_0003.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 4
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0004
+ 108 + file=ngofs_0004.nc
+ 108 + '[' -s ngofs_0004.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 5
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0005
+ 108 + file=ngofs_0005.nc
+ 108 + '[' -s ngofs_0005.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 6
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0006
+ 108 + file=ngofs_0006.nc
+ 108 + '[' -s ngofs_0006.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 7
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0007
+ 108 + file=ngofs_0007.nc
+ 108 + '[' -s ngofs_0007.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 8
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0008
+ 108 + file=ngofs_0008.nc
+ 108 + '[' -s ngofs_0008.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 9
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0009
+ 108 + file=ngofs_0009.nc
+ 108 + '[' -s ngofs_0009.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 10
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0010
+ 108 + file=ngofs_0010.nc
+ 108 + '[' -s ngofs_0010.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 11
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0011
+ 108 + file=ngofs_0011.nc
+ 108 + '[' -s ngofs_0011.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 12
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0012
+ 108 + file=ngofs_0012.nc
+ 108 + '[' -s ngofs_0012.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 13
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0013
+ 108 + file=ngofs_0013.nc
+ 108 + '[' -s ngofs_0013.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 14
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0014
+ 108 + file=ngofs_0014.nc
+ 108 + '[' -s ngofs_0014.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 15
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0015
+ 108 + file=ngofs_0015.nc
+ 108 + '[' -s ngofs_0015.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 16
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0016
+ 108 + file=ngofs_0016.nc
+ 108 + '[' -s ngofs_0016.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 17
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0017
+ 108 + file=ngofs_0017.nc
+ 108 + '[' -s ngofs_0017.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 18
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0018
+ 108 + file=ngofs_0018.nc
+ 108 + '[' -s ngofs_0018.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 19
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0019
+ 108 + file=ngofs_0019.nc
+ 108 + '[' -s ngofs_0019.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 20
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0020
+ 108 + file=ngofs_0020.nc
+ 108 + '[' -s ngofs_0020.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 21
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0021
+ 108 + file=ngofs_0021.nc
+ 108 + '[' -s ngofs_0021.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 22
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0022
+ 108 + file=ngofs_0022.nc
+ 108 + '[' -s ngofs_0022.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 23
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0023
+ 108 + file=ngofs_0023.nc
+ 108 + '[' -s ngofs_0023.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 24
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0024
+ 108 + file=ngofs_0024.nc
+ 108 + '[' -s ngofs_0024.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 25
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0025
+ 108 + file=ngofs_0025.nc
+ 108 + '[' -s ngofs_0025.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 26
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0026
+ 108 + file=ngofs_0026.nc
+ 108 + '[' -s ngofs_0026.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 27
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0027
+ 108 + file=ngofs_0027.nc
+ 108 + '[' -s ngofs_0027.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 28
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0028
+ 108 + file=ngofs_0028.nc
+ 108 + '[' -s ngofs_0028.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 29
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0029
+ 108 + file=ngofs_0029.nc
+ 108 + '[' -s ngofs_0029.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 30
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0030
+ 108 + file=ngofs_0030.nc
+ 108 + '[' -s ngofs_0030.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 31
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0031
+ 108 + file=ngofs_0031.nc
+ 108 + '[' -s ngofs_0031.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 32
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0032
+ 108 + file=ngofs_0032.nc
+ 108 + '[' -s ngofs_0032.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 33
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0033
+ 108 + file=ngofs_0033.nc
+ 108 + '[' -s ngofs_0033.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 34
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0034
+ 108 + file=ngofs_0034.nc
+ 108 + '[' -s ngofs_0034.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 35
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0035
+ 108 + file=ngofs_0035.nc
+ 108 + '[' -s ngofs_0035.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 36
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0036
+ 108 + file=ngofs_0036.nc
+ 108 + '[' -s ngofs_0036.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 37
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0037
+ 108 + file=ngofs_0037.nc
+ 108 + '[' -s ngofs_0037.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 38
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0038
+ 108 + file=ngofs_0038.nc
+ 108 + '[' -s ngofs_0038.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 39
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0039
+ 108 + file=ngofs_0039.nc
+ 108 + '[' -s ngofs_0039.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 40
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0040
+ 108 + file=ngofs_0040.nc
+ 108 + '[' -s ngofs_0040.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 41
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0041
+ 108 + file=ngofs_0041.nc
+ 108 + '[' -s ngofs_0041.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 42
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0042
+ 108 + file=ngofs_0042.nc
+ 108 + '[' -s ngofs_0042.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 43
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0043
+ 108 + file=ngofs_0043.nc
+ 108 + '[' -s ngofs_0043.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 44
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0044
+ 108 + file=ngofs_0044.nc
+ 108 + '[' -s ngofs_0044.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 45
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0045
+ 108 + file=ngofs_0045.nc
+ 108 + '[' -s ngofs_0045.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 46
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0046
+ 108 + file=ngofs_0046.nc
+ 108 + '[' -s ngofs_0046.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 47
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0047
+ 108 + file=ngofs_0047.nc
+ 108 + '[' -s ngofs_0047.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 48
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0048
+ 108 + file=ngofs_0048.nc
+ 108 + '[' -s ngofs_0048.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 49
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0049
+ 108 + file=ngofs_0049.nc
+ 108 + '[' -s ngofs_0049.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 50
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0050
+ 108 + file=ngofs_0050.nc
+ 108 + '[' -s ngofs_0050.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 51
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0051
+ 108 + file=ngofs_0051.nc
+ 108 + '[' -s ngofs_0051.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 52
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0052
+ 108 + file=ngofs_0052.nc
+ 108 + '[' -s ngofs_0052.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 53
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0053
+ 108 + file=ngofs_0053.nc
+ 108 + '[' -s ngofs_0053.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 54
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0054
+ 108 + file=ngofs_0054.nc
+ 108 + '[' -s ngofs_0054.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 55
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0055
+ 108 + file=ngofs_0055.nc
+ 108 + '[' -s ngofs_0055.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 56
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0056
+ 108 + file=ngofs_0056.nc
+ 108 + '[' -s ngofs_0056.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 57
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0057
+ 108 + file=ngofs_0057.nc
+ 108 + '[' -s ngofs_0057.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 58
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0058
+ 108 + file=ngofs_0058.nc
+ 108 + '[' -s ngofs_0058.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 59
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0059
+ 108 + file=ngofs_0059.nc
+ 108 + '[' -s ngofs_0059.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 60
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0060
+ 108 + file=ngofs_0060.nc
+ 108 + '[' -s ngofs_0060.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 61
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0061
+ 108 + file=ngofs_0061.nc
+ 108 + '[' -s ngofs_0061.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 62
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0062
+ 108 + file=ngofs_0062.nc
+ 108 + '[' -s ngofs_0062.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 63
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0063
+ 108 + file=ngofs_0063.nc
+ 108 + '[' -s ngofs_0063.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 64
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0064
+ 108 + file=ngofs_0064.nc
+ 108 + '[' -s ngofs_0064.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 65
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0065
+ 108 + file=ngofs_0065.nc
+ 108 + '[' -s ngofs_0065.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 66
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0066
+ 108 + file=ngofs_0066.nc
+ 108 + '[' -s ngofs_0066.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 67
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0067
+ 108 + file=ngofs_0067.nc
+ 108 + '[' -s ngofs_0067.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 68
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0068
+ 108 + file=ngofs_0068.nc
+ 108 + '[' -s ngofs_0068.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 69
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0069
+ 108 + file=ngofs_0069.nc
+ 108 + '[' -s ngofs_0069.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 70
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0070
+ 108 + file=ngofs_0070.nc
+ 108 + '[' -s ngofs_0070.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 71
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0071
+ 108 + file=ngofs_0071.nc
+ 108 + '[' -s ngofs_0071.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 72
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0072
+ 108 + file=ngofs_0072.nc
+ 108 + '[' -s ngofs_0072.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 73
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0073
+ 108 + file=ngofs_0073.nc
+ 108 + '[' -s ngofs_0073.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 74
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0074
+ 108 + file=ngofs_0074.nc
+ 108 + '[' -s ngofs_0074.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 75
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0075
+ 108 + file=ngofs_0075.nc
+ 108 + '[' -s ngofs_0075.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 76
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0076
+ 108 + file=ngofs_0076.nc
+ 108 + '[' -s ngofs_0076.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 77
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0077
+ 108 + file=ngofs_0077.nc
+ 108 + '[' -s ngofs_0077.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 78
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0078
+ 108 + file=ngofs_0078.nc
+ 108 + '[' -s ngofs_0078.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 79
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0079
+ 108 + file=ngofs_0079.nc
+ 108 + '[' -s ngofs_0079.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 80
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0080
+ 108 + file=ngofs_0080.nc
+ 108 + '[' -s ngofs_0080.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 81
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0081
+ 108 + file=ngofs_0081.nc
+ 108 + '[' -s ngofs_0081.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 82
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0082
+ 108 + file=ngofs_0082.nc
+ 108 + '[' -s ngofs_0082.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 83
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0083
+ 108 + file=ngofs_0083.nc
+ 108 + '[' -s ngofs_0083.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 84
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0084
+ 108 + file=ngofs_0084.nc
+ 108 + '[' -s ngofs_0084.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 85
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0085
+ 108 + file=ngofs_0085.nc
+ 108 + '[' -s ngofs_0085.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 86
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0086
+ 108 + file=ngofs_0086.nc
+ 108 + '[' -s ngofs_0086.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 87
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0087
+ 108 + file=ngofs_0087.nc
+ 108 + '[' -s ngofs_0087.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 88
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0088
+ 108 + file=ngofs_0088.nc
+ 108 + '[' -s ngofs_0088.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 89
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0089
+ 108 + file=ngofs_0089.nc
+ 108 + '[' -s ngofs_0089.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 90
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0090
+ 108 + file=ngofs_0090.nc
+ 108 + '[' -s ngofs_0090.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 91
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0091
+ 108 + file=ngofs_0091.nc
+ 108 + '[' -s ngofs_0091.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 92
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0092
+ 108 + file=ngofs_0092.nc
+ 108 + '[' -s ngofs_0092.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 93
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0093
+ 108 + file=ngofs_0093.nc
+ 108 + '[' -s ngofs_0093.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 94
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0094
+ 108 + file=ngofs_0094.nc
+ 108 + '[' -s ngofs_0094.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 95
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0095
+ 108 + file=ngofs_0095.nc
+ 108 + '[' -s ngofs_0095.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 96
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0096
+ 108 + file=ngofs_0096.nc
+ 108 + '[' -s ngofs_0096.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 97
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0097
+ 108 + file=ngofs_0097.nc
+ 108 + '[' -s ngofs_0097.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 98
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0098
+ 108 + file=ngofs_0098.nc
+ 108 + '[' -s ngofs_0098.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 99
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0099
+ 108 + file=ngofs_0099.nc
+ 108 + '[' -s ngofs_0099.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 100
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0100
+ 108 + file=ngofs_0100.nc
+ 108 + '[' -s ngofs_0100.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 101
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0101
+ 108 + file=ngofs_0101.nc
+ 108 + '[' -s ngofs_0101.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 102
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0102
+ 108 + file=ngofs_0102.nc
+ 108 + '[' -s ngofs_0102.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 103
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0103
+ 108 + file=ngofs_0103.nc
+ 108 + '[' -s ngofs_0103.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 104
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0104
+ 108 + file=ngofs_0104.nc
+ 108 + '[' -s ngofs_0104.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 105
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0105
+ 108 + file=ngofs_0105.nc
+ 108 + '[' -s ngofs_0105.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 106
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0106
+ 108 + file=ngofs_0106.nc
+ 108 + '[' -s ngofs_0106.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 107
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0107
+ 108 + file=ngofs_0107.nc
+ 108 + '[' -s ngofs_0107.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 108
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0108
+ 108 + file=ngofs_0108.nc
+ 108 + '[' -s ngofs_0108.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 109
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0109
+ 108 + file=ngofs_0109.nc
+ 108 + '[' -s ngofs_0109.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 110
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0110
+ 108 + file=ngofs_0110.nc
+ 108 + '[' -s ngofs_0110.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 111
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0111
+ 108 + file=ngofs_0111.nc
+ 108 + '[' -s ngofs_0111.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 112
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0112
+ 108 + file=ngofs_0112.nc
+ 108 + '[' -s ngofs_0112.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 113
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0113
+ 108 + file=ngofs_0113.nc
+ 108 + '[' -s ngofs_0113.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 114
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0114
+ 108 + file=ngofs_0114.nc
+ 108 + '[' -s ngofs_0114.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 115
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0115
+ 108 + file=ngofs_0115.nc
+ 108 + '[' -s ngofs_0115.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 116
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0116
+ 108 + file=ngofs_0116.nc
+ 108 + '[' -s ngofs_0116.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 117
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0117
+ 108 + file=ngofs_0117.nc
+ 108 + '[' -s ngofs_0117.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 118
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0118
+ 108 + file=ngofs_0118.nc
+ 108 + '[' -s ngofs_0118.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 119
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0119
+ 108 + file=ngofs_0119.nc
+ 108 + '[' -s ngofs_0119.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 120
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0120
+ 108 + file=ngofs_0120.nc
+ 108 + '[' -s ngofs_0120.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 121
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0121
+ 108 + file=ngofs_0121.nc
+ 108 + '[' -s ngofs_0121.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 122
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0122
+ 108 + file=ngofs_0122.nc
+ 108 + '[' -s ngofs_0122.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 123
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0123
+ 108 + file=ngofs_0123.nc
+ 108 + '[' -s ngofs_0123.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 124
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0124
+ 108 + file=ngofs_0124.nc
+ 108 + '[' -s ngofs_0124.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 125
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0125
+ 108 + file=ngofs_0125.nc
+ 108 + '[' -s ngofs_0125.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 126
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0126
+ 108 + file=ngofs_0126.nc
+ 108 + '[' -s ngofs_0126.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 127
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0127
+ 108 + file=ngofs_0127.nc
+ 108 + '[' -s ngofs_0127.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 128
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0128
+ 108 + file=ngofs_0128.nc
+ 108 + '[' -s ngofs_0128.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 129
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0129
+ 108 + file=ngofs_0129.nc
+ 108 + '[' -s ngofs_0129.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 130
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0130
+ 108 + file=ngofs_0130.nc
+ 108 + '[' -s ngofs_0130.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 131
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0131
+ 108 + file=ngofs_0131.nc
+ 108 + '[' -s ngofs_0131.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 132
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0132
+ 108 + file=ngofs_0132.nc
+ 108 + '[' -s ngofs_0132.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 133
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0133
+ 108 + file=ngofs_0133.nc
+ 108 + '[' -s ngofs_0133.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 134
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0134
+ 108 + file=ngofs_0134.nc
+ 108 + '[' -s ngofs_0134.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 135
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0135
+ 108 + file=ngofs_0135.nc
+ 108 + '[' -s ngofs_0135.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 136
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0136
+ 108 + file=ngofs_0136.nc
+ 108 + '[' -s ngofs_0136.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 137
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0137
+ 108 + file=ngofs_0137.nc
+ 108 + '[' -s ngofs_0137.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 138
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0138
+ 108 + file=ngofs_0138.nc
+ 108 + '[' -s ngofs_0138.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 139
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0139
+ 108 + file=ngofs_0139.nc
+ 108 + '[' -s ngofs_0139.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 140
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0140
+ 108 + file=ngofs_0140.nc
+ 108 + '[' -s ngofs_0140.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 141
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0141
+ 108 + file=ngofs_0141.nc
+ 108 + '[' -s ngofs_0141.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 142
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0142
+ 108 + file=ngofs_0142.nc
+ 108 + '[' -s ngofs_0142.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 143
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0143
+ 108 + file=ngofs_0143.nc
+ 108 + '[' -s ngofs_0143.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 144
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0144
+ 108 + file=ngofs_0144.nc
+ 108 + '[' -s ngofs_0144.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 145
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0145
+ 108 + file=ngofs_0145.nc
+ 108 + '[' -s ngofs_0145.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 146
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0146
+ 108 + file=ngofs_0146.nc
+ 108 + '[' -s ngofs_0146.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 147
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0147
+ 108 + file=ngofs_0147.nc
+ 108 + '[' -s ngofs_0147.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 148
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0148
+ 108 + file=ngofs_0148.nc
+ 108 + '[' -s ngofs_0148.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 149
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0149
+ 108 + file=ngofs_0149.nc
+ 108 + '[' -s ngofs_0149.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 150
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0150
+ 108 + file=ngofs_0150.nc
+ 108 + '[' -s ngofs_0150.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 151
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0151
+ 108 + file=ngofs_0151.nc
+ 108 + '[' -s ngofs_0151.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 152
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0152
+ 108 + file=ngofs_0152.nc
+ 108 + '[' -s ngofs_0152.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 153
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0153
+ 108 + file=ngofs_0153.nc
+ 108 + '[' -s ngofs_0153.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 154
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0154
+ 108 + file=ngofs_0154.nc
+ 108 + '[' -s ngofs_0154.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 155
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0155
+ 108 + file=ngofs_0155.nc
+ 108 + '[' -s ngofs_0155.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 156
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0156
+ 108 + file=ngofs_0156.nc
+ 108 + '[' -s ngofs_0156.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 157
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0157
+ 108 + file=ngofs_0157.nc
+ 108 + '[' -s ngofs_0157.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 158
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0158
+ 108 + file=ngofs_0158.nc
+ 108 + '[' -s ngofs_0158.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 159
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0159
+ 108 + file=ngofs_0159.nc
+ 108 + '[' -s ngofs_0159.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 160
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0160
+ 108 + file=ngofs_0160.nc
+ 108 + '[' -s ngofs_0160.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 161
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0161
+ 108 + file=ngofs_0161.nc
+ 108 + '[' -s ngofs_0161.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 162
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0162
+ 108 + file=ngofs_0162.nc
+ 108 + '[' -s ngofs_0162.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 163
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0163
+ 108 + file=ngofs_0163.nc
+ 108 + '[' -s ngofs_0163.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 164
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0164
+ 108 + file=ngofs_0164.nc
+ 108 + '[' -s ngofs_0164.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 165
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0165
+ 108 + file=ngofs_0165.nc
+ 108 + '[' -s ngofs_0165.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 166
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0166
+ 108 + file=ngofs_0166.nc
+ 108 + '[' -s ngofs_0166.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 167
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0167
+ 108 + file=ngofs_0167.nc
+ 108 + '[' -s ngofs_0167.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+  108 + echo 168
+  108 + awk '{printf("%04i",$1)}'
+ 108 + fhr4=0168
+ 108 + file=ngofs_0168.nc
+ 108 + '[' -s ngofs_0168.nc ']'
+ 108 + ((  I = I + 1  ))
+ 108 + ((  I < 169  ))
+ 108 + '[' ngofs == NGOFS -o ngofs == ngofs ']'
+ 108 + '[' -s nos_ngofs_nestnode_negofs.nc ']'
+ 108 + '[' -s nos_ngofs_nestnode_nwgofs.nc ']'
+  108 + ls /data/temp/ngofs.20191030/nos.ngofs.fields.f000.20191030.t09z.nc
+ 108 + for combinefields in '`ls ${DATA}/nos.${OFS}.fields.f*.nc`'
+ 108 + cp -p /data/temp/ngofs.20191030/nos.ngofs.fields.f000.20191030.t09z.nc /data/com/nos/ngofs.20191030/.
+ 108 + cp -p /data/temp/ngofs.20191030/nos.ngofs.stations.forecast.20191030.t09z.nc /data/com/nos/ngofs.20191030/nos.ngofs.stations.forecast.20191030.t09z.nc
+ 108 + setoff
+ 108 + set +x
+ 
+Ending nos_ofs_nowcast_forecast.sh at : Fri Nov  1 18:47:10 UTC 2019
+ 
+                     *** End of NOS OFS NOWCAST/FORECAST SIMULATIONS ***
+ 
+ 108 + export err=0
+ 108 + err=0

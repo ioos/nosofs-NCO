@@ -1,0 +1,611 @@
+Fri Nov  1 17:30:05 UTC 2019
+/data/com/nos/ngofs.20191030
+/data/com/nos/ngofs.20191030
+ 0 + env
+USHnos=/save/centos/nosofs.v3.1.9.1/ush
+REMOTEHOST=wsip-184-180-13-92.ri.ri.cox.net
+MANPATH=/usrx/mpich-3.1rc4/share/man:/usrx/gcc/6.5.0/share/man:/usr/share/man:/usr/local/share/man
+XDG_SESSION_ID=6
+cyc=09
+HOSTNAME=ip-172-31-10-124.ec2.internal
+SELINUX_ROLE_REQUESTED=
+PDY=20191030
+HOST=ip-172-31-10-124.ec2.internal
+SHELL=/bin/bash
+TERM=xterm-256color
+HISTSIZE=1000
+SSH_CLIENT=184.180.13.92 24999 22
+NET=nos
+SELINUX_USE_CURRENT_RANGE=
+OLDPWD=/save/centos/nosofs.v3.1.9.1/jobs
+SSH_TTY=/dev/pts/3
+COMROOT=/data/com
+HOMEnos=/save/centos/nosofs.v3.1.9.1
+nosofs_ver=v3.1.9.1
+GROUP=centos
+USER=centos
+nosjlogfile=/data/com/nos/ngofs.20191030/nos.ngofs.jlogfile.20191030.t09z.log
+OFS=ngofs
+LD_LIBRARY_PATH=/save/centos/nosofs.v3.1.9.1/lib:/usrx/mpich-3.1rc4/lib:/usrx/zlib/1.2.11/lib:/usrx/gcc/6.5.0/lib64:/usrx/gcc/6.5.0/lib:/usrx/netcdf/4.2/lib64
+LS_COLORS=rs=0:di=38;5;27:ln=38;5;51:mh=44;38;5;15:pi=40;38;5;11:so=38;5;13:do=38;5;5:bd=48;5;232;38;5;11:cd=48;5;232;38;5;3:or=48;5;232;38;5;9:mi=05;48;5;232;38;5;15:su=48;5;196;38;5;15:sg=48;5;11;38;5;16:ca=48;5;196;38;5;226:tw=48;5;10;38;5;16:ow=48;5;10;38;5;21:st=48;5;21;38;5;15:ex=38;5;34:*.tar=38;5;9:*.tgz=38;5;9:*.arc=38;5;9:*.arj=38;5;9:*.taz=38;5;9:*.lha=38;5;9:*.lz4=38;5;9:*.lzh=38;5;9:*.lzma=38;5;9:*.tlz=38;5;9:*.txz=38;5;9:*.tzo=38;5;9:*.t7z=38;5;9:*.zip=38;5;9:*.z=38;5;9:*.Z=38;5;9:*.dz=38;5;9:*.gz=38;5;9:*.lrz=38;5;9:*.lz=38;5;9:*.lzo=38;5;9:*.xz=38;5;9:*.bz2=38;5;9:*.bz=38;5;9:*.tbz=38;5;9:*.tbz2=38;5;9:*.tz=38;5;9:*.deb=38;5;9:*.rpm=38;5;9:*.jar=38;5;9:*.war=38;5;9:*.ear=38;5;9:*.sar=38;5;9:*.rar=38;5;9:*.alz=38;5;9:*.ace=38;5;9:*.zoo=38;5;9:*.cpio=38;5;9:*.7z=38;5;9:*.rz=38;5;9:*.cab=38;5;9:*.jpg=38;5;13:*.jpeg=38;5;13:*.gif=38;5;13:*.bmp=38;5;13:*.pbm=38;5;13:*.pgm=38;5;13:*.ppm=38;5;13:*.tga=38;5;13:*.xbm=38;5;13:*.xpm=38;5;13:*.tif=38;5;13:*.tiff=38;5;13:*.png=38;5;13:*.svg=38;5;13:*.svgz=38;5;13:*.mng=38;5;13:*.pcx=38;5;13:*.mov=38;5;13:*.mpg=38;5;13:*.mpeg=38;5;13:*.m2v=38;5;13:*.mkv=38;5;13:*.webm=38;5;13:*.ogm=38;5;13:*.mp4=38;5;13:*.m4v=38;5;13:*.mp4v=38;5;13:*.vob=38;5;13:*.qt=38;5;13:*.nuv=38;5;13:*.wmv=38;5;13:*.asf=38;5;13:*.rm=38;5;13:*.rmvb=38;5;13:*.flc=38;5;13:*.avi=38;5;13:*.fli=38;5;13:*.flv=38;5;13:*.gl=38;5;13:*.dl=38;5;13:*.xcf=38;5;13:*.xwd=38;5;13:*.yuv=38;5;13:*.cgm=38;5;13:*.emf=38;5;13:*.axv=38;5;13:*.anx=38;5;13:*.ogv=38;5;13:*.ogx=38;5;13:*.aac=38;5;45:*.au=38;5;45:*.flac=38;5;45:*.mid=38;5;45:*.midi=38;5;45:*.mka=38;5;45:*.mp3=38;5;45:*.mpc=38;5;45:*.ogg=38;5;45:*.ra=38;5;45:*.wav=38;5;45:*.axa=38;5;45:*.oga=38;5;45:*.spx=38;5;45:*.xspf=38;5;45:
+FIXnos=/save/centos/nosofs.v3.1.9.1/fix/shared
+HOSTTYPE=x86_64-linux
+CDATE=20191030
+DATA=/data/temp/ngofs.20191030
+NDATE=/usrx/produtil/1.0.18/exec/ndate
+KEEPDATA=YES
+FIXofs=/save/centos/nosofs.v3.1.9.1/fix/ngofs
+EXECnos=/save/centos/nosofs.v3.1.9.1/exec
+PATH=/usrx/mpich-3.1rc4/bin:/usrx/gcc/6.5.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/centos/.local/bin:/home/centos/bin:/usrx/netcdf/4.2/bin:/usrx/produtil/1.0.18/ush:/usrx/produtil/1.0.18/exec
+MAIL=/var/spool/mail/centos
+Z_LIB=-L/usrx/zlib/1.2.11/lib -lz
+DBN_ALERT_TYPE_NETCDF=NOS_OFS_FCST_NETCDF
+MDATE=/usrx/produtil/1.0.18/exec/mdate
+PWD=/data/temp/ngofs.20191030
+_LMFILES_=/usrx/modulefiles/gcc/6.5.0:/usrx/modulefiles/zlib/1.2.11:/usrx/modulefiles/netcdf/4.2:/usrx/modulefiles/mpi/mpich/3.1rc4:/usrx/modulefiles/produtil/1.0.18
+pgmout=OUTPUT.16385
+DBN_ALERT_TYPE_TEXT=NOS_OFS_FCST_TEXT
+LANG=en_US.UTF-8
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles:/usrx/modulefiles
+LOADEDMODULES=gcc/6.5.0:zlib/1.2.11:netcdf/4.2:mpi/mpich/3.1rc4:produtil/1.0.18
+cormslogfile=/data/com/nos/ngofs.20191030/nos.ngofs.corms.20191030.t09z.log
+NHOUR=/usrx/produtil/1.0.18/exec/nhour
+SELINUX_LEVEL_REQUESTED=
+NWROOT=/save
+PARMnos=/save/centos/nosofs.v3.1.9.1/parm
+jobid=fcst.16385
+cycle=t09z
+HISTCONTROL=ignoredups
+COMOUT=/data/com/nos/ngofs.20191030
+PS4= $SECONDS + 
+HOME=/home/centos
+SHLVL=3
+OSTYPE=linux
+COMIN=/data/com/nos/ngofs.20191030
+NETCDF=/usrx/netcdf/4.2
+VENDOR=unknown
+DBN_ALERT_TYPE_NETCDF_LRG=NOS_OFS_FCST_NETCDF_LP
+HYDRA_TOPO_DEBUG=1
+MACHTYPE=x86_64
+LOGNAME=centos
+SSH_CONNECTION=184.180.13.92 24999 172.31.10.124 22
+jlogfile=/data/temp/ngofs.20191030/jlogfile.16385
+MODULESHOME=/usr/share/Modules
+RUN=ngofs
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+COMOUTroot=/data/com/nos
+SENDDBN=NO
+XDG_RUNTIME_DIR=/run/user/1000
+SCRIPTSnos=/save/centos/nosofs.v3.1.9.1/scripts
+NPP=16
+BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}
+_=/usr/bin/env
+ 0 + /save/centos/nosofs.v3.1.9.1/scripts/exnos_ofs_nowcast.sh ngofs
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.ctl ']'
+ 0 + . /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.ctl
+  0 + export DBASE_MET_NOW=NAM4
+  0 + DBASE_MET_NOW=NAM4
+  0 + export DBASE_MET_FOR=NAM4
+  0 + DBASE_MET_FOR=NAM4
+  0 + export DBASE_WL_NOW=RTOFS
+  0 + DBASE_WL_NOW=RTOFS
+  0 + export DBASE_WL_FOR=RTOFS
+  0 + DBASE_WL_FOR=RTOFS
+  0 + export DBASE_TS_NOW=RTOFS
+  0 + DBASE_TS_NOW=RTOFS
+  0 + export DBASE_TS_FOR=RTOFS
+  0 + DBASE_TS_FOR=RTOFS
+  0 + export OCEAN_MODEL=FVCOM
+  0 + OCEAN_MODEL=FVCOM
+  0 + export LEN_FORECAST=54
+  0 + LEN_FORECAST=54
+  0 + export IGRD_MET=2
+  0 + IGRD_MET=2
+  0 + export IGRD_OBC=2
+  0 + IGRD_OBC=2
+  0 + export BASE_DATE=1858111700
+  0 + BASE_DATE=1858111700
+  0 + export TIME_START=2011010100
+  0 + TIME_START=2011010100
+  0 + export MINLON=-99.0
+  0 + MINLON=-99.0
+  0 + export MINLAT=25.0
+  0 + MINLAT=25.0
+  0 + export MAXLON=-82.0
+  0 + MAXLON=-82.0
+  0 + export MAXLAT=32.0
+  0 + MAXLAT=32.0
+  0 + export THETA_S=4.5d0
+  0 + THETA_S=4.5d0
+  0 + export THETA_B=0.95d0
+  0 + THETA_B=0.95d0
+  0 + export TCLINE=10.0d0
+  0 + TCLINE=10.0d0
+  0 + export SCALE_HFLUX=1.0
+  0 + SCALE_HFLUX=1.0
+  0 + export CREATE_TIDEFORCING=0
+  0 + CREATE_TIDEFORCING=0
+  0 + export GRIDFILE=nos.ngofs.grid.dat
+  0 + GRIDFILE=nos.ngofs.grid.dat
+  0 + export HC_FILE_OBC=nos.ngofs.HC.nc
+  0 + HC_FILE_OBC=nos.ngofs.HC.nc
+  0 + export HC_FILE_OFS=nos.ngofs.HC.nc
+  0 + HC_FILE_OFS=nos.ngofs.HC.nc
+  0 + export RIVER_CTL_FILE=nos.ngofs.river.ctl
+  0 + RIVER_CTL_FILE=nos.ngofs.river.ctl
+  0 + export RIVER_CLIM_FILE=nos.ofs.river.clim.usgs.nc
+  0 + RIVER_CLIM_FILE=nos.ofs.river.clim.usgs.nc
+  0 + export OBC_CTL_FILE=nos.ngofs.obc.ctl
+  0 + OBC_CTL_FILE=nos.ngofs.obc.ctl
+  0 + export OBC_CLIM_FILE=nos.ofs.clim.WOA05.nc
+  0 + OBC_CLIM_FILE=nos.ofs.clim.WOA05.nc
+  0 + export STA_OUT_CTL=nos.ngofs_station.dat
+  0 + STA_OUT_CTL=nos.ngofs_station.dat
+  0 + export VGRID_CTL=nos.ngofs.vgrid.dat
+  0 + VGRID_CTL=nos.ngofs.vgrid.dat
+  0 + export RUNTIME_CTL=nos.ngofs.fvcom.nml
+  0 + RUNTIME_CTL=nos.ngofs.fvcom.nml
+  0 + export HC_FILE_NWLON=nos.ofs.HC_NWLON.nc
+  0 + HC_FILE_NWLON=nos.ofs.HC_NWLON.nc
+  0 + export OBC_FILE_TEMPLATE=nos.ngofs.obc.template.nc
+  0 + OBC_FILE_TEMPLATE=nos.ngofs.obc.template.nc
+  0 + export NNODE=90267
+  0 + NNODE=90267
+  0 + export NELE=174474
+  0 + NELE=174474
+  0 + export KBm=40
+  0 + KBm=40
+  0 + export DELT_MODEL=3
+  0 + DELT_MODEL=3
+  0 + export EXTSTEP_SECONDS=3.0
+  0 + EXTSTEP_SECONDS=3.0
+  0 + export ISPLIT=3
+  0 + ISPLIT=3
+  0 + export RST_OUT_INTERVAL=21600.0
+  0 + RST_OUT_INTERVAL=21600.0
+  0 + export IREPORT=100
+  0 + IREPORT=100
+  0 + export NC_OUT_INTERVAL=3600.0
+  0 + NC_OUT_INTERVAL=3600.0
+  0 + export NC_STA_INTERVAL=360.0
+  0 + NC_STA_INTERVAL=360.0
+  0 + export NRIVERS=44
+  0 + NRIVERS=44
+  0 + export MIN_DEPTH=0.5
+  0 + MIN_DEPTH=0.5
+  0 + export HEATING_LONGWAVE_LENGTHSCALE=1.4
+  0 + HEATING_LONGWAVE_LENGTHSCALE=1.4
+  0 + export HEATING_LONGWAVE_PERCTAGE=0.78
+  0 + HEATING_LONGWAVE_PERCTAGE=0.78
+  0 + export HEATING_SHORTWAVE_LENGTHSCALE=6.3
+  0 + HEATING_SHORTWAVE_LENGTHSCALE=6.3
+  0 + export NESTING_BLOCKSIZE=5
+  0 + NESTING_BLOCKSIZE=5
+  0 + export RIVER_NAMELIST=nos.ngofs.RIVERS_NAMELIST.nml
+  0 + RIVER_NAMELIST=nos.ngofs.RIVERS_NAMELIST.nml
+  0 + export CORIOLISFILE=nos.ngofs.cor.dat
+  0 + CORIOLISFILE=nos.ngofs.cor.dat
+  0 + export DEPTHFILE=nos.ngofs.dep.dat
+  0 + DEPTHFILE=nos.ngofs.dep.dat
+  0 + export RUNGRIDFILE=nos.ngofs.grd.dat
+  0 + RUNGRIDFILE=nos.ngofs.grd.dat
+  0 + export MODELOBCFILE=nos.ngofs.obc.dat
+  0 + MODELOBCFILE=nos.ngofs.obc.dat
+  0 + export SIGMA_LEVEL=nos.ngofs.sigma.dat
+  0 + SIGMA_LEVEL=nos.ngofs.sigma.dat
+  0 + export SPONGEFILE=nos.ngofs.spg.dat
+  0 + SPONGEFILE=nos.ngofs.spg.dat
+  0 + export STATIONFILE=nos.ngofs.station.dat
+  0 + STATIONFILE=nos.ngofs.station.dat
+  0 + export InputNodeFile=nos.ngofs.node.dat
+  0 + InputNodeFile=nos.ngofs.node.dat
+  0 + export InputNode2LFile=nos.ngofs.node.2LayerNd.dat
+  0 + InputNode2LFile=nos.ngofs.node.2LayerNd.dat
+  0 + export NRST=3600
+  0 + NRST=3600
+  0 + export NSTA=360
+  0 + NSTA=360
+  0 + export NFLT=3600
+  0 + NFLT=3600
+  0 + export NHIS=3600
+  0 + NHIS=3600
+  0 + export NAVG=3600
+  0 + NAVG=3600
+  0 + export 'DCRIT=0.10d0     !m'
+  0 + DCRIT='0.10d0     !m'
+  0 + export TOTAL_TASKS=240
+  0 + TOTAL_TASKS=240
+ 0 + '[' -n '' ']'
+ 0 + echo 'run the launch script to set the NOS configuration'
+run the launch script to set the NOS configuration
+ 0 + . /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast
+  0 + set -x
+  0 + '[' 2 -lt 2 ']'
+  0 + export OFS=ngofs
+  0 + OFS=ngofs
+  0 + export runtype=nowcast
+  0 + runtype=nowcast
+   0 + date
+  0 + echo 'The script nos_ofs_launch.sh has started at UTC' Fri Nov 1 17:30:05 UTC 2019
+The script nos_ofs_launch.sh has started at UTC Fri Nov 1 17:30:05 UTC 2019
+   0 + date
+  0 + echo 'The script nos_ofs_launch.sh has started at UTC' Fri Nov 1 17:30:05 UTC 2019
+   0 + date
+  0 + echo 'The script nos_ofs_launch.sh has started at UTC' Fri Nov 1 17:30:05 UTC 2019
+   0 + date
+  0 + echo 'The script nos_ofs_launch.sh has started at UTC' Fri Nov 1 17:30:05 UTC 2019
+  0 + export time_nowcastend=2019103009
+  0 + time_nowcastend=2019103009
+  0 + echo '*******************************************************************'
+*******************************************************************
+  0 + echo '*******************************************************************'
+*******************************************************************
+  0 + echo 'time_nowcastend is 2019103009'
+time_nowcastend is 2019103009
+  0 + echo '*******************************************************************'
+*******************************************************************
+  0 + echo '*******************************************************************'
+*******************************************************************
+  0 + '[' '!' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.grid.dat ']'
+  0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.grid.dat /data/temp/ngofs.20191030/.
+  0 + export err=0
+  0 + err=0
+  0 + err_chk
+  0 + echo '/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.grid.dat is copied into working dir'
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.grid.dat is copied into working dir
+  0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+  0 + '[' FVCOM == ROMS -o FVCOM == roms ']'
+  0 + '[' 0 -gt 0 -a RTOFS '!=' OBS ']'
+  0 + '[' -d /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.vgrid.dat -o '!' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.vgrid.dat ']'
+  0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.vgrid.dat /data/temp/ngofs.20191030/.
+  0 + export pgm=/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy
+  0 + pgm=/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy
+  0 + . prep_step
+   0 + '[' -n /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy ']'
+   0 + '[' -n OUTPUT.16385 ']'
+   0 + echo /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy
+   0 + '[' -f errfile ']'
+   0 + export FORT01=0
+   0 + FORT01=0
+    0 + env
+    0 + grep '^FORT[0-9]\{1,\}='
+    0 + awk -F= '{print $1}'
+   0 + unset FORT01
+  0 + '[' '!' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat ']'
+  0 + '[' '!' -d /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat -a -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat ']'
+  0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat /data/temp/ngofs.20191030/.
+  0 + export err=0
+  0 + err=0
+  0 + err_chk
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy completed cleanly
+  0 + echo '/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat was copied into working dir'
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat was copied into working dir
+  0 + '[' '!' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml -o '!' -f /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml ']'
+  0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml /data/temp/ngofs.20191030/.
+  0 + export err=0
+  0 + err=0
+  0 + err_chk
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy completed cleanly
+  0 + echo '/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml was copied into working dir'
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs.fvcom.nml was copied into working dir
+  0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/ -a -f /save/centos/nosofs.v3.1.9.1/fix/ngofs/ ']'
+  0 + BIO_MODULE=0
+  0 + '[' 0 -eq 1 ']'
+  0 + TS_NUDGING=0
+  0 + '[' 0 -eq 1 ']'
+  0 + export HH=09
+  0 + HH=09
+  0 + export PDY1=20191030
+  0 + PDY1=20191030
+  0 + '[' nowcast = prep ']'
+  0 + '[' nowcast = PREP ']'
+  0 + export OBC_FORCING_FILE=nos.ngofs.obc.20191030.t09z.nc
+  0 + OBC_FORCING_FILE=nos.ngofs.obc.20191030.t09z.nc
+  0 + export OBC_FORCING_FILE_EL=nos.ngofs.obc.el.20191030.t09z.nc
+  0 + OBC_FORCING_FILE_EL=nos.ngofs.obc.el.20191030.t09z.nc
+  0 + export OBC_FORCING_FILE_TS=nos.ngofs.obc.ts.20191030.t09z.nc
+  0 + OBC_FORCING_FILE_TS=nos.ngofs.obc.ts.20191030.t09z.nc
+  0 + export RIVER_FORCING_FILE=nos.ngofs.river.20191030.t09z.nc
+  0 + RIVER_FORCING_FILE=nos.ngofs.river.20191030.t09z.nc
+  0 + export OBC_TIDALFORCING_FILE=nos.ngofs.roms.tides.20191030.t09z.nc
+  0 + OBC_TIDALFORCING_FILE=nos.ngofs.roms.tides.20191030.t09z.nc
+  0 + export NUDG_FORCING_FILE=nos.ngofs.clim.20191030.t09z.nc
+  0 + NUDG_FORCING_FILE=nos.ngofs.clim.20191030.t09z.nc
+  0 + export OBC_FORCING_FILE_EL=nos.ngofs.obc.20191030.t09z.nc
+  0 + OBC_FORCING_FILE_EL=nos.ngofs.obc.20191030.t09z.nc
+  0 + export OBC_FORCING_FILE_TS=nos.ngofs.obc.20191030.t09z.nc
+  0 + OBC_FORCING_FILE_TS=nos.ngofs.obc.20191030.t09z.nc
+  0 + export INI_FILE_NOWCAST=nos.ngofs.init.nowcast.20191030.t09z.nc
+  0 + INI_FILE_NOWCAST=nos.ngofs.init.nowcast.20191030.t09z.nc
+  0 + export HIS_OUT_NOWCAST=nos.ngofs.fields.nowcast.20191030.t09z.nc
+  0 + HIS_OUT_NOWCAST=nos.ngofs.fields.nowcast.20191030.t09z.nc
+  0 + export STA_OUT_NOWCAST=nos.ngofs.stations.nowcast.20191030.t09z.nc
+  0 + STA_OUT_NOWCAST=nos.ngofs.stations.nowcast.20191030.t09z.nc
+  0 + export RST_OUT_NOWCAST=nos.ngofs.rst.nowcast.20191030.t09z.nc
+  0 + RST_OUT_NOWCAST=nos.ngofs.rst.nowcast.20191030.t09z.nc
+  0 + export MET_NETCDF_1_NOWCAST=nos.ngofs.met.nowcast.20191030.t09z.nc
+  0 + MET_NETCDF_1_NOWCAST=nos.ngofs.met.nowcast.20191030.t09z.nc
+  0 + export MET_NETCDF_2_NOWCAST=nos.ngofs.hflux.nowcast.20191030.t09z.nc
+  0 + MET_NETCDF_2_NOWCAST=nos.ngofs.hflux.nowcast.20191030.t09z.nc
+  0 + export HIS_2D_NOWCAST=nos.ngofs.surface.nowcast.20191030.t09z.nc
+  0 + HIS_2D_NOWCAST=nos.ngofs.surface.nowcast.20191030.t09z.nc
+  0 + export HIS_2D_FORECAST=nos.ngofs.surface.forecast.20191030.t09z.nc
+  0 + HIS_2D_FORECAST=nos.ngofs.surface.forecast.20191030.t09z.nc
+  0 + export INI_FILE_FORECAST=nos.ngofs.rst.nowcast.20191030.t09z.nc
+  0 + INI_FILE_FORECAST=nos.ngofs.rst.nowcast.20191030.t09z.nc
+  0 + export HIS_OUT_FORECAST=nos.ngofs.fields.forecast.20191030.t09z.nc
+  0 + HIS_OUT_FORECAST=nos.ngofs.fields.forecast.20191030.t09z.nc
+  0 + export STA_OUT_FORECAST=nos.ngofs.stations.forecast.20191030.t09z.nc
+  0 + STA_OUT_FORECAST=nos.ngofs.stations.forecast.20191030.t09z.nc
+  0 + export RST_OUT_FORECAST=nos.ngofs.rst.forecast.20191030.t09z.nc
+  0 + RST_OUT_FORECAST=nos.ngofs.rst.forecast.20191030.t09z.nc
+  0 + export MET_NETCDF_1_FORECAST=nos.ngofs.met.forecast.20191030.t09z.nc
+  0 + MET_NETCDF_1_FORECAST=nos.ngofs.met.forecast.20191030.t09z.nc
+  0 + export MET_NETCDF_2_FORECAST=nos.ngofs.hflux.forecast.20191030.t09z.nc
+  0 + MET_NETCDF_2_FORECAST=nos.ngofs.hflux.forecast.20191030.t09z.nc
+  0 + export MODEL_LOG_NOWCAST=nos.ngofs.nowcast.20191030.t09z.log
+  0 + MODEL_LOG_NOWCAST=nos.ngofs.nowcast.20191030.t09z.log
+  0 + export MODEL_LOG_FORECAST=nos.ngofs.forecast.20191030.t09z.log
+  0 + MODEL_LOG_FORECAST=nos.ngofs.forecast.20191030.t09z.log
+  0 + export RUNTIME_CTL_NOWCAST=nos.ngofs.nowcast.20191030.t09z.in
+  0 + RUNTIME_CTL_NOWCAST=nos.ngofs.nowcast.20191030.t09z.in
+  0 + export RUNTIME_CTL_FORECAST=nos.ngofs.forecast.20191030.t09z.in
+  0 + RUNTIME_CTL_FORECAST=nos.ngofs.forecast.20191030.t09z.in
+  0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+  0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+  0 + export RIVER_FORCING_FILE=nos.ngofs.river.20191030.t09z.nc.tar
+  0 + RIVER_FORCING_FILE=nos.ngofs.river.20191030.t09z.nc.tar
+  0 + echo 'Variable and parameter setup has been completed'
+  0 + echo 'Variable and parameter setup has been completed'
+ 0 + export 'pgm=/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast'
+ 0 + pgm='/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast'
+ 0 + export err=0
+ 0 + err=0
+ 0 + '[' 0 -ne 0 ']'
+ 0 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast completed normally'
+ 0 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast completed normally'
+Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast completed normally
+ 0 + msg=' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast completed normally'
+ 0 + postmsg /data/temp/ngofs.20191030/jlogfile.16385 ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast completed normally'
+ 0 + postmsg /data/com/nos/ngofs.20191030/nos.ngofs.jlogfile.20191030.t09z.log ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_launch.sh ngofs nowcast completed normally'
+ 0 + runtype=nowcast
+ 0 + echo '     '
+ 0 + echo '     '
+ 0 + echo ' Start nowcast '
+ 0 + echo ' Start nowcast '
+  0 + date
+ 0 + echo 'Making nowcast at : Fri Nov  1 17:30:05 UTC 2019'
+  0 + date
+ 0 + echo 'Making nowcast at : Fri Nov  1 17:30:05 UTC 2019'
+  0 + date
+ 0 + echo 'Making nowcast at : Fri Nov  1 17:30:05 UTC 2019'
+Making nowcast at : Fri Nov  1 17:30:05 UTC 2019
+ 0 + export 'pgm=/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast'
+ 0 + pgm='/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast'
+ 0 + /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast
+ 0 + echo 'PT DEBUG: ulimits   ================================'
+PT DEBUG: ulimits   ================================
+ 0 + ulimit -a
+core file size          (blocks, -c) unlimited
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 377308
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) unlimited
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 4096
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+ 0 + echo 'PT DEBUG: ulimits   ================================'
+PT DEBUG: ulimits   ================================
+ 0 + cd /data/temp/ngofs.20191030
+ 0 + echo ' '
+ 
+ 0 + echo '  		    ****************************************'
+  		    ****************************************
+ 0 + echo '  		    *** NOS OFS  NOWCAST/FORECAST SCRIPT ***'
+  		    *** NOS OFS  NOWCAST/FORECAST SCRIPT ***
+ 0 + echo '  		    ****************************************'
+  		    ****************************************
+ 0 + echo ' '
+ 
+  0 + date
+ 0 + echo 'Starting nos_ofs_nowcast_forecast.sh at : Fri Nov  1 17:30:05 UTC 2019'
+Starting nos_ofs_nowcast_forecast.sh at : Fri Nov  1 17:30:05 UTC 2019
+ 0 + RUNTYPE=nowcast
+ 0 + RUN=ngofs
+ 0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_brf.nc ']'
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_cor.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_cor.dat /data/temp/ngofs.20191030/ngofs_cor.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_dep.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_dep.dat /data/temp/ngofs.20191030/ngofs_dep.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_grd.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_grd.dat /data/temp/ngofs.20191030/ngofs_grd.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_obc.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_obc.dat /data/temp/ngofs.20191030/ngofs_obc.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_sigma.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_sigma.dat /data/temp/ngofs.20191030/ngofs_sigma.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_spg.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_spg.dat /data/temp/ngofs.20191030/ngofs_spg.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat /data/temp/ngofs.20191030/ngofs_station.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_rivernamelist.nml ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_rivernamelist.nml /data/temp/ngofs.20191030/RIVERS_NAMELIST.nml
+ 0 + '[' ngofs == NGOFS -o ngofs == ngofs ']'
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos_ngofs_nestnode_negofs.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos_ngofs_nestnode_negofs.dat /data/temp/ngofs.20191030/nos_ngofs_nestnode_negofs.dat
+ 0 + '[' -s /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos_ngofs_nestnode_nwgofs.dat ']'
+ 0 + cp -p /save/centos/nosofs.v3.1.9.1/fix/ngofs/nos_ngofs_nestnode_nwgofs.dat /data/temp/ngofs.20191030/nos_ngofs_nestnode_nwgofs.dat
+ 0 + '[' ngofs == NWGOFS -o ngofs == nwgofs ']'
+ 0 + echo 'Preparing input files for ngofs nowcast '
+Preparing input files for ngofs nowcast 
+ 0 + echo -----------------------
+-----------------------
+ 0 + seton
+ 0 + set -x
+ 0 + '[' nowcast == NOWCAST -o nowcast == nowcast ']'
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' FVCOM == ROMS -o FVCOM == roms ']'
+ 0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+ 0 + '[' '!' -r /data/temp/ngofs.20191030/RIVER ']'
+ 0 + '[' -s /data/temp/ngofs.20191030/nos.ngofs.river.20191030.t09z.nc.tar ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.river.20191030.t09z.nc.tar ']'
+ 0 + rm -fr /data/temp/ngofs.20191030/RIVER
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.river.20191030.t09z.nc.tar /data/temp/ngofs.20191030/.
+ 0 + tar -xvf /data/temp/ngofs.20191030/nos.ngofs.river.20191030.t09z.nc.tar
+RIVER/
+RIVER/24153.nc
+RIVER/23097.nc
+RIVER/23098.nc
+RIVER/32482.nc
+RIVER/38798.nc
+RIVER/89538.nc
+RIVER/89664.nc
+RIVER/88931.nc
+RIVER/61006.nc
+RIVER/64011.nc
+RIVER/64019.nc
+RIVER/67480.nc
+RIVER/79585.nc
+RIVER/79586.nc
+RIVER/79587.nc
+RIVER/62740.nc
+RIVER/53084.nc
+RIVER/52236.nc
+RIVER/52235.nc
+RIVER/27893.nc
+RIVER/27892.nc
+RIVER/26886.nc
+RIVER/23744.nc
+RIVER/22631.nc
+RIVER/20378.nc
+RIVER/21497.nc
+RIVER/20383.nc
+RIVER/14115.nc
+RIVER/14116.nc
+RIVER/14117.nc
+RIVER/14118.nc
+RIVER/32096.nc
+RIVER/32097.nc
+RIVER/88869.nc
+RIVER/88169.nc
+RIVER/88090.nc
+RIVER/85595.nc
+RIVER/70887.nc
+RIVER/86790.nc
+RIVER/87516.nc
+RIVER/40692.nc
+RIVER/76267.nc
+RIVER/50759.nc
+RIVER/75834.nc
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' -f /data/temp/ngofs.20191030/nos.ngofs.obc.20191030.t09z.nc ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.obc.20191030.t09z.nc ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.obc.20191030.t09z.nc nos.ngofs.obc.20191030.t09z.nc
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' -s /data/temp/ngofs.20191030/nos.ngofs.met.nowcast.20191030.t09z.nc ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.met.nowcast.20191030.t09z.nc ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.met.nowcast.20191030.t09z.nc nos.ngofs.met.nowcast.20191030.t09z.nc
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' -f /data/temp/ngofs.20191030/nos.ngofs.init.nowcast.20191030.t09z.nc ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.init.nowcast.20191030.t09z.nc ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.init.nowcast.20191030.t09z.nc nos.ngofs.init.nowcast.20191030.t09z.nc
+ 0 + '[' -f /data/temp/ngofs.20191030/nos.ngofs.hflux.nowcast.20191030.t09z.nc ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.hflux.nowcast.20191030.t09z.nc ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.hflux.nowcast.20191030.t09z.nc nos.ngofs.hflux.nowcast.20191030.t09z.nc
+ 0 + '[' -f /data/temp/ngofs.20191030/ngofs_FVCOM_nowcast.in ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.nowcast.20191030.t09z.in ']'
+ 0 + echo '/data/com/nos/ngofs.20191030/nos.ngofs.nowcast.20191030.t09z.in is found '
+/data/com/nos/ngofs.20191030/nos.ngofs.nowcast.20191030.t09z.in is found 
+ 0 + '[' FVCOM == SELFE -o FVCOM == selfe ']'
+ 0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.nowcast.20191030.t09z.in /data/temp/ngofs.20191030/ngofs_run.nml
+ 0 + '[' -f /data/temp/ngofs.20191030/nos.ngofs.HC.nc ']'
+ 0 + '[' -s /data/com/nos/ngofs.20191030/nos.ngofs.HC.nc ']'
+ 0 + cp -p /data/com/nos/ngofs.20191030/nos.ngofs.HC.nc nos.ngofs.HC.nc
+ 0 + TS_NUDGING=0
+ 0 + '[' 0 -eq 1 ']'
+  0 + date
+ 0 + echo 'Ocean Model run starts at time: ' Fri Nov 1 17:30:05 UTC 2019
+Ocean Model run starts at time:  Fri Nov 1 17:30:05 UTC 2019
+ 0 + '[' FVCOM == ROMS -o FVCOM == roms ']'
+ 0 + '[' FVCOM == FVCOM -o FVCOM == fvcom ']'
+ 0 + mpirun -verbose -np 16 -bind-to core:16 /save/centos/nosofs.v3.1.9.1/exec/fvcom_ngofs --casename=ngofs
+ 93 + export err=0
+ 93 + err=0
+ 93 + '[' 0 -ne 0 ']'
+ 93 + exit 0
+ 93 + export err=0
+ 93 + err=0
+ 93 + '[' 0 -ne 0 ']'
+ 93 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast completed normally'
+ 93 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast completed normally'
+Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast completed normally
+ 93 + msg=' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast completed normally'
+ 93 + postmsg /data/temp/ngofs.20191030/jlogfile.16385 ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast completed normally'
+ 93 + postmsg /data/com/nos/ngofs.20191030/nos.ngofs.jlogfile.20191030.t09z.log ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_nowcast_forecast.sh nowcast completed normally'
+ 93 + export 'pgm=/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast'
+ 93 + pgm='/save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast'
+ 93 + err=0
+ 93 + '[' 0 -ne 0 ']'
+ 93 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast completed normally'
+ 93 + echo 'Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast completed normally'
+Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast completed normally
+ 93 + msg=' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast completed normally'
+ 93 + postmsg /data/temp/ngofs.20191030/jlogfile.16385 ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast completed normally'
+ 93 + postmsg /data/com/nos/ngofs.20191030/nos.ngofs.jlogfile.20191030.t09z.log ' Execution of /save/centos/nosofs.v3.1.9.1/ush/nos_ofs_archive.sh nowcast completed normally'
+ 93 + '[' NO = YES ']'
+ 93 + echo '                                    '
+                                    
+ 93 + echo 'END OF NOWCAST/FORECAST SUCCESSFULLY'
+END OF NOWCAST/FORECAST SUCCESSFULLY
+ 93 + echo '                                    '
+                                    
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo '    FINISHED FORECAST FOR 20191030 t09z               '
+    FINISHED FORECAST FOR 20191030 t09z               
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + echo -----------------------------------------------------
+-----------------------------------------------------
+ 93 + cat OUTPUT.16385
+/save/centos/nosofs.v3.1.9.1/fix/ngofs/nos.ngofs_station.dat_copy
+ 93 + postmsg /data/temp/ngofs.20191030/jlogfile.16385 './fcstrun.sh completed normally'
+ 93 + '[' YES '!=' YES ']'
+ 93 + date
+Fri Nov  1 17:31:38 UTC 2019

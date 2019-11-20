@@ -1,5 +1,5 @@
 #!/bin/sh
-#set -x
+set -x
 
 if [ $# -ne 2 ] ; then
   echo "Usage: $0 YYYYMMDD HH"
@@ -25,18 +25,57 @@ date
 #export MP_TIMEOUT=9000
 #export MP_SHARED_MEMORY=yes
 
+export HOMEnos=$(dirname $PWD)
+
+module purge
+export I_MPI_OFI_LIBRARY_INTERNAL=1
 module load gcc/6.5.0
-module load netcdf
 module load mpi/intel
+module load netcdf
+
+#module load mpi/intel/2019.5.281-noefa
+#module load mpi/intel/2019.5.281-efa
 module load produtil
 
 #export NPP=140
-export NPP=${NPP:-16}    # Number of processors
-export KEEPDATA=NO
+#printenv
+#unset I_MPI_PMI_LIBRARY
+#export FI_PROVIDER=efa  # default if EFA is available
+#export FI_PROVIDER=sockets  # fall back to TCP instead
 
+#source /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/bin/mpivars.sh
+
+export I_MPI_DEBUG=1
+#export I_MPI_DEBUG=4,nobuf
+#export I_MPI_HYDRA_DEBUG=1
+#export I_MPI_HYDRA_ENV=all
+#export I_MPI_HYDRA_IFACE=ens5
+#export I_MPI_OFI_PROVIDER_DUMP=1
+#export I_MPI_EXTRA_FILESYSTEM=1
+
+#export I_MPI_FABRICS=shm:ofi
+#export I_MPI_FABRICS=shm
+#export I_MPI_FABRICS=efa
+#export I_MPI_FABRICS=verbs
+
+#export FI_PROVIDER=efa
+#export FI_PROVIDER=tcp
+#export FI_PROVIDER=sockets
+#export FI_PROVIDER=tcp
+#export FI_EFA_ENABLE_SHM_TRANSFER=1
+#export I_MPI_WAIT_MODE=1   #default is 0
+
+export NODES=1
+export NPP=36
+export NPP=${NPP:-16}    # Number of processors
+
+export PPN=$((NPP/NODES))
+
+export HOSTFILE=$PWD/hosts
 #export envir=ec2
 export SENDDBN=NO
 export OFS=cbofs
+export KEEPDATA=NO
 
 #export CDATE=20191001     # The hindcast date
 #export cyc='00'
@@ -46,8 +85,7 @@ export cyc=$2
 export cycle=t${cyc}z
 export nosofs_ver=v3.1.9.1
 export NWROOT=/save
-export HOMEnos=$(dirname $PWD)
-export COMROOT=/noscrub/com
+export COMROOT=/com
 #export COMIN=$COMROOT
 export jobid=fcst.$$
 
@@ -65,7 +103,11 @@ else
   . ./PDY
 fi
 
+<<<<<<< HEAD
 export DATA=/ptmp/$USER/$OFS.$PDY
+=======
+export DATA=/ptmp/$OFS.$PDY
+>>>>>>> e592d25ef2d0fd65be155bbe498ec0ec77afc287
 
 export jlogfile=$DATA/jlogfile.$$
 

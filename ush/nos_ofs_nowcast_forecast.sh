@@ -1456,8 +1456,12 @@ then
 # --------------------------------------------------------------------------- #
 # 2   Execute ocean model of ROMS; where ${RUN}_roms_forecast.in is created by nos_ofs_reformat_roms_ctl.sh
   if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]; then
-     # mpirun.lsf $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
-     mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+     # mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+     #mpirun -np $NPP -bind-to numa:2 -map-by C $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+     # mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+     mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+     #mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+     #mpirun -np $NPP -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
     export err=$?
     if [ $err -ne 0 ]
     then
