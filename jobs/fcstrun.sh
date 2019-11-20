@@ -103,11 +103,8 @@ else
   . ./PDY
 fi
 
-<<<<<<< HEAD
-export DATA=/ptmp/$USER/$OFS.$PDY
-=======
+#export DATA=/ptmp/$USER/$OFS.$PDY
 export DATA=/ptmp/$OFS.$PDY
->>>>>>> e592d25ef2d0fd65be155bbe498ec0ec77afc287
 
 export jlogfile=$DATA/jlogfile.$$
 
