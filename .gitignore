@@ -6,3 +6,5 @@ lib/
 fix/
 exec/
 sorc/ROMS.fd/Build/
+**/config.log
+**/config.status

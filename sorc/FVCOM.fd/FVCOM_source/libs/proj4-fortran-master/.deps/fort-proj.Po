@@ -1,5 +1,5 @@
 fort-proj.o: fort-proj.c /usr/include/stdc-predef.h \
- /save/centos/nosofs.v3.1.9.1/sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/include/projects.h \
+ /home/centos/nosofs-NCO/sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/include/projects.h \
  /usr/include/math.h /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
  /usr/include/gnu/stubs-64.h /usr/include/bits/huge_val.h \
@@ -23,12 +23,12 @@ fort-proj.o: fort-proj.c /usr/include/stdc-predef.h \
  /usr/include/bits/stdlib-float.h /usr/include/string.h \
  /usr/include/xlocale.h /usr/include/bits/string.h \
  /usr/include/bits/string2.h \
- /save/centos/nosofs.v3.1.9.1/sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/include/proj_api.h \
+ /home/centos/nosofs-NCO/sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/include/proj_api.h \
  cfortran.h
 
 /usr/include/stdc-predef.h:
 
-/save/centos/nosofs.v3.1.9.1/sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/include/projects.h:
+/home/centos/nosofs-NCO/sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/include/projects.h:
 
 /usr/include/math.h:
 
@@ -122,6 +122,6 @@ fort-proj.o: fort-proj.c /usr/include/stdc-predef.h \
 
 /usr/include/bits/string2.h:
 
-/save/centos/nosofs.v3.1.9.1/sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/include/proj_api.h:
+/home/centos/nosofs-NCO/sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/include/proj_api.h:
 
 cfortran.h:

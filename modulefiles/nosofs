@@ -25,13 +25,14 @@ setenv COMP_MPCC mpicc
 
 module purge
 module load produtil
-#module load gcc/6.5.0
-module load gcc/7.4.0
+module load gcc/6.5.0
+#module load gcc/7.4.0
 #module load mpi/mpich/2-1.5rc3
 #module load mpi/openmpi/3.1.4-debug
 #module load mpi/mpich/3.1rc4
 #module load mpi/intel/2018.6.288
-module load mpi/intel/2019.5.281
+#module load mpi/intel/2019.5.281
+module load mpi/intel/2020.0.154
 
 module load wgrib2
 # Loding nceplibs modules

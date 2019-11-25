@@ -2,7 +2,7 @@
 
 # libtool - Provide generalized library-building support services.
 # Generated automatically by config.status (proj) 4.9.1
-# Libtool was configured on host ip-172-31-10-124.ec2.internal:
+# Libtool was configured on host ip-10-0-0-13.ec2.internal:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 #
 #   Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005,
@@ -96,7 +96,7 @@ NM="/usr/bin/nm -B"
 LN_S="ln -s"
 
 # What is the maximum length of a command?
-max_cmd_len=3458764513820540925
+max_cmd_len=1572864
 
 # Object file suffix (normally "o").
 objext=o
@@ -275,7 +275,7 @@ hardcode_into_libs=yes
 sys_lib_search_path_spec="/usrx/gcc/6.5.0/lib/gcc/x86_64-pc-linux-gnu/6.5.0 /usrx/gcc/6.5.0/lib64 /lib64 /usr/lib64 "
 
 # Run-time system search path for libraries.
-sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib64/dyninst /usr/lib64/mysql "
+sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib64//bind9-export/ /opt/amazon/efa/lib64 /usr/lib64/mysql "
 
 # Whether dlopen is supported.
 dlopen_support=unknown

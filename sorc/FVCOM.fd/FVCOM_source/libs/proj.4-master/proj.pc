@@ -1,4 +1,4 @@
-prefix=/save/centos/nosofs.v3.1.9.1/sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master
+prefix=/home/centos/nosofs-NCO/sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

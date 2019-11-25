@@ -1,7 +1,16 @@
 #!/bin/sh
 
+nosofs_ver=v3.1.9.1
+
 HOMEnos=$(dirname $PWD)
 export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
+
+# Make exec accessible to all nodes
+export EXECnfs=/save/nosofs.${nosofs_ver}/exec
+if [ ! -s $EXECnfs ]
+then
+  mkdir -p $EXECnfs
+fi
 
 module purge
 module use $HOMEnos/modulefiles
@@ -143,6 +152,7 @@ cd $SORCnos/FVCOM.fd/FVCOM_source
 gmake clean
 gmake -f makefile_NGOFS
 if [ -s  fvcom_ngofs ]; then
+  cp -p fvcom_ngofs $EXECnfs/.
   mv fvcom_ngofs $EXECnos/.
 else
   echo 'fvcom executable is not created'
