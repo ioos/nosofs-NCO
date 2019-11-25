@@ -29,24 +29,27 @@ then
 fi
 
 
-cd $SORCnos/FVCOM.fd/METIS_source
-gmake clean
-gmake -f makefile
-rm -f *.o
+BUILDPREP=NO
+
+#cd $SORCnos/FVCOM.fd/METIS_source
+#gmake clean
+#gmake -f makefile
+#rm -f *.o
 
 # Just build the model - debugging
 
-cd $SORCnos/FVCOM.fd/FVCOM_source
-gmake clean
-gmake -f makefile_NGOFS
-if [ -s  fvcom_ngofs ]; then
-  mv fvcom_ngofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-exit 
+#cd $SORCnos/FVCOM.fd/FVCOM_source
+#gmake clean
+#gmake -f makefile_NGOFS
+#if [ -s  fvcom_ngofs ]; then
+#  mv fvcom_ngofs $EXECnos/.
+#else
+#  echo 'fvcom executable is not created'
+#fi
+#
+#exit 
 
-
+if [[ $BUILDPREP == "YES" ]] ; then
 
 cd $SORCnos/nos_ofs_utility.fd
 rm -f *.o *.a
@@ -101,6 +104,9 @@ gmake -f makefile
 cd $SORCnos/nos_ofs_create_forcing_nudg.fd
 gmake clean
 gmake -f makefile
+
+
+fi  # IF BUILDPREP
 
 
 ##  Compile ocean model of FVCOM for NGOFS
