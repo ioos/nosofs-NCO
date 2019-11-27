@@ -6,7 +6,7 @@ if [ $# -ne 5 ] ; then
   exit 1
 fi
 
-export HOMEnos=/home/centos/nosofs-NCO
+export HOMEnos=/save/nosofs-NCO
 export I_MPI_OFI_LIBRARY_INTERNAL=1
 export I_MPI_DEBUG=1
 
@@ -35,5 +35,5 @@ host1=`awk -F, '{print $1}' hosts.launcher`
 localhost=`hostname`
 #export mpiopts="-localhost $host1 -nolocal -launcher ssh -genvall "
 #export mpiopts="-localhost $localhost -nolocal -path /ptmp/ngofs.20191030 -bootstrap ssh" 
-export mpiopts="-hosts $HOSTS -nolocal -path /ptmp/ngofs.20191030 -bootstrap ssh" 
+export mpiopts="-hosts $HOSTS -nolocal -bootstrap ssh" 
 ./fcstrun.sh $CDATE $HH

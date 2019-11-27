@@ -8,3 +8,4 @@ exec/
 sorc/ROMS.fd/Build/
 **/config.log
 **/config.status
+jobs/hosts.launcher

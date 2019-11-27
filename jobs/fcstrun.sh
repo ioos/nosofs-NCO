@@ -33,8 +33,6 @@ date
 #export MP_TIMEOUT=9000
 #export MP_SHARED_MEMORY=yes
 
-export HOMEnos=$(dirname $PWD)
-
 module purge
 export I_MPI_OFI_LIBRARY_INTERNAL=1
 module load gcc/6.5.0
@@ -84,7 +82,7 @@ export PPN=$((NPP/NODES))
 export HOSTFILE=${HOSTFILE:-$PWD/hosts}
 #export envir=ec2
 export SENDDBN=NO
-export KEEPDATA=NO
+export KEEPDATA=YES
 #export OFS=cbofs
 export OFS=ngofs
 
