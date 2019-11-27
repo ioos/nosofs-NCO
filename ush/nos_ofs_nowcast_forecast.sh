@@ -737,6 +737,9 @@ then
     #export MPIR_CVAR_BCAST_SHORT_MSG_SIZE=1024
     #export MPIR_CVAR_BCAST_LONG_MSG_SIZE=2048
     # numa{:<n>}
+    # NOWCAST
+    # NOWCAST
+    # NOWCAST
     mpirun -verbose -np $NPP -bind-to core:$NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
     #mpirun -verbose -np $NPP -bind-to numa:2 -map-by C $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
     #mpirun -verbose  -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
@@ -1480,16 +1483,13 @@ then
 # --------------------------------------------------------------------------- #
 # 2   Execute ocean model of ROMS; where ${RUN}_roms_forecast.in is created by nos_ofs_reformat_roms_ctl.sh
   if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]; then
-<<<<<<< Updated upstream
      # mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
      #mpirun -np $NPP -bind-to numa:2 -map-by C $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
      # mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
      mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
      #mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
      #mpirun -np $NPP -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
-=======
-     mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
->>>>>>> Stashed changes
+     # mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -1579,7 +1579,12 @@ then
   then
     rm -f $MODEL_LOG_FORECAST
     #mpirun -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
-    mpirun -np $NPP -bind-to core:$NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
+ # mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+
+    #mpirun -np $NPP -bind-to core:$NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
+    #mpiopts="-nolocal"
+    #mpirun -np $NPP -ppn $PPN -f $HOSTFILE $mpiopts -bind-to core $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
+    mpirun -np $NPP -ppn $PPN $mpiopts -bind-to core $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
     #mpirun -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
     export err=$?
     if [ $err -ne 0 ]

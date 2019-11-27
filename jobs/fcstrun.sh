@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 set -x
 ulimit -s unlimited
 ulimit -c unlimited
 
-export HYDRA_TOPO_DEBUG=1
+#export HYDRA_TOPO_DEBUG=1
 
 # NGOFS 20191017 03
 
@@ -73,16 +73,15 @@ export I_MPI_DEBUG=1
 #export FI_EFA_ENABLE_SHM_TRANSFER=1
 #export I_MPI_WAIT_MODE=1   #default is 0
 
-export NODES=1
-export NPP=36
-export NPP=${NPP:-16}    # Number of processors
+export NODES=${NODES:-1}
+export NPP=${NPP:-16}     # Number of processors
 HOMEnos=$(dirname $PWD)
 # This is needed for Intel MPI 2019+
 #export I_MPI_FABRICS=shm
 
 export PPN=$((NPP/NODES))
 
-export HOSTFILE=$PWD/hosts
+export HOSTFILE=${HOSTFILE:-$PWD/hosts}
 #export envir=ec2
 export SENDDBN=NO
 export KEEPDATA=NO
@@ -143,6 +142,23 @@ export DBN_ALERT_TYPE_TEXT=${DBN_ALERT_TYPE_TEXT:-NOS_OFS_FCST_TEXT}
 ############################################
 export pgmout="OUTPUT.$$"
 
+########################################################
+# Make working directory
+########################################################
+export DATA=${DATA:-${DATAROOT:?}/${jobid:?}}
+
+if [ ! -d $DATA ]; then
+  mkdir -p $DATA
+  cd $DATA
+else
+  cd $DATA
+  rm -fr $DATA/*
+fi
+
+# Copy exec to run directory, sorc/build directory is not on NFS
+export EXECnos=$DATA
+cp -p ${HOMEnos}/exec/*${OFS}* $EXECnos
+
 ####################################
 # Specify Execution Areas
 ####################################
@@ -161,7 +177,6 @@ export SCRIPTSnos=${SCRIPTSnos:-${HOMEnos}/scripts}
 # Define COM directories
 ##############################################
 export COMIN=${COMIN:-${COMROOT}/${NET}/${RUN}.${PDY}}          # input directory
-
 export COMOUTroot=${COMOUTroot:-${COMROOT}/${NET}}              # output directory
 export COMOUT=${COMOUT:-${COMOUTroot}/${RUN}.${PDY}}                     # output directory
 
@@ -172,19 +187,6 @@ mkdir -m 775 -p $COMOUT
 
 # Fetch/Copy the ICs
 # ./getICs.sh
-
-########################################################
-# Make working directory
-########################################################
-export DATA=${DATA:-${DATAROOT:?}/${jobid:?}}
-
-if [ ! -d $DATA ]; then
-  mkdir -p $DATA
-  cd $DATA
-else
-  cd $DATA
-  rm -fr $DATA/*
-fi
 
 
 ##############################################
@@ -204,13 +206,15 @@ set -x
 
 env  
 
+NOWCAST=NO
+FORECAST=YES
 
 ########################################################
 # Execute the script.
 ########################################################
-$SCRIPTSnos/exnos_ofs_nowcast.sh $OFS
+if [[ $NOWCAST == "YES" ]] ; then
 
-exit
+$SCRIPTSnos/exnos_ofs_nowcast.sh $OFS
 
 echo "-----------------------------------------------------"
 echo "-----------------------------------------------------"
@@ -221,20 +225,24 @@ echo "-----------------------------------------------------"
 echo "-----------------------------------------------------"
 echo "-----------------------------------------------------"
 echo "-----------------------------------------------------"
+fi
 
-$SCRIPTSnos/exnos_ofs_forecast.sh $OFS
 
+if [[ $FORECAST == "YES" ]] ; then
 
-echo "-----------------------------------------------------"
-echo "-----------------------------------------------------"
-echo "-----------------------------------------------------"
-echo "-----------------------------------------------------"
-echo "    FINISHED FORECAST FOR $CDATE $cycle               "
-echo "-----------------------------------------------------"
-echo "-----------------------------------------------------"
-echo "-----------------------------------------------------"
-echo "-----------------------------------------------------"
-########################################################
+  $SCRIPTSnos/exnos_ofs_forecast.sh $OFS
+
+  echo "-----------------------------------------------------"
+  echo "-----------------------------------------------------"
+  echo "-----------------------------------------------------"
+  echo "-----------------------------------------------------"
+  echo "    FINISHED FORECAST FOR $CDATE $cycle               "
+  echo "-----------------------------------------------------"
+  echo "-----------------------------------------------------"
+  echo "-----------------------------------------------------"
+  echo "-----------------------------------------------------"
+  ########################################################
+fi
 
 cat $pgmout
 
@@ -243,7 +251,7 @@ postmsg "$jlogfile" "$0 completed normally"
 ##############################
 # Remove the Temporary working directory
 ##############################
-if [ "${KEEPDATA^^}" != YES ]; then
+if [ "${KEEPDATA}" != YES ]; then
   rm -rf $DATA
 fi
 
