@@ -1,3 +1,61 @@
+!--------------------------------------------------------------------------
+!
+!  Program Name:  nos_ofs_create_forcing_obc_fvcom_gl.fd/nos_ofs_obc_write_netcdf_fvcom_gl.f
+!
+!  Contact: NOS/CO-OPS Aijun Zhang
+!           Phone: 240-533-0591   Email: aijun.zhang@noaa.gov
+!
+!  Abstract:  This is a SUBROUTINE to create a NetCDF file (imode=1),
+!           store the data to NetCDF file (imode=2), and close the
+!           NetCDF file (imode=3) for FVCOM-base Great Lakes OFS OBC 
+!           forcing (such as LEOFS and LMHOFS).  This subroutine is called 
+!           by program nos_ofs_create_forcing_obc_fvcom_gl.f.
+!
+!       Error Codes:
+!           0  No Error
+!         -33  Not a NetCDF ID
+!         -34  Too many NetCDFs open
+!         -35  NetCDF file exists && NC_NOCLOBBER
+!         -36  Invalid Argument
+!         -37  Write to read only
+!         -38  Operation not allowed in data mode
+!         -39  Operation not allowed in define mode
+!         -40  Index exceeds dimension bound
+!         -41  NC_MAX_DIMS exceeded
+!         -42  String match to name in use
+!         -43  Attribute not found
+!         -44  NC_MAX_ATTRS exceeded
+!         -45  Not a netcdf data type
+!         -46  Invalid dimension id or name
+!         -47  NC_UNLIMITED in the wrong index
+!         -48  NC_MAX_VARS exceeded
+!         -49  Variable not found
+!         -50  Action prohibited on NC_GLOBAL varid
+!         -51  Not a netcdf file
+!         -52  In Fortran, string too short
+!         -53  NC_MAX_NAME exceeded
+!         -54  NC_UNLIMITED size already in use
+!         -55  nc_rec op when there are no record vars
+!         -56  Attempt to convert between text & numbers
+!         -57  Edge+start exceeds dimension bound
+!         -58  Illegal stride
+!         -59  Attribute or variable name contains illegal characters
+!         -60  Math result not representable
+!         -61  Memory allocation (malloc) failure
+!         -62  One or more variable sizes violate format constraints
+!         -63  Invalid dimension size
+!         -64  File likely truncated or possibly corrupted
+!         -65  Unknown axis type
+!
+!  History Log:
+!           03/28/2019
+!
+!  Usage:
+!    Input File:
+!          GRIDFILE: Model grid file which is provided at "fix" folder.
+!    Output File: NETCDF_FILE
+!          NETCDF_FILE: NetCDF file which provides OBC forcing data.
+!
       subroutine nos_ofs_write_netCDF_obc_fvcom_gl(GRIDFILE,netcdf_file,
      & ncid,imode,time_len,node_len,nele_len,siglay_len,siglev_len,
      & base_date,Itime,Itime2,Times,h,lat,lon,latc,lonc,nv,siglay,
@@ -64,7 +122,7 @@ C       integer, save ::  weight_node_id
 
       logical, save ::  h_L
 C       logical, save ::  hyw_L
-      logical, save ::  iint_L
+C       logical, save ::  iint_L
       logical, save ::  latc_L
       logical, save ::  lonc_L
 C       logical, save ::  nprocs_L
@@ -88,7 +146,7 @@ C       logical, save ::  weight_node_L
 
 
 * data variables
-      character Times(time_len*DateStrLen_len)
+      character Times(time_len)*DateStrLen_len 
       integer  Itime(time_len)
       integer  Itime2(time_len)
 C       integer  IINT(time_len)
@@ -145,7 +203,7 @@ C      IF (h(1) .le. 0) h_L = .FALSE.
        latc_L = .FALSE.
        lonc_L = .FALSE.
       ENDIF
-      IF(nv(1,1) .ne. 0) nv_L = .FALSE.
+      IF(nv(1,1)) nv_L = .FALSE.
       IF(elevation(1,1) .le. 0) elevation_L = .FALSE. 
       IF(obc_temp(1,1,1) .le. 0) obc_temp_L = .FALSE.
       IF(obc_salinity(1,1,1) .le. 0) obc_salinity_L = .FALSE.
@@ -587,11 +645,11 @@ C Global Attributes
      &       LEN,TRIM(TEXT))
       call check_err(iret)
       
-* leave define mode
+c leave define mode
       iret = nf_enddef(ncid)
       call check_err(iret)
       print *,'end of define mode' 
-* Write record variables
+c Write record variables
  
       CORNER(1) = 1 
       COUNT(1)=node_len
@@ -657,8 +715,8 @@ C        iint(N)=jtime
       iret=nf_put_vara_real(ncid,time_id,CORNER,COUNT,time)
       call check_err(iret)
 
-      IF(iint_L)
-     & iret=nf_put_vara_int(ncid,iint_id,CORNER,COUNT,iint)
+c      IF(iint_L)
+c     & iret=nf_put_vara_int(ncid,iint_id,CORNER,COUNT,iint)
 
       CORNER(1) = 1
       CORNER(2) = jtime

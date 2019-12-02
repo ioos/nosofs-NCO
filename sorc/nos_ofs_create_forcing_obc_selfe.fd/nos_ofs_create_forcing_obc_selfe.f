@@ -3617,17 +3617,19 @@ C  ----------------------------------------------------------------------------
 C   GET AIR TEMPERATURE AND SEA SURFACE TEMPERATURE DATA
                  CALL UFBINT(LUNIN,DATES,5,1,IRET,'WATM TMDB')
 	       ENDIF	 
-                 if(DATES(1).eq.bmiss)then
+                 if(DATES(1).ge.bmiss/2.0)then
                     SST=-99999.99
 	         else	  
                     SST=DATES(1)-273.15  !! Convert from Kelvin to deg C
                  endif
-                 if(DATES(2).eq.bmiss)then
+                 IF(SST.LT.0.0) SST=-99999.99
+
+                 if(DATES(2).ge.bmiss/2.0)then
                     ATMP=-99999.99
 	         else	  
                     ATMP=DATES(2)   
                  endif
-	         IF (SST .EQ. -99999.99)GOTO 710
+	         IF (abs(SST) .GT. 99999.0) GOTO 710
                  IF(    (NTR_T(I) .GT. 1)
      &	             .and. (dayj .LE. RTIME_T(I,NTR_T(I)) ) )GOTO 710 
 	         NTR_T(I)=NTR_T(I)+1
@@ -3639,22 +3641,24 @@ C  ----------------------------------------------------------------------------
 C  GET CONDUCTIVITY AND SALINITY
 C  ----------------------------------------------------------------------------
                  CALL UFBINT(LUNIN,DATES,5,1,IRET,'SALN WACN')
-                 if(DATES(1).eq.bmiss)then
+                 if(DATES(1).ge.bmiss/2.0)then
                     SALN=-99999.9
 	         else	  
                     SALN=DATES(1)
                  endif
-                 if(DATES(2).eq.bmiss)then
+                 if(DATES(2).ge.bmiss/2.0)then
                     COND=-99999.9        !     Unit of COND is mS/cm for NOS station
 	         else	  
                     COND=DATES(2)   
                  endif
-		 IF(SALN .EQ. -99999.9)THEN
-		   IF( (SST .NE.-99999.9) .AND. (COND .NE. -99999.9) )THEN
+		 IF(SALN .LT. -99999.0)THEN
+		   IF( (SST .GT.-99999.0) .AND. (COND .GT. -99999.0) )THEN
 		      SALN=SAL(COND,SST,0.0)
 		   ENDIF   
 		 ENDIF  
-	         IF (SALN .EQ. -99999.9)GOTO 715
+                 IF(SALN.LT.-0.5) SALN=-99999.9
+
+	         IF (abs(SALN) .GT. 99999.0)GOTO 715
                  IF(    (NTR_S(I) .GT. 1)
      &	             .and. (dayj .LE. RTIME_S(I,NTR_S(I)) ) )GOTO 715 
 	         NTR_S(I)=NTR_S(I)+1
@@ -3672,17 +3676,17 @@ C  ----------------------------------------------------------------------------
                ELSEIF(BUFRFILE(LLEN-4:LLEN) .EQ. 'xx012')THEN 
                  CALL UFBINT(LUNIN,DATES,5,1,IRET,'TLLW TIDER')
 	       ENDIF	 
-                 if(DATES(1).eq.bmiss)then
+                 if(DATES(1).ge.bmiss/2.0)then
                     EL=-99999.9
 	         else	  
                     EL=DATES(1)  
                  endif
-                 if(DATES(2).eq.bmiss)then
+                 if(DATES(2).ge.bmiss/2.0)then
                     SWL=-99999.9
 	         else	  
                     SWL=DATES(2)   
                  endif
-	         IF (EL .EQ. -99999.9)GOTO 777
+	         IF (ABS(EL) .GT. 99999.0) GOTO 777
                  IF(    (NTR(I) .GT. 1)
      &	             .and. (dayj .LE. RTIME(I,NTR(I)) ) )GOTO 777 
 	         NTR(I)=NTR(I)+1
@@ -3781,17 +3785,19 @@ c  AJ 09/15/11 Use different CALL routine in order to handle long station IDs
 C  ----------------------------------------------------------------------------
 C   GET AIR TEMPERATURE AND SEA SURFACE TEMPERATURE DATA
                  CALL UFBINT(LUNIN,DATES,5,1,IRET,'SST1 TMDB')
-                 if(DATES(1).eq.bmiss)then
+                 if(DATES(1).ge.bmiss/2.0)then
                     SST=-99999.9
 	         else	  
                     SST=DATES(1)-273.15  !! Convert from Kelvin to deg C
                  endif
-                 if(DATES(2).eq.bmiss)then
+                 IF(SST.LT.0.0) SST=-99999.9
+
+                 if(DATES(2).ge.bmiss/2.0)then
                     ATMP=-99999.9
 	         else	  
                     ATMP=DATES(2)-273.15  !! Convert from Kelvin to deg C
                  endif
-	         IF (SST .EQ. -99999.9)GOTO 8710
+	         IF (abs(SST) .GT. 99999.0)GOTO 8710
                  IF( (NTR_T(I) .GT. 1)
      &	             .and. (dayj .LE. RTIME_T(I,NTR_T(I)) ) )GOTO 8710 
 	         NTR_T(I)=NTR_T(I)+1
@@ -3802,12 +3808,12 @@ c  -----------------------------------------------------------------------------
 C  GET RIVER STAGE DATA INCLUDING INFO ON USGS SENSOR TYPE 
 c   Stage height is in meters
                CALL UFBINT(LUNIN,DATES,5,1,IRET,'RSH29 STRV')
-                 if(DATES(1).eq.bmiss)then
+                 if(DATES(1).ge.bmiss/2.0)then
                     rsh29=-99999.9
 	         else	  
                     rsh29=DATES(1)  
                  endif
-                 if(DATES(2).eq.bmiss)then
+                 if(DATES(2).ge.bmiss/2.0)then
                     strv=-99999.9
 	         else	  
                     strv=DATES(2)  
@@ -3818,12 +3824,12 @@ C  -----------------------------------------------------------------------------
 C GET RIVER STAGE HEIGHT ABOVE NGVD 1929, STREAM VELOCITY, AND SALINITY
 C  ----------------------------------------------------------------------------
                  CALL UFBINT(LUNIN,DATES,5,1,IRET,'RSHM DDRS')
-                 if(DATES(1).eq.bmiss)then
+                 if(DATES(1).ge.bmiss/2.0)then
                     EL=-99999.9
 	         else	  
                     EL=DATES(1)  
                  endif
-	         IF (EL .EQ. -99999.9)GOTO 8720
+	         IF (ABS(EL) .GT. 99999.0) GOTO 8720
                  IF(    (NTR(I) .GT. 1)
      &	             .and. (dayj .LE. RTIME(I,NTR(I)) ) )GOTO 8720 
 	         NTR(I)=NTR(I)+1
@@ -3837,24 +3843,26 @@ C    Fresh Water Conductivity Measurements using SBE-19 SEACAT Profiler
 C    specific C25,0 [us/cm]=(C/[1+0.02*(Temperature-25)]  where C is in ms/cm 
 C  ----------------------------------------------------------------------------
                  CALL UFBINT(LUNIN,DATES,5,1,IRET,'SALN WACN')
-                 if(DATES(1).eq.bmiss)then
+                 if(DATES(1).ge.bmiss/2.0)then
                     SALN=-99999.9
 	         else	  
                     SALN=DATES(1)
                  endif
-                 if(DATES(2).eq.bmiss)then
+                 if(DATES(2).ge.bmiss/2.0)then
                     COND=-99999.9        !     Unit of COND is uS/cm for USGS station
 	         else	  
-                    COND=DATES(2)   
-		    
+                    COND=DATES(2)
                  endif
-		 IF(SALN .EQ. -99999.9)THEN
-		   IF( (SST .NE.-99999.9) .AND. (COND .NE. -99999.9) )THEN
+
+		 IF(SALN .LT. -99999.0)THEN
+		   IF( (SST .GT. -99999.0) .AND. (COND .GT. -99999.)) THEN
 		      COND=COND*(1.0+0.02*(SST-25.0))  !! convert from uS/cm to mS/cm
 		      SALN=SAL(COND,SST,0.0)
 		   ENDIF   
 		 ENDIF  
-	         IF (SALN .EQ. -99999.9)GOTO 8730
+                 IF(SALN.LT.-0.5) SALN=-99999.9
+
+	         IF (abs(SALN) .GT. 99999.0)GOTO 8730
                  IF(    (NTR_S(I) .GT. 1)
      &	             .and. (dayj .LE. RTIME_S(I,NTR_S(I)) ) )GOTO 8730 
 	         NTR_S(I)=NTR_S(I)+1
@@ -4341,7 +4349,7 @@ C  separate bias as mean error + time varying difference
   	     AVG=0.0
              DO N=1,N0
                 DO N1=1,NTMAX_WL
-	          IF(ONED3(N) .EQ. zeta_time(N1) )THEN
+	          IF(ABS(ONED3(N)-zeta_time(N1)).LE.1.0e-10) THEN
 	            ONED1(N)=ONED4(N)-WLOBC(GRIDID_STA(I),N1)! avg=SWL-ETSS at the corresponding grid
                     write(89,*)ONED1(N),ONED4(N),WLOBC(GRIDID_STA(I),N1)
                     AVG=AVG+ONED1(N)
@@ -4539,7 +4547,7 @@ C  separate bias as mean error + time varying difference
   	     AVG=0.0
              DO N=1,N0
                 DO N1=1,NTMAX
-	          IF(ONED3(N) .EQ. TS_time(N1) )THEN
+	          IF(ABS(ONED3(N)-TS_time(N1)).LT.1.0e-10) THEN
 	            ONED1(N)=ONED4(N)-TEMPOBC_M(GRIDID_STA(I),KBm,N1) ! avg=Tobs - NCOM at surface at the corresponding grid
                     AVG=AVG+ONED1(N)                                ! For Selfe, K=1 for bottom, K=KBm for surface   
 		    GOTO 925
@@ -4713,7 +4721,7 @@ C  separate bias as mean error + time varying difference
   	     AVG=0.0
              DO N=1,N0
                 DO N1=1,NTMAX
-	          IF(ONED3(N) .EQ. TS_time(N1) )THEN
+	          IF(ABS(ONED3(N)-TS_time(N1)).LT.1.0e-10) THEN
 	            ONED1(N)=ONED4(N)-SALTOBC_M(GRIDID_STA(I),KBm,N1) ! avg=Sobs - NCOM at the corresponding grid
                     AVG=AVG+ONED1(N)                                ! For Selfe, K=1 for bottom, K=KBm for surface
 		    GOTO 8925
@@ -5012,8 +5020,8 @@ C ----------------------------------------------------------------------------
         CLOSE(37)
         CLOSE(35)
         CLOSE(54)
-	nrecl_et=1*(NOBC_ORI+1)
-!AJ for CCS nrecl_et=4*(NOBC_ORI+1)
+!	nrecl_et=1*(NOBC_ORI+1)
+        nrecl_et=4*(NOBC_ORI+1)
  	OPEN(37,file='temp_nu.in',form='unformatted')
  	OPEN(35,file='salt_nu.in',form='unformatted')
  	OPEN(54,file='elev3D.th',access='direct',recl=nrecl_et)

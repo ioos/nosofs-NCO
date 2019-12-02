@@ -34,7 +34,8 @@ C-------------------------------------------------------------------------------
       parameter (NMAX=9000)
       include 'netcdf.inc'
       character*200 OFS,OCEAN_MODEL*10
-      character*200 FIN,FIN_F,FOUT,netcdf_file,FILE_P(200),GRIDFILE
+      character*200 FIN,FIN_F,FOUT,netcdf_file,FILE_P(200)
+      character*200 GRIDFILE,CENTERFILE
       character*200 CORMSLOG,BUFFER,NESTED_PARENT_OFS,COMINnestedparent
       character*200 START_TIME, END_TIME
       character*200 START_TIMEm1
@@ -66,6 +67,11 @@ cc allocatable arrays for parent grid
       real, allocatable :: siglay(:,:)
       real, allocatable :: siglev(:,:)
       real, allocatable :: h(:)
+!  added by zheng on 07/17/2018
+      real, allocatable :: heobc(:)
+      real, allocatable :: siglay_ele(:,:)
+!  added by zheng on 07/17/2018
+
       integer, allocatable :: nv(:,:)  
       integer, allocatable :: iint(:)
       character*26,allocatable :: Times(:)
@@ -350,10 +356,15 @@ cc allocate arrays for parent grid
       allocate (yc(NELE))
       allocate (lonc(NELE))
       allocate (latc(NELE))
-      allocate ( siglay(NODE,KB))
-      allocate ( siglev(NODE,KB1))
+      allocate (siglay(NODE,KB))
+      allocate (siglev(NODE,KB1))
       allocate (h(NODE))
       allocate ( nv(NELE,3))
+
+!  added by zheng on 07/17/2018
+      allocate (heobc(NELE))
+      allocate (siglay_ele(NELE,KB))
+!  added by zheng on 07/17/2018
 
       allocate  (iint(NMAX))
       allocate ( Times(NMAX))
@@ -400,6 +411,65 @@ cc allocate arrays for parent grid
       STATUS = NF_GET_VAR_REAL(NCID,IDVAR,h)
       STATUS = NF_INQ_VARID(NCID,'nv',IDVAR)
       STATUS = NF_GET_VAR_INT(NCID,IDVAR,nv)
+
+!  added by zheng on 07/17/2018
+      STATUS = NF_INQ_VARID(NCID,'h_center',IDVAR)
+      IF(STATUS .EQ. NF_NOERR) THEN
+        STATUS = NF_GET_VAR_REAL(NCID,IDVAR,heobc)
+
+        DO I=1,4
+          DIMS(I)=1
+        ENDDO
+        STATUS = NF_INQ_VARID(NCID,'siglay_center',IDVAR)
+        STATUS = NF_INQ_VARNDIMS(NCID,IDVAR,NDIMS)
+        STATUS = NF_INQ_VARDIMID(NCID,IDVAR,dimids)
+        DO I=1,NDIMS
+           STATUS = NF_INQ_DIMLEN(NCID,dimids(i),DIMS(i))
+        ENDDO
+        IF(ALLOCATED(TMP4D)) DEALLOCATE(TMP4D)
+        ALLOCATE(TMP4D(DIMS(1),DIMS(2),DIMS(3),DIMS(4)) )
+        STATUS = NF_GET_VAR_REAL(NCID,IDVAR,TMP4D)
+        DO N=1,NELE
+          DO I=1,KB
+            SIGLAY_ELE(N,I)=TMP4D(N,NKB(I),1,1) 
+          ENDDO
+        ENDDO
+        CLOSE(5)
+      ELSE
+        READ(5,'(A200)') BUFFER
+        DO I=1,LEN_TRIM(BUFFER)
+          IF(BUFFER(I:I) .EQ. "'" .OR. BUFFER(I:I) .EQ. '"') THEN
+ 	    BUFFER(I:I)=' '
+	  ENDIF    
+        ENDDO
+        CENTERFILE=TRIM(adjustL(BUFFER))
+        WRITE(*,*) 'CENTERFILE: ',TRIM(CENTERFILE)
+        STATUS=NF_OPEN(TRIM(CENTERFILE),NF_NOWRITE,NCIDD)
+        STATUS=NF_INQ_VARID(NCIDD,'h_center',IDVAR)
+        STATUS=NF_GET_VAR_REAL(NCIDD,IDVAR,HEOBC)
+
+        DO I=1,4
+          DIMS(I)=1
+        ENDDO
+        STATUS=NF_INQ_VARID(NCIDD,'siglay_center',IDVAR)
+        STATUS=NF_INQ_VARNDIMS(NCIDD,IDVAR,NDIMS)
+        STATUS=NF_INQ_VARDIMID(NCIDD,IDVAR,DIMIDS)
+        DO I=1,NDIMS
+           STATUS=NF_INQ_DIMLEN(NCIDD,DIMIDS(I),DIMS(I))
+        ENDDO
+        IF(ALLOCATED(TMP4D)) DEALLOCATE(TMP4D)
+        ALLOCATE(TMP4D(DIMS(1),DIMS(2),DIMS(3),DIMS(4)) )
+        STATUS=NF_GET_VAR_REAL(NCIDD,IDVAR,TMP4D)
+        DO N=1,NELE
+          DO I=1,KB
+            SIGLAY_ELE(N,I)=TMP4D(N,NKB(I),1,1) 
+          ENDDO
+        ENDDO
+        CLOSE(5)
+        STATUS=NF_CLOSE(NCIDD)
+      ENDIF  
+ !  added by zheng on 07/17/2018
+
       DO I=1,4
         DIMS(I)=1
       ENDDO
@@ -418,6 +488,7 @@ cc allocate arrays for parent grid
         siglay(N,I)=tmp4d(N,NKB(I),1,1) 
       ENDDO
       ENDDO
+
       DO I=1,4
         DIMS(I)=1
       ENDDO
@@ -703,7 +774,8 @@ C Generate CORMS FLAG Message
      & ncidout,imode,1,node,nele,KB,KB1,base_date,
      & Itime(1),Itime2(1),Times(1),h,lat,lon,latc,lonc,nv,siglay,
      & siglev,zeta(:,1),temp(:,:,1),salinity(:,:,1),u(:,:,1),
-     & v(:,:,1),ua(:,1),va(:,1),partition,globalstr)
+     & v(:,:,1),ua(:,1),va(:,1),partition,globalstr,
+     & heobc,siglay_ele)
 
 
 !        call nos_ofs_write_netCDF_obc_nest(netcdf_file,
@@ -723,7 +795,8 @@ C Generate CORMS FLAG Message
      &   ncidout,2,1,node,nele,KB,KB1,base_date,
      &   Itime(N),Itime2(N),Times(N),h,lat,lon,latc,lonc,nv,siglay,
      &   siglev,zeta(:,N),temp(:,:,N),salinity(:,:,N),u(:,:,N),
-     &   v(:,:,N),ua(:,N),va(:,N),partition,globalstr)
+     &   v(:,:,N),ua(:,N),va(:,N),partition,globalstr,
+     &   heobc,siglay_ele)
 !       write(*,*)time(N),Itime(N),Itime2(N)
          Iii=Iii+1
          time_last=time(N)
@@ -737,7 +810,8 @@ C Generate CORMS FLAG Message
      & ncidout,3,1,node,nele,KB,KB1,base_date,
      & Itime(1),Itime2(1),Times(1),h,lat,lon,latc,lonc,nv,siglay,
      & siglev,zeta(:,1),temp(:,:,1),salinity(:,:,1),u(:,:,1),
-     & v(:,:,1),ua(:,1),va(:,1),partition,globalstr)
+     & v(:,:,1),ua(:,1),va(:,1),partition,globalstr,
+     & heobc,siglay_ele)
 
       write(ICORMS,'(a)')'Nested OBC file is COMPLETED SUCCESSFULLY'
       WRITE(ICORMS,'(a)')'END SECTION OF GENERATING OBC FILE'

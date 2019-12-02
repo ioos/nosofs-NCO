@@ -1,3 +1,46 @@
+!       Subroutine Name:  nos_ofs_met_write_netcdf_SELFE.f
+!
+!       Technical Contact(s):   Name:  Aijun Zhang
+!                               Org:   NOS/CO-OPS/OD
+!                               Phone: 240-533-0591
+!                               E-Mail: aijun.zhang@noaa.gov
+!
+!       Abstract:  this subroutine is used to write surface meteological
+!       forcing into NetCDF format for those SELFE-based OFS
+!
+!       History Log:
+!           03/28/2019
+!
+!       Usage: call nos_ofs_write_netcdf_wind_SELFE from
+!       nos_ofs_create_forcing_met_fvcom.f
+!
+!       Argument Input:
+!               netcdf_file - the output NetCDF file
+!               ncid       - NetCDF file identity integer
+!               imode      - 1, 2, or 3 depending on netcdf_file status
+!                IGRD       - indicator of horizontal interpolation method
+!                            =0: no interpolation
+!                            =1:  remesh using triangulation techniques
+!                            =2: bicubic routine from ROMS
+!                            =3: bilinear routine from ROMS
+!                            =4: nature neighbours
+!               IM     - the number of grid in x direction
+!               JM      - the number of grid in y direction
+!               base_date       - base date for the NetCDF file
+!               lon             - longitude
+!               lat             - latitude
+!               time            - surface forcing time
+!               uwind           - eastward_wind
+!               vwind           - northward_wind
+!               prmsl           - air_pressure_at_sea_level
+!               stmp            - air_temperature
+!               spfh            - specific_humidity
+!               globalstr       - global attributes                                              
+!                            
+!       Argument Output:
+!               netcdf_file     -  the output NetCDF file with values in
+!                               targete variables
+
 
 !  lf95 write_surface_forcing.f -I/usr/local/include -L/usr/local/lib -lnetcdf -o write_surface_forcing.x
 c old

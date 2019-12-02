@@ -18,8 +18,25 @@
 * names.  This macro takes care of this operating system quirk.
 *******************************************************************************/
 
+#ifdef VMS
+#define FORTRAN_NAME(name)	name
+
+#else
+
+#ifdef __APPLE__
+#define FORTRAN_NAME(name)	name
+
+#else
+
+#ifdef __STDC__
 #define FORTRAN_NAME(name)	name##_
 
+#else
+#define FORTRAN_NAME(name)	name/**/_
+
+#endif
+#endif
+#endif
 
 /*******************************************************************************
 * Define the FORTRAN logical constants .TRUE. and .FALSE.

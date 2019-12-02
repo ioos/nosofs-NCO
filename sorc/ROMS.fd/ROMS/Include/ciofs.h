@@ -66,7 +66,10 @@
 # undef OUT_DOUBLE
 #endif
 
-                                                                               
+#define SOLAR_SOURCE
+#define HDF5    
+/*#define EMINUSP */                    
+                                                       
 #define ANA_BTFLUX
 
 #define BULK_FLUXES

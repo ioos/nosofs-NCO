@@ -1,3 +1,29 @@
+!       Subroutine Name: equarg.f 
+!
+!  Contact: NOS/CO-OPS Aijun Zhang
+!           Phone: 240-533-0591   Email: aijun.zhang@noaa.gov
+!
+!       Abstract:  this subroutine is used to calculate equilibrium
+!       arguments and node factors.
+!
+!       History Log:
+!           04/01/2019
+!
+!       Usage: call equarg from nos_ofs_tideprediction.f 
+!
+!       Argument Input:
+!                nsped   -  number of constituents to be calculated
+!                IYR    -   month of first data point
+!                ICM    -  day  of first data point
+!                ICD    -  year of first data point
+!                length -  length of series to be analyzed (in days)
+!                label   - names of the tidal constituents
+!
+!        Argument Output:
+!               fff     - node factor for each constituent 
+!               vau     - equilibrium argument for each constitent
+
+
       BLOCK DATA
       PARAMETER (MXDIM=200000)
       integer (kind=4), parameter :: max_constants = 175

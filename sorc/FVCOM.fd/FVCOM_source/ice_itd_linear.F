@@ -234,7 +234,6 @@
 
       do ni = 1, ncat-1 
 
-!DIR$ CONCURRENT !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
          do ij = 1, icells       ! aice(i,j) > puny
@@ -408,7 +407,6 @@
       ! Find area lost due to melting of thin (category 1) ice
       !-----------------------------------------------------------------
 
-!DIR$ CONCURRENT !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
       do ij = 1, icells    ! remap_flag = .true.
@@ -473,7 +471,6 @@
       dvice(:,:,:) = c0i
 
       do ni = 1, ncat-1
-!DIR$ CONCURRENT !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
          do ij = 1, icells   ! remap_flag = .true.
@@ -570,7 +567,6 @@
       ! Make sure hice(i,j,1) >= minimum ice thickness hi_min.
       !-----------------------------------------------------------------
 
-!DIR$ CONCURRENT !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
       do ij = 1, icells          ! remap_flag = .true.

@@ -1,3 +1,31 @@
+!       Program Name:  nos_creofs_wl_offset_correction.f
+!
+!       Technical Contact(s):   Name:  Aijun Zhang
+!                               Org:   NOS/CO-OPS/OD
+!                               Phone: 240-533-0591
+!                               E-Mail: aijun.zhang@noaa.gov
+!
+!       Abstract:  this program is used to ajust model water level at 
+!       open bounday with observed data in nos_ofs_nowcast_forecast.sh
+!
+!       Usage: nos_creofs_wl_offset_correction < tmpsta.ctl
+!
+!       History Log:
+!           03/27/2019 
+!
+!       Input files: (from tmpsta.ctl)
+!                  nos.creofs.wl.correction.ctl  
+!                  nos.creofs.hgrid.ll    
+!                  nos.creofs.station.info
+!                  nos.creofs.wl.correction.old                    
+!                  BUFF water level file from
+!                  /gpfs/tp1/nco/ops/dcom/us007003
+!
+!       Output files: 
+!                 nos.creofs.fields.wl_correction.dat 
+!               nos.creofs.stations.wl_correction.dat
+!
+
       parameter (NMAX=9000)
       include 'netcdf.inc'
       character*200 OFS,GRIDFILE_LL,STA_NETCDF_CTL,CORRECTION_OLD
@@ -225,8 +253,8 @@ C     initiate NTR
 700     FORMAT(A1,I4.4,2I2.2,A6)
         BUFRFILE=TRIM(NOSWLDIR)//trim(BUFRFILE)//trim(NOSBUFR) 
         INQUIRE(FILE=trim(BUFRFILE),EXIST=FEXIST)
-        IF(FEXIST) THEN
         print *,'BUFR FILE= ',trim(BUFRFILE)
+        IF(FEXIST) THEN
         LUNIN=11
 	CLOSE(LUNIN)
         OPEN(LUNIN,file=trim(BUFRFILE),FORM='UNFORMATTED')

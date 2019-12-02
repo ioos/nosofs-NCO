@@ -106,7 +106,7 @@ MODULE MOD_SOLAR
 !==============================================================================|
 
 !---------------------------------------------------------------------------
-      SUBROUTINE SOLAR(TA,DP,WS,CC,TWAT,CH,CD,RLATD,RLONG,IJD0,MONTH,HR,SURFLX,Q0)
+      SUBROUTINE SOLAR(TA,DP,WS,CC,TWAT,CH,CD,RLATD,RLONG,IJD0,MONTH,HR,SURFLX,Q0,HS,HL,RLN)
             
 
 !
@@ -201,7 +201,7 @@ MODULE MOD_SOLAR
   IMPLICIT NONE
       REAL(SP), INTENT(IN) :: TA,DP,WS,CC,TWAT,CH,CD,RLATD,RLONG,HR
       INTEGER, INTENT(IN) :: IJD0,MONTH
-      REAL(SP), INTENT(OUT) :: SURFLX,Q0
+      REAL(SP), INTENT(OUT) :: SURFLX,Q0,HL,HS,RLN
       LOGICAL DEW
       REAL(SP) :: CP, CW, SIGMA
       REAL(SP) :: SOLC,PHASE,TWOPI
@@ -211,7 +211,7 @@ MODULE MOD_SOLAR
       REAL(SP),DIMENSION(12,2) :: A0
       REAL(SP),DIMENSION(2) :: A1,A2,A3
       REAL(SP) :: C0,C1,C2,C3
-      REAL(SP) :: SC,SST,TAK,DPK,TWK,RHLAT,RHOA,ETW,EDP,QW,QA,HL,HS,RLN,GMT,DAY
+      REAL(SP) :: SC,SST,TAK,DPK,TWK,RHLAT,RHOA,ETW,EDP,QW,QA,GMT,DAY
       REAL(SP) :: ANGD,SIG,STHETA,ARCS,CTHETA,RM,HRANG,SINLAT,COSLAT,CST,SOL
       REAL(SP) :: SRCS,CLD,ALB,ALBEDO
       INTEGER :: JD,MONTHR,M,N
@@ -221,8 +221,7 @@ MODULE MOD_SOLAR
       DATA DEG/273.15/
       DATA ES, ED/0.0167238, .99986/
       DATA IMON/32,60,91,121,152,182,213,244,274,305,335,366/
-      DATA A0/10.,37.,62.,-6.,-84.,-157.,-180.,-164.,-103.,-61.,-12.,6.,-18.,10.,12.,-56.,-148.,-217.,-222.,-216., &
-            &  -178.,-106.,-59.,-50./
+      DATA A0/10.,37.,62.,-6.,-84.,-157.,-180.,-164.,-103.,-61.,-12.,6.,-18.,10.,12.,-56.,-148.,-217.,-222.,-216.,-178.,-106.,-59.,-50./
       DATA A1/2460., 2550./
       DATA A2/3010., 2800./
       DATA A3/-1750., -1580./
@@ -335,7 +334,9 @@ MODULE MOD_SOLAR
 !.
       IF(CST .LE. 0.) GOTO 30
       ALB=.045/CST
-      ALBEDO=0.
+      ALBEDO=ALB
+      !EJA - fixed assumed bug in ALBEDO - 05/03/2016
+      !ALBEDO=0.
       IF(ALB .GT. 1.) ALBEDO=1.
 !.  
       CLD=C0 +C1*SC +C2*SC*SC +C3*SC*SC*SC
@@ -512,13 +513,13 @@ MODULE MOD_SOLAR
       UST1 = 0.04 * UM
       H = ZM
       DTHETA = TD
-      IF (ABS(DTHETA) .LT. 1.E-7) DTHETA = SIGN(1.E-7_sp,DTHETA)
+      IF (ABS(DTHETA) .LT. 1.E-7) DTHETA = SIGN(1.E-7,DTHETA)
 !
 ! INITIAL GUESS FOR Z0
 !
       Z0 = .00459 * UST1 * UST1
       S = UM * UM * TBAR / (9.8*DTHETA)
-      IF (ABS(S) .GT. 1.E6) S = SIGN(1.E6_sp,S)
+      IF (ABS(S) .GT. 1.E6) S = SIGN(1.E6,S)
 # if defined (DOUBLE_PRECISION)
       X = DLOG(H/Z0)
 # else
@@ -534,7 +535,7 @@ MODULE MOD_SOLAR
 # else
         X = ALOG(H/Z0)
 # endif      
-        IF (ABS(FL) .GT. 500.) FL = SIGN(500.0_sp,FL)
+        IF (ABS(FL) .GT. 500.) FL = SIGN(500.,FL)
         IF (FL .GT. 0.) GO TO 20
 !
 ! UNSTABLE SECTION (L LT 0 OR DT LT 0)
@@ -553,7 +554,7 @@ MODULE MOD_SOLAR
           ARG2 = (1. - X1*Z0) ** (.25)
           B = LOG((ARG1 - 1.)*(ARG2 + 1.)/((ARG1 + 1.)*(ARG2 - 0.999999))) +2. * (ATAN(ARG1) - ATAN(ARG2))
           FL = S * A / (B*B)
-          IF (ABS(FL) .GT. 500.) FL = SIGN(500.0_sp,FL)
+          IF (ABS(FL) .GT. 500.) FL = SIGN(500.,FL)
           FLI = 1. / FL
    10   CONTINUE
         GO TO 50

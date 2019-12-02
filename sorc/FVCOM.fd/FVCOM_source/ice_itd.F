@@ -135,8 +135,17 @@
       endif
 
       rncat = real(ncat, kind=dbl_kind)
+#  if defined (ICE_FRESHWATER)
+! ayumi 20151112 & EJA 20160920 - thickness categories for the Great Lakes
+! (5 categories)
+!       d1 = 1.0_dbl_kind / rncat
+!       d2 = 0.5_dbl_kind / rncat
+      d1 = 0.25_dbl_kind / rncat
+      d2 = 0.75_dbl_kind / rncat
+#  else
       d1 = 3.0_dbl_kind / rncat
       d2 = 0.5_dbl_kind / rncat
+#  endif
 
       !-----------------------------------------------------------------
       ! Choose category boundaries based on one of two formulas.
@@ -289,7 +298,6 @@
 
       do ni = 1, ncat
 
-!DIR$ CONCURRENT !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
          do ij = 1, icells
@@ -303,7 +311,6 @@
          enddo                  ! ij
 
          do k = 1, nilyr
-!DIR$ CONCURRENT !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
             do ij = 1, icells
@@ -1083,7 +1090,6 @@
          enddo
          enddo
 
-!DIR$ CONCURRENT !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
          do ij = 1, icells
@@ -1122,7 +1128,6 @@
          enddo                  ! ij
 
          do k = 1, nilyr
-!DIR$ CONCURRENT !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
             do ij = 1, icells
@@ -1370,7 +1375,6 @@
       !-----------------------------------------------------------------
 
          do k = 1, nilyr
-!DIR$ CONCURRENT !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
             do ij = 1, icells
@@ -1386,7 +1390,6 @@
             enddo               ! ij
          enddo                  ! k
 
-!DIR$ CONCURRENT !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
          do ij = 1, icells

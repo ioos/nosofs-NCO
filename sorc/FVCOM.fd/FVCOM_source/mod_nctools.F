@@ -988,6 +988,7 @@ SUBROUTINE READ_ATT_TYPE(NCID,VARID,ATT)
 
   len=ATT%LEN
   write(clen,'(I4.4)') len
+  status = 1
   select case(ATT%XTYPE)
   case(NF90_BYTE)
      allocate(ATT%int(len),stat=status)
@@ -1093,6 +1094,7 @@ SUBROUTINE WRITE_ATT_TYPE(ncid,varid,ATT)
        & write(IPT,*) "START WRITE_ATT_TYPE"
 
   len=ATT%LEN
+  status=1
   select case(ATT%XTYPE)
   case(NF90_BYTE)
      status = nf90_put_att(NCID,VARID,&
@@ -6777,11 +6779,6 @@ SUBROUTINE NC_READ_VAR(VAR,STKCNT,STKRNG,IOSTART,IOCOUNT,IOSTRIDE,DEALERID,PARAL
   ! BASED ON CODE WRITE THE DATA
   errmsg="NC_READ_VAR: VARIABLE: "//VAR%varname//"; Can not be read by nf90_get_var!"
 
-  IF(DBG_SET(DBG_SBRIO)) THEN
-     write(IPT,*) "PT DEBUG: About to enter SELECT CASE(CODE)"
-     write(IPT,*) "PT DEBUG: CODE is :: ", CODE
-  END IF
-
   SELECT CASE(CODE)
 !********************************************************************
 ! =====   SCALAR FLOATING POINT DATA
@@ -6800,7 +6797,7 @@ SUBROUTINE NC_READ_VAR(VAR,STKCNT,STKRNG,IOSTART,IOCOUNT,IOSTRIDE,DEALERID,PARAL
            IF(size(VAR%FDA_FLT)==1) VAR%SCL_FLT=>VAR%FDA_FLT(1,1,1,1)
         ELSE        
            CALL PRINT_VAR(VAR)
-           CALL FATAL_ERROR("NC_READ_VAR: Variable objects SCL_FLT data is NOT associated!")
+           CALL FATAL_ERROR("NC_READ_VAR: Variable objects SCL_FLT data is NOT assocaited!")
         END IF
 
      END IF
@@ -9215,7 +9212,6 @@ END FUNCTION IS_VALID_FLOAT_SECONDS
   INTEGER ::  FRAME
   TYPE(TIME) :: CTIME
 
-
   IF (DBG_SET(DBG_SBRIO))THEN
      WRITE(IPT,*) "%%%%%%%%%%%% RECURSIVE_FILE_BRACK INPUT %%%%%%%%%%%%%%" 
      CALL PRINT_FTIME(FTM)
@@ -9252,10 +9248,10 @@ END FUNCTION IS_VALID_FLOAT_SECONDS
   ! IF PREV AND NEXT BRACK THE CURRENT VALUE
   IF( FTM%PREV_IO < NOW .AND. NOW < FTM%NEXT_IO ) THEN
 
-     IF (dbg_set(dbg_log)) write(IPT,*) "PREVIOUS AND NEXT BRACKET NOW"
+!     IF (dbg_set(dbg_log)) write(IPT,*) "PREVIOUS AND NEXT BRACKET NOW"
 
      IF(FTM%NEXT_STKCNT == FTM%PREV_STKCNT+1) THEN
-        IF (dbg_set(dbg_log)) write(IPT,*) "PREVIOUS AND NEXT ARE CONTIGUOUS FRAMES"
+!        IF (dbg_set(dbg_log)) write(IPT,*) "PREVIOUS AND NEXT ARE CONTIGUOUS FRAMES"
 
         STATUS = 0
         RETURN ! WE FOUND IT
@@ -9297,7 +9293,7 @@ END FUNCTION IS_VALID_FLOAT_SECONDS
      
   ELSE IF( FTM%PREV_IO == NOW ) THEN
 
-     IF (dbg_set(dbg_log)) write(IPT,*) "PREVIOUS EQUAL TO NOW"
+!     IF (dbg_set(dbg_log)) write(IPT,*) "PREVIOUS EQUAL TO NOW"
      ! WE HAVE THE ANSWER
      FTM%NEXT_STKCNT = FTM%PREV_STKCNT + 1
      FTM%NEXT_IO = GET_FILE_TIME(FTM,FTM%NEXT_STKCNT)
@@ -9307,7 +9303,7 @@ END FUNCTION IS_VALID_FLOAT_SECONDS
      
   ELSE IF( FTM%NEXT_IO == NOW ) THEN
      
-     IF (dbg_set(dbg_log)) write(IPT,*) "NEXT EQUAL TO NOW"
+!     IF (dbg_set(dbg_log)) write(IPT,*) "NEXT EQUAL TO NOW"
      ! WE HAVE THE ANSWER
      FTM%PREV_STKCNT = FTM%NEXT_STKCNT - 1
      FTM%PREV_IO = GET_FILE_TIME(FTM,FTM%PREV_STKCNT)
@@ -9317,7 +9313,7 @@ END FUNCTION IS_VALID_FLOAT_SECONDS
      
   ELSE IF( NOW > FTM%NEXT_IO ) THEN
 
-     IF (dbg_set(dbg_log)) write(IPT,*) "NOW GREATER THAN NEXT"
+!     IF (dbg_set(dbg_log)) write(IPT,*) "NOW GREATER THAN NEXT"
   
      IF (FTM%NEXT_STKCNT .GE. FTM%STK_LEN) THEN
         ! THE TIME EXCEEDS THE FILE TIME
@@ -9369,7 +9365,7 @@ END FUNCTION IS_VALID_FLOAT_SECONDS
       
   ELSE IF ( FTM%PREV_IO > NOW) THEN
 
-     IF (dbg_set(dbg_log)) write(IPT,*) "PREVIOUS GREATER THAN NOW"
+!     IF (dbg_set(dbg_log)) write(IPT,*) "PREVIOUS GREATER THAN NOW"
 
      IF (FTM%PREV_STKCNT .LE. 1) THEN
         ! THE TIME PRECEEDS THE FILE TIME
@@ -9692,14 +9688,6 @@ END SUBROUTINE UPDATE_FILE_BRACKET
              CALL NC_POINT_VAR(VNEXT,VARRP)              
              CALL INTERP_BILINEAR_P(VARRP,INTERP,VVECP)
           END IF
-
-        !  if(DBG_SET(dbg_sbr)) &
-        ! & write(IPT,*) "PT DEBUG: About to call NC_READ_VAR(VPREV,FTM%PREV_STKCNT)"
-
-        ! INTEGER VARID
-        ! CHARACTER(Len=NF90_MAX_NAME+1) VARNAME
-        !  if(DBG_SET(dbg_sbr)) &
-        ! & write(IPT,*) "PT DEBUG: ", VPREV%VARNAME," ", FTM%PREV_STKCNT
 
           CALL NC_READ_VAR(VPREV,FTM%PREV_STKCNT)
 

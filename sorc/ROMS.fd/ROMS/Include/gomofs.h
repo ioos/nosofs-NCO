@@ -6,7 +6,7 @@
 **   See License_ROMS.txt                                                    **
 *******************************************************************************
 **
-** Options for Gulf of Maine Operational Forecast System (GoMOFS)
+** Options for Gulf of Maine Operational Forecast System (GoMOFS) 
 **
 ** Application flag:   GoMOFS
 ** Input script:       nos.gomofs.roms.in
@@ -24,7 +24,7 @@
 #endif
 
 #define NONLIN_EOS
-
+ 
 #define UV_ADV
 #define UV_COR
 #define UV_QDRAG
@@ -51,7 +51,7 @@
 #define ADD_M2OBC        /* tidal currents  to processed OBC data */
 #undef  FSOBC_REDUCED   /* for computing press gradient; applied to the cases of _M2FLATHER, _M2REDUCED */
 
-#define GLS_MIXING
+#define GLS_MIXING 
 #undef MY25_MIXING
 
 #if defined MY25_MIXING || defined GLS_MIXING
@@ -62,7 +62,7 @@
 # undef OUT_DOUBLE
 #endif
 
-
+                                                                               
 #define ANA_BTFLUX
 
 #define BULK_FLUXES
@@ -70,6 +70,7 @@
 #define LONGWAVE_OUT
 #define SOLAR_SOURCE
 #define EMINUSP
+#define HDF5
 /*# define ANA_CLOUD
 # define ANA_RAIN */
 #else
@@ -85,7 +86,7 @@
 #define LIMIT_BSTRESS
 #undef LIMIT_VDIFF
 #undef LIMIT_VVISC
-
-#undef RAMP_TIDES
+ 
+#undef RAMP_TIDES      
 #define NO_LBC_ATT
 

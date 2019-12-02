@@ -19,8 +19,8 @@
 program combine_hotstart1
 !-------------------------------------------------------------------------------
   implicit real(8)(a-h,o-z),integer(i-n)
-  parameter(nbyte=1)
-! parameter(nbyte=4)
+! parameter(nbyte=1)
+  parameter(nbyte=4)
   character(12) :: it_char
   character(72) :: fgb,fgb2,fdb  ! Processor specific global output file name
   integer :: lfgb,lfdb       ! Length of processor specific global output file name

@@ -1,0 +1,18 @@
+ &NML_NETCDF_SURFACE
+ NCSF_ON = T,
+ NCSF_FIRST_OUT       = '2007-04-15 00:00:00'   ,
+ NCSF_OUT_INTERVAL    = 'seconds= 3600.0'       ,
+ NCSF_OUTPUT_STACK    = 0                       ,
+ NCSF_SUBDOMAIN_FILES = FVCOM                   ,
+ NCSF_GRID_METRICS    = T,
+ NCSF_FILE_DATE       = T,
+ NCSF_VELOCITY        = T,
+ NCSF_SALT_TEMP       = T,
+ NCSF_TURBULENCE      = T,
+ NCSF_WIND_VEL        = T,
+ NCSF_WIND_STRESS     = T,
+ NCSF_WAVE_PARA       = T,
+ NCSF_EVAP_PRECIP     = T,
+ NCSF_SURFACE_HEAT    = T
+ /
+ 

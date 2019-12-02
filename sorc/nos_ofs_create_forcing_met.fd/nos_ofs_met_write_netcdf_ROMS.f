@@ -1,4 +1,53 @@
-
+!       Program Name:  nos_ofs_met_write_netcdf_ROMS.f
+!       
+!       Technical Contact(s):   Name:  Aijun Zhang
+!                               Org:   NOS/CO-OPS/OD
+!                               Phone: 240-533-0591
+!                               E-Mail: aijun.zhang@noaa.gov
+!
+!       Abstract:  this subroutine is used to write surface meteological
+!       forcing into NetCDF format for those ROMS-based OFS
+!
+!       History Log:
+!           03/28/2019
+!
+!
+!       Usage: call write_netCDF_surfaceforcing_ROMS from
+!       nos_ofs_create_forcing_met.f
+!
+!       Argument Input: 
+!                netcdf_file - the output NetCDF file
+!                imode      - equals 1, 2, or 3 depending on netcdf_file
+!                             status
+!                ncid       - NetCDF file identity integer   
+!                IGRD       - indicator of horizontal interpolation method
+!                            =0: no interpolation
+!                            =1:  remesh using triangulation techniques
+!                            =2: bicubic routine from ROMS
+!                            =3: bilinear routine from ROMS
+!                            =4: nature neighbours
+!                IM         - Model grid index in x direction
+!                JM          - Model grid index in y direction
+!                base_date   - Base date for the NetCDF file  
+!                lon        - longitude at ROMS model grid
+!                lat        - latitude at ROMS model grid
+!                frc_time   - surface forcing time
+!                uwind      - u-component of 10m surface wind
+!                vwind      - v-component of 10m surface wind
+!                pair       - surface air pressure
+!                tair       - surface air temperature
+!                qair       - surface air relative humidity
+!                swrad      - Net solar shortwave radiation flux                      
+!                lwrad      - downward solar longwave radiation flux                 
+!                rain       - Precipation rate
+!                tcdc       - total cloud cover
+!                evp        - evaporation
+!                globalstr  - global attributes    
+!
+!      Argument Output:  
+!               netcdf_file - the output NetCDF file with values in targeted
+!               variables
+!
 !  lf95 write_surface_forcing.f -I/usr/local/include -L/usr/local/lib -lnetcdf -o write_surface_forcing.x
       subroutine write_netCDF_surfaceforcing_ROMS(netcdf_file,ncid,
      & imode,IGRD,IM,JM,base_date,lon,lat,frc_time,uwind,vwind,pair,

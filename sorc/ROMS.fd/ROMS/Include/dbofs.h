@@ -69,13 +69,17 @@
 
 #define BULK_FLUXES
 #ifdef BULK_FLUXES
-# define LONGWAVE_OUT
-# define ANA_CLOUD
-# define ANA_RAIN
+#define LONGWAVE_OUT
+#define ANA_CLOUD
+#define ANA_RAIN
 #else
-# define ANA_SMFLUX
-# define ANA_STFLUX
+#define ANA_SMFLUX
+#define ANA_STFLUX
 #endif
+
+#define SOLAR_SOURCE
+#define EMINUSP
+#define HDF5
 
 #define STATIONS
 #define LIMIT_STFLX_COOLING

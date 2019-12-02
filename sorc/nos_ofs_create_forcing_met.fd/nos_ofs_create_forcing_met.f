@@ -86,7 +86,7 @@ C ------------------------------------------------------------------------------
       real minlon,minlat,maxlat,maxlon
       real*8 jdays,jdaye,jbase_date,JULIAN,yearb,monthb,dayb,hourb
       real*8 jday,jday0,js_etss,je_etss
-      integer grbunit
+      integer grbunit,GRIDID
       real latsw,lonsw,LaD,LoV,dx_grb,LON_XX_P,LAT_XX_P
 cc allocatable variables for NCEP meteorological products (NAM, GFS, RTMA,etc.)
       real, allocatable :: uwind(:,:)
@@ -353,7 +353,7 @@ C  temporary array
       CALL rdgrb2dims(gribfile,lengrb,IM,JM,iret
      & ,latsw,lonsw,LaD,LoV,dx_grb,GRIDID)
       write(*,*)latsw,lonsw,LaD,LoV,dx_grb
-      write(*,*)'IM & JM= ',IM,JM
+      write(*,*)'IM & JM= ',IM,JM,GRIDID
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 cc allocate sizes of arrays for NCEP operational products 
 cc from control file
@@ -498,8 +498,8 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       ALLOCATE(maskm_e(ISUB+2,JSUB+2))
       ALLOCATE(IFILL(ISUB,JSUB))
       ALLOCATE(JFILL(ISUB,JSUB))
-      ALLOCATE(ISHORE(ISUB*JSUB/50))
-      ALLOCATE(JSHORE(ISUB*JSUB/50))
+C      ALLOCATE(ISHORE(ISUB*JSUB/50))
+C      ALLOCATE(JSHORE(ISUB*JSUB/50))
       DO J=1,JSUB
       DO I=1,ISUB
          maskm_e(I+1,J+1)=landsub(I,J)
@@ -515,27 +515,40 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
            maskm_e(1,J)=maskm_e(2,J)
            maskm_e(ISUB+2,J)=maskm_e(ISUB+1,J)
       ENDDO
-       NSHORE=0
-       DO J=2,JSUB+1
-       DO I=2,ISUB+1
+      NSHORE=0
+      DO J=2,JSUB+1
+      DO I=2,ISUB+1
            s=maskm_e(I-1,J-1)+maskm_e(I,J-1)+maskm_e(I+1,J-1)
      &      +maskm_e(I-1,J  )+maskm_e(I,J  )+maskm_e(I+1,J  )
      &      +maskm_e(I-1,J+1)+maskm_e(I,J+1)+maskm_e(I+1,J+1)
            if (maskm_e (I,J) .GT. 0.5 .AND. s .LT. 9 ) then 
               NSHORE=NSHORE+1
+           endif
+      ENDDO
+      ENDDO
+      ALLOCATE(ISHORE(NSHORE))
+      ALLOCATE(JSHORE(NSHORE))
+      NSHORE=0
+      DO J=2,JSUB+1
+      DO I=2,ISUB+1
+           s=maskm_e(I-1,J-1)+maskm_e(I,J-1)+maskm_e(I+1,J-1)
+     &      +maskm_e(I-1,J  )+maskm_e(I,J  )+maskm_e(I+1,J  )
+     &      +maskm_e(I-1,J+1)+maskm_e(I,J+1)+maskm_e(I+1,J+1)
+           if (maskm_e (I,J) .GT. 0.5 .AND. s .LT. 9 ) then
+              NSHORE=NSHORE+1
               ISHORE(NSHORE)=I-1
               JSHORE(NSHORE)=J-1
            endif
-       ENDDO
-       ENDDO
-       open(45,file='ShorePoints.dat')
-       DO I=1,NSHORE
-         write(45,*) ISHORE(I),JSHORE(I)
-       ENDDO
+      ENDDO
+      ENDDO
+      open(45,file='ShorePoints.dat')
+      DO I=1,NSHORE
+        write(45,*) ISHORE(I),JSHORE(I)
+      ENDDO
 
-       DO J=1,JSUB  ! find nearest coastal point for all land cells
-       DO I=1,ISUB
-          IF (landsub(I,J) .LT. 0.5) THEN
+      DO J=1,JSUB  ! find nearest coastal point for all land cells
+      DO I=1,ISUB
+        IF (landsub(I,J) .LT. 0.5) THEN
            DISTMIN=1.0E20
            DO N1=1,NSHORE
               DIST=(lonm(ISHORE(N1),JSHORE(N1))-lonm(I,J))**2
@@ -548,7 +561,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
            IFILL(I,J)=ISHORE(NS)
            JFILL(I,J)=JSHORE(NS)
            write(45,*) I, J, ISHORE(NS), JSHORE(NS)
-         ENDIF
+        ENDIF
       ENDDO
       ENDDO
       close(45)
@@ -689,7 +702,7 @@ c  max perturbation = 0.05 * grid size
 !        INQUIRE(FILE=TRIM(FNAME),EXIST=FEXIST)
 !        IF(FEXIST)tcdc_L = 1.
       ENDIF
-      IF( netlwrf_Ld .GT. 0.0 .AND. netswrf_L .GT. 0.0 .AND.
+      IF( netlwrf_L .GT. 0.0 .AND. netswrf_L .GT. 0.0 .AND.
      1    lhtfl_L .GT. 0.0 .AND. shtfl_L .GT. 0.0 )nflux_L = 1.
       	
       ITMP=pair_L+Uwind_L+Vwind_L+Tair_L+qair_L+dlwrf_L+dswrf_L	
@@ -1641,7 +1654,7 @@ C  calculate relative humility from dew point temperature according to formulas 
             DO J=1,JM
 	    DO I=1,IM
 	      READ(93,*)x,y,value
-              tmp1(i,j)=value !convert to milibar
+              tmp1(i,j)=value
             ENDDO
 	    ENDDO
             DO J=1,JSUB
@@ -1743,6 +1756,13 @@ C  calculate relative humility from dew point temperature according to formulas 
             IND_HOUR_END=INDEX(BUFFER,'hour')-1
             IND=INDEX(BUFFER,'-',BACK=.TRUE.)
             IF(IND .GT. 0)IND_HOUR=IND+1
+ 	    IF(IND .GT. 0)THEN
+	      READ(BUFFER(IND-2:IND-1),*)IHH1
+              READ(BUFFER(IND+1:IND+2),*)IHH
+              IDELT=IHH-IHH1
+            ELSE
+	      IDELT=1
+            ENDIF
 	    READ(BUFFER(IND_DATE:IND_DATE+9),'(I4,3I2)')IYR,IMM,IDD,ICYC
             IND=INDEX(BUFFER,'anl')
 	    IF(IND .GT. 0)THEN
@@ -1760,7 +1780,8 @@ C  calculate relative humility from dew point temperature according to formulas 
             DO J=1,JM
 	    DO I=1,IM
 	      READ(96,*)x,y,value
-              tmp1(i,j)=value !convert to milibar
+! EVP in NAM is in kg/m-2 (accumilated from IHH1 to IHH  and evap in ROMS is in kg m-2 second-1                         
+              tmp1(i,j)=value/(IDELT*3600)
             ENDDO
 	    ENDDO
             DO J=1,JSUB
@@ -1946,8 +1967,31 @@ C since Longitude is negative in west (minus 360), so the parameter Lov =LoV - 3
 !     &     (trim(DBASE) .EQ. 'NDFD').or.
 !     &	   (trim(DBASE) .EQ. 'RTMA').or.
 !     &     (trim(DBASE) .EQ. 'RUC') )THEN
-        IF ( (trim(DBASE) .NE. "GFS") .AND.
-     1       (trim(DBASE) .NE. "GFS25") )THEN
+
+!        IF ( (trim(DBASE) .NE. "GFS") .AND.
+!     1       (trim(DBASE) .NE. "GFS25") )THEN
+!            LON_XX_P=LoV -360.0
+C	    LAT_XX_P=LaD
+C	    ROTCON_P=sin(D2R*LAT_XX_P)
+C            DO J=1,JSUB
+C            DO I=1,ISUB
+C              if (uwind(i,j) .GT. -999.0 .AND.
+C     1            vwind(i,j) .GT. -999.0 )then
+C                 ANGLE=ROTCON_P*(lonsub(I,J)-LON_XX_P)*D2R
+C                 SINX2=SIN(ANGLE)
+C                 COSX2=COS(ANGLE)
+C                 ut=uwind(i,j)
+C                 vt=vwind(i,j)
+C                 Uwind(I,J)= COSX2 * ut + SINX2 * VT
+C                 Vwind(I,J)= -SINX2 * ut + COSX2 * VT
+C              else
+C                 Uwind(I,J)=-99999.9
+C                 Vwind(I,J)=-99999.9
+C              endif
+C            ENDDO
+C            ENDDO
+C	ENDIF  
+        IF (GRIDID .EQ. 30)THEN            !! for Lambert Conformal 
             LON_XX_P=LoV -360.0
 	    LAT_XX_P=LaD
 	    ROTCON_P=sin(D2R*LAT_XX_P)
@@ -1968,7 +2012,29 @@ C since Longitude is negative in west (minus 360), so the parameter Lov =LoV - 3
               endif
             ENDDO
             ENDDO
-	ENDIF  
+        ELSEIF (GRIDID .EQ. 20)THEN       !! polar stereographic grid AWIPS 242 for Alaska
+            write(*,*)'GRIDID= ',GRIDID
+            LON_XX_P=121.642615733049    !this is for sub-setted ciofs_NAM.grid2 from Eric Rogers
+            LAT_XX_P=314.793569453542
+            DO J=1,JSUB
+            DO I=1,ISUB
+              if (uwind(i,j) .GT. -999.0 .AND.
+     1            vwind(i,j) .GT. -999.0 )then
+                 FFID=LON_XX_P - I
+                 FFJD=LAT_XX_P - J
+                 FGU=uwind(i,j)
+                 FGV=vwind(i,j)
+                CALL W3FC07(FFID, FFJD, FGU, FGV, FU, FV)
+                 Uwind(I,J)= FU
+                 Vwind(I,J)= FV
+              else
+                 Uwind(I,J)=-99999.9
+                 Vwind(I,J)=-99999.9
+              endif
+            ENDDO
+            ENDDO
+
+        ENDIF
 
         DO J=1,JSUB !replace land values with closest coastal value
         DO I=1,ISUB
@@ -2357,7 +2423,7 @@ C since Longitude is negative in west (minus 360), so the parameter Lov =LoV - 3
             ENDIF
             IF (evp_L .GT. 0) THEN
             CALL INTERP_REGRID(iflag,ISUB,JSUB,lonsub,latsub,evp,
-     &           IROMS,JROMS,lonm,latm,ecpm,Iout,Jout,1) 	 
+     &           IROMS,JROMS,lonm,latm,evpm,Iout,Jout,1) 	 
             ENDIF
 
 	ELSEIF (IGRD .EQ. 4)THEN   !! spatial interpolation using nature neighbors
@@ -2810,6 +2876,7 @@ CC  Rotate u & v components to ROMS curvilinear grid (ROMS local coordinates)
       write(*,*)'idrttmp= ',gfld%idrtmpl
       write(*,*)'gfld%ipdtmpl= ',gfld%ipdtmpl
       write(*,*)'gfld%idsect= ',gfld%idsect
+      write(*,*)'gfld%igdtmpl= ',gfld%igdtmpl
       itemp = gfld%ipdtmpl(5)         ! indicator of model see ON388 Table A
       IF (gfld%idsect(1) == 7) THEN   !US NWS 
         IF (itemp == 83 .OR. itemp == 84) THEN
@@ -2850,6 +2917,7 @@ CC  Rotate u & v components to ROMS curvilinear grid (ROMS local coordinates)
       END IF
 
       IF (gfld%igdtnum == 0) THEN       ! Lat/Lon grid
+!        iproj_grb   = gfld%igdtnum
         nx_grb    = gfld%igdtmpl(8)
         ny_grb    = gfld%igdtmpl(9)
         dx_grb    = gfld%igdtmpl(17)/1.0E6  ! in degree
@@ -2875,15 +2943,15 @@ CC  Rotate u & v components to ROMS curvilinear grid (ROMS local coordinates)
         write(*,*)'igtmp= ',gfld%igdtmpl
 
       ELSE IF (gfld%igdtnum == 30) THEN ! Lambert Conformal Grid
-!    iproj_grb   = 2
+!        iproj_grb   = gfld%igdtnum
         nx_grb      = gfld%igdtmpl(8)
         ny_grb      = gfld%igdtmpl(9)
         latsw       = gfld%igdtmpl(10)/1.0E6  ! in degrees
         lonsw       = gfld%igdtmpl(11)/1.0E6  ! in degrees
         LaD      = gfld%igdtmpl(13)/1.0E6  ! in degrees
         LoV     = gfld%igdtmpl(14)/1.0E6  ! in degrees
-        dx_grb      = gfld%igdtmpl(15)/1.0E3  ! in degrees
-        dy_grb      = gfld%igdtmpl(16)/1.0E3  ! in degrees
+        dx_grb      = gfld%igdtmpl(15)/1.0E3  ! in meters
+        dy_grb      = gfld%igdtmpl(16)/1.0E3  ! in meters
         lattru1     = gfld%igdtmpl(19)/1.0E6  ! in degrees
         lattru2     = gfld%igdtmpl(20)/1.0E6  ! in degrees
         write(*,*)'nx & ny= ',nx_grb,ny_grb
@@ -2897,13 +2965,17 @@ CC  Rotate u & v components to ROMS curvilinear grid (ROMS local coordinates)
         ENDDO
         ENDDO
       ELSE IF (gfld%igdtnum == 20) THEN ! Polar-Stereographic Grid
-!    iproj_grb   = 1
+!        iproj_grb   = gfld%igdtnum
         nx_grb      = gfld%igdtmpl(8)
         ny_grb      = gfld%igdtmpl(9)
-!    lattru1     = 60.
-!    lattru2     = 91.
-!    latsw       = gfld%igdtmpl(10)
-!    lonsw       = gfld%igdtmpl(11)
+        latsw       = gfld%igdtmpl(10)/1.0E6  ! in degrees
+        lonsw       = gfld%igdtmpl(11)/1.0E6  ! in degrees
+        LaD      = gfld%igdtmpl(13)/1.0E6  ! in degrees
+        LoV     = gfld%igdtmpl(14)/1.0E6  ! in degrees
+        dx_grb      = gfld%igdtmpl(15)/1.0E3  ! in meters
+        dy_grb      = gfld%igdtmpl(16)/1.0E3  ! in meters
+        lattru1     = 60.
+        lattru2     = 91.
 
       ELSE
        WRITE(6,'(1x,a,I3)') 'Unkown projection: ',gfld%igdtnum

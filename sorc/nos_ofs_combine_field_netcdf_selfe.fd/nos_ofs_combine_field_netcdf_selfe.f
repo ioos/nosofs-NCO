@@ -31,7 +31,8 @@ program read_iwrite1
 
       implicit real(4)(a-h,o-z),integer(i-n)
       include 'netcdf.inc'
-      parameter(nbyte=1)
+!     parameter(nbyte=1)
+      parameter(nbyte=4)
       character*120 filename
       character*30 file63
       character*12 it_char
@@ -373,7 +374,10 @@ program read_iwrite1
         it_len=len_trim(it_char)  !length without trailing blanks
         fgb=it_char(1:it_len)//'_0000'; lfgb=len_trim(fgb);
         fgb2=fgb
-        irank=0
+!        irank=0
+!        irank=1                      ! based on Greg Seroka recommendation to make it work on WCOSS Phase 3
+! The following irank 3 is based on AJ's comment:make it stop creating the extra bad files on Phase 3 after removing the old *.o files and recompiled, 05/28/2019
+        irank=3                      
         file63=outfile(1)
         file63=adjustl(file63)
         write(fgb2(lfgb-3:lfgb),'(i4.4)') irank

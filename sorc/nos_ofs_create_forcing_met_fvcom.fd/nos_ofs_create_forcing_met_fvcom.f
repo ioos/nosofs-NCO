@@ -79,7 +79,7 @@ C ------------------------------------------------------------------------------
       character(len=8) :: pabbrev
       character(len=20) :: labbrev
       character(len=120) :: tabbrev
-      character*120 OFS*5,DBASE*10,DBASE_MET_NOW*10, OCEAN_MODEL*20
+      character*120 OFS,DBASE*10,DBASE_MET_NOW*10, OCEAN_MODEL*20
       character*120 header,BUFFER,GRIBFILE,GRIDFILE,OUTPUTFILE,FNAME
       character*120 OUTPUTFILE1,OUTPUTFILE2,OUTPUTFILE3
       character*26 Times(1)
@@ -87,7 +87,7 @@ C ------------------------------------------------------------------------------
       real minlon,minlat,maxlat,maxlon
       real*8 jdays,jdaye,jbase_date,JULIAN,yearb,monthb,dayb,hourb
       real*8 jday,jday0,js_etss,je_etss
-      integer grbunit
+      integer grbunit, GRIDID
       real latsw,lonsw,LaD,LoV,dx_grb,LON_XX_P,LAT_XX_P
 cc allocatable variables for NCEP meteorological products (NAM, GFS, RTMA,etc.)
       real, allocatable :: uwind(:,:)
@@ -549,6 +549,9 @@ c  max perturbation = 0.05 * grid size
       FNAME='PRMSL.'//trim(DBASE)
       INQUIRE(FILE=TRIM(FNAME),EXIST=FEXIST)
       IF(FEXIST)pair_L =1.
+      FNAME='PRES.'//trim(DBASE)
+      INQUIRE(FILE=TRIM(FNAME),EXIST=FEXIST)
+      IF(FEXIST)pair_L =1.
       FNAME='UGRD.'//trim(DBASE)
       INQUIRE(FILE=TRIM(FNAME),EXIST=FEXIST)
       IF(FEXIST)Uwind_L = 1.
@@ -571,7 +574,10 @@ c  max perturbation = 0.05 * grid size
       FNAME='DPT.'//trim(DBASE)
       INQUIRE(FILE=TRIM(FNAME),EXIST=FEXIST)
       IF(FEXIST)tdair_L = 1.
-  
+      FNAME='EVP.'//trim(DBASE)
+      INQUIRE(FILE=TRIM(FNAME),EXIST=FEXIST)
+      IF(FEXIST)evp_L = 1.
+      print *,'EVP_L=',evp_L
       FNAME='RH.'//trim(DBASE)
       INQUIRE(FILE=TRIM(FNAME),EXIST=FEXIST)
       IF(FEXIST)THEN
@@ -606,10 +612,6 @@ c  max perturbation = 0.05 * grid size
         INQUIRE(FILE=TRIM(FNAME),EXIST=FEXIST)
         IF(FEXIST)tcdc_L = 1.
         print *,'TCDC_L=',tcdc_L
-        FNAME='EVP.'//trim(DBASE)
-        INQUIRE(FILE=TRIM(FNAME),EXIST=FEXIST)
-        IF(FEXIST)evp_L = 1.
-        print *,'EVP_L=',evp_L
       ELSEIF( trim(DBASE) .EQ. "RUC" )THEN
         FNAME='NLWRS.'//trim(DBASE)
         INQUIRE(FILE=TRIM(FNAME),EXIST=FEXIST)
@@ -675,7 +677,7 @@ c  max perturbation = 0.05 * grid size
      &          IGRD,NODEm,NELEm,base_date,nv,lonm,latm,lonc,latc,
      &          time_start,Times(1),uwind_L,vwind_L,nflux_L,Tair_L,
      &          pair_L,netswrf_L,dlwrf_L,qair_L,tdair_L,
-     &          tcdc_L,globalstr)
+     &          tcdc_L,evp_L,prate_L,globalstr)
 
 !	   call nos_ofs_met_write_netcdf_FVCOM(OUTPUTFILE,ncid,1,
 !     &          IGRD,NODEm,NELEm,base_date,nv,lonm,latm,lonc,latc,
@@ -723,6 +725,10 @@ c  max perturbation = 0.05 * grid size
 	TIME=-9999.0
         FNAME='PRMSL.'//trim(DBASE)
         INQUIRE(FILE=TRIM(FNAME),EXIST=FEXIST,OPENED=FOPEN)
+        IF(.NOT.FEXIST)THEN
+          FNAME='PRES.'//trim(DBASE)
+          INQUIRE(FILE=TRIM(FNAME),EXIST=FEXIST,OPENED=FOPEN)
+        ENDIF  
 	IF(FEXIST .and. (.NOT. FOPEN))OPEN(81,file=trim(FNAME))
         IF(.NOT.FEXIST)THEN
             DO J=1,JSUB
@@ -1649,8 +1655,9 @@ C  calculate relative humility from dew point temperature according to formulas 
  	  IF(time0 .GE. time)THEN
             DO J=1,JM
 	    DO I=1,IM
+! PRATE in NAM is in kg/m2/s and precip in FVCOM is in m/s                         
 	      READ(93,*)x,y,value
-              tmp1(i,j)=value !convert to milibar
+              tmp1(i,j)=value*0.001 ! convert kg/m2/s to m/s for fvcom
             ENDDO
 	    ENDDO
             DO J=1,JSUB
@@ -1751,6 +1758,13 @@ C  calculate relative humility from dew point temperature according to formulas 
             IND_HOUR=IND+12
             IND_HOUR_END=INDEX(BUFFER,'hour')-1
             IND=INDEX(BUFFER,'-',BACK=.TRUE.)
+ 	    IF(IND .GT. 0)THEN
+	      READ(BUFFER(IND-2:IND-1),*)IHH1
+              READ(BUFFER(IND+1:IND+2),*)IHH
+              IDELT=IHH-IHH1
+            ELSE
+	      IDELT=1
+            ENDIF
             IF(IND .GT. 0)IND_HOUR=IND+1
 	    READ(BUFFER(IND_DATE:IND_DATE+9),'(I4,3I2)')IYR,IMM,IDD,ICYC
             IND=INDEX(BUFFER,'anl')
@@ -1770,7 +1784,9 @@ C  calculate relative humility from dew point temperature according to formulas 
             DO J=1,JM
 	    DO I=1,IM
 	      READ(96,*)x,y,value
-              tmp1(i,j)=value !convert to milibar
+! EVP in NAM is in kg/m-2 (accumulated from IHH1 to IHH  and evap in FVCOM is in m/s            
+              tmp1(i,j)=value*0.001/(IDELT*3600)
+              if(OFS .eq. 'lmhofs') tmp1(i,j)=value*0.001 !! MP
             ENDDO
 	    ENDDO
             DO J=1,JSUB
@@ -1967,9 +1983,9 @@ C since Longitude is negative in west (minus 360), so the parameter Lov =LoV - 3
 !     &     (trim(DBASE) .EQ. 'NDFD').or.
 !     &	   (trim(DBASE) .EQ. 'RTMA').or.
 !     &     (trim(DBASE) .EQ. 'RUC') )THEN
-        IF ( (trim(DBASE) .NE. "GFS") .AND.
-     1       (trim(DBASE) .NE. "GFS25") )THEN
-
+C        IF ( (trim(DBASE) .NE. "GFS") .AND.
+C     1       (trim(DBASE) .NE. "GFS25") )THEN
+        IF (GRIDID .eq. 30) THEN     !! for Lambert Conformal    
             LON_XX_P=LoV -360.0
 	    LAT_XX_P=LaD
 	    ROTCON_P=sin(D2R*LAT_XX_P)
@@ -1990,6 +2006,34 @@ C since Longitude is negative in west (minus 360), so the parameter Lov =LoV - 3
               endif
             ENDDO
             ENDDO
+        ELSEIF (GRIDID .EQ. 20)THEN   !! polar stereographic grid AWIPS 242 for Alaska
+            write(*,*)'GRIDID= ',GRIDID
+C            LON_XX_P=lonsw -360.0     !Longitute of North Pole
+C            LAT_XX_P=latsw            !Latitude of North Pole
+            LON_XX_P=121.642615733049    !this is for sub-setted ciofs_NAM.grid2 from Eric Rogers
+            LAT_XX_P=314.793569453542
+            DO J=1,JSUB
+            DO I=1,ISUB
+              if (uwind(i,j) .GT. -999.0 .AND.
+     1            vwind(i,j) .GT. -999.0 )then
+C                 FFID=LON_XX_P - lonsub(I,J)
+C                 FFJD=LAT_XX_P - latsub(I,J)
+                 FFID=LON_XX_P - I
+                 FFJD=LAT_XX_P - J
+                 FGU=uwind(i,j)
+                 FGV=vwind(i,j)
+                CALL W3FC07(FFID, FFJD, FGU, FGV, FU, FV)
+                 Uwind(I,J)= FU
+                 Vwind(I,J)= FV
+              else
+                 Uwind(I,J)=-99999.9
+                 Vwind(I,J)=-99999.9
+              endif
+            ENDDO
+            ENDDO
+
+
+
 	ENDIF  
         IF (IGRD .LE. 0 )THEN     !!  no spatial interpolation
 	   IF( (TIME .GT. TIME_START+0.001) .AND. (N .EQ. 1) )THEN  ! extra-interpolating to cover simulation period
@@ -2331,6 +2375,27 @@ C since Longitude is negative in west (minus 360), so the parameter Lov =LoV - 3
               call INTERP_REMESH(NTMP,oned1,oned2,oned3,
      *        NODEm,XOUT,YOUT,pratem,weightnodes,weights,1)
             ENDIF
+
+            IF (evp_L .gt. 0.0)then
+              NTMP=0
+              DO I=1,ISUB
+              DO J=1,JSUB
+                if (evp(I,J) .GT. -999.0)then
+                  NTMP=NTMP+1
+                  oned1(NTMP)=lonsub(i,j)
+                  oned2(NTMP)=latsub(i,j)
+                  oned3(NTMP)=evp(i,j)
+                endif
+              ENDDO
+              ENDDO
+              IF (NTMP0 .ne. NTMP)then
+                NTMP0=NTMP
+                call INTERP_REMESH(NTMP,oned1,oned2,oned3,
+     *          NODEm,XOUT,YOUT,evpm,weightnodes,weights,0)
+              ENDIF
+              call INTERP_REMESH(NTMP,oned1,oned2,oned3,
+     *        NODEm,XOUT,YOUT,evpm,weightnodes,weights,1)
+            ENDIF
 	ELSEIF (IGRD .EQ. 4)THEN   !! spatial interpolation using nature neighbors
             if (allocated(oned1)) deallocate(oned1)
             if (allocated(oned2)) deallocate(oned2)
@@ -2544,6 +2609,22 @@ C since Longitude is negative in west (minus 360), so the parameter Lov =LoV - 3
               call INTERP_NNEIGHBORS(NTMP,oned1,oned2,oned3,
      *        NODEm,XOUT,YOUT,pratem)
             ENDIF
+
+            IF (evp_L .gt. 0.0)then
+              NTMP=0
+              DO I=1,ISUB
+              DO J=1,JSUB
+                if (evp(I,J) .GT. -999.0)then
+                  NTMP=NTMP+1
+                  oned1(NTMP)=lonsub(i,j)
+                  oned2(NTMP)=latsub(i,j)
+                  oned3(NTMP)=evp(i,j)
+                endif
+              ENDDO
+              ENDDO
+              call INTERP_NNEIGHBORS(NTMP,oned1,oned2,oned3,
+     *        NODEm,XOUT,YOUT,evpm)
+            ENDIF
             IF (netswrf_L .gt. 0.0)then
               NTMP=0
               DO I=1,ISUB
@@ -2697,6 +2778,15 @@ C since Longitude is negative in west (minus 360), so the parameter Lov =LoV - 3
                pratem(I)=OUTM(I,1)
             ENDDO
           ENDIF
+
+          IF (evp_L .gt. 0.0)then
+            print *,'evp'
+            CALL INTERP_REGRID(iflag,ISUB,JSUB,lonsub,latsub,evp,
+     &        NODEm,1,dummy1,dummy2,outm,Iout,Jout,1)
+            DO I=1,NODEm
+               evpm(I)=OUTM(I,1)
+            ENDDO
+          ENDIF
 !!!!
 	ENDIF 
         print *,'spatial interpolation is completed'
@@ -2722,7 +2812,7 @@ C since Longitude is negative in west (minus 360), so the parameter Lov =LoV - 3
                 call nos_ofs_met_write_netcdf_FVCOM(OUTPUTFILE,ncid,2,
      &          IGRD,NODEm,NELEm,base_date,nv,lonm,latm,lonc,latc,
      &          Time,Times(1),uwindm,vwindm,nfluxm,Tairm,pairm,
-     &          netswrfm,dlwrfm,qairm,tdairm,tcdcm,globalstr)
+     &          netswrfm,dlwrfm,qairm,tdairm,tcdcm,evpm,pratem,globalstr)
 
              ELSEIF(trim(OCEAN_MODEL) .EQ. 'SELFE')THEN
                 WRITE(*,*)'IGRD > 0 is not developed for SELFE'
@@ -2776,7 +2866,7 @@ C since Longitude is negative in west (minus 360), so the parameter Lov =LoV - 3
                 call nos_ofs_met_write_netcdf_FVCOM(OUTPUTFILE,ncid,2,
      &          IGRD,NODEm,NELEm,base_date,nv,lonm,latm,lonc,latc,
      &          Time,Times(1),uwindm,vwindm,nfluxm,Tairm,pairm,
-     &          netswrfm,dlwrfm,qairm,tdairm,tcdcm,globalstr)
+     &          netswrfm,dlwrfm,qairm,tdairm,tcdcm,evpm,pratem,globalstr)
 
 
            ELSEIF(trim(OCEAN_MODEL) .EQ. 'SELFE')THEN
@@ -2828,7 +2918,7 @@ C since Longitude is negative in west (minus 360), so the parameter Lov =LoV - 3
                call nos_ofs_met_write_netcdf_FVCOM(OUTPUTFILE,ncid,2,
      &          IGRD,NODEm,NELEm,base_date,nv,lonm,latm,lonc,latc,
      &          Time,Times(1),uwindm,vwindm,nfluxm,Tairm,pairm,
-     &          netswrfm,dlwrfm,qairm,tdairm,tcdcm,globalstr)
+     &          netswrfm,dlwrfm,qairm,tdairm,tcdcm,evpm,pratem,globalstr)
 
              ELSEIF(trim(OCEAN_MODEL) .EQ. 'SELFE')THEN
                 WRITE(*,*)'IGRD > 0 is not developed for SELFE'
@@ -2870,7 +2960,7 @@ C since Longitude is negative in west (minus 360), so the parameter Lov =LoV - 3
                 call nos_ofs_met_write_netcdf_FVCOM(OUTPUTFILE,ncid,3,
      &          IGRD,NODEm,NELEm,base_date,nv,lonm,latm,lonc,latc,
      &          Time,Times(1),uwindm,vwindm,nfluxm,Tairm,pairm,
-     &          netswrfm,dlwrfm,qairm,tdairm,tcdcm,globalstr)
+     &          netswrfm,dlwrfm,qairm,tdairm,tcdcm,evpm,pratem,globalstr)
 
            ELSEIF(trim(OCEAN_MODEL) .EQ. 'SELFE')THEN
                 WRITE(*,*)'IGRD > 0 is not developed for SELFE'

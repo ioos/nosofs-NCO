@@ -200,7 +200,7 @@ C
       do j=1,37
         VPU(J)=VAU(J)
         XODE(J)=FFF(J)
-        WRITE(6,'(I2,2x,A10,1x,F12.7,2X,F5.1,2X,F6.4)')
+        WRITE(6,'(I2,2x,A10,1x,F12.7,2X,F6.1,2X,F9.4)')
      1  J, ALIST(J),A(J),VPU(J),XODE(J)
       end do
       yearb=IYR

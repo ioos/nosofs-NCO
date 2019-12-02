@@ -1,6 +1,6 @@
-# svn $Id: Linux-ifort.mk 680 2013-08-12 21:58:57Z arango $
+# svn $Id: Linux-ifort.mk 909 2018-06-23 22:06:04Z arango $
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# Copyright (c) 2002-2013 The ROMS/TOMS Group                           :::
+# Copyright (c) 2002-2018 The ROMS/TOMS Group                           :::
 #   Licensed under a MIT/X style license                                :::
 #   See License_ROMS.txt                                                :::
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -24,7 +24,9 @@
 # First the defaults
 #
                FC := $(COMP_F)
-           FFLAGS := -heap-arrays -fp-model precise
+#               FC := ifort
+           FFLAGS := -fp-model precise
+           FFLAGS += -heap-arrays
               CPP := /usr/bin/cpp
          CPPFLAGS := -P -traditional
           LDFLAGS :=
@@ -41,26 +43,20 @@
 #
 # Library locations, can be overridden by environment variables.
 #
-#ifdef USE_NETCDF4
-#        NC_CONFIG ?= nc-config
-#    NETCDF_INCDIR ?= $(shell $(NC_CONFIG) --prefix)/include
-#             LIBS := $(shell $(NC_CONFIG) --flibs)
-#else
-#    NETCDF_INCDIR ?= /usr/local/include
-#    NETCDF_LIBDIR ?= /usr/local/lib
-#             LIBS := -L$(NETCDF_LIBDIR) -lnetcdff
-#endif
 
 ifdef USE_NETCDF4
-        NC_CONFIG ?= nc-config
-    NETCDF_INCDIR ?= /usrx/local/NetCDF/4.2/serial/include
-    NETCDF_LIBDIR ?= /usrx/local/NetCDF/4.2/serial/lib
-      HDF5_LIBDIR ?= /usrx/local/HDF5/1.8.9/serial/lib
+        NF_CONFIG ?= nf-config
+    NETCDF_INCDIR ?= $(shell $(NF_CONFIG) --prefix)/include
+             LIBS := $(shell $(NF_CONFIG) --flibs)
 else
-    NETCDF_INCDIR ?= /usrx/local/NetCDF/4.2/serial/include
-    NETCDF_LIBDIR ?= /usrx/local/NetCDF/4.2/serial/lib
+#    NETCDF_INCDIR ?= /usr/local/include
+#    NETCDF_LIBDIR ?= /usr/local/lib
+#             LIBS := -L$(NETCDF_LIBDIR) -lnetcdf
+      NETCDF_INCDIR ?= /usrx/local/NetCDF/4.2/serial/include
+      NETCDF_LIBDIR ?= /usrx/local/NetCDF/4.2/serial/lib
+      LIBS := -L$(NETCDF_LIBDIR) -lnetcdff
 endif
-             LIBS := -L$(NETCDF_LIBDIR) -lnetcdff
+
 ifdef USE_ARPACK
  ifdef USE_MPI
    PARPACK_LIBDIR ?= /opt/intelsoft/PARPACK
@@ -73,7 +69,8 @@ endif
 ifdef USE_MPI
          CPPFLAGS += -DMPI
  ifdef USE_MPIF90
-               FC := mpfort
+               FC := mpif90
+#               FC := mpfort
  else
              LIBS += -lfmpi-pgi -lmpi-pgi
  endif
@@ -85,12 +82,19 @@ ifdef USE_OpenMP
 endif
 
 ifdef USE_DEBUG
-#          FFLAGS += -g -check bounds -traceback
-           FFLAGS += -g -check bounds -traceback -check uninit -warn interfaces,nouncalled -gen-interfaces
-#          FFLAGS += -g -check uninit -ftrapuv -traceback
+           FFLAGS += -g
+#          FFLAGS += -O3
+#          FFLAGS += -check all
+           FFLAGS += -check bounds
+           FFLAGS += -check uninit
+#          FFLAGS += -fp-stack-check
+           FFLAGS += -traceback
+           FFLAGS += -warn interfaces,nouncalled -gen-interfaces
+           FFLAGS += -Wl,-no_compact_unwind
 else
-           FFLAGS += -ip -O2
-           FFLAGS += -xSSE4.2 -lifcoremt -lirc   ## Lyon uses on jet
+           FFLAGS += -O3 -ftz -fast-transcendentals -no-prec-div -no-prec-sqrt -xHost
+#           FFLAGS += -check all
+#           FFLAGS += -xSSE4.2 -lifcoremt -lirc   ## Lyon uses on jet
 endif
 
 ifdef USE_MCT
@@ -101,11 +105,12 @@ ifdef USE_MCT
 endif
 
 ifdef USE_ESMF
+          ESMF_OS ?= $(OS)
       ESMF_SUBDIR := $(ESMF_OS).$(ESMF_COMPILER).$(ESMF_ABI).$(ESMF_COMM).$(ESMF_SITE)
       ESMF_MK_DIR ?= $(ESMF_DIR)/lib/lib$(ESMF_BOPT)/$(ESMF_SUBDIR)
                      include $(ESMF_MK_DIR)/esmf.mk
            FFLAGS += $(ESMF_F90COMPILEPATHS)
-             LIBS += $(ESMF_F90LINKPATHS) -lesmf -lC
+             LIBS += $(ESMF_F90LINKPATHS) $(ESMF_F90ESMFLINKLIBS)
 endif
 
        clean_list += ifc* work.pc*

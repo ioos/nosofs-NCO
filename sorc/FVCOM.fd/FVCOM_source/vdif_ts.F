@@ -137,7 +137,7 @@ SUBROUTINE VDIF_TS(NCON1,F)
 !-----------------------------------------------------------------------
 !  If net heat flux is cooling and SST is at freezing point or below
 !  then suppress further cooling. Note: net heat flux sign convention is that 
-!  positive means heating the ocean (J Wilkin - ROMS).
+!  positive (in FVCOM negitive - J. Qi) means heating the ocean (J Wilkin - ROMS).
 !-----------------------------------------------------------------------
 ! 
 !  Below the surface heat flux WFSURF is ZERO if cooling AND
@@ -147,7 +147,8 @@ SUBROUTINE VDIF_TS(NCON1,F)
 !    WFTMP3 = 0      if SST warmer than threshold (WFTMP1) - change nothing
 !    WFTMP3 = 1      if SST colder than threshold (WFTMP1)
 !
-!    0.5*(WFTMP2-ABS(WFTMP2)) = 0                        if flux is warming
+!    0.5*(WFTMP2-ABS(WFTMP2)) = 0                        if flux is warming in ROMS
+!    0.5*(WFTMP2+ABS(WFTMP2)) = 0                        if flux is warming
 !                             = WFSURF                   if flux is cooling 
 !
         WFTMP1=-2.0_SP              ! nominal SST threshold to cease cooling

@@ -507,14 +507,13 @@ void InitRandom(int seed)
 }
 
 /*************************************************************************
-* This function returns the log2(x)
+* This function returns the log22(x)
 **************************************************************************/
-/* This conflicts with standard C library log2 
-int log2(int a)
+int log22(int a)
 {
   int i;
 
   for (i=1; a > 1; i++, a = a>>1);
   return i-1;
 }
-*/
+

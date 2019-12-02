@@ -1,7 +1,67 @@
+!--------------------------------------------------------------------------
+!
+!  Program Name: nos_ofs_create_forcing_obc_fvcom_nest.fd/nos_ofs_obc_write_netcdf_fvcom.f
+!
+!  Contact: NOS/CO-OPS Aijun Zhang
+!           Phone: 240-533-0591   Email: aijun.zhang@noaa.gov
+!
+!  Abstract:  This is a SUBROUTINE to create a NetCDF file (imode=1),
+!           store the data to NetCDF file (imode=2), and close the
+!           NetCDF file (imode=3) for FVCOM-base OFS OBC forcing 
+!           (used for nesting to outer FVCOM OFS model, such as NEGOFS and  
+!           NWGOFS).  This subroutine is called by program
+!           nos_ofs_create_forcing_obc_fvcom_nest.f.
+!
+!       Error Codes:
+!           0  No Error
+!         -33  Not a NetCDF ID
+!         -34  Too many NetCDFs open
+!         -35  NetCDF file exists && NC_NOCLOBBER
+!         -36  Invalid Argument
+!         -37  Write to read only
+!         -38  Operation not allowed in data mode
+!         -39  Operation not allowed in define mode
+!         -40  Index exceeds dimension bound
+!         -41  NC_MAX_DIMS exceeded
+!         -42  String match to name in use
+!         -43  Attribute not found
+!         -44  NC_MAX_ATTRS exceeded
+!         -45  Not a netcdf data type
+!         -46  Invalid dimension id or name
+!         -47  NC_UNLIMITED in the wrong index
+!         -48  NC_MAX_VARS exceeded
+!         -49  Variable not found
+!         -50  Action prohibited on NC_GLOBAL varid
+!         -51  Not a netcdf file
+!         -52  In Fortran, string too short
+!         -53  NC_MAX_NAME exceeded
+!         -54  NC_UNLIMITED size already in use
+!         -55  nc_rec op when there are no record vars
+!         -56  Attempt to convert between text & numbers
+!         -57  Edge+start exceeds dimension bound
+!         -58  Illegal stride
+!         -59  Attribute or variable name contains illegal characters
+!         -60  Math result not representable
+!         -61  Memory allocation (malloc) failure
+!         -62  One or more variable sizes violate format constraints
+!         -63  Invalid dimension size
+!         -64  File likely truncated or possibly corrupted
+!         -65  Unknown axis type
+!
+!  History Log:
+!           03/28/2019
+!
+!  Usage:
+!    Input File:
+!          GRIDFILE: Model grid file which is provided at "fix" folder.
+!    Output File: NETCDF_FILE
+!          NETCDF_FILE: NetCDF file which provides OBC forcing data.
+!
       subroutine nos_ofs_write_netCDF_obc_fvcom(GRIDFILE,netcdf_file,
      & ncid,imode,time_len,node_len,nele_len,siglay_len,siglev_len,
      & base_date,Itime,Itime2,Times,h,lat,lon,latc,lonc,nv,siglay,
-     & siglev,zeta,temp,salinity,u,v,ua,va,partition,globalstr)
+     & siglev,zeta,temp,salinity,u,v,ua,va,partition,globalstr,
+     & heobc,siglay_ele)
       include 'netcdf.inc'
       CHARACTER*120 TEXT,CNAME,netcdf_file,GRIDFILE
       INTEGER LEN,base_date(4),intval(4),CORNER(4),COUNT(4)
@@ -59,6 +119,12 @@
       integer  Times_id
       integer  weight_cell_id
       integer  weight_node_id
+
+!  added by zheng on 04/04/2018
+      integer  he_id
+      integer  siglayele_id
+!  added by zheng on 04/04/2018
+
 * data variables
       character*26 Times(time_len)
       integer  Itime(time_len)
@@ -67,6 +133,11 @@
       real  time(time_len)
       real  h(node_len)
       real  hyw(node_len,siglev_len,time_len)
+
+!  added by zheng on 04/04/2018
+      real  heobc(nele_len)
+      real  siglay_ele(nele_len, siglay_len)
+!  added by zheng on 04/04/2018
 
       real  lat(node_len)
       real  lon(node_len)
@@ -91,7 +162,7 @@
       real  weight_node(node_len,time_len)
       real  weight_cell(nele_len,time_len)
 CCCCCCCCCCCCC 
-      write(*,*)'start writing OBC NetCDF'
+!      write(*,*)'start writing OBC NetCDF'
       if (imode.eq.1) then           ! Write the file message 
       nprocs=256
       DO I=1,node_len
@@ -144,6 +215,13 @@ CCCCCCCCCCCCC
       intval(1) = node_dim
       iret = nf_def_var(ncid, 'h', NF_REAL, 1,intval , h_id)
       call check_err(iret)
+
+!  added by zheng on 04/04/2018
+      intval(1) = nele_dim
+      iret = nf_def_var(ncid, 'h_center', NF_REAL, 1,intval, he_id)
+      call check_err(iret)
+!  added by zheng on 04/04/2018
+
       intval(3) = time_dim
       intval(2) = siglev_dim
       intval(1) = node_dim
@@ -182,6 +260,15 @@ CCCCCCCCCCCCC
       intval(1) = node_dim
       iret = nf_def_var(ncid, 'siglev', NF_REAL,2,intval,siglev_id)
       call check_err(iret)
+
+!  added by zheng on 04/04/2018
+      intval(2) = siglay_dim
+      intval(1) = nele_dim
+      iret=nf_def_var(ncid, 'siglay_center',NF_REAL,2,intval,
+     &   siglayele_id)
+      call check_err(iret)
+!  added by zheng on 04/04/2018
+
       intval(3) = time_dim
       intval(2) = siglay_dim
       intval(1) = node_dim
@@ -221,6 +308,7 @@ CCCCCCCCCCCCC
       iret = nf_def_var(ncid, 'weight_node', NF_REAL,2,intval,
      &  weight_node_id)
       call check_err(iret)
+
 * assign attributes
       WRITE(TEXT,'(a11,I4,3(a1,I2.2),a6)')'days since ',base_date(1),
      & '-',base_date(2),'-',base_date(3),' ',base_date(4),':00:00'
@@ -265,6 +353,7 @@ CCCCCCCCCCCCC
       LEN=LEN_TRIM(TEXT)
       iret = nf_put_att_text(ncid, Times_id, 'time_zone',
      &       LEN,TRIM(TEXT))
+
       iret = nf_put_att_text(ncid, h_id, 'long_name', 10, 'Bathymetry')
       call check_err(iret)
       iret = nf_put_att_text(ncid, h_id, 'standard_name', 27, 
@@ -280,6 +369,25 @@ CCCCCCCCCCCCC
       call check_err(iret)
       iret = nf_put_att_text(ncid, h_id, 'type', 4, 'data')
       call check_err(iret)
+
+!  added by zheng on 04/04/2018
+      iret = nf_put_att_text(ncid, he_id, 'long_name', 10, 'Bathymetry')
+      call check_err(iret)
+      iret = nf_put_att_text(ncid, he_id, 'standard_name', 27, 
+     1'sea_floor_depth_below_geoid')
+      call check_err(iret)
+      iret = nf_put_att_text(ncid, he_id, 'units', 1, 'm')
+      call check_err(iret)
+      iret = nf_put_att_text(ncid, he_id, 'positive', 4, 'down')
+      call check_err(iret)
+      iret = nf_put_att_text(ncid, he_id, 'grid', 15, 'Bathymetry_Mesh')
+      call check_err(iret)
+      iret = nf_put_att_text(ncid, he_id, 'coordinates', 9,'latc lonc')
+      call check_err(iret)
+      iret = nf_put_att_text(ncid, he_id, 'type', 4, 'data')
+      call check_err(iret)
+!  added by zheng on 04/04/2018
+
       iret = nf_put_att_text(ncid, hyw_id, 'long_name', 30, 
      1'hydro static vertical velocity')
       call check_err(iret)
@@ -355,6 +463,7 @@ CCCCCCCCCCCCC
       call check_err(iret)
       iret = nf_put_att_text(ncid, salinity_id, 'type', 4, 'data')
       call check_err(iret)
+
       iret = nf_put_att_text(ncid, siglay_id, 'long_name', 12, 
      1'Sigma Layers')
       call check_err(iret)
@@ -385,6 +494,25 @@ CCCCCCCCCCCCC
       iret = nf_put_att_text(ncid, siglev_id, 'formula_terms', 31, 
      1'sigma:siglay eta: zeta depth: h')
       call check_err(iret)
+ 
+!  added by zheng on 04/04/2018
+      iret = nf_put_att_text(ncid, siglayele_id, 'long_name', 12, 
+     1'Sigma Layers')
+      call check_err(iret)
+      iret = nf_put_att_text(ncid, siglayele_id, 'standard_name', 30,
+     1'ocean_sigma/general_coordinate')
+      call check_err(iret)
+      iret = nf_put_att_text(ncid, siglayele_id, 'positive', 2, 'up')
+      call check_err(iret)
+      iret = nf_put_att_text(ncid, siglayele_id, 'valid_min', 2, '-1')
+      call check_err(iret)
+      iret = nf_put_att_text(ncid, siglayele_id, 'valid_max', 1, '0')
+      call check_err(iret)
+      iret = nf_put_att_text(ncid, siglayele_id, 'formula_terms', 32, 
+     1'sigma: siglay eta: zeta depth: h')
+      call check_err(iret)
+!  added by zheng on 04/04/2018
+
       iret = nf_put_att_text(ncid, temp_id, 'long_name', 11, 
      1'temperature')
       call check_err(iret)
@@ -569,8 +697,12 @@ C Global Attributes
       iret=nf_put_vara_real(ncid,lon_id,CORNER,COUNT,lon)
       iret=nf_put_vara_real(ncid,x_id,CORNER,COUNT,x)
       iret=nf_put_vara_real(ncid,y_id,CORNER,COUNT,y)
+
       CORNER(1) = 1 
       COUNT(1)=nele_len
+!  added by zheng on 04/04/2018
+      iret=nf_put_vara_real(ncid,he_id,CORNER,COUNT,heOBC)
+!  added by zheng on 04/04/2018
       iret=nf_put_vara_real(ncid,latc_id,CORNER,COUNT,latc)
       iret=nf_put_vara_real(ncid,lonc_id,CORNER,COUNT,lonc)
       iret=nf_put_vara_real(ncid,xc_id,CORNER,COUNT,xc)
@@ -586,6 +718,13 @@ C Global Attributes
       COUNT(1)=node_len
       COUNT(2)=siglay_len
       iret=nf_put_vara_real(ncid,siglay_id,CORNER,COUNT,siglay)
+
+!  added by zheng on 04/04/2018
+      COUNT(1)=nele_len
+      COUNT(2)=siglay_len
+      iret=nf_put_vara_real(ncid,siglayele_id,CORNER,COUNT,siglay_ele)
+!  added by zheng on 04/04/2018
+
       CORNER(1) = 1
       CORNER(2) = 1
       COUNT(1)=node_len

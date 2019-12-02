@@ -945,10 +945,6 @@ END SUBROUTINE PRINT_FTIME
 !    VAR%VARNAME   = NAME
     VAR%VARNAME   = ' '
     VAR%XTYPE     = -1
-#if defined(CRAY_MOD1)
-! cray, ensure 0 STKCNT
-    VAR%CURR_STKCNT = 0
-#endif
     nullify(VAR%DIMS)
     nullify(VAR%ATTS)
 

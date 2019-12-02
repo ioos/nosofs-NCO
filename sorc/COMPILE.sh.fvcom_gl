@@ -1,0 +1,31 @@
+#!/bin/sh
+cd ..
+
+HOMEnos=`pwd`
+export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
+
+module purge
+printenv SHELL
+module use $HOMEnos/modulefiles
+module load nosofs
+module list 2>&1
+
+export SORCnos=$HOMEnos/sorc
+export EXECnos=$HOMEnos/exec
+export LIBnos=$HOMEnos/lib
+
+if [ ! -s $EXECnos ]
+then
+  mkdir -p $EXECnos
+fi
+export LIBnos=$HOMEnos/lib
+
+if [ ! -s $LIBnos ]
+then
+  mkdir -p $LIBnos
+fi
+
+cd $SORCnos/nos_ofs_create_forcing_obc_fvcom_gl.fd
+rm -f *.o *.a
+gmake -f makefile
+

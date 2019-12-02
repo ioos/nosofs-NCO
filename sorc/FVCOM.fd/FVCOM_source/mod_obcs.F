@@ -112,7 +112,12 @@ MODULE MOD_OBCS
   REAL(SP), ALLOCATABLE :: XFLUX_OBCN(:)
   REAL(SP), ALLOCATABLE :: UARD_OBCN(:)
   REAL(SP), ALLOCATABLE :: XFLUX_OBC(:,:)
-
+# if defined (ICE)
+! - begin afm 20171113 for ice open boundary -------------
+  REAL(SP), ALLOCATABLE :: UIARD_OBCN(:)
+  REAL(SP), ALLOCATABLE :: XFLUX_ICE_OBC(:)
+! - end afm 20171113 for ice open boundary -------------
+# endif
 
 CONTAINS
   !==========================================================================|
@@ -138,6 +143,12 @@ CONTAINS
     ALLOCATE(XFLUX_OBCN(IOBCN+1))    ;XFLUX_OBCN = ZERO
     ALLOCATE(UARD_OBCN(IOBCN+1))     ;UARD_OBCN  = ZERO
     ALLOCATE(XFLUX_OBC(IOBCN+1,KBM1));XFLUX_OBC  = ZERO
+#   if defined (ICE)
+! - begin afm 20171113 for ice open boundary -------------
+    ALLOCATE(UIARD_OBCN(IOBCN+1))     ;UIARD_OBCN  = ZERO
+    ALLOCATE(XFLUX_ICE_OBC(IOBCN+1))     ;XFLUX_ICE_OBC  = ZERO
+! - end afm 20171113 for ice open boundary -------------
+#   endif
 
     ALLOCATE(TEMP_OBC(IOBCN,KBM1))   ;TEMP_OBC   = ZERO
     ALLOCATE(SALT_OBC(IOBCN,KBM1))   ;SALT_OBC   = ZERO
@@ -145,7 +156,9 @@ CONTAINS
     ALLOCATE(WQM_OBC(IOBCN,KBM1,NB))   ;WQM_OBC   = ZERO
 #   endif
 #   if defined (BioGen)
-    ALLOCATE(BIO_OBC(IOBCN,KBM1,NTT))   ;BIO_OBC   = ZERO
+    IF(BIOLOGICAL_MODEL)THEN
+      ALLOCATE(BIO_OBC(IOBCN,KBM1,NTT));BIO_OBC   = ZERO
+    END IF
 #   endif
 
     IF(TYPE_TSOBC == 4)THEN
@@ -453,11 +466,9 @@ CONTAINS
 #  if defined (AIR_PRESSURE)
 !==============================================================================|
    USE ALL_VARS
-
-# if defined (MULTIPROCESSOR)
+#  if defined (MULTIPROCESSOR)
    USE MOD_PAR, ONLY : NC,AEXCHANGE
-# endif
-
+#  endif
    IMPLICIT NONE
 
    TYPE(TIME) :: NOW
@@ -470,16 +481,16 @@ CONTAINS
    NOW = IntTime
 # else
    NOW = ExtTime
-# endif
+#endif
 
 !==============================================================================|
 !   SURFACE AIR PRESSURE FORCING FOR INTERNAL MODE                                          !
 !==============================================================================|
    CALL UPDATE_AIRPRESSURE(NOW,PA_AIR)
 
-# if defined (MULTIPROCESSOR)
+#  if defined (MULTIPROCESSOR)
    IF(PAR)CALL AEXCHANGE(NC,MYID,NPROCS,PA_AIR)         
-# endif
+#  endif
 
 !!$   ELF_AIR = -(PA_AIR-SLP0)/(1025._SP*GRAV_N)
    ELF_AIR(1:MT) = -(PA_AIR(1:MT)-SLP0)/(1025._SP*GRAV_N(1:MT))
@@ -610,7 +621,7 @@ CONTAINS
   !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%|
 
   !==========================================================================|
-  SUBROUTINE BCOND_GWI
+  SUBROUTINE BCOND_GWI(K_RK)
 
     !--------------------------------------------------------------------------|
     !  GRAVITY-WAVE RADIATION IMPLICIT OPEN BOUNDARY CONDITION (GWI)           |
@@ -619,16 +630,28 @@ CONTAINS
     USE ALL_VARS
     IMPLICIT NONE
 
-    INTEGER :: I1,I2,J,JN
-    REAL(SP):: CC,CP
+    INTEGER :: I1,I2,J,JN,K_RK
+    REAL(SP):: CC,CP,ALPHA_RK_TMP
+
+    IF(K_RK == 0)THEN
+      ALPHA_RK_TMP = 1.0
+    ELSE
+      ALPHA_RK_TMP = ALPHA_RK(K_RK)
+    END IF
 
     DO J = 1,IBCN(3)
-       JN = OBC_LST(3,J)
-       I1 =  I_OBC_N(JN) 
-       I2 = NEXT_OBC(JN) 
-       CC = SQRT(GRAV_N(I1)*H(I1))*DTE/DLTN_OBC(JN)
-       CP = CC + 1.0_SP
-       ELF(I1) = (CC*ELF(I2) + EL(I1))/CP
+      JN = OBC_LST(3,J)
+      I1 =  I_OBC_N(JN) 
+      I2 = NEXT_OBC(JN) 
+#     if defined (SEMI_IMPLICIT)
+      CC = SQRT(GRAV_N(I1)*H(I1))*DTE/DLTN_OBC(JN)
+      CP = CC + 1.0_SP
+      ELF(I1) = (CC*ELF(I2) + EL(I1))/CP
+#     else
+      CC = SQRT(GRAV_N(I1)*H(I1))*DTE/DLTN_OBC(JN)*ALPHA_RK_TMP
+      CP = CC + 1.0_SP
+      ELF(I1) = (CC*ELF(I2) + ELRK(I1))/CP
+#     endif     
     END DO
 
     RETURN
@@ -639,7 +662,7 @@ CONTAINS
   !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%|
 
   !==========================================================================|
-  SUBROUTINE BCOND_BKI
+  SUBROUTINE BCOND_BKI(K_RK)
 
     !--------------------------------------------------------------------------|
     !  BLUMBERG AND KHANTA IMPLICIT OPEN BOUNDARY CONDITION                    |
@@ -648,17 +671,28 @@ CONTAINS
     USE ALL_VARS
     IMPLICIT NONE
 
-    INTEGER :: I1,I2,J,JN
-    REAL(SP):: CC,CP
+    INTEGER :: I1,I2,J,JN,K_RK
+    REAL(SP):: CC,CP,ALPHA_RK_TMP
+
+    IF(K_RK == 0)THEN
+      ALPHA_RK_TMP = 1.0
+    ELSE
+      ALPHA_RK_TMP = ALPHA_RK(K_RK)
+    END IF
 
     DO J = 1,IBCN(4)
-       JN = OBC_LST(4,J)
-       I1 = I_OBC_N(JN)
-       I2 = NEXT_OBC(JN)
-       CC = SQRT(GRAV_N(I1)*H(I1))*DTE/DLTN_OBC(JN)
-       CP = CC + 1.0_SP
-
-       ELF(I1) = (CC*ELF(I2) + EL(I1)*(1.0_SP-DTE/10800.0_SP))/CP
+      JN = OBC_LST(4,J)
+      I1 = I_OBC_N(JN)
+      I2 = NEXT_OBC(JN)
+#     if defined (SEMI_IMPLICIT)
+      CC = SQRT(GRAV_N(I1)*H(I1))*DTE/DLTN_OBC(JN)
+      CP = CC + 1.0_SP
+      ELF(I1) = (CC*ELF(I2) + EL(I1)*(1.0_SP-DTE/10800.0_SP))/CP
+#     else
+      CC = SQRT(GRAV_N(I1)*H(I1))*DTE/DLTN_OBC(JN)*ALPHA_RK_TMP
+      CP = CC + 1.0_SP
+      ELF(I1) = (CC*ELF(I2) + ELRK(I1)*(1.0_SP-DTE/10800.0_SP))/CP
+#     endif     
     END DO
 
     RETURN

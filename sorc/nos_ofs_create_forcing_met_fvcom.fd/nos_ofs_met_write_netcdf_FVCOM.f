@@ -1,9 +1,67 @@
+!       Subroutine Name:  nos_ofs_met_write_netcdf_FVCOM.f
+!
+!       Technical Contact(s):   Name:  Aijun Zhang
+!                               Org:   NOS/CO-OPS/OD
+!                               Phone: 240-533-0591
+!                               E-Mail: aijun.zhang@noaa.gov
+!
+!       Abstract:  this subroutine is used to write surface meteological
+!       forcing into NetCDF format for those FVCOM-based OFS
+!
+!       History Log:
+!           03/28/2019
+!
+!       Usage: call nos_ofs_met_write_netcdf_FVCOM from
+!       nos_ofs_create_forcing_met_fvcom.f
+!
+!       Argument Input:
+!                netcdf_file - the output NetCDF file
+!                ncid       - NetCDF file identity integer
+!                imode      - 1, 2, or 3 depending on netcdf_file status
+!                IGRD       - indicator of horizontal interpolation
+!                method
+!                            =0: no interpolation
+!                            =1:  remesh using triangulation techniques
+!                            =2: bicubic routine from ROMS
+!                            =3: bilinear routine from ROMS
+!                            =4: nature neighbours
+!
+!               node_len        - number of node
+!               nele_len        - number of element
+!               base_date       - Base date for the NetCDF file                                 
+!               nv              - nodes surrounding elements
+!               lon             - Nodal latitude
+!               lat             - Nodal longitude
+!               lonc            - zonal longitude
+!               latc            - zonal latitude
+!               fcst_time       - surface forcing time (real)
+!               Times           - surface forcing time (characters) 
+!               U10             - Eastward Wind Speed at 10m height
+!               V10             - Northward Wind Speed at 10m height
+!               net_heat_flux   - Surface Net Heat Flux
+!               air_temperature - Air Temperature
+!               air_pressure    - Air Pressure
+!               short_wave      - Net Short Wave Radiation
+!               long_wave       - Downward Long Wave Radiation
+!               relative_humidity       - surface air relative humidity
+!               dew_point       - Dew Point
+!               cloud_cover     - Cloud Cover
+!               evap            - evaporation
+!               precip          - precipitation
+!               globalstr       - global attributes       
+!       
+!       Argument Output:  
+!               netcdf_file     -  the output NetCDF file with values in
+!                               targete variables
+
+!
+
       subroutine nos_ofs_met_write_netcdf_FVCOM(netcdf_file,
      &  ncid,imode,IGRD,node_len,nele_len,base_date,nv,lon,
      &  lat,lonc,latc,fcst_time,Times,U10,V10,net_heat_flux,
      &  air_temperature,air_pressure,short_wave,long_wave,
-     &  relative_humidity,dew_point,cloud_cover,globalstr) 
-c
+     &  relative_humidity,dew_point,cloud_cover,evap,precip,globalstr) ! 
+
       include 'netcdf.inc'
       CHARACTER*80 TEXT,CNAME,netcdf_file
       INTEGER LEN,base_date(4),intval(4),CORNER(4),COUNT(4)
@@ -34,6 +92,7 @@ c variable ids
       integer  net_heat_flux_id, short_wave_id, long_wave_id 
       integer  air_pressure_id, air_temperature_id
       integer  relative_humidity_id, dew_point_id, cloud_cover_id
+      integer evap_id, precip_id
       
 c data variables
       integer Itime,Itime2
@@ -47,11 +106,14 @@ c data variables
       real air_pressure(node_len), air_temperature(node_len)
       real relative_humidity(node_len),dew_point(node_len)
       real cloud_cover(node_len)
+      real evap(node_len), precip(node_len)
 c
       logical U10_L,V10_L,net_heat_flux_L
       logical short_wave_L,long_wave_L,air_pressure_L,air_temperature_L
       logical relative_humidity_L, dew_point_L, cloud_cover_L
-      
+      logical evap_L, precip_L      
+
+
 C save all dimention id and variable id for next call
       save  node_dim,nele_dim,time_dim 
       save  Itime_id,Itime2_id,fcst_time_id,Times_id
@@ -63,12 +125,11 @@ C save all dimention id and variable id for next call
       save  U10_L,V10_L,net_heat_flux_L
       save  short_wave_L,long_wave_L,air_pressure_L,air_temperature_L
       save  relative_humidity_L, dew_point_L, cloud_cover_L
-
-c
+      save evap_id, precip_id
+      save evap_L, precip_L
 !       write(*,*) 'in write netCDF.... ncid=',ncid
       if (imode.eq.1) then           ! Write the file message 
-c
-       write(*,*) 'Start netCDF write, imode, ncid = ', imode, ncid 
+      write(*,*) 'Start netCDF write, imode, ncid = ', imode, ncid 
 C Set optional variable flags
       U10_L = .TRUE.
       V10_L = .TRUE.
@@ -80,7 +141,9 @@ C Set optional variable flags
       relative_humidity_L = .TRUE.
       dew_point_L = .TRUE.
       cloud_cover_L = .TRUE.
-  
+      evap_L = .TRUE.
+      precip_L = .TRUE.
+
       if(U10(1) .lt. 0.5)U10_L = .FALSE.
       if(V10(1) .lt. 0.5)V10_L = .FALSE.
       if(net_heat_flux(1) .lt. 0.5)net_heat_flux_L = .FALSE.
@@ -91,6 +154,8 @@ C Set optional variable flags
       if(relative_humidity(1) .lt. 0.5)relative_humidity_L = .FALSE.
       if(dew_point(1).lt. 0.5)dew_point_L = .FALSE.
       if(cloud_cover(1).lt. 0.5)cloud_cover_L = .FALSE. 
+!      if(evap(1) .lt. 0.5)evap_L = .FALSE.
+!      if(precip(1) .lt. 0.5)precip_L = .FALSE.
       
       status=nf_create(trim(netcdf_file), NF_CLOBBER, ncid)
       if (status .ne. NF_NOERR) then
@@ -491,8 +556,60 @@ c assign attributes
         call check_err(iret)
       iret = nf_put_att_text(ncid,cloud_cover_id,'type',4,
      1  'data')               
-      ENDIF             
-c
+      ENDIF
+
+
+      IF(evap_L) THEN
+      iret = nf_def_var(ncid,'evap',NF_REAL,2,
+     c   intval,evap_id)
+             call check_err(iret)
+      TEXT='Evaporation'
+      LEN=LEN_TRIM(TEXT)
+      iret=nf_put_att_text(ncid,evap_id, 'long_name',
+     &           len,TRIM(TEXT))
+         call check_err(iret)
+      iret=nf_put_att_text(ncid,evap_id,'units',5,'m s-1')
+           call check_err(iret)
+      TEXT='fvcom_grid'
+      LEN=LEN_TRIM(TEXT)
+      iret=nf_put_att_text(ncid,evap_id,'grid',LEN,
+     & TRIM(TEXT))
+          call check_err(iret)
+      TEXT='FVCOM Spheric coordinates'
+      LEN=LEN_TRIM(TEXT)
+      iret=nf_put_att_text(ncid,evap_id,
+     1 'coordinates',LEN, TRIM(TEXT))
+          call check_err(iret)
+      iret=nf_put_att_text(ncid,evap_id,'type',4,'data')
+          call check_err(iret)
+      ENDIF
+
+
+      IF(precip_L) THEN
+      iret = nf_def_var(ncid,'precip',NF_REAL,2,
+     c   intval,precip_id)
+             call check_err(iret)
+      TEXT='Precipitation'
+      LEN=LEN_TRIM(TEXT)
+      iret=nf_put_att_text(ncid,precip_id, 'long_name',
+     &           len,TRIM(TEXT))
+         call check_err(iret)
+      iret=nf_put_att_text(ncid,precip_id,'units',5,'m s-1')
+           call check_err(iret)
+      TEXT='fvcom_grid'
+      LEN=LEN_TRIM(TEXT)
+      iret=nf_put_att_text(ncid,precip_id,'grid',LEN,
+     & TRIM(TEXT))
+          call check_err(iret)
+      TEXT='FVCOM Spheric coordinates'
+      LEN=LEN_TRIM(TEXT)
+      iret=nf_put_att_text(ncid,precip_id,
+     1 'coordinates',LEN, TRIM(TEXT))
+          call check_err(iret)
+      iret=nf_put_att_text(ncid,precip_id,'type',4,'data')
+          call check_err(iret)
+      ENDIF
+
 C Global Attributes
       TEXT=trim(globalstr(1))
       LEN=LEN_TRIM(TEXT)
@@ -660,10 +777,26 @@ c
       ENDIF       
       write(*,*) 'in netCDF write.... end of imode= ', imode 
 
-      elseif (imode.eq.3) then             ! Close the netCDF  
+      IF(evap_L)THEN
+      status=nf_put_vara_real(ncid,evap_id,CORNER,
+     &             COUNT,evap)
+      call check_err(iret)
+      ENDIF
+
+      IF(precip_L)THEN
+      status=nf_put_vara_real(ncid,precip_id,CORNER,
+     &             COUNT,precip)
+      call check_err(iret)
+      ENDIF
+
+
+
+
+      elseif (imode.eq.3) then             ! Close the netCDF
         iret = nf_close(ncid)
-        write(*,*) ' The netCDF file is closed' 
+        write(*,*) ' The netCDF file is closed'
       endif
+
 
       return 
       end       

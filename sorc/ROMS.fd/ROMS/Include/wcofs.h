@@ -48,7 +48,7 @@
 #define LONGWAVE_OUT
 #define SOLAR_SOURCE
 #define EMINUSP
-
+#define HDF5
 #define MIX_S_TS
 #define MIX_S_UV
 

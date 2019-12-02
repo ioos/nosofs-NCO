@@ -1,3 +1,38 @@
+!       Subroutine Name: nos_ofs_nudging_write_netcdf_ROMS.f 
+!
+!       Technical Contact(s):   Name:  Aijun Zhang
+!                               Org:   NOS/CO-OPS/OD
+!                               Phone: 240-533-0591
+!                               E-Mail: aijun.zhang@noaa.gov
+!
+!       Abstract:  this subroutine is used to write averaged climatologic 
+!       variables into NetCDF format for ROMS-based OFS
+!
+!       History Log:
+!           03/28/2019
+!
+!       Usage: call write_netCDF_nudging_fields_ROMS from
+!               nos_ofs_create_forcing_nudg.f 
+!
+!       Argument Input:
+!                netcdf_file - the output NetCDF file
+!                ncid       - NetCDF file identity integer
+!                imode      - 1, 2, or 3 depending on netcdf_file status
+!                IM         - number of grid point in x direction                 
+!                JM         - number of grid point in y direction
+!                KM         -  Number of vertical levels for temperature and salinity of the OFS
+!                NTm        -  Number of time record
+!               base_date   - Base date for the NetCDF file
+!               ocean_time  - time in days (real) since reference time
+!               temp            - potential temperature
+!               salt            - salinity
+!                globalstr       - global attributes
+!       
+!       Argument Output:
+!               netcdf_file - the output NetCDF file with values in targeted
+!               variables
+!
+!               
 
 !  lf95 write_surface_forcing.f -I/usr/local/include -L/usr/local/lib -lnetcdf -o write_surface_forcing.x
       subroutine write_netCDF_nudging_fields_ROMS(netcdf_file,ncid,

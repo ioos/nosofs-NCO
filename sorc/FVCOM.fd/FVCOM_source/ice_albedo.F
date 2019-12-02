@@ -166,7 +166,6 @@
       !-----------------------------------------------------------------
 
       do ni = 1, ncat
-!cdir$ ivdep      !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
          do ij = 1, icells
@@ -237,7 +236,6 @@
       enddo
 
       do ni = 1, ncat
-!cdir$ ivdep      !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
          do ij = 1, icells
@@ -252,7 +250,6 @@
          enddo                  ! ij
       enddo                     ! ncat
 
-!cdir$ ivdep      !Cray
 !cdir nodep      !NEC
 !ocl novrec      !Fujitsu
       do ij = 1, icells

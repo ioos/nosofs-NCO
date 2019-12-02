@@ -208,7 +208,7 @@ allocatable :: tr_tc(:,:),tr_tl(:,:)
 # ifdef SED_MORPH
 allocatable :: dhnd(:),bed_thick(:,:)
 # endif
-# endif USE_SED
+# endif
 
 # ifdef USE_OIL
 # endif
@@ -610,7 +610,7 @@ edge_angle(1,1:npa)=swild(1:npa)
 swild(1:npa)=edge_angle(2,1:npa)
 call exchange_p2d(swild)
 edge_angle(2,1:npa)=swild(1:npa)
-# endif USE_WWM
+# endif
 
 open(31,file='bctides.in',status='old')
 read(31,'(a48)') start_time
@@ -1684,7 +1684,7 @@ variable_nm(indx2+1+ntracers+i)='Bedlv #'//trim(ifile_char)
 variable_dim(indx2+1+ntracers+i)='2D scalar'
 enddo
 indx2=indx2+1+2*ntracers
-#endif USE_SED
+#endif
 
 #ifdef USE_NAPZD
 outfile(indx2+1)='Bbdf.63'
@@ -1694,7 +1694,7 @@ outfile(indx2+2)='totN.63'
 variable_nm(indx2+2)='Total Nitrogyn'
 variable_dim(indx2+2)='3D scalar'
 indx2=indx2+2
-#endif USE_NAPZD
+#endif
 
 #ifdef USE_WWM
 outfile(indx2+1)='Hsig.61'
@@ -1704,7 +1704,7 @@ outfile(indx2+2)='WavD.61'
 variable_nm(indx2+2)='Mean wave dir. (deg)'
 variable_dim(indx2+2)='2D scalar'
 indx2=indx2+2
-#endif USE_WWM
+#endif
 
 if(indx2/=noutput) then
 write(errmsg,*)'MAIN: mismatch (1):',indx2,noutput
@@ -2188,7 +2188,7 @@ iharind=NFREQ*(NHAGE+NHAGV)
 if (iharind.GT.0) iharind=1
 close(31)
 endif
-#endif USE_HA
+#endif
 
 if(myrank==0) write(16,*)'s2_mxnbt in param.in =',s2_mxnbt
 
@@ -2342,7 +2342,7 @@ if(nstep_wwm<1) then
 write(errmsg,*)'Wrong coupling interval:',nstep_wwm
 call parallel_abort(errmsg)
 endif
-# endif USE_WWM
+# endif
 
 if(lm2d) then
 if(ntracers/=0.or.nonhydro==1.or.ihorcon/=0.or.ihdif/=0.or. &
@@ -2524,7 +2524,7 @@ enddo
 
 if(myrank==0) write(16,*) 'Reading sediment model parameters inputs...'
 call read_sed_input
-# endif USE_SED
+# endif
 
 case(2)
 if(myrank==0) write(16,*) 'Ecological model invoked'
@@ -2656,7 +2656,7 @@ Tair=swild(5)
 cloud=swild(6)
 close(31)
 endif
-# endif USE_ECO
+# endif
 case(3)
 call parallel_abort('Oil spill model under consruction')
 case(4)
@@ -2671,7 +2671,7 @@ call get_param('sim_minute',1,minutes,tmp,stringvalue)
 call get_param('sim_second',2,itmp,seconds,stringvalue)
 if(myrank==0) write(16,*)'reading inputs from NAPZD model'
 call read_napzd_input
-# endif USE_NAPZD
+# endif
 case default
 call parallel_abort('Unknown tracer model')
 end select
@@ -2899,7 +2899,7 @@ XVELVA=0.D0
 YVELVA=0.D0
 ENDIF
 ENDIF
-#endif USE_HA
+#endif
 
 endif
 
@@ -3025,7 +3025,7 @@ ENDIF
 ENDIF
 ENDIF
 ENDIF
-#endif USE_HA
+#endif
 
 close(36)
 
@@ -3129,7 +3129,7 @@ trel0(1,:,i)=20.0*ft1+trel0(1,:,i)*(1.0-ft1);
 endif
 trel(1,:,i)=trel0(1,:,i)
 enddo
-# endif USE_NAPZD
+# endif
 
 
 if(ihot<=1) ifile=1
@@ -3287,7 +3287,7 @@ call sed_init( &
 #endif
 & )
 
-# endif USE_SED
+# endif
 
 
 
@@ -3436,7 +3436,7 @@ endif
 a_4 = transfer(source=floatout,mold=a_4)
 write(ichan(j),"(a4)",advance="no") a_4
 endif
-# endif USE_SED
+# endif
 
 # ifdef USE_NAPZD
 if(j<=indx_out(2,2)) then
@@ -3450,7 +3450,7 @@ a_4 = transfer(source=floatout,mold=a_4)
 write(ichan(j),"(a4)",advance="no") a_4
 enddo
 endif
-# endif USE_NAPZD
+# endif
 
 # ifdef USE_WWM
 if(j<=indx_out(3,2)) then
@@ -3462,7 +3462,7 @@ endif
 a_4 = transfer(source=floatout,mold=a_4)
 write(ichan(j),"(a4)",advance="no") a_4
 endif
-# endif USE_WWM
+# endif
 endif
 enddo
 
@@ -3692,7 +3692,7 @@ open(32,file=trim(fdb),status='unknown')
 write(32,*)'Drag coefficents for nchi=1'
 write(32,*)nsa
 do i=1,nsa
-write(32,'(i6,2e14.6,1x,e9.3)')i,xcj(i),ycj(i),Cd(i)
+write(32,'(i6,2e15.6,1x,e12.3)')i,xcj(i),ycj(i),Cd(i)
 enddo
 close(32)
 endif
@@ -4009,7 +4009,7 @@ endif
 if(nettype2>0) then
 read(54,rec=it) floatout,(a2th(1,1,i),i=1,nnode_et)
 if(it==iths+1.and.abs(floatout-time)>1.e-4) then
-write(errmsg,*)'Starting time wrong for eta 2',it,floatout
+write(errmsg,*)'Starting time wrong for eta 2',it,floatout,time
 call parallel_abort(errmsg)
 endif
 
@@ -4261,7 +4261,7 @@ write(12,*)'R.S. in WWM:',it,wwave_force
 write(12,*)'Max. & min. R.S. from WWM (m/s/s):',it,maxval(wwave_force),minval(wwave_force)
 endif
 
-# endif USE_WWM
+# endif
 
       if(iupwind_t==0) then
         do i=1,npa
@@ -5494,7 +5494,7 @@ hat_gam_y=sdbtv+dt*(-dprdy/rho0+0.69*grav*detpdy)- &
 # ifdef USE_WWM
 hat_gam_x=hat_gam_x+dt*wwave_force(1,isd,1)
 hat_gam_y=hat_gam_y+dt*wwave_force(1,isd,2)
-# endif USE_WWM
+# endif
 del=hhat(isd)**2+(theta2*cori(isd)*dt*htot)**2
 gam_x=(hhat(isd)*htot*hat_gam_x+theta2*cori(isd)*htot*htot*dt*hat_gam_y)/del
 gam_y=(hhat(isd)*htot*hat_gam_y-theta2*cori(isd)*htot*htot*dt*hat_gam_x)/del
@@ -5537,7 +5537,7 @@ enddo
 ghat1(i,1)=ghat1(i,1)+dt*rs1
 ghat1(i,2)=ghat1(i,2)+dt*rs2
 endif
-# endif USE_WWM
+# endif
 
 if(ibc==0) then
 if(prho(1,nm(i,1))<-98.or.prho(1,nm(i,2))<-98.or.prho(1,nm(i,3))<-98) then
@@ -5999,7 +5999,7 @@ hat_gam_y=sdbt(2,1,j)+dt*(-dpr_dy(j)/rho0+0.69*grav*detp_dy(j))- &
 # ifdef USE_WWM
 hat_gam_x=hat_gam_x+dt*wwave_force(1,j,1)
 hat_gam_y=hat_gam_y+dt*wwave_force(1,j,2)
-# endif USE_WWM
+# endif
 hat_gam_x=hat_gam_x-grav*thetai*dt*deta2_dx(j)
 hat_gam_y=hat_gam_y-grav*thetai*dt*deta2_dy(j)
 su2(1,j)=(hhat(j)*htot*hat_gam_x+theta2*cori(j)*dt*htot*htot*hat_gam_y)/del
@@ -6103,7 +6103,7 @@ if(k<nvrt) rrhs(kin,1:2)=rrhs(kin,1:2)+dzz(k+1)/6*dt* &
 &(2*wwave_force(k,j,1:2)+wwave_force(k+1,j,1:2))
 if(k>kbs(j)+1) rrhs(kin,1:2)=rrhs(kin,1:2)+dzz(k)/6*dt* &
 &(2*wwave_force(k,j,1:2)+wwave_force(k-1,j,1:2))
-# endif USE_WWM
+# endif
 enddo
 
 call tridag(nvrt,100,ndim,2,alow,bdia,cupp,rrhs,soln,gam)
@@ -7541,7 +7541,7 @@ CALL sediment(nvrt,nea,npa,mntr,time,it &
 # endif
 & )
 
-# endif USE_SED
+# endif
 if(myrank==0) write(16,*) 'done sediment model...'
 
 case(2)
@@ -7571,7 +7571,7 @@ flx_sf = 0.d0
 if(myrank==0) write(16,*) 'entering NAPZD model....'
 call napzd_spitz(nea,npa,nvrt,ntracers,ntracers2,srad_e)
 if(myrank==0) write(16,*) 'done NAPZD preparation....'
-#endif USE_NAPZD
+#endif
 case default
 call parallel_abort('Unknown tracer model (9)')
 end select
@@ -7690,7 +7690,7 @@ endif
 enddo
 enddo
 
-#endif USE_NAPZD
+#endif
 
 endif
 
@@ -8098,7 +8098,7 @@ endif
 a_4 = transfer(source=floatout,mold=a_4)
 write(ichan(j),"(a4)",advance="no") a_4
 endif
-# endif USE_SED
+# endif
 
 # ifdef USE_NAPZD
 if(j<=indx_out(2,2)) then
@@ -8112,7 +8112,7 @@ a_4 = transfer(source=floatout,mold=a_4)
 write(ichan(j),"(a4)",advance="no") a_4
 enddo
 endif
-# endif USE_NAPZD
+# endif
 
 # ifdef USE_WWM
 if(j<=indx_out(3,2)) then
@@ -8124,7 +8124,7 @@ endif
 a_4 = transfer(source=floatout,mold=a_4)
 write(ichan(j),"(a4)",advance="no") a_4
 endif
-# endif USE_WWM
+# endif
 endif
 enddo
 
@@ -8295,7 +8295,7 @@ END DO
 ENDIF
 endif
 ENDIF
-#endif USE_HA
+#endif
 
 #ifdef INCLUDE_TIMING
 wtmp2=mpi_wtime()
@@ -8358,7 +8358,7 @@ ENDIF
 ENDIF
 endif
 close(36)
-#endif USE_HA
+#endif
 
 if(myrank==0) write(16,*) 'hot start written',it,time,ifile
 endif
@@ -8383,7 +8383,7 @@ write(fdb(lfdb-3:lfdb),'(i4.4)') myrank
 open(10,file='outputs/'//fdb,status='replace')
 write(10,*)np,nproc
 do i=1,np
-write(10,'(i10,2(1x,e20.14),1x,e9.3)')iplg(i),xnd(i),ynd(i),elevmax(i)
+write(10,'(i10,2(1x,e21.14),1x,e12.3)')iplg(i),xnd(i),ynd(i),elevmax(i)
 enddo
 close(10)
 
@@ -8415,7 +8415,7 @@ write(12,*)'myrank=',myrank,TIMEBEG,ITMV,dt
 IF(NHAGE.EQ.1) CALL LSQSOLEG(np,ELAV,ELVA,CHARMV,myrank,TIMEBEG,DT,FMV,NTSTEPS,ITMV)
 IF(NHAGV.EQ.1) CALL LSQSOLVG(np,XVELAV,YVELAV,XVELVA,YVELVA,CHARMV,myrank,TIMEBEG,DT,FMV,NTSTEPS,ITMV)
 ENDIF
-#endif USE_HA
+#endif
 
 
 #ifdef INCLUDE_TIMING

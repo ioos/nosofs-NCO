@@ -1,0 +1,556 @@
+mpcc -c -O3   -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  func_pointer.c
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_prec.F > mod_prec.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_prec.f90
+\rm mod_prec.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               sinter.F > sinter.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  sinter.f90
+\rm sinter.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_types.F > mod_types.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_types.f90
+\rm mod_types.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_time.F > mod_time.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_time.f90
+\rm mod_time.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_main.F > mod_main.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_main.f90
+\rm mod_main.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_spherical.F > mod_spherical.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_spherical.f90
+\rm mod_spherical.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               swmod1.F > swmod1.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  swmod1.f90
+\rm swmod1.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_utils.F > mod_utils.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_utils.f90
+\rm mod_utils.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_clock.F > mod_clock.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_clock.f90
+\rm mod_clock.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               eqs_of_state.F > eqs_of_state.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  eqs_of_state.f90
+\rm eqs_of_state.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_bulk.F > mod_bulk.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_bulk.f90
+\rm mod_bulk.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_interp.F > mod_interp.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_interp.f90
+\rm mod_interp.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_par.F > mod_par.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_par.f90
+\rm mod_par.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_par_special.F > mod_par_special.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_par_special.f90
+\rm mod_par_special.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_ncll.F > mod_ncll.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_ncll.f90
+\rm mod_ncll.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_nctools.F > mod_nctools.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_nctools.f90
+\rm mod_nctools.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_wd.F > mod_wd.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_wd.f90
+\rm mod_wd.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_sng.F > mod_sng.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_sng.f90
+\rm mod_sng.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_heatflux.F > mod_heatflux.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_heatflux.f90
+\rm mod_heatflux.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_solar.F > mod_solar.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_solar.f90
+\rm mod_solar.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_input.F > mod_input.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_input.f90
+\rm mod_input.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_force.F > mod_force.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_force.f90
+\rm mod_force.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_obcs.F > mod_obcs.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_obcs.f90
+\rm mod_obcs.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_petsc.F > mod_petsc.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_petsc.f90
+\rm mod_petsc.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_dam.F > mod_dam.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_dam.f90
+\rm mod_dam.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_northpole.F > mod_northpole.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_northpole.f90
+\rm mod_northpole.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_semi_implicit.F > mod_semi_implicit.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_semi_implicit.f90
+\rm mod_semi_implicit.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_non_hydro.F > mod_non_hydro.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_non_hydro.f90
+\rm mod_non_hydro.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_main_wave.F > mod_main_wave.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_main_wave.f90
+\rm mod_main_wave.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_set_time.F > mod_set_time.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_set_time.f90
+\rm mod_set_time.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_kinds_mod.F > ice_kinds_mod.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_kinds_mod.f90
+\rm ice_kinds_mod.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_model_size.F > ice_model_size.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_model_size.f90
+\rm ice_model_size.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_domain.F > ice_domain.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_domain.f90
+\rm ice_domain.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_constants.F > ice_constants.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_constants.f90
+\rm ice_constants.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_fileunits.F > ice_fileunits.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_fileunits.f90
+\rm ice_fileunits.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_state.F > ice_state.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_state.f90
+\rm ice_state.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_work.F > ice_work.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_work.f90
+\rm ice_work.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_grid.F > ice_grid.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_grid.f90
+\rm ice_grid.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_albedo.F > ice_albedo.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_albedo.f90
+\rm ice_albedo.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_calendar.F > ice_calendar.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_calendar.f90
+\rm ice_calendar.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_flux.F > ice_flux.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_flux.f90
+\rm ice_flux.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_flux_in.F > ice_flux_in.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_flux_in.f90
+\rm ice_flux_in.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_itd.F > ice_itd.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_itd.f90
+\rm ice_itd.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_mechred.F > ice_mechred.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_mechred.f90
+\rm ice_mechred.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_itd_linear.F > ice_itd_linear.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_itd_linear.f90
+\rm ice_itd_linear.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_scaling.F > ice_scaling.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_scaling.f90
+\rm ice_scaling.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_atmo.F > ice_atmo.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_atmo.f90
+\rm ice_atmo.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_ocean.F > ice_ocean.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_ocean.f90
+\rm ice_ocean.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_therm_vertical.F > ice_therm_vertical.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_therm_vertical.f90
+\rm ice_therm_vertical.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_init.F > ice_init.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_init.f90
+\rm ice_init.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ice_therm_itd.F > ice_therm_itd.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ice_therm_itd.f90
+\rm ice_therm_itd.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_ice2d.F > mod_ice2d.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_ice2d.f90
+\rm mod_ice2d.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_ice.F > mod_ice.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_ice.f90
+\rm mod_ice.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               swmod2.F > swmod2.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  swmod2.f90
+\rm swmod2.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_meanflow.F > mod_meanflow.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_meanflow.f90
+\rm mod_meanflow.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_obcs2.F > mod_obcs2.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_obcs2.f90
+\rm mod_obcs2.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_obcs3.F > mod_obcs3.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_obcs3.f90
+\rm mod_obcs3.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_wqm.F > mod_wqm.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_wqm.f90
+\rm mod_wqm.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_bio_3D.F > mod_bio_3D.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_bio_3D.f90
+\rm mod_bio_3D.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_balance_2d.F > mod_balance_2d.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_balance_2d.f90
+\rm mod_balance_2d.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_station_timeseries.F > mod_station_timeseries.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_station_timeseries.f90
+\rm mod_station_timeseries.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_sparse_timeseries.F > mod_sparse_timeseries.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_sparse_timeseries.f90
+\rm mod_sparse_timeseries.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_wave_current_interaction.F > mod_wave_current_interaction.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_wave_current_interaction.f90
+\rm mod_wave_current_interaction.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_newinp.F > mod_newinp.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_newinp.f90
+\rm mod_newinp.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_fluid_mud.F > mod_fluid_mud.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_fluid_mud.f90
+\rm mod_fluid_mud.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_tridiag.F > mod_tridiag.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_tridiag.f90
+\rm mod_tridiag.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_scal.F > mod_scal.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_scal.f90
+\rm mod_scal.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_cstms_vars.F > mod_cstms_vars.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_cstms_vars.f90
+\rm mod_cstms_vars.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_flocmod.F > mod_flocmod.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_flocmod.f90
+\rm mod_flocmod.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_sed_cstms.F > mod_sed_cstms.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_sed_cstms.f90
+\rm mod_sed_cstms.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_sed.F > mod_sed.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_sed.f90
+\rm mod_sed.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_dye.F > mod_dye.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_dye.f90
+\rm mod_dye.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_ncdio.F > mod_ncdio.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_ncdio.f90
+\rm mod_ncdio.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_setup.F > mod_setup.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_setup.f90
+\rm mod_setup.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_nesting.F > mod_nesting.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_nesting.f90
+\rm mod_nesting.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_startup.F > mod_startup.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_startup.f90
+\rm mod_startup.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               particle.F > particle.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  particle.f90
+\rm particle.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               linklist.F > linklist.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  linklist.f90
+\rm linklist.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_lag.F > mod_lag.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_lag.f90
+\rm mod_lag.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_pwp.F > mod_pwp.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_pwp.f90
+\rm mod_pwp.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_optimal_interpolation.F > mod_optimal_interpolation.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_optimal_interpolation.f90
+\rm mod_optimal_interpolation.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_report.F > mod_report.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_report.f90
+\rm mod_report.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_probe.F > mod_probe.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_probe.f90
+\rm mod_probe.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_gotm.F > mod_gotm.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_gotm.f90
+\rm mod_gotm.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_enkf.F > mod_enkf.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_enkf.f90
+\rm mod_enkf.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_etkf.F > mod_etkf.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_etkf.f90
+\rm mod_etkf.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_rrk.F > mod_rrk.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_rrk.f90
+\rm mod_rrk.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_rrkf_obs.F > mod_rrkf_obs.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_rrkf_obs.f90
+\rm mod_rrkf_obs.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_rrkassim.F > mod_rrkassim.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_rrkassim.f90
+\rm mod_rrkassim.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_enkf_ncd.F > mod_enkf_ncd.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_enkf_ncd.f90
+\rm mod_enkf_ncd.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               enkf_ncdio.F > enkf_ncdio.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  enkf_ncdio.f90
+\rm enkf_ncdio.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_enkf_obs.F > mod_enkf_obs.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_enkf_obs.f90
+\rm mod_enkf_obs.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_enkfassim.F > mod_enkfassim.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_enkfassim.f90
+\rm mod_enkfassim.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_assim.F > mod_assim.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_assim.f90
+\rm mod_assim.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_visit.F > mod_visit.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_visit.f90
+\rm mod_visit.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_plbc.F > mod_plbc.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_plbc.f90
+\rm mod_plbc.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_boundschk.F > mod_boundschk.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_boundschk.f90
+\rm mod_boundschk.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_esmf_nesting.F > mod_esmf_nesting.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_esmf_nesting.f90
+\rm mod_esmf_nesting.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               swmod3.F > swmod3.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  swmod3.f90
+\rm swmod3.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_action_im.F > mod_action_im.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_action_im.f90
+\rm mod_action_im.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_action_ex.F > mod_action_ex.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_action_ex.f90
+\rm mod_action_ex.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_wavesetup.F > mod_wavesetup.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_wavesetup.f90
+\rm mod_wavesetup.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_bbl.F > mod_bbl.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_bbl.f90
+\rm mod_bbl.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               mod_onedtide.F > mod_onedtide.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  mod_onedtide.f90
+\rm mod_onedtide.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               fvcom.F > fvcom.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  fvcom.f90
+\rm fvcom.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               genmap.F > genmap.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  genmap.f90
+\rm genmap.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               tge.F > tge.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  tge.f90
+\rm tge.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               longshore_flow.F > longshore_flow.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  longshore_flow.f90
+\rm longshore_flow.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               cell_area.F > cell_area.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  cell_area.f90
+\rm cell_area.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               open_all.F > open_all.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  open_all.f90
+\rm open_all.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               load_grid.F > load_grid.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  load_grid.f90
+\rm load_grid.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               allocate_all.F > allocate_all.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  allocate_all.f90
+\rm allocate_all.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               setup_domain.F > setup_domain.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  setup_domain.f90
+\rm setup_domain.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               genmap_obc.F > genmap_obc.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  genmap_obc.f90
+\rm genmap_obc.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               genmap_lsf.F > genmap_lsf.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  genmap_lsf.f90
+\rm genmap_lsf.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               print_vals.F > print_vals.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  print_vals.f90
+\rm print_vals.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               coords_n_const.F > coords_n_const.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  coords_n_const.f90
+\rm coords_n_const.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               shape_coef_gcn.F > shape_coef_gcn.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  shape_coef_gcn.f90
+\rm shape_coef_gcn.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               shape_coef_gcy.F > shape_coef_gcy.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  shape_coef_gcy.f90
+\rm shape_coef_gcy.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               depth_grad.F > depth_grad.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  depth_grad.f90
+\rm depth_grad.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               grid_metrics.F > grid_metrics.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  grid_metrics.f90
+\rm grid_metrics.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               cntrl_prmtrs.F > cntrl_prmtrs.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  cntrl_prmtrs.f90
+\rm cntrl_prmtrs.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               init_sed.F > init_sed.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  init_sed.f90
+\rm init_sed.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               internal_step.F > internal_step.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  internal_step.f90
+\rm internal_step.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               bcond_gcn.F > bcond_gcn.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  bcond_gcn.f90
+\rm bcond_gcn.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               bcond_gcy.F > bcond_gcy.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  bcond_gcy.f90
+\rm bcond_gcy.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               adjust2d3d.F > adjust2d3d.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  adjust2d3d.f90
+\rm adjust2d3d.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               brough.F > brough.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  brough.f90
+\rm brough.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               advection_edge_gcn.F > advection_edge_gcn.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  advection_edge_gcn.f90
+\rm advection_edge_gcn.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               advection_edge_gcy.F > advection_edge_gcy.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  advection_edge_gcy.f90
+\rm advection_edge_gcy.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ghostuv.F > ghostuv.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ghostuv.f90
+\rm ghostuv.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               advave_edge_gcn.F > advave_edge_gcn.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  advave_edge_gcn.f90
+\rm advave_edge_gcn.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               advave_edge_gcy.F > advave_edge_gcy.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  advave_edge_gcy.f90
+\rm advave_edge_gcy.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               phy_baropg.F > phy_baropg.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  phy_baropg.f90
+\rm phy_baropg.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               baropg.F > baropg.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  baropg.f90
+\rm baropg.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               external_step.F > external_step.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  external_step.f90
+\rm external_step.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               extel_edge.F > extel_edge.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  extel_edge.f90
+\rm extel_edge.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               extuv_edge.F > extuv_edge.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  extuv_edge.f90
+\rm extuv_edge.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               depth_check.F > depth_check.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  depth_check.f90
+\rm depth_check.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               vertvl_edge.F > vertvl_edge.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  vertvl_edge.f90
+\rm vertvl_edge.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               adv_uv_edge_gcn.F > adv_uv_edge_gcn.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  adv_uv_edge_gcn.f90
+\rm adv_uv_edge_gcn.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               adv_uv_edge_gcy.F > adv_uv_edge_gcy.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  adv_uv_edge_gcy.f90
+\rm adv_uv_edge_gcy.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               vdif_uv.F > vdif_uv.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  vdif_uv.f90
+\rm vdif_uv.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               extelpf_edge.F > extelpf_edge.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  extelpf_edge.f90
+\rm extelpf_edge.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               wreal.F > wreal.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  wreal.f90
+\rm wreal.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               viscofh.F > viscofh.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  viscofh.f90
+\rm viscofh.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               adv_q.F > adv_q.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  adv_q.f90
+\rm adv_q.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               fct_q2.F > fct_q2.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  fct_q2.f90
+\rm fct_q2.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               fct_q2l.F > fct_q2l.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  fct_q2l.f90
+\rm fct_q2l.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               vdif_q.F > vdif_q.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  vdif_q.f90
+\rm vdif_q.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               adv_t.F > adv_t.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  adv_t.f90
+\rm adv_t.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               adv_s.F > adv_s.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  adv_s.f90
+\rm adv_s.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               fct_t.F > fct_t.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  fct_t.f90
+\rm fct_t.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               vdif_ts.F > vdif_ts.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  vdif_ts.f90
+\rm vdif_ts.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               vdif_ts_gom.F > vdif_ts_gom.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  vdif_ts_gom.f90
+\rm vdif_ts_gom.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               fct_s.F > fct_s.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  fct_s.f90
+\rm fct_s.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               bcond_ts.F > bcond_ts.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  bcond_ts.f90
+\rm bcond_ts.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               adjust_ts.F > adjust_ts.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  adjust_ts.f90
+\rm adjust_ts.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               conv_over.F > conv_over.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  conv_over.f90
+\rm conv_over.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               visitsim.F > visitsim.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  visitsim.f90
+\rm visitsim.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               startup_type.F > startup_type.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  startup_type.f90
+\rm startup_type.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               edge_len.F > edge_len.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  edge_len.f90
+\rm edge_len.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               adcor.F > adcor.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  adcor.f90
+\rm adcor.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               icing.F > icing.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  icing.f90
+\rm icing.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               rho_pmean.F > rho_pmean.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  rho_pmean.f90
+\rm rho_pmean.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               calc_vort.F > calc_vort.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  calc_vort.f90
+\rm calc_vort.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               namelist.F > namelist.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  namelist.f90
+\rm namelist.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               nh_set_nesting.F > nh_set_nesting.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  nh_set_nesting.f90
+\rm nh_set_nesting.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               coare26z.F > coare26z.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  coare26z.f90
+\rm coare26z.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               coare40vn.F > coare40vn.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  coare40vn.f90
+\rm coare40vn.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ocpmix.F > ocpmix.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ocpmix.f90
+\rm ocpmix.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ocpcre.F > ocpcre.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ocpcre.f90
+\rm ocpcre.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               ocpids.F > ocpids.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  ocpids.f90
+\rm ocpids.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               swanpre1.F > swanpre1.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  swanpre1.f90
+\rm swanpre1.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               swanpre2.F > swanpre2.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  swanpre2.f90
+\rm swanpre2.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               w3part.F > w3part.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  w3part.f90
+\rm w3part.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               swanser.F > swanser.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  swanser.f90
+\rm swanser.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               swanmain.F > swanmain.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  swanmain.f90
+\rm swanmain.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               swancom1.F > swancom1.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  swancom1.f90
+\rm swancom1.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               swancom2.F > swancom2.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  swancom2.f90
+\rm swancom2.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               swancom3.F > swancom3.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  swancom3.f90
+\rm swancom3.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               swancom4.F > swancom4.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  swancom4.f90
+\rm swancom4.f90
+cpp -P -C -traditional  -DIFORT -P -C -traditional  -DDOUBLE_PRECISION -DSINGLE_OUTPUT -DSPHERICAL -DWET_DRY -DMULTIPROCESSOR  -DPROJ  -DLIMITED_1  -DGCN    -DRIVER_FLOAT             -DHEATING_CALCULATED   -DAIR_PRESSURE               -DOLD_PETSC -DPARTITION_SPECIAL               swancom5.F > swancom5.f90
+mpfort  -c  -O3  -fp-model precise  -I/usrx/local/NetCDF/4.2/serial/include    -I./libs/proj.4-master/include -I./libs/proj4-fortran-master/include -I./libs/julian  swancom5.f90
+\rm swancom5.f90
+mpfort  -O3  -fp-model precise   func_pointer.o mod_prec.o sinter.o mod_types.o mod_time.o mod_main.o mod_spherical.o mod_utils.o mod_clock.o eqs_of_state.o mod_bulk.o mod_interp.o mod_par.o mod_par_special.o mod_ncll.o mod_nctools.o mod_wd.o mod_sng.o mod_heatflux.o mod_solar.o mod_input.o mod_force.o mod_obcs.o mod_petsc.o mod_semi_implicit.o mod_non_hydro.o mod_set_time.o ice_kinds_mod.o ice_model_size.o ice_domain.o ice_constants.o ice_fileunits.o ice_state.o ice_work.o ice_grid.o ice_albedo.o ice_calendar.o ice_flux.o ice_flux_in.o ice_itd.o ice_mechred.o ice_itd_linear.o ice_scaling.o ice_atmo.o ice_ocean.o ice_therm_vertical.o ice_init.o ice_therm_itd.o mod_ice2d.o mod_ice.o mod_startup.o mod_wqm.o mod_ncdio.o mod_setup.o mod_newinp.o particle.o linklist.o mod_lag.o mod_northpole.o mod_pwp.o mod_dye.o mod_optimal_interpolation.o mod_report.o mod_probe.o mod_gotm.o mod_balance_2d.o mod_tridiag.o mod_scal.o mod_meanflow.o mod_obcs2.o mod_obcs3.o mod_sed.o mod_enkf.o mod_etkf.o mod_rrk.o mod_rrkf_obs.o mod_rrkassim.o mod_enkf_ncd.o enkf_ncdio.o mod_enkf_obs.o mod_enkfassim.o mod_assim.o mod_nesting.o mod_visit.o mod_plbc.o mod_dam.o mod_station_timeseries.o mod_sparse_timeseries.o mod_boundschk.o mod_esmf_nesting.o mod_cstms_vars.o mod_flocmod.o mod_sed_cstms.o mod_fluid_mud.o mod_main_wave.o swmod1.o swmod2.o swmod3.o mod_action_im.o mod_action_ex.o mod_wavesetup.o mod_wave_current_interaction.o mod_bbl.o fvcom.o genmap.o tge.o longshore_flow.o cell_area.o open_all.o load_grid.o allocate_all.o setup_domain.o genmap_obc.o genmap_lsf.o print_vals.o coords_n_const.o shape_coef_gcn.o shape_coef_gcy.o depth_grad.o grid_metrics.o cntrl_prmtrs.o init_sed.o internal_step.o bcond_gcn.o bcond_gcy.o adjust2d3d.o brough.o advection_edge_gcn.o advection_edge_gcy.o ghostuv.o advave_edge_gcn.o advave_edge_gcy.o phy_baropg.o baropg.o external_step.o extel_edge.o extuv_edge.o depth_check.o vertvl_edge.o adv_uv_edge_gcn.o adv_uv_edge_gcy.o vdif_uv.o extelpf_edge.o wreal.o viscofh.o adv_q.o fct_q2.o fct_q2l.o vdif_q.o adv_t.o adv_s.o fct_t.o vdif_ts.o vdif_ts_gom.o fct_s.o bcond_ts.o adjust_ts.o conv_over.o visitsim.o startup_type.o edge_len.o adcor.o icing.o rho_pmean.o calc_vort.o namelist.o nh_set_nesting.o coare26z.o coare40vn.o mod_bio_3D.o mod_onedtide.o ocpmix.o ocpcre.o ocpids.o swanpre1.o swanpre2.o swanser.o swanmain.o swancom1.o swancom2.o swancom3.o swancom4.o swancom5.o w3part.o      -L../METIS_source -lmetis -L/usrx/local/NetCDF/4.2/serial/lib -lnetcdff	-L./libs/julian -ljulian       -L./libs/proj.4-master/lib  -lproj -lm -L./libs/proj4-fortran-master/lib  -lfproj4 -lm  -o fvcom_ngofs
+make libfvcom
+make[1]: Entering directory `/gpfs/gd3/nos/noscrub/Aijun.Zhang/nwprod2/nosofs.v4.0.0/sorc/FVCOM.fd/FVCOM_source'
+ar rc libfvcom.a func_pointer.o mod_prec.o sinter.o mod_types.o mod_time.o mod_main.o mod_spherical.o mod_utils.o mod_clock.o eqs_of_state.o mod_bulk.o mod_interp.o mod_par.o mod_par_special.o mod_ncll.o mod_nctools.o mod_wd.o mod_sng.o mod_heatflux.o mod_solar.o mod_input.o mod_force.o mod_obcs.o mod_petsc.o mod_semi_implicit.o mod_non_hydro.o mod_set_time.o ice_kinds_mod.o ice_model_size.o ice_domain.o ice_constants.o ice_fileunits.o ice_state.o ice_work.o ice_grid.o ice_albedo.o ice_calendar.o ice_flux.o ice_flux_in.o ice_itd.o ice_mechred.o ice_itd_linear.o ice_scaling.o ice_atmo.o ice_ocean.o ice_therm_vertical.o ice_init.o ice_therm_itd.o mod_ice2d.o mod_ice.o mod_startup.o mod_wqm.o mod_ncdio.o mod_setup.o mod_newinp.o particle.o linklist.o mod_lag.o mod_northpole.o mod_pwp.o mod_dye.o mod_optimal_interpolation.o mod_report.o mod_probe.o mod_gotm.o mod_balance_2d.o mod_tridiag.o mod_scal.o mod_meanflow.o mod_obcs2.o mod_obcs3.o mod_sed.o mod_enkf.o mod_etkf.o mod_rrk.o mod_rrkf_obs.o mod_rrkassim.o mod_enkf_ncd.o enkf_ncdio.o mod_enkf_obs.o mod_enkfassim.o mod_assim.o mod_nesting.o mod_visit.o mod_plbc.o mod_dam.o mod_station_timeseries.o mod_sparse_timeseries.o mod_boundschk.o mod_esmf_nesting.o mod_cstms_vars.o mod_flocmod.o mod_sed_cstms.o mod_fluid_mud.o mod_main_wave.o swmod1.o swmod2.o swmod3.o mod_action_im.o mod_action_ex.o mod_wavesetup.o mod_wave_current_interaction.o mod_bbl.o fvcom.o genmap.o tge.o longshore_flow.o cell_area.o open_all.o load_grid.o allocate_all.o setup_domain.o genmap_obc.o genmap_lsf.o print_vals.o coords_n_const.o shape_coef_gcn.o shape_coef_gcy.o depth_grad.o grid_metrics.o cntrl_prmtrs.o init_sed.o internal_step.o bcond_gcn.o bcond_gcy.o adjust2d3d.o brough.o advection_edge_gcn.o advection_edge_gcy.o ghostuv.o advave_edge_gcn.o advave_edge_gcy.o phy_baropg.o baropg.o external_step.o extel_edge.o extuv_edge.o depth_check.o vertvl_edge.o adv_uv_edge_gcn.o adv_uv_edge_gcy.o vdif_uv.o extelpf_edge.o wreal.o viscofh.o adv_q.o fct_q2.o fct_q2l.o vdif_q.o adv_t.o adv_s.o fct_t.o vdif_ts.o vdif_ts_gom.o fct_s.o bcond_ts.o adjust_ts.o conv_over.o visitsim.o startup_type.o edge_len.o adcor.o icing.o rho_pmean.o calc_vort.o namelist.o nh_set_nesting.o coare26z.o coare40vn.o mod_bio_3D.o mod_onedtide.o ocpmix.o ocpcre.o ocpids.o swanpre1.o swanpre2.o swanser.o swanmain.o swancom1.o swancom2.o swancom3.o swancom4.o swancom5.o w3part.o  
+ranlib libfvcom.a
+make[1]: Leaving directory `/gpfs/gd3/nos/noscrub/Aijun.Zhang/nwprod2/nosofs.v4.0.0/sorc/FVCOM.fd/FVCOM_source'

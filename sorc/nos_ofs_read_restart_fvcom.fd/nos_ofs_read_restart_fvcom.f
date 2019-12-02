@@ -1,5 +1,55 @@
-C xlf nos_ofs_read_restart.f  -I/gpfs/c2/home/wx21az/netcdf-3.6.2/include 
-C -L/gpfs/c2/home/wx21az/netcdf-3.6.2/lib -lnetcdf -o nos_ofs_read_restart
+!--------------------------------------------------------------------------
+!
+!  Program Name: nos_ofs_read_restart_fvcom.fd/nos_ofs_read_restart_fvcom.f
+!
+!  Contact: NOS/CO-OPS Aijun Zhang
+!           Phone: 240-533-0591   Email: aijun.zhang@noaa.gov
+!
+!  Abstract:  This program read the FVCOM-base restart NetCDF file.
+!
+!       Error Codes:
+!           0  No Error
+!         -33  Not a NetCDF ID
+!         -34  Too many NetCDFs open
+!         -35  NetCDF file exists && NC_NOCLOBBER
+!         -36  Invalid Argument
+!         -37  Write to read only
+!         -38  Operation not allowed in data mode
+!         -39  Operation not allowed in define mode
+!         -40  Index exceeds dimension bound
+!         -41  NC_MAX_DIMS exceeded
+!         -42  String match to name in use
+!         -43  Attribute not found
+!         -44  NC_MAX_ATTRS exceeded
+!         -45  Not a netcdf data type
+!         -46  Invalid dimension id or name
+!         -47  NC_UNLIMITED in the wrong index
+!         -48  NC_MAX_VARS exceeded
+!         -49  Variable not found
+!         -50  Action prohibited on NC_GLOBAL varid
+!         -51  Not a netcdf file
+!         -52  In Fortran, string too short
+!         -53  NC_MAX_NAME exceeded
+!         -54  NC_UNLIMITED size already in use
+!         -55  nc_rec op when there are no record vars
+!         -56  Attempt to convert between text & numbers
+!         -57  Edge+start exceeds dimension bound
+!         -58  Illegal stride
+!         -59  Attribute or variable name contains illegal characters
+!         -60  Math result not representable
+!         -61  Memory allocation (malloc) failure
+!         -62  One or more variable sizes violate format constraints
+!         -63  Invalid dimension size
+!         -64  File likely truncated or possibly corrupted
+!         -65  Unknown axis type
+!
+!  History Log:
+!           03/28/2019
+!
+!  Usage:  
+!    $EXECnos/nos_ofs_read_restart_fvcom <Fortran_read_restart.ctl > Fortran_read_restart.log
+!    Where the control file Fortran_read_restart.ctl is generate by
+!    script "ush/nos_ofs_launch.sh. 
 
 C The julian subroutine does not work correctly while Year < 1900
 C A new subroutine from Jianhua Qi is used 

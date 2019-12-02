@@ -77,6 +77,9 @@
 #endif
 #define STATIONS
 #define NO_LBC_ATT
+#define SOLAR_SOURCE
+#define EMINUSP
+#define HDF5
 /*
 #define LIMIT_VDIFF
 #define LIMIT_VVISC
