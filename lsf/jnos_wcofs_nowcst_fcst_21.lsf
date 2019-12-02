@@ -1,0 +1,44 @@
+#BSUB -L /bin/sh
+#BSUB -P NMO-T2O
+#BSUB -a poe
+#BSUB -q devmax2
+#BSUB -J wcofs_nf_2_21
+#BSUB -o rpt/wcofs_nf_21.out.%J
+#BSUB -e rpt/wcofs_nf_21.err.%J
+#BSUB -w 'done (wcofs_prep_2_21)'
+##BSUB -x
+#BSUB -n 1440
+#BSUB -R "span[ptile=24]"
+#BSUB -W 2:30
+#BSUB -cwd /ptmpp2/%U
+
+module use /nwprod2/modulefiles
+
+. /nos2/noscrub/$LOGNAME/nwprod2/versions/nosofs.ver
+
+module switch ics/${ics_ver:?}
+module load prod_util/${prod_util_ver:?}
+module load grib_util/${grib_util_ver:?}
+module load NetCDF/${netcdf_ver:?}
+module load cfp/${cfp_ver:?}
+module load ibmpe
+
+export MP_EUIDEVICE=sn_all
+export MP_EUILIB=us
+export MP_MPILIB=mpich2
+export MP_TASK_AFFINITY=core
+export MP_USE_BULK_XFER=yes
+export MP_PULSE=0
+export MP_TIMEOUT=9000
+export MP_SHARED_MEMORY=yes
+
+export envir=dev
+export OFS=wcofs
+export cyc=21
+export job=wcofs_nf_21
+export platform=Phase2
+
+
+# CALL executable job script here
+
+/nos2/noscrub/$LOGNAME/nwprod2/nosofs.${nosofs_ver}/jobs/JNOS_OFS_NOWCST_FCST.${envir}

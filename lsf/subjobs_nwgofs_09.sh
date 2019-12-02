@@ -1,6 +1,5 @@
-#! /bin/sh 
-. /usrx/local/Modules/3.2.9/init/sh
-module use /nwprod2/modulefiles
-module load lsf
-export LSFDIR=/nos/save/Aijun.Zhang/nwprod/nosofs.v3.1.5/lsf 
+#!/bin/bash -l
+. /gpfs/dell2/nos/noscrub/Aijun.Zhang/nwprod/versions/nosofs.ver
+module load lsf/${lsf_ver:?}
+export LSFDIR=/gpfs/dell2/nos/noscrub/Aijun.Zhang/nwprod/nosofs.v3.2.0/lsf 
 bsub < $LSFDIR/jnos_nwgofs_prep_09.lsf; bsub < $LSFDIR/jnos_nwgofs_nowcst_fcst_09.lsf #; bsub < $LSFDIR/jnos_nwgofs_ftp_09.lsf

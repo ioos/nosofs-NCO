@@ -1,0 +1,49 @@
+#!/bin/bash
+#BSUB -P NMO-T2O
+#BSUB -q "dev_transfer"
+#BSUB -J lmhofs_ftp_d_00
+#BSUB -o rpt/lmhofs_ftp_00.out.%J
+#BSUB -e rpt/lmhofs_ftp_00.err.%J
+#BSUB -w 'done (lmhofs_nf_d_00)'
+#BSUB -n 1
+#BSUB -R "span[ptile=1]"
+#BSUB -cwd /gpfs/dell3/ptmp/%U
+#BSUB -R rusage[mem=1000]
+#BSUB -R affinity[core]
+#BSUB -W 1:30
+#BSUB -cwd /gpfs/dell3/ptmp/%U
+
+. /gpfs/dell2/nos/noscrub/$LOGNAME/nwprod/versions/nosofs.ver
+module purge
+module load EnvVars/${envvars_ver:?}
+module load lsf/${lsf_ver:?}
+module load ips/${ips_ver:?}
+module load prod_util/${prod_util_ver:?}
+
+#
+export MP_EUIDEVICE=sn_all
+export MP_EUILIB=us
+
+export MP_USE_BULK_XFER=yes
+export MP_TASK_AFFINITY=cpu
+#
+# EXPORT list here
+
+set +x
+export envir=dev
+export OFS=lmhofs
+export cyc=00
+export job=lmhofs_ftp_00
+export platform=Dell3
+
+# CALL executable job script here
+
+/gpfs/dell2/nos/noscrub/$LOGNAME/nwprod/nosofs.${nosofs_ver}/jobs/JNOS_OFS_FTP.${envir}
+
+
+#######################################################################
+# Purpose: To execute the job that runs the NOS OFS model prep
+#          on the IBMSP
+#######################################################################
+
+

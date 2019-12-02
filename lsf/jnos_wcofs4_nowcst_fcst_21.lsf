@@ -1,20 +1,20 @@
 #BSUB -L /bin/sh
 #BSUB -P NMO-T2O
 #BSUB -a poe
-#BSUB -q devmax
-#BSUB -J wcofs_nf_1_00
-#BSUB -o rpt/wcofs_nf_00.out.%J
-#BSUB -e rpt/wcofs_nf_00.err.%J
-#BSUB -w 'done (wcofs_prep_1_00)'
+#BSUB -q devmax2
+#BSUB -J wcofs4_nf_2_21
+#BSUB -o rpt/wcofs4_nf_21.out.%J
+#BSUB -e rpt/wcofs4_nf_21.err.%J
+#BSUB -w 'done (wcofs4_prep_2_21)'
 ##BSUB -x
-#BSUB -n 1440
-#BSUB -R "span[ptile=16]"
+#BSUB -n 480
+#BSUB -R "span[ptile=24]"
 #BSUB -W 2:30
-#BSUB -cwd /ptmpp1/%U
+#BSUB -cwd /ptmpp2/%U
 
 module use /nwprod2/modulefiles
 
-. /nos/save/$LOGNAME/nwprod/versions/nosofs.ver
+. /nos2/noscrub/$LOGNAME/nwprod2/versions/nosofs.ver
 
 module switch ics/${ics_ver:?}
 module load prod_util/${prod_util_ver:?}
@@ -33,12 +33,12 @@ export MP_TIMEOUT=9000
 export MP_SHARED_MEMORY=yes
 
 export envir=dev
-export OFS=wcofs
-export cyc=00
-export job=wcofs_nf_00
-export platform=Phase1
+export OFS=wcofs4
+export cyc=21
+export job=wcofs4_nf_21
+export platform=Phase2
 
 
 # CALL executable job script here
 
-/nos/save/$LOGNAME/nwprod/nosofs.${nosofs_ver}/jobs/JNOS_OFS_NOWCST_FCST.${envir}
+/nos2/noscrub/$LOGNAME/nwprod2/nosofs.${nosofs_ver}/jobs/JNOS_OFS_NOWCST_FCST.${envir}
