@@ -96,7 +96,7 @@ then
 # 1.2 HIS nowcast 
 #    if [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
 #    then 
-       cp -p $DATA/nos.${OFS}.2ds.n*.nc $COMOUT/
+     if [ -s $COMOUT/nos.${OFS}.2ds.n003.$PDY.t${cyc}z.nc ]; then
        for combinefields in `ls $COMOUT/nos.${OFS}.2ds.n*t${cyc}z.nc`
        do
          if [ -f ${combinefields} ]
@@ -106,6 +106,22 @@ then
            fi
          fi
        done
+     fi
+     if [ -s $DATA/nos.${OFS}.avg.nowcast.$PDY.t${cyc}z.nc ]; then
+       for combinefields in `ls $COMOUT/nos.${OFS}.avg.n*.nc`
+       do
+         if [ -f ${combinefields} ]
+         then
+           if [ $SENDDBN = YES ]; then
+             if [ "${OFS,,}" == "gomofs" -o "${OFS,,}" == "wcofs" -o "${OFS,,}" == "ciofs" ]; then
+               $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF_LRG $job ${combinefields}
+             else
+               $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF $job ${combinefields}
+             fi
+           fi
+         fi
+       done
+     fi
        for combinefields in `ls $COMOUT/nos.${OFS}.fields.n*t${cyc}z.nc`
        do
          if [ -f ${combinefields} ]
@@ -119,8 +135,6 @@ then
            fi
          fi
        done
-
-       cp -p $DATA/*avg*.nc $COMOUT/
 #    else   
       if [ -f $COMOUT/$HIS_OUT_NOWCAST ]
       then
@@ -280,8 +294,8 @@ then
 
 # 2.2 HIS forecast 
 #    if [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
-#    then 
-       cp -p $DATA/nos.${OFS}.2ds.f*.nc $COMOUT/
+#    then
+     if [ -s $DATA/nos.${OFS}.2ds.f003.$PDY.t${cyc}z.nc ]; then 
        for combinefields in `ls $COMOUT/nos.${OFS}.2ds.f*t${cyc}z.nc`
        do
          if [ -f ${combinefields} ]
@@ -291,6 +305,7 @@ then
            fi
          fi
        done
+     fi
        for combinefields in `ls $COMOUT/nos.${OFS}.fields.f*t${cyc}z.nc`
        do
          if [ -f ${combinefields} ]
@@ -304,6 +319,21 @@ then
            fi
          fi
        done
+     if [ -s $DATA/nos.${OFS}.avg.forecast.$PDY.t${cyc}z.nc ]; then
+       for combinefields in `ls $COMOUT/nos.${OFS}.avg.f*.nc`
+       do
+         if [ -f ${combinefields} ]
+         then
+           if [ $SENDDBN = YES ]; then
+             if [ "${OFS,,}" == "gomofs" -o "${OFS,,}" == "wcofs" -o "${OFS,,}" == "ciofs" ]; then
+               $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF_LRG $job ${combinefields}
+             else
+               $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF $job ${combinefields}
+             fi
+           fi
+         fi
+       done
+     fi
 #    else   
        if [ -f $COMOUT/$HIS_OUT_FORECAST ]
        then

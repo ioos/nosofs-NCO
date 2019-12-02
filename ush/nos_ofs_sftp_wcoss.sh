@@ -85,6 +85,7 @@ export OBC_FORCING_FILE_TS=${NET}.${RUN}.obc.ts.$PDY.t${cyc}z.nc
 export RIVER_FORCING_FILE=${NET}.${RUN}.river.$PDY.t${cyc}z.nc
 export INI_FILE_NOWCAST=${NET}.${RUN}.init.nowcast.$PDY.t${cyc}z.nc
 export HIS_OUT_NOWCAST=${NET}.${RUN}.fields.nowcast.$PDY.t${cyc}z.nc
+export AVG_OUT_NOWCAST=${NET}.${RUN}.avg.nowcast.$PDY.t${cyc}z.nc
 export STA_OUT_NOWCAST=${NET}.${RUN}.stations.nowcast.$PDY.t${cyc}z.nc
 export RST_OUT_NOWCAST=${NET}.${RUN}.rst.nowcast.$PDY.t${cyc}z.nc
 export MET_NETCDF_1_NOWCAST=${NET}.${RUN}.met.nowcast.$PDY.t${cyc}z.nc
@@ -93,12 +94,13 @@ export MET_NETCDF_2_NOWCAST=${NET}.${RUN}.hflux.nowcast.$PDY.t${cyc}z.nc
 export OBC_TIDALFORCING_FILE=${NET}.${RUN}.roms.tides.$PDY.t${cyc}z.nc
 export OBC_FORCING_FILE_NWGOFS_NOW=${NET}.${RUN}.nestnode.nwgofs.nowcast.$PDY.t${cyc}z.nc
 export OBC_FORCING_FILE_NEGOFS_NOW=${NET}.${RUN}.nestnode.negofs.nowcast.$PDY.t${cyc}z.nc
-export OBC_FORCING_FILE_NWGOFS_FOR=${NET}.${RUN}.nestnode.nwgofs.nowcast.$PDY.t${cyc}z.nc
-export OBC_FORCING_FILE_NEGOFS_FOR=${NET}.${RUN}.nestnode.negofs.nowcast.$PDY.t${cyc}z.nc
+export OBC_FORCING_FILE_NWGOFS_FOR=${NET}.${RUN}.nestnode.nwgofs.forecast.$PDY.t${cyc}z.nc
+export OBC_FORCING_FILE_NEGOFS_FOR=${NET}.${RUN}.nestnode.negofs.forecast.$PDY.t${cyc}z.nc
 
 #export INI_FILE_FORECAST=$RST_OUT_NOWCAST
 export HIS_OUT_FORECAST=${NET}.${RUN}.fields.forecast.$PDY.t${cyc}z.nc
 export STA_OUT_FORECAST=${NET}.${RUN}.stations.forecast.$PDY.t${cyc}z.nc
+export AVG_OUT_FORECAST=${NET}.${RUN}.avg.forecast.$PDY.t${cyc}z.nc
 export RST_OUT_FORECAST=${NET}.${RUN}.rst.forecast.$PDY.t${cyc}z.nc
 export MET_NETCDF_1_FORECAST=${NET}.${RUN}.met.forecast.$PDY.t${cyc}z.nc
 export MET_NETCDF_2_FORECAST=${NET}.${RUN}.hflux.forecast.$PDY.t${cyc}z.nc
@@ -151,22 +153,22 @@ done
 
 
 
-if [ -f ftp_nowcast.txt ]; then
-      rm -f  ftp_nowcast.txt  
+if [ -f $DATA/ftp_nowcast.txt ]; then
+      rm -f  $DATA/ftp_nowcast.txt  
 fi
-echo " binary "   > ftp_nowcast.txt
-echo " cd $FTPDIR "  >> ftp_nowcast.txt
+echo " binary "   > $DATA/ftp_nowcast.txt
+echo " cd $FTPDIR "  >> $DATA/ftp_nowcast.txt
 
 # 1  push nowcast output to CO-OPS tidepool 
 # 1.1 Nowcast log 
 if [ -f ${MODEL_LOG_NOWCAST} ]
 then
-  echo " put ${MODEL_LOG_NOWCAST} " >> ftp_nowcast.txt 
+  echo " put ${MODEL_LOG_NOWCAST} " >> $DATA/ftp_nowcast.txt 
 fi
 # 1.2 STA nowcast
 if [ -f $STA_OUT_NOWCAST ]
 then
-  echo " put $STA_OUT_NOWCAST " >> ftp_nowcast.txt
+  echo " put $STA_OUT_NOWCAST " >> $DATA/ftp_nowcast.txt
 fi
 # 1.3 HIS nowcast 
 #    if [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
@@ -176,14 +178,14 @@ if [ $nfile_2d -ge 1 ]; then
   for combinefields in `ls nos.${OFS}.2ds.n*t${cyc}z.nc`
   do
     if [ -f ${combinefields} ];  then
-      echo " put ${combinefields}" >> ftp_nowcast.txt
+      echo " put ${combinefields}" >> $DATA/ftp_nowcast.txt
     fi
   done
 else
   for combinefields in `ls nos.${OFS}.fields.n*t${cyc}z.nc`
   do
     if [ -f ${combinefields} ];  then
-      echo " put ${combinefields}" >> ftp_nowcast.txt
+      echo " put ${combinefields}" >> $DATA/ftp_nowcast.txt
     fi
   done
 fi
@@ -193,7 +195,7 @@ fi
 #  for combinefields in `ls nos.${OFS}.fields.n*t${cyc}z.nc`
 #  do
 #    if [ -f ${combinefields} ];  then
-#      echo " put ${combinefields}" >> ftp_nowcast.txt 
+#      echo " put ${combinefields}" >> $DATA/ftp_nowcast.txt 
 #    fi
 #  done
 #else
@@ -204,21 +206,25 @@ fi
 #       fhr3=`echo $I |  awk '{printf("%03i",$1)}'`
 #       fileout=nos.${RUN}.fields.n${fhr3}.$PDY.t${cyc}z.nc
 #       if [ -s $fileout ]; then
-#          echo " put ${fileout}" >> ftp_nowcast.txt
+#          echo " put ${fileout}" >> $DATA/ftp_nowcast.txt
 #       fi
 #       (( I = I + 1 ))
 #    done
 #fi
 if [ -f $HIS_OUT_NOWCAST ]
 then
-  echo " put $HIS_OUT_NOWCAST " >> ftp_nowcast.txt 
+  echo " put $HIS_OUT_NOWCAST " >> $DATA/ftp_nowcast.txt 
+fi
+if [ -f $AVG_OUT_NOWCAST ]
+then
+  echo " put $AVG_OUT_NOWCAST " >> $DATA/ftp_nowcast.txt
 fi
 
 # 1.4 restart file for nowcast
 if [ ${OFS} != "wcofs" -a ${OFS} != "gomofs" ]; then
   if [ ${cyc} = "00" -o ${cyc} = "03" ]; then
      if [ -f $INI_FILE_NOWCAST ]; then
-       echo " put $INI_FILE_NOWCAST " >> ftp_nowcast.txt
+       echo " put $INI_FILE_NOWCAST " >> $DATA/ftp_nowcast.txt
      fi
   fi
 fi
@@ -226,69 +232,69 @@ fi
 # 1.4 RST nowcast
  #   if [ -f $RST_OUT_NOWCAST ]
  #   then
- #     echo " put $RST_OUT_NOWCAST " >> ftp_nowcast.txt
+ #     echo " put $RST_OUT_NOWCAST " >> $DATA/ftp_nowcast.txt
  #     echo "   $RST_OUT_NOWCAST pushed to CO-OPS "
  #   fi
 # 1.5 OBC Forcing 
 if [ -f $OBC_FORCING_FILE ]
 then
-  echo " put $OBC_FORCING_FILE " >> ftp_nowcast.txt
+  echo " put $OBC_FORCING_FILE " >> $DATA/ftp_nowcast.txt
 fi
 if [ -f $OBC_FORCING_FILE_EL ]
 then
-  echo " put $OBC_FORCING_FILE_EL " >> ftp_nowcast.txt
+  echo " put $OBC_FORCING_FILE_EL " >> $DATA/ftp_nowcast.txt
   echo "   $OBC_FORCING_FILE_EL pushed to CO-OPS "
 fi
 if [ -f $OBC_FORCING_FILE_TS ]
 then
-  echo " put $OBC_FORCING_FILE_TS " >> ftp_nowcast.txt
+  echo " put $OBC_FORCING_FILE_TS " >> $DATA/ftp_nowcast.txt
   echo "   $OBC_FORCING_FILE_TS pushed to CO-OPS "
 fi
 if [ -f $NUDG_FORCING_FILE ]; then
-  echo " put $NUDG_FORCING_FILE " >> ftp_nowcast.txt
+  echo " put $NUDG_FORCING_FILE " >> $DATA/ftp_nowcast.txt
 fi
 
 #if [ -f $OBC_TIDALFORCING_FILE ]
 #then
-#  echo " put $OBC_TIDALFORCING_FILE " >> ftp_nowcast.txt
+#  echo " put $OBC_TIDALFORCING_FILE " >> $DATA/ftp_nowcast.txt
 #  echo "   $OBC_TIDALFORCING_FILE pushed to CO-OPS "
 #fi
 # 1.6 River Forcing 
 if [ -f $RIVER_FORCING_FILE ]
 then
-   echo " put $RIVER_FORCING_FILE " >> ftp_nowcast.txt
+   echo " put $RIVER_FORCING_FILE " >> $DATA/ftp_nowcast.txt
    echo "   $RIVER_FORCING_FILE pushed to CO-OPS "
 fi
 # 1.7 Surface Forcing 
 if [ -f $MET_NETCDF_1_NOWCAST ]
 then
-  echo " put $MET_NETCDF_1_NOWCAST " >> ftp_nowcast.txt
+  echo " put $MET_NETCDF_1_NOWCAST " >> $DATA/ftp_nowcast.txt
   echo "   $MET_NETCDF_1_NOWCAST pushed to CO-OPS "
 fi
 # 1.8 Surface Forcing 2
 if [ -f $MET_NETCDF_2_NOWCAST ]
 then
-  echo " put $MET_NETCDF_2_NOWCAST " >> ftp_nowcast.txt
+  echo " put $MET_NETCDF_2_NOWCAST " >> $DATA/ftp_nowcast.txt
   echo "   $MET_NETCDF_2_NOWCAST pushed to CO-OPS "
 fi
 # 1.9 Model runtime control file for nowcast
 if [ -f $RUNTIME_CTL_NOWCAST ]
 then
-  echo " put $RUNTIME_CTL_NOWCAST " >> ftp_nowcast.txt
+  echo " put $RUNTIME_CTL_NOWCAST " >> $DATA/ftp_nowcast.txt
 fi
 
 if [ -f $OBC_FORCING_FILE_NWGOFS_NOW ]; then
-   echo " put $OBC_FORCING_FILE_NWGOFS_NOW " >> ftp_nowcast.txt
+   echo " put $OBC_FORCING_FILE_NWGOFS_NOW " >> $DATA/ftp_nowcast.txt
 fi
 
 if [ -f $OBC_FORCING_FILE_NEGOFS_NOW ]; then
-   echo " put $OBC_FORCING_FILE_NEGOFS_NOW " >> ftp_nowcast.txt
+   echo " put $OBC_FORCING_FILE_NEGOFS_NOW " >> $DATA/ftp_nowcast.txt
 fi
 if [ -f $OBC_FORCING_FILE_NWGOFS_FOR ]; then
-   echo " put $OBC_FORCING_FILE_NWGOFS_FOR " >> ftp_nowcast.txt
+   echo " put $OBC_FORCING_FILE_NWGOFS_FOR " >> $DATA/ftp_nowcast.txt
 fi
 if [ -f $OBC_FORCING_FILE_NEGOFS_FOR ]; then
-   echo " put $OBC_FORCING_FILE_NEGOFS_FOR " >> ftp_nowcast.txt
+   echo " put $OBC_FORCING_FILE_NEGOFS_FOR " >> $DATA/ftp_nowcast.txt
 fi
 
 
@@ -300,30 +306,24 @@ fi
 # 2.1 forecast log 
 if [ -f ${MODEL_LOG_FORECAST} ]
 then
-  echo " put ${MODEL_LOG_FORECAST} " >> ftp_nowcast.txt 
+  echo " put ${MODEL_LOG_FORECAST} " >> $DATA/ftp_nowcast.txt 
 fi
 # 2.2 STA FORECAST
 if [ -f $STA_OUT_FORECAST ]
 then
-  echo " put $STA_OUT_FORECAST" >> ftp_nowcast.txt
+  echo " put $STA_OUT_FORECAST" >> $DATA/ftp_nowcast.txt
 fi
 # 2.3 HIS FORECAST 
 #for combinefields in `ls nos.${OFS}.fields.f*t${cyc}z.nc`
 #do
 #  if [ -f ${combinefields} ]
 #  then
-#    echo " put ${combinefields}" >> ftp_nowcast.txt
+#    echo " put ${combinefields}" >> $DATA/ftp_nowcast.txt
 #  fi
 #done
 
 nfile=`ls nos.${OFS}.2ds.f*t${cyc}z.nc |wc -l`
 if [ $nfile -ge 1 ]; then
-#  for combinefields in `ls nos.${OFS}.2ds.f*t${cyc}z.nc`
-#  do
-#    if [ -f ${combinefields} ]; then
-#      echo " put ${combinefields}" >> ftp_nowcast.txt
-#    fi
-#  done
   I=0
   while (( I < 49))
   do
@@ -331,20 +331,20 @@ if [ $nfile -ge 1 ]; then
     fhr3=`echo $I |  awk '{printf("%03i",$1)}'`
     fileout=nos.${OFS}.2ds.f${fhr3}.$PDY.t${cyc}z.nc
     if [ -s $fileout ]; then
-      echo " put ${fileout}" >> ftp_nowcast.txt
+      echo " put ${fileout}" >> $DATA/ftp_nowcast.txt
     fi
     (( I = I + 1 ))
   done
 
 else
   I=0
-  while (( I < 25))
+  while (( I < 49))
   do
     fhr4=`echo $I |  awk '{printf("%04i",$1)}'`
     fhr3=`echo $I |  awk '{printf("%03i",$1)}'`
     fileout=nos.${RUN}.fields.f${fhr3}.$PDY.t${cyc}z.nc
     if [ -s $fileout ]; then
-      echo " put ${fileout}" >> ftp_nowcast.txt
+      echo " put ${fileout}" >> $DATA/ftp_nowcast.txt
     fi
     (( I = I + 1 ))
   done
@@ -352,7 +352,7 @@ else
 #  for combinefields in `ls nos.${OFS}.fields.f*t${cyc}z.nc`
 #  do
 #    if [ -f ${combinefields} ]; then
-#      echo " put ${combinefields}" >> ftp_nowcast.txt
+#      echo " put ${combinefields}" >> $DATA/ftp_nowcast.txt
 #    fi
 #  done
 fi
@@ -361,13 +361,13 @@ fi
 #  for combinefields in `ls nos.${OFS}.fields.n*t${cyc}z.nc`
 #  do
 #    if [ -f ${combinefields} ];  then
-#      echo " put ${combinefields}" >> ftp_nowcast.txt
+#      echo " put ${combinefields}" >> $DATA/ftp_nowcast.txt
 #    fi
 #  done
 #  for combinefields in `ls nos.${OFS}.fields.f*t${cyc}z.nc`
 #  do
 #    if [ -f ${combinefields} ];  then
-#      echo " put ${combinefields}" >> ftp_nowcast.txt
+#      echo " put ${combinefields}" >> $DATA/ftp_nowcast.txt
 #    fi
 #  done
 #fi
@@ -378,61 +378,91 @@ fi
 #  fhr3=`echo $I |  awk '{printf("%03i",$1)}'`
 #  fileout=nos.${RUN}.fields.f${fhr3}.$PDY.t${cyc}z.nc
 #  if [ -s $fileout ]; then
-#    echo " put ${fileout}" >> ftp_nowcast.txt
+#    echo " put ${fileout}" >> $DATA/ftp_nowcast.txt
 #  fi
 #  (( I = I + 1 ))
 #done
 
 if [ -f $HIS_OUT_FORECAST ]
 then
-  echo " put $HIS_OUT_FORECAST" >> ftp_nowcast.txt 
+  echo " put $HIS_OUT_FORECAST" >> $DATA/ftp_nowcast.txt 
+fi
+if [ -f $AVG_OUT_FORECAST ]
+then
+  echo " put $AVG_OUT_FORECAST" >> $DATA/ftp_nowcast.txt
 fi
 
 # 2.4 Surface Forcing 
 if [ -f $MET_NETCDF_1_FORECAST ]
 then
-  echo " put $MET_NETCDF_1_FORECAST" >> ftp_nowcast.txt
+  echo " put $MET_NETCDF_1_FORECAST" >> $DATA/ftp_nowcast.txt
 fi
 # 2.5 Surface Forcing 2
 if [ -f $MET_NETCDF_2_FORECAST ]
 then
-  echo " put $MET_NETCDF_2_FORECAST " >> ftp_nowcast.txt
+  echo " put $MET_NETCDF_2_FORECAST " >> $DATA/ftp_nowcast.txt
 fi
 # 2.6 Mdel runtime control file for FORECAST
 if [ -f $RUNTIME_CTL_FORECAST ]
 then
-  echo " put $RUNTIME_CTL_FORECAST " >> ftp_nowcast.txt
+  echo " put $RUNTIME_CTL_FORECAST " >> $DATA/ftp_nowcast.txt
 fi
 # 2.7 CORMS FLAG file for forecast
 if [ -f ${NET}.${RUN}.corms.${PDY}.${cycle}.log ]
 then
-  echo " put ${NET}.${RUN}.corms.${PDY}.${cycle}.log " >> ftp_nowcast.txt
+  echo " put ${NET}.${RUN}.corms.${PDY}.${cycle}.log " >> $DATA/ftp_nowcast.txt
 fi
 # 2.8 jlog file for nowcast and forecast
 if [ -f ${NET}.${RUN}.jlogfile.${PDY}.${cycle}.log ]
 then
-  echo " put ${NET}.${RUN}.jlogfile.${PDY}.${cycle}.log " >> ftp_nowcast.txt
+  echo " put ${NET}.${RUN}.jlogfile.${PDY}.${cycle}.log " >> $DATA/ftp_nowcast.txt
 fi
 
 if [ -f ${NET}.${RUN}.jlog.${PDY}.${cycle}.log ]
 then
-  echo " put ${NET}.${RUN}.jlog.${PDY}.${cycle}.log " >> ftp_nowcast.txt
+  echo " put ${NET}.${RUN}.jlog.${PDY}.${cycle}.log " >> $DATA/ftp_nowcast.txt
 fi
 if [ -f  ${NET}.${RUN}.avg.${PDY}.${cycle}.nc ];  then
-   echo " put ${NET}.${RUN}.avg.${PDY}.${cycle}.nc " >> ftp_nowcast.txt
+   echo " put ${NET}.${RUN}.avg.${PDY}.${cycle}.nc " >> $DATA/ftp_nowcast.txt
 fi
 
 
 # 2.9 OFS status file for nowcast and forecast
 if [ -f ${RUN}.status ]
 then
-  echo " put  ${RUN}.status  " >> ftp_nowcast.txt
+  echo " put  ${RUN}.status  " >> $DATA/ftp_nowcast.txt
 fi
 
-echo " bye " >> ftp_nowcast.txt
-cp -p ftp_nowcast.txt ${COMOUT}/nos.${OFS}.ftp.${cyc}.ctl
+### still transfer 3D field outputs after ftp ${RUN}.status
+nfile=`ls nos.${OFS}.fields.f*t${cyc}z.nc |wc -l`
+if [ $nfile -ge 1 ]; then
+  I=0
+  while (( I < 49))
+  do
+    fhr4=`echo $I |  awk '{printf("%04i",$1)}'`
+    fhr3=`echo $I |  awk '{printf("%03i",$1)}'`
+    fileout=nos.${OFS}.fields.n${fhr3}.$PDY.t${cyc}z.nc
+    if [ -s $fileout ]; then
+      echo " put ${fileout}" >> $DATA/ftp_nowcast.txt
+    fi
+    (( I = I + 1 ))
+  done
+  I=0
+  while (( I < 24))
+  do
+    fhr4=`echo $I |  awk '{printf("%04i",$1)}'`
+    fhr3=`echo $I |  awk '{printf("%03i",$1)}'`
+    fileout=nos.${RUN}.fields.f${fhr3}.$PDY.t${cyc}z.nc
+    if [ -s $fileout ]; then
+      echo " put ${fileout}" >> $DATA/ftp_nowcast.txt
+    fi
+    (( I = I + 1 ))
+  done
+fi
+echo " bye " >> $DATA/ftp_nowcast.txt
+cp -p $DATA/ftp_nowcast.txt ${COMOUT}/nos.${OFS}.ftp.${cyc}.ctl
 
-ftp -v tidepool.nos.noaa.gov < ftp_nowcast.txt
+ftp -v tidepool.nos.noaa.gov < $DATA/ftp_nowcast.txt
 
 export err=$?
 if [ $err -ne 0 ]

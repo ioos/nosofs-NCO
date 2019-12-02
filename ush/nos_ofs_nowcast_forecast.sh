@@ -59,8 +59,6 @@
 # 0.  Preparations
 # 0.a Basic modes of operation
 
-
-
 function seton {
   set -x
 }
@@ -68,10 +66,6 @@ function setoff {
   set +x
 }
 seton
-
-echo "PT DEBUG: ulimits   ================================"
-ulimit -a
-echo "PT DEBUG: ulimits   ================================"
 
 cd $DATA
 
@@ -91,6 +85,7 @@ RUN=$OFS
 
 if [ ${OCEAN_MODEL} == "FVCOM" -o ${OCEAN_MODEL} == "fvcom" ]
 then 
+  NCSF_OUT_INTERVAL=${NCSF_OUT_INTERVAL:-$NC_OUT_INTERVAL}
   if [ -s ${FIXofs}/nos.${RUN}_brf.nc ]
   then
      cp -p ${FIXofs}/nos.${RUN}_brf.nc $DATA/${RUN}_brf.nc
@@ -128,7 +123,7 @@ then
   then
      cp -p ${FIXofs}/nos.${RUN}_rivernamelist.nml $DATA/RIVERS_NAMELIST.nml
   fi
-  if [ ${OFS} == "NGOFS" -o ${OFS} == "ngofs" ]; then
+  if [ "${OFS,,}" == "ngofs" ]; then
      if [ -s ${FIXofs}/nos_${RUN}_nestnode_negofs.dat ]; then
         cp -p ${FIXofs}/nos_${RUN}_nestnode_negofs.dat $DATA/nos_${RUN}_nestnode_negofs.dat
      fi
@@ -265,7 +260,7 @@ then
   fi
 fi
 
-if [ ${OFS} == "NWGOFS" -o ${OFS} == "nwgofs" ]; then
+if [ "${OFS,,}" == "nwgofs" ]; then
      if [ -s ${FIXofs}/nos.${RUN}_dam_cell.dat ]; then
         cp -p ${FIXofs}/nos.${RUN}_dam_cell.dat $DATA/${RUN}_dam_cell.dat
      fi
@@ -280,14 +275,6 @@ fi
 echo "Preparing input files for ${RUN} $RUNTYPE "
 echo '-----------------------'
 seton
-
-
-
-###############################################################################
-###############################################################################
-#### NOWCAST
-###############################################################################
-###############################################################################
 
 if [ $RUNTYPE == "NOWCAST" -o $RUNTYPE == "nowcast" ]
 then
@@ -613,14 +600,13 @@ then
   fi
 
 #1.i Tide data 
-  if [ -f $DATA/$HC_FILE_OFS ]
-  then
+  if [ $CREATE_TIDEFORCING -ge 0 ]; then
+   if [ -f $DATA/$HC_FILE_OFS ]; then
       echo "   $DATA/$HC_FILE_OFS linked "
-  elif [ -s $COMOUT/$HC_FILE_OFS ]
-  then
+   elif [ -s $COMOUT/$HC_FILE_OFS ]; then
       cp -p $COMOUT/$HC_FILE_OFS $HC_FILE_OFS
+   fi
   fi
-
 #1.j Nudging file
   TS_NUDGING=${TS_NUDGING:-0}
   if [ $TS_NUDGING -eq 1 ]; then
@@ -634,16 +620,12 @@ then
     fi
   fi
 
-
-  ######## NOWCAST #########
-  ##########################
   echo 'Ocean Model run starts at time: ' `date `
 # --------------------------------------------------------------------------- #
 # 2   Execute ocean model of ROMS; where ${RUN}_roms_nowcast.in is created by nos_ofs_reformat_roms_ctl.sh
   if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]
   then 
-    # nowccast
-    mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ${RUN}_${OCEAN_MODEL}_nowcast.in >> ${MODEL_LOG_NOWCAST}
+    mpirun $EXECnos/${RUN}_roms_mpi ${RUN}_${OCEAN_MODEL}_nowcast.in >> ${MODEL_LOG_NOWCAST}
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -670,6 +652,8 @@ then
     then
        echo "${RUN} NOWCAST RUN OF CYCLE t${HH}z ON $PDY FAILED 00"  >> $cormslogfile 
        echo "NOWCAST_RUN DONE 0"  >> $cormslogfile
+#for development
+       cp -pr $DATA $DATA/../../.
        export err=99; err_chk
     else
        grep "ROMS/TOMS: DONE" ${MODEL_LOG_NOWCAST} > corms.now
@@ -696,8 +680,9 @@ then
 
      NHIS_INTERVAL=`expr $NHIS / 3600`
      NQCK_INTERVAL=`expr $NQCK / 3600`
-    if [ -f damee4_avg.nc ]; then 
-      mv damee4_avg.nc nos.${RUN}.avg.$PDY.t${cyc}z.nc
+    if [ -f nos.${RUN}.avg.nc ]; then 
+      mv nos.${RUN}.avg.nc nos.${RUN}.avg.nowcast.$PDY.t${cyc}z.nc
+      cp -p nos.${RUN}.avg.nowcast.$PDY.t${cyc}z.nc ${COMOUT}/
     fi
     I=1
     while (( I < 120 ))
@@ -728,23 +713,7 @@ then
 
   elif [ ${OCEAN_MODEL} == "FVCOM" -o ${OCEAN_MODEL} == "fvcom" ]
   then
-    # nowcast
-    # mpirun -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
-    #mpirun --oversubscribe -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
-    #export MPIR_CVAR_PRINT_ERROR_STACK=1
-    #export MPIR_CVAR_ERROR_CHECKING=1
-    #export MPIR_CVAR_BCAST_MIN_PROCS=2
-    #export MPIR_CVAR_BCAST_SHORT_MSG_SIZE=1024
-    #export MPIR_CVAR_BCAST_LONG_MSG_SIZE=2048
-    # numa{:<n>}
-    # NOWCAST
-    # NOWCAST
-    # NOWCAST
-    mpirun -verbose -np $NPP -bind-to core:$NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
-    #mpirun -verbose -np $NPP -bind-to numa:2 -map-by C $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
-    #mpirun -verbose  -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
-    #mpirun -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
-    #mpirun -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    mpirun $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -754,8 +723,6 @@ then
       postmsg "$nosjlogfile" "$msg"
       err_exit "$msg"
     fi
-
-    exit 0
 
     rm -f corms.now corms.fcst 
     if [ -s ${MODEL_LOG_NOWCAST} ]
@@ -789,7 +756,13 @@ then
        then
          mv $DATA/$RUN'_station_timeseries.nc' $DATA/$STA_OUT_NOWCAST
        fi
+       NC_OUT_INTERVAL=`printf '%.0f' $NC_OUT_INTERVAL` ## convert decimal number to integer, and get the nearest integer
+       NCSF_OUT_INTERVAL=${NCSF_OUT_INTERVAL%.*} # just tuncate the integer part and remove the fractional part   
+       NHIS_INTERVAL=`expr $NC_OUT_INTERVAL / 3600`
+       NQCK_INTERVAL=`expr $NCSF_OUT_INTERVAL / 3600`
+       echo $NHIS_INTERVAL $NQCK_INTERVAL 
        Im1=0
+       IQm=0
        I=1
        while (( I < 100 ))
        do
@@ -799,13 +772,23 @@ then
             fhr3=`echo $Im1 |  awk '{printf("%03i",$1)}'`
             fileout=nos.${RUN}.fields.n${fhr3}.$PDY.t${cyc}z.nc
             mv $file $fileout
-            Im1=`expr $Im1 + 1`
+            Im1=`expr $Im1 + $NHIS_INTERVAL`
+          fi
+
+          file=$RUN'_surface_'${fhr4}'.nc'
+          if [ -s $file ]; then
+            fhr3=`echo $IQm |  awk '{printf("%03i",$1)}'`
+            fileout=nos.${RUN}.2ds.n${fhr3}.$PDY.t${cyc}z.nc
+            mv $file $fileout
+            IQm=`expr $IQm + $NQCK_INTERVAL`
           fi
           (( I = I + 1 ))
+
        done
        
-      fi
-      if [ ${OFS} == "NGOFS" -o ${OFS} == "ngofs" ]; then
+      fi  
+      if [ "${OFS,,}" == "ngofs" ]; then
+#      if [ ${OFS} == "NGOFS" -o ${OFS} == "ngofs" ]; then
         if [ -s nos_${RUN}_nestnode_negofs.nc ]; then
           cp -p nos_${RUN}_nestnode_negofs.nc $COMOUT/nos.${RUN}.nestnode.negofs.nowcast.$PDY.t${cyc}z.nc
         fi
@@ -822,13 +805,8 @@ then
   elif [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
   then
     echo "nowcast simulation began at:  `date`" >> $nosjlogfile
-    mpirun -np $NPP $EXECnos/selfe_${RUN} > $MODEL_LOG_NOWCAST
+    mpirun $EXECnos/selfe_${RUN} > $MODEL_LOG_NOWCAST
     export err=$?
-    echo "PT DEBUG: Exiting before a possibly bad restart file is copied over to /com"
-    echo "err: $err"
-    exit $err
-
-
     rm -f corms.now corms.fcst 
     if [ -s $DATA/mirror.out ]
     then
@@ -1044,7 +1022,7 @@ then
  
 #run netcdf combine executable
 #    cp -p $EXECnos/nos_ofs_combine_field_netcdf_selfe .
-     time tar -cvf - . | cat >/dev/null &
+     time tar -cvf - . | cat >/dev/null 
      time ${EXECnos}/nos_ofs_combine_field_netcdf_selfe 
      wait
 #    ${EXECnos}/nos_ofs_combine_field_netcdf_selfe
@@ -1120,26 +1098,32 @@ then
     mv $DATA/outputs $DATA/outputs_nowcast
     mv mirror.out $DATA/outputs_nowcast
   fi
+  echo 'Ocean Model run ends at time: ' `date `
+#save 3D surface nowcast field output file into COMOUT
   for combinefields in `ls ${DATA}/nos.${RUN}.fields.n*.nc`
   do
-     cp -p ${combinefields} ${COMOUT}/.
+    if [ -s ${combinefields} ]; then 
+      cp -p ${combinefields} ${COMOUT}/.
+    fi
   done
+#save 2D surface nowcast field output file into COMOUT
+  if [ -s ${DATA}/nos.${RUN}.2ds.n001.$PDY.t${cyc}z.nc ]; then
+   for combinefields in `ls ${DATA}/nos.${OFS}.2ds.n*.nc`
+   do
+    if [ -s ${combinefields} ]; then 
+      cp -p ${combinefields} ${COMOUT}/.
+    fi
+   done
+  fi
 #save nowcast station output file into COMOUT
   cp -p $DATA/$STA_OUT_NOWCAST  ${COMOUT}/$STA_OUT_NOWCAST
-  echo 'Ocean Model run ends at time: ' `date `
+  if [ -s $DATA/nos.${OFS}.avg.nowcast.$PDY.t${cyc}z.nc ]; then
+    cp -p $DATA/nos.${OFS}.avg.n*.nc $COMOUT/
+  fi 
 fi
-###############################################################################
-## END NOWCAST
-###############################################################################
 
 
-
-
-###############################################################################
-###############################################################################
 #### FORECAST
-###############################################################################
-###############################################################################
  
 if [ $RUNTYPE == "FORECAST" -o $RUNTYPE == "forecast" ]
 then
@@ -1477,19 +1461,10 @@ then
       err_exit "No restart file for forecast: $COMOUT/$RST_OUT_NOWCAST"
     fi
   fi 
-
-  ######## FORECAST #########
-  ##########################
 # --------------------------------------------------------------------------- #
 # 2   Execute ocean model of ROMS; where ${RUN}_roms_forecast.in is created by nos_ofs_reformat_roms_ctl.sh
   if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]; then
-     # mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
-     #mpirun -np $NPP -bind-to numa:2 -map-by C $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
-     # mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
-     mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
-     #mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
-     #mpirun -np $NPP -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
-     # mpirun -np $NPP $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+     mpirun $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -1546,6 +1521,9 @@ then
 #       fi
 #       (( I = I + 1 ))
 #    done
+    if [ -f nos.${RUN}.avg.nc ]; then
+      mv nos.${RUN}.avg.nc nos.${RUN}.avg.forecast.$PDY.t${cyc}z.nc
+    fi
 
     NHIS_INTERVAL=`expr $NHIS / 3600`
     NQCK_INTERVAL=`expr $NQCK / 3600`
@@ -1567,25 +1545,16 @@ then
          IQm=`expr $IQm + $NQCK_INTERVAL`
          fhr3=`echo $IQm |  awk '{printf("%03i",$1)}'`
          fileout=nos.${RUN}.2ds.f${fhr3}.$PDY.t${cyc}z.nc
-         cp -p $file $COMOUT/$fileout
+#         cp -p $file $COMOUT/$fileout
          mv $file $fileout
        fi
        (( I = I + 1 ))
     done
 
-  ######## FORECAST #########
-  ##########################
   elif [ ${OCEAN_MODEL} == "FVCOM" -o ${OCEAN_MODEL} == "fvcom" ]
   then
     rm -f $MODEL_LOG_FORECAST
-    #mpirun -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
- # mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
-
-    #mpirun -np $NPP -bind-to core:$NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
-    #mpiopts="-nolocal"
-    #mpirun -np $NPP -ppn $PPN -f $HOSTFILE $mpiopts -bind-to core $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
-    mpirun -np $NPP -ppn $PPN $mpiopts -bind-to core $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
-    #mpirun -np $NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
+    mpirun $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -1636,7 +1605,12 @@ then
           mv $DATA/$RUN'_station_timeseries.nc' $DATA/$STA_OUT_FORECAST
           echo "  $STA_OUT_FORECAST  saved "
         fi
+        NC_OUT_INTERVAL=`printf '%.0f' $NC_OUT_INTERVAL` ## convert decimal number to integer, and get the nearest integer
+        NCSF_OUT_INTERVAL=${NCSF_OUT_INTERVAL%.*} # just tuncate the integer part and remove the fractional part   
+        NHIS_INTERVAL=`expr $NC_OUT_INTERVAL / 3600`
+        NQCK_INTERVAL=`expr $NCSF_OUT_INTERVAL / 3600`
         Im1=0
+        IQm=0
         I=1
         while (( I < 169 ))
         do
@@ -1644,10 +1618,19 @@ then
           file=$RUN'_'${fhr4}'.nc'
           if [ -s $file ]; then
             fhr3=`echo $Im1 |  awk '{printf("%03i",$1)}'`
-            fileout=nos.${OFS}.fields.f${fhr3}.$PDY.t${cyc}z.nc
+            fileout=nos.${RUN}.fields.f${fhr3}.$PDY.t${cyc}z.nc
             mv $file $fileout
-            Im1=`expr $Im1 + 1`
+            Im1=`expr $Im1 + $NHIS_INTERVAL`
           fi
+
+          file=$RUN'_surface_'${fhr4}'.nc'
+          if [ -s $file ]; then
+            fhr3=`echo $IQm |  awk '{printf("%03i",$1)}'`
+            fileout=nos.${RUN}.2ds.f${fhr3}.$PDY.t${cyc}z.nc
+            mv $file $fileout
+            IQm=`expr $IQm + $NQCK_INTERVAL`
+          fi
+
           (( I = I + 1 ))
         done
       fi
@@ -1759,7 +1742,7 @@ then
  
 #run netcdf combine executable
 #    cp -p $EXECnos/nos_ofs_combine_field_netcdf_selfe $DATA/outputs 
-    time tar -cvf - . | cat >/dev/null &
+    time tar -cvf - . | cat >/dev/null 
     time $EXECnos/nos_ofs_combine_field_netcdf_selfe
     wait 
     export err=$?
@@ -1837,12 +1820,29 @@ then
        cp ${OFS}.status $COMOUT/.
   
   fi
+#save 3D forecast field output file into COMOUT
+  cd $DATA
   for combinefields in `ls ${DATA}/nos.${OFS}.fields.f*.nc`
   do
-     cp -p ${combinefields} ${COMOUT}/.
+    if [ -s ${combinefields} ]; then
+      cp -p ${combinefields} ${COMOUT}/.
+    fi
   done
+
+#save 2D surface forecast field output file into COMOUT
+  if [ -s ${DATA}/nos.${RUN}.2ds.f003.$PDY.t${cyc}z.nc ]; then
+   for combinefields in `ls ${DATA}/nos.${OFS}.2ds.f*.nc`
+   do
+    if [ -s ${combinefields} ]; then
+      cp -p ${combinefields} ${COMOUT}/.
+    fi
+   done
+  fi
 #save forecast station output file into COMOUT
-   cp -p $DATA/$STA_OUT_FORECAST  ${COMOUT}/$STA_OUT_FORECAST
+  cp -p $DATA/$STA_OUT_FORECAST  ${COMOUT}/$STA_OUT_FORECAST
+  if [ -s $DATA/nos.${OFS}.avg.forecast.$PDY.t${cyc}z.nc ]; then
+    cp -p $DATA/nos.${OFS}.avg.f*.nc $COMOUT/
+  fi 
 
 fi 
 

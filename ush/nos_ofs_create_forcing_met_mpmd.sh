@@ -1,16 +1,12 @@
 #!/bin/sh
 
-# PT 10/29/2019
-# This script has major flaws!!!
-#
-# In order to work as intended, NPP must be set to the correct number
-# depending on the number of levels (see non-mpmd driver)
-#
 GRB2FILE=${1:?}
 HH=${2:?}
 NPP=${3:?}
 
-TMPDIR=$(basename ${GRB2FILE//./_})
+TMPDIR1=$(dirname ${GRB2FILE//./_})
+TMPDIR2=$(basename $TMPDIR1)
+TMPDIR=${TMPDIR2}/$(basename ${GRB2FILE//./_})
 PS4=" \${SECONDS} \${TMPDIR} + "
 echo $GRB2FILE $HH
 set -x
@@ -19,14 +15,16 @@ set -x
 . ./var_lev_arrays
 
 if [ -d $TMPDIR ]; then
-  rm -f $TMPDIR
+  rm -fr $TMPDIR
 fi
 mkdir -p $TMPDIR
 
 TMPGRB2=$TMPDIR/${RUN:?}_${DBASE:?}.grib2
 TMP1GRB2=$TMPDIR/${RUN}_${DBASE}1.grib2
-
-${WGRIB2:?} $GRB2FILE -small_grib ${MINLON:?}:${MAXLON:?} ${MINLAT:?}:${MAXLAT:?} $TMPGRB2 
+TMPGRB3=$TMPDIR/$(basename $GRB2FILE)_nos
+${WGRIB2:?} $GRB2FILE | grep -F -f ${FIXnos}/nos.met.parmlist.dat | $WGRIB2 -i -grib ${TMPGRB3} $GRB2FILE
+${WGRIB2:?} ${TMPGRB3} -small_grib ${MINLON:?}:${MAXLON:?} ${MINLAT:?}:${MAXLAT:?} $TMPGRB2 
+#${WGRIB2:?} $GRB2FILE -small_grib ${MINLON:?}:${MAXLON:?} ${MINLAT:?}:${MAXLAT:?} $TMPGRB2
 N=0
 (( N = 10#$HH ))
 (( N3 = $N - 3 ))

@@ -87,6 +87,9 @@ fi
    DD=`echo $TIME_START | cut -c7-8 `
    HH=`echo $TIME_START | cut -c9-10 `
  NUDG_FORCING_FILE_LAST=nos.${OFS}.clim.${YYYY}${MM}${DD}.t${HH}z.nc
+if [ -s ${COMOUTroot}/${OFS}.$YYYY$MM$DD/$NUDG_FORCING_FILE_LAST ]; then
+      cp -p ${COMOUTroot}/${OFS}.$YYYY$MM$DD/$NUDG_FORCING_FILE_LAST $DATA/.
+fi
 echo ${OFS} > Fortran_nudg.ctl
 echo $OCEAN_MODEL >> Fortran_nudg.ctl
 echo $DBASE_TS  >> Fortran_nudg.ctl

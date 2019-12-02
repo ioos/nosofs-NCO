@@ -53,11 +53,11 @@
 #       Implementation                    01/14/2010
 #
 # -------------------------------------------------------------------------
-set -x
+set -xa
 
-echo 'The script nos_ofs_create_forcing_obc.sh started at UTC' `date`
-echo 'The script nos_ofs_create_forcing_obc.sh started at UTC' `date` >> $jlogfile
-echo 'The script nos_ofs_create_forcing_obc.sh started at UTC' `date` >> $nosjlogfile
+echo 'The script nos_ofs_create_forcing_obc.sh started at UTC' `date -u +%Y%m%d%H`
+echo 'The script nos_ofs_create_forcing_obc.sh started at UTC' `date -u +%Y%m%d%H` >> $jlogfile
+echo 'The script nos_ofs_create_forcing_obc.sh started at UTC' `date -u +%Y%m%d%H` >> $nosjlogfile
 
 TIME_START=$time_hotstart
 TIME_END=$time_forecastend
@@ -72,7 +72,8 @@ DD=`echo $TIME_START |cut -c7-8 `
 HH=`echo $TIME_START |cut -c9-10 `
  
 ##  create nest OBC file for NEGOFS/NWGOFS
-if [ "${OFS,,}" == "negofs" -o "${OFS,,}" == "nwgofs" ]; then
+if [ ${OFS} == "NEGOFS" -o ${OFS} == "negofs" -o ${OFS} == "NWGOFS" -o ${OFS} == "nwgofs" ]
+then
     echo $OFS > nos.${OFS}.obc.ctl
     echo $OCEAN_MODEL >> nos.${OFS}.obc.ctl
     echo $TIME_START >> nos.${OFS}.obc.ctl
@@ -83,11 +84,7 @@ if [ "${OFS,,}" == "negofs" -o "${OFS,,}" == "nwgofs" ]; then
     echo $KBm >> nos.${OFS}.obc.ctl
     echo '1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41' >> nos.${OFS}.obc.ctl
     echo $NESTED_PARENT_OFS >> nos.${OFS}.obc.ctl
-    echo $COMINnestedparent >> nos.${OFS}.obc.ctl
-
-## added by Zheng on 07/17/2018
-    echo $HOMEnos/fix/$NESTED_PARENT_OFS/nos.$NESTED_PARENT_OFS.${OFS}.obc.center.nc >> nos.${OFS}.obc.ctl
-## added by Zheng on 07/17/2018
+    echo $COMINnestedparent >> nos.${OFS}.obc.ctl    
 
     $EXECnos/nos_ofs_create_forcing_obc_fvcom_nest < nos.${OFS}.obc.ctl  >> Fortran_OBC_${OFS}.log
     if grep "COMPLETED SUCCESSFULLY" Fortran_OBC_${OFS}.log /dev/null 2>&1
@@ -179,11 +176,7 @@ then
  if [ -f "$HC_FILE_OFS" ]; then
     cp $HC_FILE_OFS $COMOUT/$OBC_TIDALFORCING_FILE 
     if [ $SENDDBN = YES ]; then
-      if [ "${OFS,,}" == "gomofs" -o "${OFS,,}" == "wcofs" -o "${OFS,,}" == "ciofs" ]; then
-        $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF_LRG $job $COMOUT/$OBC_TIDALFORCING_FILE
-      else
-        $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF $job $COMOUT/$OBC_TIDALFORCING_FILE
-      fi
+      $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF $job $COMOUT/$OBC_TIDALFORCING_FILE
     fi
  fi
 fi
@@ -194,7 +187,6 @@ fi
 #     Find and Process available RTOFS NetCDF files       
 # --------------------------------------------------------------------------
 if [ $DBASE_TS == 'RTOFS' ]; then
-
   COMTMP=$COMINrtofs_3d
   echo 'process G-RTOFS from : ' $TIME_START 'to ' $TIME_END
 #  typeset -Z2 HH HH3 CYCLE
@@ -207,47 +199,20 @@ if [ $DBASE_TS == 'RTOFS' ]; then
   DD=`echo $TIME_STARTm1 |cut -c7-8 `
   HH=`echo $TIME_STARTm1 |cut -c9-10 `
   CYCLE=00
-  reg="reg1"
-  if [  "${OFS,,}" == "creofs" -o "${OFS,,}" == "sfbofs" -o "${OFS,,}" == "wcofs" -o "${OFS,,}" == "wcofs4" ]; then
-      reg="reg2"
-  elif [ "${OFS,,}" == "ciofs" ]; then
-      reg="reg3"
+  reg="US_east"
+  if [ $OFS == "CREOFS" -o $OFS == "creofs" -o $OFS == "SFBOFS" -o $OFS == "sfbofs" -o $OFS == "WCOFS" -o $OFS == "wcofs" ]; then
+    reg="US_west"
+  elif [ $OFS == "CIOFS" -o $OFS == "ciofs" ]; then
+    reg="alaska"
   fi
+
   FILESIZE=800000000
-  if [ $reg == "reg1" ]; then
-      FILESIZE=800000000
-  elif [ $reg == "reg2" ]; then
-      FILESIZE=1100000000
-  elif [ $reg == "reg3" ]; then
-      FILESIZE=390000000
-  fi
-  NCEPPRODDIR=${COMINrtofs_3d}'/rtofs.'$YYYY$MM$DD
-  NFILE9=`ls -l ${NCEPPRODDIR}/rtofs_glo_3dz_f*_6hrly_hvr_${reg}.nc | wc -l`
-  if [ $NFILE9 -gt 0 ]; then
-    echo 'use RTOFS.v1.0'
-  elif [ $NFILE9 -le 0 ]; then
-    echo "RTOFS 1.0.x products are not available"
-    echo "search RTOFS 1.2.x products"
-    reg="US_east"
-    if [ "${OFS,,}" == "creofs" -o "${OFS,,}" == "sfbofs" -o "${OFS,,}" == "wcofs" -o "${OFS,,}" == "wcofs4" ]; then
-      reg="US_west"
-    elif [ "${OFS,,}" == "ciofs" ]; then
-      reg="alaska"
-    fi
-    NCEPPRODDIR=${COMINrtofs_3d}'/rtofs.'$YYYY$MM$DD
-    NFILE9=`ls -l ${NCEPPRODDIR}/rtofs_glo_3dz_f*_6hrly_hvr_${reg}.nc | wc -l`
-    if [ $NFILE9 -le 0 ]; then
-      echo "WARNING: there is no RTOFS product found"
-      echo "use HYCOM as backup"
-    fi
-    FILESIZE=800000000
-    if [ $reg == "US_east" ]; then
-       FILESIZE=800000000
-    elif [ $reg == "US_west" ]; then
-       FILESIZE=1100000000
-    elif [ $reg == "alaska" ]; then
-       FILESIZE=390000000
-    fi
+  if [ $reg == "US_east" ]; then
+     FILESIZE=800000000
+  elif [ $reg == "US_west" ]; then
+    FILESIZE=1100000000
+  elif [ $reg == "alaska" ]; then
+    FILESIZE=390000000
   fi
   TMPDATE[1]='0000000000'
   TMPFILE[1]=''
@@ -333,23 +298,23 @@ if [ $DBASE_TS == 'RTOFS' ]; then
     done 
     
      if [ $MAXDATE -lt $TIME_ENDm3 ]; then
-      echo 'WARNING: RTOFS products do not cover from : ' $TIME_START 'to ' $TIME_END
-      echo "Please check RTOFS Products on " $COMINrtofs_3d
-      echo "switching to backup products HYCOM for TS and ETSS for WL"
+      echo 'Global RTOFS products do not cover from : ' $TIME_START 'to ' $TIME_END
+      echo "Please check Global RTOFS Products on " $COMINrtofs_3d
+      echo "switch to backup products HYCOM"
       export DBASE_TS='HYCOM'
       export DBASE_WL="ETSS"
     fi
   else
-      echo 'WARNING: RTOFS products do not cover from : ' $TIME_START 'to ' $TIME_END
-      echo "Please check RTOFS Products on " $COMINrtofs_3d
-      echo "switching to backup products HYCOM for TS and ETSS for WL"
+      echo 'Global RTOFS products do not cover from : ' $TIME_START 'to ' $TIME_END
+      echo "Please check Global RTOFS Products on " $COMINrtofs_3d
+      echo "switch to backup products HYCOM"
       export DBASE_TS='HYCOM'    
       export DBASE_WL="ETSS"
   fi
-  if [ ! -s RTOFS_FILE ]; then
-      echo 'WARNING: RTOFS products do not cover from : ' $TIME_START 'to ' $TIME_END
-      echo "Please check RTOFS Products on " $COMINrtofs_3d
-      echo "switching to backup products HYCOM for TS and ETSS for WL"
+  if [ ! -s ${RTOFS_FILE} ]; then
+      echo 'Global RTOFS products do not cover from : ' $TIME_START 'to ' $TIME_END
+      echo "Please check Global RTOFS Products on " $COMINrtofs_3d
+      echo "switch to backup products HYCOM"
       export DBASE_TS='HYCOM'
       export DBASE_WL="ETSS"
   fi  
@@ -369,9 +334,9 @@ if [ $DBASE_TS == 'HYCOM' ]; then
   HH=`echo $TIME_STARTm1 |cut -c9-10 `
   CYCLE=00
   reg=regp01
-  if [ "${OFS,,}" == "creofs" -o "${OFS,,}" == "sfbofs" -o "${OFS,,}" == "wcofs" -o "${OFS,,}" == "wcofs4" ]; then
+  if [ $OFS == "CREOFS" -o $OFS == "creofs" -o $OFS == "SFBOFS" -o $OFS == "sfbofs" -o $OFS == "WCOFS" -o $OFS == "wcofs" ]; then
     reg=regp07
-  elif [  "${OFS,,}"  == "ciofs" ]; then
+  elif [ $OFS == "CIOFS" -o $OFS == "ciofs" ]; then
     reg=regp06
   fi
   FILESIZE=176000000
@@ -470,12 +435,6 @@ if [ $DBASE_TS == 'HYCOM' ]; then
   else 
      DBASE_TS='WOA05'
      DBASE_WL='ETSS'
-
-     echo "WARNING: Neither RTOFS nor HYCOM model data are available" 
-     echo "switching to backup products WOA05 for TS and ETSS for WL"
-     echo "WARNING: Neither RTOFS nor HYCOM model data are available" >> $jlogfile 
-     echo "switching to backup products WOA05 for TS and ETSS for WL" >> $jlogfile 
-
   fi  
 fi
 # --------------------------------------------------------------------------
@@ -499,7 +458,7 @@ if [ $DBASE_TS == 'NCOM' ]; then
   NCOM_PRE="ncom_glb_regp01_"
   NCOM_PRE_TIDE="ncom_glb_regp01_tides_"
   FILESIZE=570000000
-  if [ "${OFS,,}" == "creofs" -o "${OFS,,}" == "sfbofs" -o "${OFS,,}" == "wcofs" -o "${OFS,,}" == "wcofs4" ]; then
+  if [ $OFS == "CREOFS" -o $OFS == "creofs" -o $OFS == "SFBOFS" -o $OFS == "sfbofs" ]; then
     NCOM_PRE="ncom_glb_regp07_"
     NCOM_PRE_TIDE="ncom_glb_regp07_tides_"
     FILESIZE=460000000
@@ -610,7 +569,6 @@ fi
 #     create Open Boundary forcing File (subtidal WL, T, and S)for OFS
 # --------------------------------------------------------------------------
 if [ $DBASE_WL == RTOFS ]; then
-
   TMPDATE[1]='0000000000'
   TMPFILE[1]=''
   LASTDATE='0000000000'
@@ -685,13 +643,8 @@ if [ $DBASE_WL == RTOFS ]; then
    fi   
    (( I = I + 1 ))
   done  
-  if [ ! -s RTOFS_FILE_WL ]; then
+  if [ ! -s $RTOFS_FILE_WL ]; then
     export DBASE_WL="ETSS"
-      echo "WARNING: no RTOFS data avaiable for WL" 
-      echo "         switching to backup products ETSS" 
-      echo "WARNING: no RTOFS data avaiable for WL" >> $jlogfile  
-      echo "         switching to backup products ETSS" >> $jlogfile  
-
   fi
 fi
 
@@ -727,7 +680,7 @@ if [ $DBASE_WL == "ETSS" ]; then
     if [ $CURRENTTIME -le ` $NDATE -60 $INPUTTIME ` ]
     then
      if [ $DBASE_WL == "ETSS" ]; then
-       echo 'FATAL ERROR: no valid ETSS operational products is available for the given time period'
+       echo 'no valid ETSS operational products is available for the given time period'
        msg="FATAL ERROR: no valid ETSS operational products is available for the given time period   "
        postmsg "$jlogfile" "$msg"
        postmsg "$nosjlogfile" "$msg"
@@ -737,6 +690,7 @@ if [ $DBASE_WL == "ETSS" ]; then
      else
        echo "ETSS is not primary forcing source of subtidal water level open boundary conditions"
        echo "$DBASE_WL is primary source for subtidal water level open boundary conditions"
+       echo "Warning Message: echo no valid ETSS operational products is available for the given time period"
      fi
     fi
     YYYY=`echo $CURRENTTIME | cut -c1-4 `
@@ -781,51 +735,51 @@ if [ $DBASE_WL == "ETSS" ]; then
    read CURRENTTIME1
    while read GRB2FILE2 
    do
-     read CURRENTTIME2
-     LENGTH=` $NHOUR $CURRENTTIME2 $CURRENTTIME1 `
-     echo 'LENGTH= ' $LENGTH
-     N=1
-     while (( N <= 10#$LENGTH))
-     do
-	   rm -f tmp.csv
-	   $WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv
-	   export err=$?
-	   if [ $err -ne 0 ]
-	   then
-	     echo "$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv did not complete normally, FATAL ERROR!"
-	     msg="$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv did not complete normally, FATAL ERROR!"
-	     postmsg "$nosjlogfile" "$msg"
-	     err_chk
-	   else
-	     echo "$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv completed normally!"
-	     msg="$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv  completed normally!"
-	     postmsg "$nosjlogfile" "$msg"
-	   fi
-	   cat tmp.csv >> ${OFS}.ETSS
-	   (( N = N + 1 ))
-     done
-     CURRENTTIME1=$CURRENTTIME2
-     GRB2FILE1=$GRB2FILE2 
+      read CURRENTTIME2
+      LENGTH=` $NHOUR $CURRENTTIME2 $CURRENTTIME1 `
+      echo 'LENGTH= ' $LENGTH
+      N=1
+      while (( N <= 10#$LENGTH))
+      do
+	 rm -f tmp.csv
+	 $WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv
+	 export err=$?
+	 if [ $err -ne 0 ]
+	 then
+	   echo "$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv did not complete normally, FATAL ERROR!"
+	   msg="$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv did not complete normally, FATAL ERROR!"
+	   postmsg "$nosjlogfile" "$msg"
+	   err_chk
+	 else
+	   echo "$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv completed normally!"
+	   msg="$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv  completed normally!"
+	   postmsg "$nosjlogfile" "$msg"
+	 fi
+	 cat tmp.csv >> ${OFS}.ETSS
+	 (( N = N + 1 ))
+      done
+      CURRENTTIME1=$CURRENTTIME2
+      GRB2FILE1=$GRB2FILE2 
    done 3<&-  
-
-   if [ -s cmdfile ]; then rm cmdfile; fi
-
    N=1
-   while (( N <= 97 ))
+   while (( N <= 97))
    do
-     rm -f tmp${N}.csv
-     echo "$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp${N}.csv" >>cmdfile
-     (( N++ ))
-   done
-
-   mpirun cfp cmdfile
-   export err=$?; err_chk
-
-   N=1
-   while (( N <= 97 ))
-   do
-     cat tmp${N}.csv >> ${OFS}.ETSS
-     (( N++ ))
+      rm -f tmp.csv
+      $WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv
+      export err=$?
+      if [ $err -ne 0 ]
+      then
+	echo "$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv did not complete normally, FATAL ERROR!"
+	msg="$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv did not complete normally, FATAL ERROR!"
+	postmsg "$nosjlogfile" "$msg"
+	err_chk
+      else
+	echo "$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv completed normally!"
+	msg="$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp.csv  completed normally!"
+	postmsg "$nosjlogfile" "$msg"
+      fi
+      cat tmp.csv >> ${OFS}.ETSS
+      (( N = N + 1 ))
    done
   fi
 fi
@@ -842,7 +796,7 @@ fi
 if [ -s Fortran_OBC.ctl ]; then
    rm -f Fortran_OBC.ctl Fortran_OBC.log
 fi 
-if [ "${OFS,,}" != "creofs" ]; then
+if [ ${OFS} != "creofs" -a  ${OFS} != "CREOFS"  ]; then
     YYYY=`echo $TIME_START | cut -c1-4 `
       MM=`echo $TIME_START | cut -c5-6 `
       DD=`echo $TIME_START | cut -c7-8 `
@@ -854,7 +808,6 @@ if [ "${OFS,,}" != "creofs" ]; then
 else
    OBC_FORCING_FILE_LAST=nos.${OFS}.obc.${YYYY}${MM}${DD}.t${HH}z.tar
 fi    
-BIO_MODULE=${BIO_MODULE:-0}
 echo ${OFS} > Fortran_OBC.ctl
 echo $OCEAN_MODEL >> Fortran_OBC.ctl
 echo $DBASE_WL  >> Fortran_OBC.ctl
@@ -880,7 +833,7 @@ else
 fi
 echo $OBC_CTL_FILE >> Fortran_OBC.ctl
 echo $OBC_CLIM_FILE >> Fortran_OBC.ctl
-if [ "${OFS,,}" == "leofs" -o "${OFS,,}" == "lmhofs" ]; then
+if [ $OFS == 'leofs' ]; then
      echo $CORRECTION_STATION_CTL >> Fortran_OBC.ctl
      echo $WL_OFFSET_OLD >> Fortran_OBC.ctl
 fi
@@ -898,7 +851,6 @@ if [ $OCEAN_MODEL == "ROMS" -o $OCEAN_MODEL == "roms" ];  then
      echo $TCLINE >> Fortran_OBC.ctl 
      echo $NVTRANS  >> Fortran_OBC.ctl
      echo $NVSTR  >> Fortran_OBC.ctl
-     echo ${BIO_MODULE} >> Fortran_OBC.ctl 
 else    
      echo $VGRID_CTL >> Fortran_OBC.ctl
 fi    
@@ -935,8 +887,7 @@ elif [ $OCEAN_MODEL == "SELFE" -o $OCEAN_MODEL == "selfe" ]; then
     tar -cvf ${OBC_FORCING_FILE} elev3D.th temp_nu.in salt_nu.in
     
 elif [ $OCEAN_MODEL == "FVCOM" -o $OCEAN_MODEL == "fvcom" ]; then
-#  if [  $OFS == "LEOFS" -o $OFS == "leofs" ];  then
-  if [  "${OFS,,}" == "leofs" -o "${OFS,,}" == "lmhofs" ];  then
+  if [  $OFS == "LEOFS" -o $OFS == "leofs" ];  then
       CURRENTTIME=$time_nowcastend
 ##  allow to search back for maximum 2 days
       CURRENTTIMEm5=`$NDATE -48 $CURRENTTIME `
@@ -962,7 +913,7 @@ elif [ $OCEAN_MODEL == "FVCOM" -o $OCEAN_MODEL == "fvcom" ]; then
         cp -p $FIXofs/$CORRECTION_STATION_CTL $DATA
       fi
       $EXECnos/nos_ofs_create_forcing_obc_fvcom_gl < Fortran_OBC.ctl > Fortran_OBC.log
-      cp -p nos.${OFS}.obc.avg-wl* $COMOUT/.
+      cp -p nos.leofs.obc.avg-wl* $COMOUT/.
       cp -p $WL_OFFSET_OLD $COMOUT/.
       cp -p $WL_OFFSET_OLD $FILESAVE
   else
@@ -1000,24 +951,24 @@ if [ -f "$OBC_FORCING_FILE" ]; then
 else
     echo "NO $OBC_FORCING_FILE File Found"
 fi
-#if [ -f $COMOUT/$OBC_FORCING_FILE_EL ]; then
-#    if [ $SENDDBN = YES ]; then
-#      $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF $job $COMOUT/$OBC_FORCING_FILE_EL
-#    fi
-#fi
-#if [ -f $COMOUT/$OBC_FORCING_FILE_TS ]  
-#then
-#    if [ $SENDDBN = YES ]; then
-#      $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF $job $COMOUT/$OBC_FORCING_FILE_TS
-#    fi
-#fi
+if [ -f $COMOUT/$OBC_FORCING_FILE_EL ]; then
+    if [ $SENDDBN = YES ]; then
+      $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF $job $COMOUT/$OBC_FORCING_FILE_EL
+    fi
+fi
+if [ -f $COMOUT/$OBC_FORCING_FILE_TS ]  
+then
+    if [ $SENDDBN = YES ]; then
+      $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF $job $COMOUT/$OBC_FORCING_FILE_TS
+    fi
+fi
 
 if [ -f "$HC_FILE_OFS" ]
 then
     cp $HC_FILE_OFS $COMOUT/$HC_FILE_OFS 
-#    if [ $SENDDBN = YES ]; then
-#      $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF $job $COMOUT/$HC_FILE_OFS
-#    fi
+    if [ $SENDDBN = YES ]; then
+      $DBNROOT/bin/dbn_alert MODEL $DBN_ALERT_TYPE_NETCDF $job $COMOUT/$HC_FILE_OFS
+    fi
 else
     echo "NO $HC_FILE_OFS File Found"
 fi
@@ -1043,5 +994,5 @@ if [ -f xx012 ]; then
     cp -p xx012  $COMOUT/xx012.t${cyc}z
 fi
 
-echo 'The script nos_ofs_create_forcing_obc.sh ended at UTC' `date`
+echo 'The script nos_ofs_create_forcing_obc.sh ended at UTC' `date -u +%Y%m%d%H`
 

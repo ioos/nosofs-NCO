@@ -70,11 +70,6 @@ echo 'The script nos_ofs_launch.sh has started at UTC' `date ` >> $nosjlogfile
 
 # set from system PDY variable for operations
 export time_nowcastend=$PDY${cyc}
-echo "*******************************************************************"
-echo "*******************************************************************"
-echo "time_nowcastend is $time_nowcastend"
-echo "*******************************************************************"
-echo "*******************************************************************"
 
 #------------------------------------------------'
 #  COPY Files into Work Directory
@@ -94,15 +89,12 @@ else
   export err=$?; err_chk
   echo "${FIXofs}/$GRIDFILE is copied into working dir"  
 fi
-
-
 if [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
 then 
   if [ ! -d $DATA/outputs ] 
   then
      mkdir -p $DATA/outputs
   fi
-
   if [ ! -d $DATA/sflux ] 
   then
      mkdir -p $DATA/sflux
@@ -112,7 +104,6 @@ then
   then
      cp -p ${FIXofs}/$GRIDFILE_LL $DATA/.
   fi
-
   if [ -s ${FIXofs}/$Nudging_weight ]
   then
      cp -p ${FIXofs}/$Nudging_weight $DATA/.
@@ -121,55 +112,49 @@ fi
 
 if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]
 then 
-  #  if [ ! -s ${FIXnos}/$VARINFOFILE_ROMS ]
-  #  then
-  #if [ ! -s ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat ]; then
-  VARINFO=${FIXnos}/varinfo.dat
-
-  if [ ! -s ${VARINFO} ]; then
+#  if [ ! -s ${FIXnos}/$VARINFOFILE_ROMS ]
+#  then
+  if [ ! -s ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat ]; then
     echo "ROMS varinfo.dat is not found"
-    echo "please provide file of ${VARINFO}"
-    echo "please provide file of ${VARINFO}" >> $cormslogfile
-    msg="FATAL ERROR: ${VARINFO} does not exist, FATAL ERROR!"
+    echo "please provide file of ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat"
+    echo "please provide file of ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat" >> $cormslogfile
+    msg="FATAL ERROR: ${HOMEnos}/ROMS.fd/sorc/ROMS/External/varinfo.dat does not exist, FATAL ERROR!"
     postmsg "$jlogfile" "$msg"
     postmsg "$nosjlogfile" "$msg"
     exit 2
   else
-    #cp -p ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat $DATA/.
-    cp -p ${VARINFO} $DATA/.
+    cp -p ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat $DATA/.
     export err=$?; err_chk
-    echo "${VARINFO} was copied into working dir"
+    echo " ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat was copied into working dir"
   fi
 fi
-
 if [ $CREATE_TIDEFORCING -gt 0 -a $DBASE_WL_NOW != "OBS" ]
 then
 
-  if [ ! -s ${FIXofs}/$HC_FILE_OBC ]
-  then
-    echo '${FIXofs}/$HC_FILE_OBC is not found'
-    echo 'please provide file of ${FIXofs}/$HC_FILE_OBC'
-    echo 'please provide file of ${FIXofs}/$HC_FILE_OBC' >> $cormslogfile
-    msg="FATAL ERROR: ${FIXofs}/$HC_FILE_OBC does not exist, FATAL ERROR!"
-    postmsg "$jlogfile" "$msg"
-    postmsg "$nosjlogfile" "$msg"
-    exit 3
-  else
-    cp -p ${FIXofs}/$HC_FILE_OBC $DATA/.
-    export err=$?; err_chk
-  fi
-fi
-
-
-if [ -d ${FIXofs}/$VGRID_CTL -o ! -s ${FIXofs}/$VGRID_CTL ]
+if [ ! -s ${FIXofs}/$HC_FILE_OBC ]
 then
+  echo '${FIXofs}/$HC_FILE_OBC is not found'
+  echo 'please provide file of ${FIXofs}/$HC_FILE_OBC'
+  echo 'please provide file of ${FIXofs}/$HC_FILE_OBC' >> $cormslogfile
+  msg="FATAL ERROR: ${FIXofs}/$HC_FILE_OBC does not exist, FATAL ERROR!"
+  postmsg "$jlogfile" "$msg"
+  postmsg "$nosjlogfile" "$msg"
+  exit 3
+else
+  cp -p ${FIXofs}/$HC_FILE_OBC $DATA/.
+  export err=$?; err_chk
+fi
+fi
+if [ ${OCEAN_MODEL} != "ROMS" -a ${OCEAN_MODEL} != "roms" ]; then
+ if [ -d ${FIXofs}/$VGRID_CTL -o ! -s ${FIXofs}/$VGRID_CTL ]
+ then
   echo "${FIXofs}/$VGRID_CTL is not found"
   echo "please provide file of ${FIXofs}/$VGRID_CTL"
   echo "please provide file of ${FIXofs}/$VGRID_CTL" >> $cormslogfile
-else
+ else
   cp -p ${FIXofs}/$VGRID_CTL $DATA/.
+ fi
 fi
-
 export pgm=${FIXofs}/$STA_OUT_CTL"_copy"
 . prep_step
 
@@ -189,7 +174,6 @@ else
      echo "${FIXofs}/$STA_OUT_CTL was copied into working dir"
   fi   
 fi
-
 if [ ! -s ${FIXofs}/$RUNTIME_CTL -o ! -f ${FIXofs}/$RUNTIME_CTL ]
 then
      echo '${FIXofs}/$RUNTIME_CTL is not found'
@@ -204,14 +188,11 @@ else
      export err=$?; err_chk
      echo "${FIXofs}/$RUNTIME_CTL was copied into working dir"
 fi
-
-if [ -s ${FIXofs}/$RUNTIME_CTL_FOR -a -f   ${FIXofs}/$RUNTIME_CTL_FOR  ]
-then
+if [ -s ${FIXofs}/$RUNTIME_CTL_FOR -a -f   ${FIXofs}/$RUNTIME_CTL_FOR  ]; then
      cp -p ${FIXofs}/$RUNTIME_CTL_FOR $DATA/.
      echo " ${FIXofs}/$RUNTIME_CTL_FOR was copied into working dir"
 #     export err=$?; err_chk
 fi
-
 BIO_MODULE=${BIO_MODULE:-0}
 if [ $BIO_MODULE -eq 1 ]; then
   if [ ! -s ${FIXofs}/${NET}.${OFS}.bio.in ]; then
@@ -227,7 +208,6 @@ if [ $BIO_MODULE -eq 1 ]; then
      export err=$?; err_chk
      echo "${FIXofs}/${NET}.${OFS}.bio.in was copied into working dir"
   fi
-
   if [ ! -s ${FIXofs}/${RESPIRATE_RATE} ]; then
      echo "${FIXofs}/${RESPIRATE_RATE} is not found"
      echo "please provide ROMS control file of ${FIXofs}/${RESPIRATE_RATE}"
@@ -242,7 +222,6 @@ if [ $BIO_MODULE -eq 1 ]; then
      echo "${FIXofs}/${RESPIRATE_RATE} was copied into working dir"
   fi
 fi  
-
 TS_NUDGING=${TS_NUDGING:-0}
 if [ $TS_NUDGING -eq 1 ]; then
   if [ ! -s ${FIXofs}/${NET}.${OFS}.nudgcoef.nc ]; then
@@ -259,81 +238,76 @@ if [ $TS_NUDGING -eq 1 ]; then
      echo "${FIXofs}/${NET}.${OFS}.bio.in was copied into working dir"
   fi
 fi
-
 export HH=$cyc
 export PDY1=$PDY
 
 ##  For prep Only -----------------------------------'
 if [ "$runtype" = "prep" ] || [ "$runtype" = "PREP" ]
 then 
-# copy all shared static files into DATA/WORK Directory
+# copy all shared static files into DATA/WORK Dirctory
 
-  if [ ! -s ${FIXnos}/$OBC_CLIM_FILE ]
-  then
-    echo '${FIXnos}/$OBC_CLIM_FILE is not found'
-    echo 'please provide OBC control file of ${FIXnos}/$OBC_CLIM_FILE'
-    echo 'please provide OBC control file of ${FIXnos}/$OBC_CLIM_FILE' >> $cormslogfile
-    msg="FATAL ERROR: ${FIXnos}/$OBC_CLIM_FILE does not exist, FATAL ERROR!"
-    postmsg "$jlogfile" "$msg"
-    postmsg "$nosjlogfile" "$msg"
-    exit 1
-  else
-    cp -p ${FIXnos}/$OBC_CLIM_FILE $DATA/.
-    export err=$?; err_chk
-  fi
-
-  if [ ! -s ${FIXnos}/nos.ofs.HC_NWLON.nc ]
-  then
-    echo '${FIXnos}/nos.ofs.HC_NWLON.nc is not found'
-    echo 'please provide OBC control file of ${FIXnos}/nos.ofs.HC_NWLON.nc'
-    echo 'please provide OBC control file of ${FIXnos}/nos.ofs.HC_NWLON.nc' >> $cormslogfile
-    msg="FATAL ERROR: ${FIXnos}/nos.ofs.HC_NWLON.nc does not exist, FATAL ERROR!"
-    postmsg "$jlogfile" "$msg"
-    postmsg "$nosjlogfile" "$msg"
-    exit 1
-  else
-    cp -p ${FIXnos}/nos.ofs.HC_NWLON.nc $DATA/.
-    export err=$?; err_chk
-  fi
-
-  if [ ! -s ${FIXnos}/$RIVER_CLIM_FILE ]
-  then
-    echo '${FIXnos}/$RIVER_CLIM_FILE is not found'
-    echo 'please provide OBC control file of ${FIXnos}/$RIVER_CLIM_FILE'
-    echo 'please provide OBC control file of ${FIXnos}/$RIVER_CLIM_FILE' >> $cormslogfile
-    msg="FATAL ERROR: ${FIXnos}/$RIVER_CLIM_FILE does not exist, FATAL ERROR!"
-    postmsg "$jlogfile" "$msg"
-    postmsg "$nosjlogfile" "$msg"
-    exit 1
-  else
-    cp -p ${FIXnos}/$RIVER_CLIM_FILE $DATA/.
-    export err=$?; err_chk
-  fi
-
-  if [ ! -s ${FIXofs}/$OBC_CTL_FILE ]
-  then
-    echo '${FIXofs}/$OBC_CTL_FILE is not found'
-    echo 'please provide OBC control file of ${FIXofs}/$OBC_CTL_FILE'
-    echo 'please provide OBC control file of ${FIXofs}/$OBC_CTL_FILE' >> $cormslogfile
-    msg="FATAL ERROR: ${FIXofs}/$OBC_CTL_FILE does not exist, FATAL ERROR!"
-    postmsg "$jlogfile" "$msg"
-    postmsg "$nosjlogfile" "$msg"
-    exit 1
-  else
-    cp -p ${FIXofs}/$OBC_CTL_FILE $DATA/.
-    export err=$?; err_chk
-  fi
-
-  if [ ${RUN} != "NEGOFS" -o ${RUN} != "negofs" -o ${RUN} != "NWGOFS" -o ${RUN} != "nwgofs" ]
-  then
-    for tmpfile in `ls ${FIXofs}/nos.${OFS}.obc.clim.ts.*`
-    do
-      if [ -f ${tmpfile} ]; then
-        cp -p $tmpfile $DATA
-      fi
-    done
-  fi
-
+ if [ ! -s ${FIXnos}/$OBC_CLIM_FILE ]
+ then
+  echo '${FIXnos}/$OBC_CLIM_FILE is not found'
+  echo 'please provide OBC control file of ${FIXnos}/$OBC_CLIM_FILE'
+  echo 'please provide OBC control file of ${FIXnos}/$OBC_CLIM_FILE' >> $cormslogfile
+  msg="FATAL ERROR: ${FIXnos}/$OBC_CLIM_FILE does not exist, FATAL ERROR!"
+  postmsg "$jlogfile" "$msg"
+  postmsg "$nosjlogfile" "$msg"
+  exit 1
+ else
+  cp -p ${FIXnos}/$OBC_CLIM_FILE $DATA/.
+  export err=$?; err_chk
+ fi
+ if [ ! -s ${FIXnos}/nos.ofs.HC_NWLON.nc ]
+ then
+  echo '${FIXnos}/nos.ofs.HC_NWLON.nc is not found'
+  echo 'please provide OBC control file of ${FIXnos}/nos.ofs.HC_NWLON.nc'
+  echo 'please provide OBC control file of ${FIXnos}/nos.ofs.HC_NWLON.nc' >> $cormslogfile
+  msg="FATAL ERROR: ${FIXnos}/nos.ofs.HC_NWLON.nc does not exist, FATAL ERROR!"
+  postmsg "$jlogfile" "$msg"
+  postmsg "$nosjlogfile" "$msg"
+  exit 1
+ else
+  cp -p ${FIXnos}/nos.ofs.HC_NWLON.nc $DATA/.
+  export err=$?; err_chk
+ fi
+ if [ ! -s ${FIXnos}/$RIVER_CLIM_FILE ]
+ then
+  echo '${FIXnos}/$RIVER_CLIM_FILE is not found'
+  echo 'please provide OBC control file of ${FIXnos}/$RIVER_CLIM_FILE'
+  echo 'please provide OBC control file of ${FIXnos}/$RIVER_CLIM_FILE' >> $cormslogfile
+  msg="FATAL ERROR: ${FIXnos}/$RIVER_CLIM_FILE does not exist, FATAL ERROR!"
+  postmsg "$jlogfile" "$msg"
+  postmsg "$nosjlogfile" "$msg"
+  exit 1
+ else
+  cp -p ${FIXnos}/$RIVER_CLIM_FILE $DATA/.
+  export err=$?; err_chk
+ fi
+ if [ ! -s ${FIXofs}/$OBC_CTL_FILE ]
+ then
+  echo '${FIXofs}/$OBC_CTL_FILE is not found'
+  echo 'please provide OBC control file of ${FIXofs}/$OBC_CTL_FILE'
+  echo 'please provide OBC control file of ${FIXofs}/$OBC_CTL_FILE' >> $cormslogfile
+  msg="FATAL ERROR: ${FIXofs}/$OBC_CTL_FILE does not exist, FATAL ERROR!"
+  postmsg "$jlogfile" "$msg"
+  postmsg "$nosjlogfile" "$msg"
+  exit 1
+ else
+  cp -p ${FIXofs}/$OBC_CTL_FILE $DATA/.
+  export err=$?; err_chk
+ fi
+if [ ${RUN} != "NEGOFS" -o ${RUN} != "negofs" -o ${RUN} != "NWGOFS" -o ${RUN} != "nwgofs" ]
+then
+ 
+ for tmpfile in `ls ${FIXofs}/nos.${OFS}.obc.clim.ts.*`
+ do
+   if [ -f ${tmpfile} ]; then
+      cp -p $tmpfile $DATA
+   fi
+ done
+fi
 # if [ ${OCEAN_MODEL} == "FVCOM" -o ${OCEAN_MODEL} == "fvcom" ]
 # then 
 #  if [ ! -s ${FIXofs}/$OBC_FILE_TEMPLATE ]; then
@@ -349,78 +323,77 @@ then
 #    export err=$?; err_chk
 #  fi
 # fi
+ if [ ! -s ${FIXofs}/$RIVER_CTL_FILE ]
+ then
+  echo '${FIXofs}/$RIVER_CTL_FILE is not found'
+  echo 'please provide River control file of ${FIXofs}/$RIVER_CTL_FILE'
+  echo 'please provide River control file of ${FIXofs}/$RIVER_CTL_FILE' >> $cormslogfile
+  msg="FATAL ERROR: ${FIXofs}/$RIVER_CTL_FILE does not exist, FATAL ERROR!"
+  postmsg "$jlogfile" "$msg"
+  postmsg "$nosjlogfile" "$msg"
+  exit 4
+ else
+  cp -p ${FIXofs}/$RIVER_CTL_FILE $DATA/.
+  export err=$?; err_chk
+ fi
 
-  if [ ! -s ${FIXofs}/$RIVER_CTL_FILE ]
+ echo '------------------------------------------------'
+ echo '   Variables read from main control file        '
+ echo '------------------------------------------------'
+ echo OFS= ${RUN}
+ echo GRIDFILE=$GRIDFILE
+ echo DBASE_MET_NOW= $DBASE_MET_NOW
+ echo DBASE_MET_FOR= $DBASE_MET_FOR
+ echo DBASE_WL_NOW= $DBASE_WL_NOW
+ echo DBASE_WL_FOR= $DBASE_WL_FOR
+ echo DBASE_TS_NOW= $DBASE_TS_NOW
+ echo DBASE_TS_FOR= $DBASE_TS_FOR
+ echo OCEAN_MODEL=$OCEAN_MODEL
+ echo LEN_FORECAST=$LEN_FORECAST
+ echo IGRD_MET=$IGRD_MET
+ echo IGRD_OBC=$IGRD_OBC
+ echo BASE_DATE=$BASE_DATE
+ echo TIME_START=$TIME_START
+ echo minlon=$MINLON
+ echo minlat=$MINLAT
+ echo maxlon=$MAXLON
+ echo maxlat=$MAXLAT
+ echo IM=$IM
+ echo JM=$JM
+# if [ $DELT_MODEL -gt 0 ]; then
+#   DELT_MODEL=$DELT_MODEL
+# fi  
+ echo NDTFAST=$NDTFAST
+ echo KBm=$KBm
+ echo THETA_S=$THETA_S
+ echo THETA_B=$THETA_B
+ echo TCLINE=$TCLINE
+ echo NVTRANS=$NVTRANS
+ echo NVSTR=$NVSTR
+ echo CREATE_TIDEFORCING=$CREATE_TIDEFORCING
+ echo HC_FILE_OBC=$HC_FILE_OBC
+ echo HC_FILE_OFS=$HC_FILE_OFS
+ echo RIVER_CTL_FILE=$RIVER_CTL_FILE
+ echo OBC_CTL_FILE=$OBC_CTL_FILE
+ echo '------------------------------------------------'
+
+
+##--------------------------------------
+# Determine Job Output Name on System
+##-------------------------------------- 
+#  if CREATE_TIDEFORCING < 0 for non-tidal domains such as Great Lakes
+ if [ $CREATE_TIDEFORCING -eq 0 ]
+ then
+  if [ -s ${FIXofs}/$HC_FILE_OFS ]
   then
-   echo '${FIXofs}/$RIVER_CTL_FILE is not found'
-   echo 'please provide River control file of ${FIXofs}/$RIVER_CTL_FILE'
-   echo 'please provide River control file of ${FIXofs}/$RIVER_CTL_FILE' >> $cormslogfile
-   msg="FATAL ERROR: ${FIXofs}/$RIVER_CTL_FILE does not exist, FATAL ERROR!"
-   postmsg "$jlogfile" "$msg"
-   postmsg "$nosjlogfile" "$msg"
-   exit 4
+      cp -p ${FIXofs}/$HC_FILE_OFS  $HC_FILE_OFS
   else
-   cp -p ${FIXofs}/$RIVER_CTL_FILE $DATA/.
-   export err=$?; err_chk
+     CREATE_TIDEFORCING=1
   fi
-
-  echo '------------------------------------------------'
-  echo '   Variables read from main control file        '
-  echo '------------------------------------------------'
-  echo OFS= ${RUN}
-  echo GRIDFILE=$GRIDFILE
-  echo DBASE_MET_NOW= $DBASE_MET_NOW
-  echo DBASE_MET_FOR= $DBASE_MET_FOR
-  echo DBASE_WL_NOW= $DBASE_WL_NOW
-  echo DBASE_WL_FOR= $DBASE_WL_FOR
-  echo DBASE_TS_NOW= $DBASE_TS_NOW
-  echo DBASE_TS_FOR= $DBASE_TS_FOR
-  echo OCEAN_MODEL=$OCEAN_MODEL
-  echo LEN_FORECAST=$LEN_FORECAST
-  echo IGRD_MET=$IGRD_MET
-  echo IGRD_OBC=$IGRD_OBC
-  echo BASE_DATE=$BASE_DATE
-  echo TIME_START=$TIME_START
-  echo minlon=$MINLON
-  echo minlat=$MINLAT
-  echo maxlon=$MAXLON
-  echo maxlat=$MAXLAT
-  echo IM=$IM
-  echo JM=$JM
-   # if [ $DELT_MODEL -gt 0 ]; then
-   #   DELT_MODEL=$DELT_MODEL
-   # fi  
-  echo NDTFAST=$NDTFAST
-  echo KBm=$KBm
-  echo THETA_S=$THETA_S
-  echo THETA_B=$THETA_B
-  echo TCLINE=$TCLINE
-  echo NVTRANS=$NVTRANS
-  echo NVSTR=$NVSTR
-  echo CREATE_TIDEFORCING=$CREATE_TIDEFORCING
-  echo HC_FILE_OBC=$HC_FILE_OBC
-  echo HC_FILE_OFS=$HC_FILE_OFS
-  echo RIVER_CTL_FILE=$RIVER_CTL_FILE
-  echo OBC_CTL_FILE=$OBC_CTL_FILE
-  echo '------------------------------------------------'
-
-
-  ##--------------------------------------
-  # Determine Job Output Name on System
-  ##-------------------------------------- 
-  #  if CREATE_TIDEFORCING < 0 for non-tidal domains such as Great Lakes
-  if [ $CREATE_TIDEFORCING -eq 0 ]
-  then
-   if [ -s ${FIXofs}/$HC_FILE_OFS ]
-   then
-       cp -p ${FIXofs}/$HC_FILE_OFS  $HC_FILE_OFS
-   else
-      CREATE_TIDEFORCING=1
-   fi
-  else
-   echo "This file is not required for non-tidal domains"
-  fi
-  export CREATE_TIDEFORCING
+ else
+  echo "This file is not required for non-tidal domains"
+ fi
+ export CREATE_TIDEFORCING
 
 ## -------------------------------------------------------------#
 # CHECK RESTART FILE AND COMPUTE HOT RESTART TIME FROM 
@@ -428,42 +401,53 @@ then
 # COMPUTE TIME FOR NOWCAST AND FORECAST RUN TIME FOR MODEL RUNS
 ##--------------------------------------------------------------#
 
-  echo "check availability of model restart file from previous run" >>  $jlogfile
-  echo "check availability of model restart file from previous run" >>  $nosjlogfile
-  echo "check availability of model restart file from previous run" >> $cormslogfile
+ echo "check availability of model restart file from previous run" >>  $jlogfile
+ echo "check availability of model restart file from previous run" >>  $nosjlogfile
+ echo "check availability of model restart file from previous run" >> $cormslogfile
 
-  COLD_START="F"
-  CURRENTTIME=`$NDATE -1 $time_nowcastend `
-
-  YYYY=`echo $CURRENTTIME | cut -c1-4 `
-    MM=`echo $CURRENTTIME |cut -c5-6 `
-    DD=`echo $CURRENTTIME |cut -c7-8 `
-    HH=`echo $CURRENTTIME |cut -c9-10 `
-  RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.nc
-  if [ $OCEAN_MODEL == "SELFE" ]
-  then
-   RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.bin
-  fi 
-  while [ ! -s $RST_FILE ]
-  do
-   CURRENTTIME=`$NDATE -1 $CURRENTTIME `
-
-   if [ $CURRENTTIME -le ` $NDATE -49 $time_nowcastend ` ] # allow to search 2 days backward
-   then
+ COLD_START="F"
+ if [ $OFS == 'wcofs4-da' ]; then
+   CURRENTTIME=`$NDATE -$LEN_DA $time_nowcastend `
+   YYYY=`echo $CURRENTTIME |cut -c1-4 `
+     MM=`echo $CURRENTTIME |cut -c5-6 `
+     DD=`echo $CURRENTTIME |cut -c7-8 `
+     HH=`echo $CURRENTTIME |cut -c9-10 `
+   RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.nc
+   if [ ! -s $RST_FILE ]; then
       COLD_START="T"
-      break
    fi
+ else
+   CURRENTTIME=`$NDATE -1 $time_nowcastend `
+
    YYYY=`echo $CURRENTTIME | cut -c1-4 `
-   MM=`echo $CURRENTTIME |cut -c5-6 `
-   DD=`echo $CURRENTTIME |cut -c7-8 `
-   HH=`echo $CURRENTTIME |cut -c9-10 `
+     MM=`echo $CURRENTTIME |cut -c5-6 `
+     DD=`echo $CURRENTTIME |cut -c7-8 `
+     HH=`echo $CURRENTTIME |cut -c9-10 `
    RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.nc
    if [ $OCEAN_MODEL == "SELFE" ]
-  then
-    RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.bin
-  fi 
- done
+   then
+     RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.bin
+   fi 
+   while [ ! -s $RST_FILE ]
+   do
+     CURRENTTIME=`$NDATE -1 $CURRENTTIME `
 
+     if [ $CURRENTTIME -le ` $NDATE -49 $time_nowcastend ` ] # allow to search 2 days backward
+     then
+       COLD_START="T"
+       break
+     fi
+     YYYY=`echo $CURRENTTIME | cut -c1-4 `
+     MM=`echo $CURRENTTIME |cut -c5-6 `
+     DD=`echo $CURRENTTIME |cut -c7-8 `
+     HH=`echo $CURRENTTIME |cut -c9-10 `
+     RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.nc
+     if [ $OCEAN_MODEL == "SELFE" ]
+     then
+       RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.bin
+     fi 
+   done
+ fi
  if [ $COLD_START == "T" ]
  then
      echo 'no valid hot restart file for the given time period' >> $cormslogfile
@@ -487,7 +471,7 @@ then
      echo "Please consult with CO-OPS Modeling Team if needed"
      # if err_exit is comment out below, it means cold start from a init file in FIXnos
      # for operations, OFS will stop if no good restart file is found
-     err_exit "NO VALID RESTART FILE AVAILABLE.  Please check $COMOUT." 
+     err_exit "NO VALID RESTART FILE AVAILABLE.  Please check $COMOUT."
  elif [ $COLD_START == "F" ]
  then
      echo 'found valid hot restart file at time: ' $YYYY $MM $DD ${HH} >> $cormslogfile
@@ -536,9 +520,7 @@ then
     echo $nvrt >> Fortran_read_restart.ctl
   fi
   export pgm=nos_ofs_read_restart
-
-
-  . prep_step
+. prep_step
   if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]
   then 
     $EXECnos/nos_ofs_read_restart < Fortran_read_restart.ctl > Fortran_read_restart.log
@@ -549,25 +531,25 @@ then
     export err=$?
   elif [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
   then
-#  $EXECnos/nos_ofs_read_restart_selfe < Fortran_read_restart.ctl > Fortran_read_restart.log
-#  rm -f ${INI_FILE_ROMS}
-#  mv ${INI_FILE_ROMS}.new ${INI_FILE_ROMS}
-   echo "Do not run nos_ofs_read_restart_selfe" > Fortran_read_restart.log
-   echo "COMPLETED SUCCESSFULLY" >> Fortran_read_restart.log
-   echo $BASE_DATE 0 0.0d0 0.0d0 > ${RUN}_time_initial.dat
-#  export err=$?
+#    $EXECnos/nos_ofs_read_restart_selfe < Fortran_read_restart.ctl > Fortran_read_restart.log
+#    rm -f ${INI_FILE_ROMS}
+#    mv ${INI_FILE_ROMS}.new ${INI_FILE_ROMS}
+     echo "Do not run nos_ofs_read_restart_selfe" > Fortran_read_restart.log
+     echo "COMPLETED SUCCESSFULLY" >> Fortran_read_restart.log
+     echo $BASE_DATE 0 0.0d0 0.0d0 > ${RUN}_time_initial.dat
+#    export err=$?
   fi    
   if [ $err -ne 0 ]
   then
-   echo "Execution of $pgm did not complete normally, FATAL ERROR!" >> $cormslogfile
-   echo "Execution of $pgm did not complete normally, FATAL ERROR!"
-   msg=" Execution of $pgm did not complete normally, FATAL ERROR!"
-   postmsg "$jlogfile" "$msg"
-   postmsg "$nosjlogfile" "$msg"
-   err_chk
+      echo "Execution of $pgm did not complete normally, FATAL ERROR!" >> $cormslogfile
+      echo "Execution of $pgm did not complete normally, FATAL ERROR!"
+      msg=" Execution of $pgm did not complete normally, FATAL ERROR!"
+      postmsg "$jlogfile" "$msg"
+      postmsg "$nosjlogfile" "$msg"
+      err_chk
   else
-   echo "Execution of $pgm completed normally" >> $cormslogfile
-  echo "Execution of $pgm completed normally"
+      echo "Execution of $pgm completed normally" >> $cormslogfile
+      echo "Execution of $pgm completed normally"
       msg=" Execution of $pgm completed normally"
       postmsg "$jlogfile" "$msg"
       postmsg "$nosjlogfile" "$msg"
@@ -644,36 +626,13 @@ then
  export NQCK=`expr $NQCK / ${DELT_MODEL}`
  export NDEFQCK=`expr $NDEFQCK / ${DELT_MODEL}`
  fi
-
- #PT export NH_NOWCAST=`$NHOUR $time_nowcastend $time_hotstart`
- echo " ****** HARDCODING NH_NOWCAST *******"
-
- export NH_NOWCAST=6
+ export NH_NOWCAST=`$NHOUR $time_nowcastend $time_hotstart`
  export NSTEP_NOWCAST=`expr $NH_NOWCAST \* 3600 / ${DELT_MODEL}`
  export NTIMES_NOWCAST=$NSTEP_NOWCAST
-
- echo "*******************************************************************"
- echo "*******************************************************************"
- echo "NH_NOWCAST=$NH_NOWCAST"
- echo "NTIMES_NOWCAST=$NSTEP_NOWCAST"
- echo "*******************************************************************"
- echo "*******************************************************************"
-
- echo " ****** HARDCODING NH_FORECAST *******"
- #export NH_FORECAST=`$NHOUR $time_forecastend $time_nowcastend `
- export NH_FORECAST=48
-
+ export NH_FORECAST=`$NHOUR $time_forecastend $time_nowcastend `
  export NSTEP_FORECAST=`expr $NH_FORECAST \* 3600 / ${DELT_MODEL}`
 # export NTIMES_FORECAST=`expr $NTIMES_NOWCAST + $NSTEP_FORECAST`  # For older ROMS version than 859
  export NTIMES_FORECAST=$NSTEP_FORECAST      #for newer version than 859
-
- echo "*******************************************************************"
- echo "*******************************************************************"
- echo "NH_FORECAST=$NH_FORECAST"
- echo "NTIMES_FORECAST=$NSTEP_NOWCAST"
- echo "*******************************************************************"
- echo "*******************************************************************"
-
  export PDY1=$YYYY$MM$DD
 
  if [ $NH_NOWCAST -lt 1 ]
@@ -701,10 +660,6 @@ then
 fi
 
 ## -- End of prep Only --------------------------------'
-
-
-
-
 
 export OBC_FORCING_FILE=${NET}.${RUN}.obc.$PDY1.t${HH}z.nc
 export OBC_FORCING_FILE_EL=${NET}.${RUN}.obc.el.$PDY1.t${HH}z.nc
@@ -736,7 +691,6 @@ export MODEL_LOG_NOWCAST=${NET}.${RUN}.nowcast.$PDY1.t${HH}z.log
 export MODEL_LOG_FORECAST=${NET}.${RUN}.forecast.$PDY1.t${HH}z.log
 export RUNTIME_CTL_NOWCAST=${NET}.${RUN}.nowcast.$PDY1.t${HH}z.in
 export RUNTIME_CTL_FORECAST=${NET}.${RUN}.forecast.$PDY1.t${HH}z.in
-
 if [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
 then
   export MET_NETCDF_1_NOWCAST=${NET}.${RUN}.met.nowcast.$PDY1.t${HH}z.nc.tar
@@ -763,5 +717,6 @@ then
   export RIVER_FORCING_FILE=${NET}.${RUN}.river.$PDY1.t${HH}z.nc.tar
 
 fi
+export RST_FILE=$RST_FILE
 echo "Variable and parameter setup has been completed"   >>  $jlogfile
 echo "Variable and parameter setup has been completed"   >>  $nosjlogfile

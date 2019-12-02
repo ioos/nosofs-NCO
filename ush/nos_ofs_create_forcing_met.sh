@@ -9,7 +9,7 @@
 #
 # Location:   ~/scripts 
 # Technical Contact:   	Aijun Zhang         Org:  NOS/CO-OPS
-#                       Phone: 301-7132890 ext. 127  
+#                       Phone: 240-533-0921  
 #                       E-Mail: aijun.zhang@noaa.gov
 #
 #  Usage: ./nos_ofs_create_forcing_met.sh 
@@ -65,8 +65,6 @@ RUNTYPE=$1
 
 echo "The script nos_ofs_create_forcing_met.sh $RUNTYPE starts at time: " `date `
 echo "The script nos_ofs_create_forcing_met.sh $RUNTYPE starts at time: " `date ` >> $jlogfile
-
-
 if [ $OCEAN_MODEL == 'ROMS' -o $OCEAN_MODEL == 'roms' ]
 then
   export EXFILE='nos_ofs_create_forcing_met'
@@ -74,8 +72,6 @@ elif [ $OCEAN_MODEL == 'FVCOM' -o $OCEAN_MODEL == 'SELFE' ]
 then
   export EXFILE='nos_ofs_create_forcing_met_fvcom'
 fi  
-
-
 if [ $RUNTYPE == "NOWCAST" -o $RUNTYPE == "nowcast" ]
 then
   DBASE=$DBASE_MET_NOW
@@ -86,11 +82,8 @@ then
   HH=00
   HHH=000
   CYCLE_ORI=`echo $TIME_END |cut -c9-10 `
-
 elif [ $RUNTYPE == "FORECAST" -o $RUNTYPE == "forecast" ]
 then
-
-
   DBASE=$DBASE_MET_FOR
   TIME_START=${time_nowcastend}
   TIME_END=$time_forecastend
@@ -100,10 +93,8 @@ then
   HHH=060
   CYCLE_ORI=`echo $TIME_START |cut -c9-10 `
 fi
-
 # make sure to get enough data, two additional hours will be acquired.
 TIME_START_TMP=` $NDATE -3 $TIME_START `
-TIME_END=` $NDATE +3 $TIME_END `
 DBASE_ORI=$DBASE
 rm -f *.$DBASE_MET_FOR
 #cp -p $FIXnos/LAND.* $DATA
@@ -113,12 +104,10 @@ YYYY=`echo $TIME_START_TMP | cut -c1-4 `
 MM=`echo $TIME_START_TMP |cut -c5-6 `
 DD=`echo $TIME_START_TMP |cut -c7-8 `
 CYCLE=`echo $TIME_START_TMP |cut -c9-10 `
-
 LENGTH=` $NHOUR $TIME_END $TIME_START_TMP `
 if [ $LENGTH -gt 60 ]; then
   LENGTH=60
 fi
-
 if [ $RUNTYPE == "FORECAST" -o $RUNTYPE == "forecast" ]
 then
   LENGTH=60
@@ -127,7 +116,7 @@ exit_status=1
 while [ $exit_status -ne 0 ]
 do
   exit_status=0
-  NPP=17
+  NPP=18
   VARNAME[0]='TMP'     #Temperature (K)
   VARNAME[1]='DPT'     #Dew point temperature (K)
   VARNAME[2]='UGRD'    #u-component of wind (m/s)
@@ -145,8 +134,8 @@ do
   VARNAME[14]='PRATE'  #Precipatation rate  kg/m2/s
   VARNAME[15]='APCP'   #Total Precipatation kg/m2
   VARNAME[16]='EVP'    #Evaporation (kg/m2)
-  VARNAME[17]='PRES'
-  VARNAME[18]='WTMP'
+  VARNAME[17]='PRES'   #Pressure (Pa)
+  VARNAME[18]='WTMP'   #Wate Temperature (K)
   #VARNAME[19]='PEVP' 
   LEV[0]=':2 m above ground:'
   LEV[1]=':2 m above ground:'
@@ -172,13 +161,13 @@ do
   if [ $DBASE == "NDFD" ]; then 
      modelist="NDFD GFS25"
   elif [ $DBASE == "RTMA" ]; then
-     modelist="RTMA NAM GFS"
+     modelist="RTMA NAM GFS25"
   elif [ $DBASE == "NAM" ]; then
-     modelist="NAM GFS"
+     modelist="NAM GFS25"
   elif [ $DBASE == "GFS" ]; then
      modelist="GFS"
   elif [ $DBASE == "NAM4" ]; then
-     modelist="NAM4 NAM GFS"
+     modelist="NAM4 NAM GFS25"
   elif [ $DBASE == "GFS25" ]; then
      modelist="GFS25 GFS"
   elif [ $DBASE == "RAP" ]; then
@@ -194,6 +183,7 @@ do
     export err=0
     DBASE=$modelcheck
     CURRENTTIME=$TIME_START_TMP
+    CURRENTTIME=` $NDATE -12 $TIME_START_TMP `
     YYYY=`echo $CURRENTTIME | cut -c1-4 `
     MM=`echo $CURRENTTIME |cut -c5-6 `
     DD=`echo $CURRENTTIME |cut -c7-8 `
@@ -227,7 +217,10 @@ do
           while (( N < 24 ))
           do
             CYCLE=`echo $N | awk '{printf("%02i",$1)}'`
-            TMPFILE9=${COMINhrrr}/hrrr.${TMPDATE}/hrrr.t${CYCLE}z.wrfsfcf02.grib2
+            TMPFILE9=${COMINhrrr}/hrrr.${TMPDATE}/conus/hrrr.t${CYCLE}z.wrfsfcf02.grib2
+            if [ "${OFS,,}" == "ciofs" ]; then
+              TMPFILE9=${COMINhrrr}/hrrr.${TMPDATE}/alaska/hrrr.t${CYCLE}z.wrfsfcf02.grib2
+            fi
             if [ -s $TMPFILE9 ]; then
               echo $TMPFILE9 >> tmp.out
               EXIST_CYCLE=$CYCLE
@@ -245,7 +238,7 @@ do
       done
       if [ $DBASE == "RAP" ];  then
          N=1
-         while (( N < 16 ))
+         while (( N < 23 ))
          do
            FF=`echo $N | awk '{printf("%02i",$1)}'`
            TMPFILE9=${COMINrap}/rap.${EXIST_DATE}/rap.t${EXIST_CYCLE}z.awp130bgrbf${FF}.grib2
@@ -257,32 +250,50 @@ do
       fi
       if [ $DBASE == "HRRR" ];  then
          N=1
-         while (( N < 16 ))
+         while (( N < 23 ))
          do
            FF=`echo $N | awk '{printf("%02i",$1)}'`
-           TMPFILE9=${COMINhrrr}/hrrr.${EXIST_DATE}/hrrr.t${EXIST_CYCLE}z.wrfsfcf${FF}.grib2
+           TMPFILE9=${COMINhrrr}/hrrr.${EXIST_DATE}/conus/hrrr.t${EXIST_CYCLE}z.wrfsfcf${FF}.grib2
+           if [ "${OFS,,}" == "ciofs" ]; then
+              TMPFILE9=${COMINhrrr}/hrrr.${EXIST_DATE}/alaska/hrrr.t${EXIST_CYCLE}z.wrfsfcf${FF}.grib2
+           fi
            if [ -s $TMPFILE9 ]; then
              echo $TMPFILE9 >> tmp.out
            fi
            (( N = N + 1 ))
          done
       fi
-    elif [ $DBASE == "NAM" ]; then
-      if [ $OFS != "ciofs" ]; then
-        ls -l ${COMINnam}/nam.${TMPDATE}/nam.t*.awip12*tm00.grib2 | awk '{print $NF}' >> tmp.out
-      elif [ $OFS == "ciofs" ]; then
-        ls -l ${COMINnam}/nam.${TMPDATE}/nam.t*.awp242*tm00.grib2 | awk '{print $NF}' >> tmp.out
-      fi
-    elif [ $DBASE == "NAM4" ]; then
-      if [ $OFS != "ciofs" ]; then
-        ls -l ${COMINnam}/nam.${TMPDATE}/nam.t*.conusnest.hiresf*tm00.grib2_nos | awk '{print $NF}' >> tmp.out
-      elif [ $OFS == "ciofs" ]; then
-        ls -l ${COMINnam}/nam.${TMPDATE}/nam.t*.alaskanest.hiresf*tm00.grib2 | awk '{print $NF}' >> tmp.out
-      fi
-    elif [ $DBASE == "GFS" ];  then
-      ls -l ${COMINgfs}/gfs.${TMPDATE}/??/gfs.t*.pgrb2.0p50.f??? | awk '{print $NF}' >> tmp.out
-    elif [ $DBASE == "GFS25" ]; then
-      ls -l ${COMINgfs}/gfs.${TMPDATE}/??/gfs.t*.pgrb2.0p25.f??? | awk '{print $NF}' >> tmp.out
+    elif [ $DBASE == "NAM" -o $DBASE == "NAM4" -o $DBASE == "GFS" -o $DBASE == "GFS25" ]; then
+      while [ $TMPDATE -le $ENDDATE ]
+      do
+        if [ $DBASE == "NAM" ]; then
+          if [ $OFS != "ciofs" ]; then
+           ls -l ${COMINnam}/nam.${TMPDATE}/nam.t*.awip12*tm00.grib2 | awk '{print $NF}' >> tmp.out
+          elif [ $OFS == "ciofs" ]; then
+           ls -l ${COMINnam}/nam.${TMPDATE}/nam.t*.awp242*tm00.grib2 | awk '{print $NF}' >> tmp.out
+          fi
+        elif [ $DBASE == "NAM4" ]; then
+          if [ $OFS != "ciofs" ]; then
+           ls -l ${COMINnam}/nam.${TMPDATE}/nam.t*.conusnest.hiresf*tm00.grib2 | awk '{print $NF}' >> tmp.out
+          elif [ $OFS == "ciofs" ]; then
+           ls -l ${COMINnam}/nam.${TMPDATE}/nam.t*.alaskanest.hiresf*tm00.grib2 | awk '{print $NF}' >> tmp.out
+          fi
+#        elif [ $DBASE == "GFS" ];  then
+#          ls -l ${COMINgfs}/gfs.${TMPDATE}/gfs.t*.pgrb2.0p50.f??? | awk '{print $NF}' >> tmp.out
+#        elif [ $DBASE == "GFS25" ]; then
+#          ls -l ${COMINgfs}/gfs.${TMPDATE}/gfs.t*.pgrb2.0p25.f??? | awk '{print $NF}' >> tmp.out
+# Please uncoment the following lines to use FV3GFS, and comment out the lines 281-284
+        elif [ $DBASE == "GFS" ];  then
+          ls -l ${COMINgfs}/gfs.${TMPDATE}/*/gfs.t*.pgrb2.0p50.f??? | awk '{print $NF}' >> tmp.out
+        elif [ $DBASE == "GFS25" ]; then
+          ls -l ${COMINgfs}/gfs.${TMPDATE}/*/gfs.t*.pgrb2.0p25.f??? | awk '{print $NF}' >> tmp.out
+        fi
+        CURRENTTIME=`$NDATE +24 $CURRENTTIME `
+        YYYY=`echo $CURRENTTIME | cut -c1-4 `
+        MM=`echo $CURRENTTIME |cut -c5-6 `
+        DD=`echo $CURRENTTIME |cut -c7-8 `
+        TMPDATE=$YYYY$MM$DD
+      done
     fi
     if [ $DBASE != "NDFD" ]; then
       if [ -s tmp.out ]; then
@@ -315,12 +326,12 @@ do
           export err=0
         else
           echo "MET FILE SEARCH ${RUNTYPE} ${DBASE} COMPLETED SUCCESSFULLY 0" >> $cormslogfile
-          echo "$pgm did not complete normally, FATAL ERROR!"
-          msg="$pgm did not complete normally, FATAL ERROR!"
+          echo "WARNING:$pgm did not complete normally with $DBASE"
+          msg="WARNING:$pgm did not complete normally with $DBASE"
           postmsg "$jlogfile" "$msg"
           export err=1
         fi
-      else
+      else # tmp.out does not exist
         export err=1
       fi
     fi
@@ -343,12 +354,12 @@ do
       VARNAME[4]='TCDC'
       VARNAME[5]='RH'
       VARNAME[6]='APCP'
-      LEV[0]=':surface:'
-      LEV[1]=':surface:'
-      LEV[2]=':surface:'
-      LEV[3]=':surface:'
+      LEV[0]=':10 m above ground:'
+      LEV[1]=':10 m above ground:'
+      LEV[2]=':2 m above ground:'
+      LEV[3]=':2 m above ground:'
       LEV[4]=':surface:'
-      LEV[5]=':surface:'
+      LEV[5]=':2 m above ground:'
       LEV[6]=':surface:'
       NREC_TMP=0
       NREC_DIR=0
@@ -392,8 +403,10 @@ do
       do
         TIME_TMP=`$NDATE -1 $TIME_TMP `
         if [ $TIME_TMP -lt $TIME_STARTm24 ]; then
-          echo "No appropriate NDFD products are available" 
-          echo "switch to backup products"
+          echo "WARNING:No appropriate NDFD products are available. Try backup productus" 
+          msg="WARNING:No appropriate NDFD products are available. Try backup products"
+          postmsg "$jlogfile" "$msg"
+          postmsg "$nosjlogfile" "$msg"
           export err=1
           break
         else
@@ -483,7 +496,10 @@ do
     fi
 ##  END of search NDFD
     if [ $err -ne 0 ]; then
-        echo "no data for $DBASE checking backup"
+        echo "WARNING: $DBASE files not available. Checking backup in the order of $modelist"
+        msg="WARNING: $DBASE files not available. Checking backup in the order of $modelist"
+        postmsg "jlogfile" "$msg"
+        postmsg "$nosjlogfile" "$msg"
     else
         echo "Use $DBASE for meteorological forcing"
         msg="Use $DBASE for meteorological forcing"
@@ -491,7 +507,6 @@ do
         break
     fi
     numcheck=`expr $numcheck + 1`
-    echo 'No file of ' $DBASE ' is not found'
   done      # end of atmos prod check
 
   echo $numcheck $totalcheck 
@@ -528,12 +543,12 @@ do
     VARNAME[4]='TCDC'
     VARNAME[5]='RH'
     VARNAME[6]='APCP'
-    LEV[0]=':surface:'
-    LEV[1]=':surface:'
-    LEV[2]=':surface:'
-    LEV[3]=':surface:'
+    LEV[0]=':10 m above ground:'
+    LEV[1]=':10 m above ground:'
+    LEV[2]=':2 m above ground:'
+    LEV[3]=':2 m above ground:'
     LEV[4]=':surface:'
-    LEV[5]=':surface:'
+    LEV[5]=':2 m above ground:'
     LEV[6]=':surface:'
   elif [ $DBASE == "RAP" ]; then
     NPP=7
@@ -558,30 +573,40 @@ do
 #    LEV[8]=':surface:'
 #    LEV[9]=':surface:'
 
-  elif [ $DBASE == "HRRR" ]; then
-    NPP=7
-    VARNAME[0]='TMP'
-    VARNAME[1]='DPT'
-    VARNAME[2]='UGRD'
-    VARNAME[3]='VGRD'
-    VARNAME[4]='PRMSL'
-    VARNAME[5]='SPFH'
-    VARNAME[6]='TCDC'
+#  elif [ $DBASE == "HRRR" ]; then
+#    NPP=13
+#    VARNAME[0]='TMP'
+#    VARNAME[1]='DPT'
+#    VARNAME[2]='UGRD'
+#    VARNAME[3]='VGRD'
+#    VARNAME[4]='PRMSL'
+#    VARNAME[4]='PRES'
+#    VARNAME[5]='SPFH'
+#    VARNAME[6]='TCDC'
 #    VARNAME[7]='PRATE'
 #    VARNAME[8]='APCP'
 #    VARNAME[9]='DSWRF'
-    LEV[0]=':2 m above ground:'
-    LEV[1]=':2 m above ground:'
-    LEV[2]=':10 m above ground:'
-    LEV[3]=':10 m above ground:'
-    LEV[4]=':mean sea level:'
-    LEV[5]=':2 m above ground:'
-    LEV[6]=':entire atmosphere:'
+#    VARNAME[10]='USWRF'
+#    VARNAME[11]='ULWRF'
+#    VARNAME[12]='LHTFL'
+#    VARNAME[13]='RH'
+#    LEV[0]=':2 m above ground:'
+#    LEV[1]=':2 m above ground:'
+#    LEV[2]=':10 m above ground:'
+#    LEV[3]=':10 m above ground:'
+#    LEV[4]=':surface:'
+#    LEV[4]=':mean sea level:'
+#    LEV[5]=':2 m above ground:'
+#    LEV[6]=':entire atmosphere:'
 #    LEV[7]=':surface:'
 #    LEV[8]=':surface:'
 #    LEV[9]=':surface:'
+#    LEV[10]=':surface:'
+#    LEV[11]=':surface:'
+#    LEV[12]=':surface:'
+#    LEV[13]=':2 m above ground:'
   else
-    NPP=17
+    NPP=18
     VARNAME[0]='TMP'     #Temperature (K)
     VARNAME[1]='DPT'     #Dew point temperature (K)
     VARNAME[2]='UGRD'    #u-component of wind (m/s)
@@ -599,8 +624,8 @@ do
     VARNAME[14]='PRATE'  #Precipatation rate  kg/m2/s
     VARNAME[15]='APCP'   #Total Precipatation kg/m2
     VARNAME[16]='EVP'    #Evaporation (kg/m2)
-    VARNAME[17]='PRES'
-    VARNAME[18]='WTMP'
+    VARNAME[17]='PRES'   #Pressure (Pa)
+    VARNAME[18]='WTMP'   #Water Temperature (K)
 #   VARNAME[19]='PEVP' 
     LEV[0]=':2 m above ground:'
     LEV[1]=':2 m above ground:'
@@ -620,6 +645,8 @@ do
     LEV[15]=':surface:'
     LEV[16]=':surface:'
     LEV[17]=':surface:'
+    LEV[18]=':surface:'
+#    LEV[19]=':surface:'
   fi
   echo 'Time of the most recent available products is ' $DBASE 'at cycle' $YYYY $MM $DD $CYCLE
   echo 'Time of the most recent available products is ' $DBASE 'at cycle' $YYYY $MM $DD $CYCLE >> $jlogfile
@@ -634,31 +661,13 @@ do
       while read GRB2FILE
       do
         read YYYY MM DD CYC HH
-        #echo "-n 1 $USHnos/nos_ofs_create_forcing_met_mpmd.sh $GRB2FILE $HH $NPP" >>cmdfile
         echo "$USHnos/nos_ofs_create_forcing_met_mpmd.sh $GRB2FILE $HH $NPP" >>cmdfile
       done 3<&-
-
-#$ cat ./mpmd_config
-#-n 1 -host node1 ./io <io_args>
-#-n 4 -host node2 ./compute <compute_args_1>
-#-n 4 -host node3 ./compute <compute_args_2>
-#$ mpirun -configfile mpmd_config
 
       # Store the VARNAME and LEV arrays to a file which will be sourced by the MPMD processes
       declare -p VARNAME LEV > var_lev_arrays
 
-      chmod u+x cmdfile
-      #mpirun.lsf cfp cmdfile
-      #mpirun -np $NPP cmdfile
-      echo "PT DEBUG ------ IN $0 Line 646"
-      echo "PT DEBUG ------ IN $0 Line 646"
-      echo "PT DEBUG ------ IN $0 Line 646"
-      echo "PT DEBUG ------ IN $0 Line 646"
-      echo "PT DEBUG ------ IN $0 Line 646"
-      echo "PT DEBUG ------ IN $PWD"
-      pwd
-      #mpirun -configfile $PWD/cmdfile
-      mpirun $PWD/cmdfile
+      mpirun cfp cmdfile
       export err=$?; err_chk
 
       LAST_TMPDIR=""
@@ -666,7 +675,9 @@ do
       while read GRB2FILE
       do
         read YYYY MM DD CYC HH
-        TMPDIR=$(basename ${GRB2FILE//./_})
+        TMPDIR1=$(dirname ${GRB2FILE//./_})
+        TMPDIR2=$(basename $TMPDIR1)
+        TMPDIR=${TMPDIR2}/$(basename ${GRB2FILE//./_})
         count=0
         while (( count < $NPP )); do
           if [ -s $TMPDIR/${VARNAME[count]}.$DBASE ]; then
@@ -689,13 +700,18 @@ do
         fi
       fi
 ##  END reading land-sea mask
-    else
-      echo "no Meteorological product files are found in time period from $TIME_START_TMP to $TIME_END"
-      msg=" no Meteorological product files are found in time period from $TIME_START_TMP to $TIME_END   "
+    else  # $MET_FILE does not exist
+      echo "WARNING: no Meteorological product files are found in time period from $TIME_START_TMP to $TIME_END"
+      msg="WARNING: no Meteorological product files are found in time period from $TIME_START_TMP to $TIME_END   "
       postmsg "$jlogfile" "$msg"
+      postmsg "$nosjlogfile" "$msg"
       err=1;export err;err_chk
-    fi   
-  fi
+    fi  #$MET_FILE checking 
+  fi #Non-NDFD cases
+# special for LMHOFS, creating PRATE.$DBASE and EVP.$DBASE
+  if [  "${OFS,,}" == "lmhofs" ]; then
+    $USHnos/nos_ofs_residual_water_calculation.sh $RUNTYPE
+  fi 
 
   count=0
   while (( count < $NPP ))
@@ -796,10 +812,13 @@ do
     fi
   else
     exit_status=99
-    if [ $DBASE != "GFS25" ]; then
+    if [ $DBASE != "GFS" ]; then
       echo "WARNING: meteorological forcing was not created from $DBASE"
       echo " trying final backup of GFS" 
-      DBASE=GFS25     # GFS is used the final backup for all if other DBASE fails
+      msg="WARNING: meteorological forcing was not created from $DBASE. Try final backup using GFS"
+      postmsg "$jlogfile" "$msg"
+      postmsg "$nosjlogfile" "$msg"
+      DBASE=GFS     # GFS is used the final backup for all if other DBASE fails
     else
       echo "MET FORCING ${RUNTYPE} ${DBASE} COMPLETED SUCCESSFULLY 0" >> $cormslogfile
       if [ $RUNTYPE == "NOWCAST" -o $RUNTYPE == "nowcast" ]; then
@@ -809,6 +828,7 @@ do
       fi
       msg="FATAL ERROR !! in generating meteorological forcing"
       postmsg "$jlogfile" "$msg"
+      postmsg "$nosjlogfile" "$msg"
       echo $msg
       echo "$OFS is abort in nos_ofs_create_forcing_met.sh"   
       err=1;export err;err_chk
@@ -817,7 +837,7 @@ do
 done     # try backup plan if met forcing is not created
 
 ## Radiation heat flux from NAM is used if DBASE=RTMA since RTMA does not have radiation heat flux
-if [ $OFS != "leofs" -a $OFS != "lmofs" -a $OFS != "loofs" -a $OFS != "lsofs" -a $OFS != "lhofs" ];then
+if [ $OFS != "leofs" -a $OFS != "lmofs" -a $OFS != "loofs" -a $OFS != "lsofs" -a $OFS != "lhofs" -a $OFS != "lmhofs" ]; then
 if [ $DBASE == "RTMA" -o $DBASE == "RAP" -o $DBASE == "NDFD"  -o $DBASE == "HRRR" ]; then
 # DBASE='NAM'   AJ 06/14/2011 
   DBASE=$DBASE_MET_FOR
@@ -876,7 +896,7 @@ if [ $DBASE == "RTMA" -o $DBASE == "RAP" -o $DBASE == "NDFD"  -o $DBASE == "HRRR
   if [ $DBASE == "NAM4" ]
   then
       NCEPPRODDIR=$COMINnam'/nam.'$YYYY$MM$DD
-      GRB2FILE=$NCEPPRODDIR/"nam.t${CYCLE}z.conusnest.hiresf${HH}.tm00.grib2_nos"
+      GRB2FILE=$NCEPPRODDIR/"nam.t${CYCLE}z.conusnest.hiresf${HH}.tm00.grib2"
   fi  
   CURRENTTIME=$INPUTTIME
   while [ ! -s $GRB2FILE ]
@@ -907,17 +927,26 @@ if [ $DBASE == "RTMA" -o $DBASE == "RAP" -o $DBASE == "NDFD"  -o $DBASE == "HRRR
     elif [ $DBASE == "NAM4" ]
     then
        NCEPPRODDIR=$COMINnam'/nam.'$YYYY$MM$DD
-       GRB2FILE=$NCEPPRODDIR/"nam.t${CYCLE}z.conusnest.hiresf${HH}.tm00.grib2_nos"
+       GRB2FILE=$NCEPPRODDIR/"nam.t${CYCLE}z.conusnest.hiresf${HH}.tm00.grib2"
        if [ $OFS == "ciofs" ];  then
        GRB2FILE=$NCEPPRODDIR/"nam.t${CYCLE}z.alaskanest.hiresf${HH}.tm00.grib2"
        fi
+#    elif [ $DBASE == "GFS" ]
+#    then
+#       NCEPPRODDIR=${COMINgfs}'/gfs.'$YYYY$MM$DD
+#       GRB2FILE=$NCEPPRODDIR/"gfs.t${CYCLE}z.pgrb2.0p50.f${HHH}"
+#    elif [ $DBASE == "GFS25" ]
+#    then
+#       NCEPPRODDIR=${COMINgfs}'/gfs.'$YYYY$MM$DD
+#       GRB2FILE=$NCEPPRODDIR/"gfs.t${CYCLE}z.pgrb2.0p25.f${HHH}"
+# Please uncoment the following lines to use FV3GFS, and comment out the above lines 934-941
     elif [ $DBASE == "GFS" ]
     then
-       NCEPPRODDIR=${COMINgfs}'/gfs.'$YYYY$MM$DD/$CYCLE
+       NCEPPRODDIR=${COMINgfs}'/gfs.'$YYYY$MM$DD/${CYCLE}
        GRB2FILE=$NCEPPRODDIR/"gfs.t${CYCLE}z.pgrb2.0p50.f${HHH}"
     elif [ $DBASE == "GFS25" ]
     then
-       NCEPPRODDIR=${COMINgfs}'/gfs.'$YYYY$MM$DD/$CYCLE
+       NCEPPRODDIR=${COMINgfs}'/gfs.'$YYYY$MM$DD/${CYCLE}
        GRB2FILE=$NCEPPRODDIR/"gfs.t${CYCLE}z.pgrb2.0p25.f${HHH}"
     fi  
   done
@@ -951,17 +980,23 @@ if [ $DBASE == "RTMA" -o $DBASE == "RAP" -o $DBASE == "NDFD"  -o $DBASE == "HRRR
       elif [ $DBASE == "NAM4" ]
       then
          if [ $OFS != "ciofs" ]; then
-           ls -l ${COMINnam}/nam.${TMPDATE}/nam.t${CYCLE}z.conusnest.hiresf*.tm00.grib2_nos | awk '{print $NF}' >> tmp.out
+           ls -l ${COMINnam}/nam.${TMPDATE}/nam.t${CYCLE}z.conusnest.hiresf*.tm00.grib2 | awk '{print $NF}' >> tmp.out
          elif [ $OFS == "ciofs" ]; then
            ls -l ${COMINnam}/nam.${TMPDATE}/nam.t${CYCLE}z.alaskanest.hiresf*.tm00.grib2 | awk '{print $NF}' >> tmp.out
          fi
+#      elif [ $DBASE == "GFS" ]
+#      then
+#         ls -l ${COMINgfs}/gfs.${TMPDATE}/gfs.t${CYCLE}z.pgrb2.0p50.f??? | awk '{print $NF}' >> tmp.out
+#      elif [ $DBASE == "GFS25" ]
+#      then
+#         ls -l ${COMINgfs}/gfs.${TMPDATE}/gfs.t${CYCLE}z.pgrb2.0p25.f??? | awk '{print $NF}' >> tmp.out
+# Please uncoment the following lines to use FV3GFS, and comment out the above lines 987-992
       elif [ $DBASE == "GFS" ]
       then
-         ls -l ${COMINgfs}/gfs.${TMPDATE}/$CYCLE/gfs.t${CYCLE}z.pgrb2.0p50.f??? | awk '{print $NF}' >> tmp.out
+         ls -l ${COMINgfs}/gfs.${TMPDATE}/${CYCLE}/gfs.t${CYCLE}z.pgrb2.0p50.f??? | awk '{print $NF}' >> tmp.out
       elif [ $DBASE == "GFS25" ]
       then
-         ls -l ${COMINgfs}/gfs.${TMPDATE}/$CYCLE/gfs.t${CYCLE}z.pgrb2.0p25.f??? | awk '{print $NF}' >> tmp.out
-
+         ls -l ${COMINgfs}/gfs.${TMPDATE}/${CYCLE}/gfs.t${CYCLE}z.pgrb2.0p25.f??? | awk '{print $NF}' >> tmp.out
       fi  
 #
 #      CURRENTTIME=`$NDATE +24 $CURRENTTIME `
@@ -985,25 +1020,27 @@ if [ $DBASE == "RTMA" -o $DBASE == "RAP" -o $DBASE == "NDFD"  -o $DBASE == "HRRR
      echo "nos_ofs_met_file_search completed at time:" `date`
   fi   
   rm -f *.$DBASE
-  if [ -s $MET_FILE ]
-  then
+  if [ -s $MET_FILE ];  then
      exec 5<&0 < $MET_FILE
      while read GRB2FILE 
      do
-        read YYYY MM DD CYC HH
-        echo $GRB2FILE
+       read YYYY MM DD CYC HH
+       echo $GRB2FILE
+       if [ -s $GRB2FILE ]; then
+#         TMPDIR1=$(dirname ${GRB2FILE//./_})
+#        TMPDIR2=$(basename $TMPDIR1)
+#         TMPDIR=${TMPDIR2}/$(basename ${GRB2FILE//./_})
+#        TMPGRB1=$TMPDIR/$(basename $GRB2FILE)_nos
+        TMPGRB1=${DBASE}.t${CYC}z.f${HH}.grib2_nos
         TMPGRB2=${RUN}_${DBASE}.grib2
-        if [ -s $TMPGRB2 ]
-        then
-          rm -f $TMPGRB2
+        if [ -s $TMPGRB1 ]; then
+           rm -f $TMPGRB1
         fi
-        $WGRIB2 $GRB2FILE -small_grib ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} $TMPGRB2 
-
- 	N=0
-#        while (( N < 10#$HH))
-#        do
-#           (( N = N + 1 ))
-#	done
+        if [ -s $TMPGRB2 ]; then
+           rm -f $TMPGRB2
+        fi
+        $WGRIB2 $GRB2FILE | grep -F -f ${FIXnos}/nos.met.parmlist.dat | $WGRIB2 -i -grib ${TMPGRB1} $GRB2FILE
+        $WGRIB2 $TMPGRB1 -small_grib ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} $TMPGRB2 
         (( N = 10#$HH))
         (( N3 = N - 3 ))
         if [ $N3 -lt 0 ]
@@ -1048,12 +1085,18 @@ if [ $DBASE == "RTMA" -o $DBASE == "RAP" -o $DBASE == "NDFD"  -o $DBASE == "HRRR
           fi	  
           (( count = count + 1 ))
         done
+       fi
      done 3<&-  
   else
      echo "no Meteorological product files are found in time period from $TIME_START_TMP to $TIME_END"
      msg="FATAL ERROR: no Meteorological product files are found in time period from $TIME_START_TMP to $TIME_END   "
      postmsg "$jlogfile" "$msg"
   fi   
+# special for LMHOFS, creating PRATE.$DBASE and EVP.$DBASE
+  if [  "${OFS,,}" == "lmhofs" ]; then
+    $USHnos/nos_ofs_residual_water_calculation.sh $RUNTYPE
+  fi 
+
   count=0
   while (( count < $NPP))
   do

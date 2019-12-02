@@ -61,6 +61,8 @@ then
 
   TIME_START=${time_nowcastend}
   TIME_END=$time_forecastend
+  RST_OUT_INTERVAL=`printf '%.0f' $RST_OUT_INTERVAL` ## convert decimal number to integer, abd get the nearest integer
+  RST_OUT_INTERVAL=${RST_OUT_INTERVAL%.*} # just tuncate the integer part and remove the fractional part   
 #  RST_OUT_INTERVAL=`expr ${RST_OUT_INTERVAL} \* 8`  this command doesn't work because ${RST_OUT_INTERVAL} is non-numeric argument 
   RST_OUT_INTERVAL=172800.0    # for forecast cycle write restart file every 2 days
 fi
@@ -129,6 +131,7 @@ fi
         -e "s/mindepth/${MIN_DEPTH}/g" \
         -e "s/rstoutint/${RST_OUT_INTERVAL}/g" \
         -e "s/ncoutint/${NC_OUT_INTERVAL}/g" \
+        -e "s/ncsfoutint/${NCSF_OUT_INTERVAL}/g" \
         -e "s/heatingll/${HEATING_LONGWAVE_LENGTHSCALE}/g" \
         -e "s/heatinglp/${HEATING_LONGWAVE_PERCTAGE}/g" \
         -e "s/heatingsl/${HEATING_SHORTWAVE_LENGTHSCALE}/g" \
