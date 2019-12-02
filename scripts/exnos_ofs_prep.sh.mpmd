@@ -5,7 +5,7 @@
 #  This is the main script is launch sripts to generating forcing files    #
 # Location:   ~/jobs
 # Technical Contact:    Aijun Zhang         Org:  NOS/CO-OPS
-#                       Phone: 301-7132890 ext. 127
+#                       Phone: 240-533-0591
 #                       E-Mail: aijun.zhang@noaa.gov
 #
 #  Usage: 
@@ -13,12 +13,10 @@
 # Input Parameters:
 #   OFS 
 #
-# Modification History:
-#     Degui Cao     02/18/2010   
 # #########################################################################
 
 set -x
-#PS4=" \${SECONDS} \${0##*/} L\${LINENO} + "
+PS4=" \${SECONDS} \${0##*/} L\${LINENO} + "
 
 echo "Start ${RUN} Preparation " > $cormslogfile
 #  Control Files For Model Run
@@ -83,93 +81,25 @@ if [ -s MET_DBASE.NOWCAST ]; then
     export DBASE_MET_NOW
   fi
 fi
-echo "Generating the river forcing"
-export pgm=nos_ofs_create_forcing_river.sh
 . prep_step
-$USHnos/nos_ofs_create_forcing_river.sh
-export err=$?
-if [ $err -ne 0 ]
-then
-  echo "Execution of $pgm did not complete normally, FATAL ERROR!"
-  echo "Execution of $pgm did not complete normally, FATAL ERROR!" >> $cormslogfile 
-  msg=" Execution of $pgm did not complete normally, FATAL ERROR!"
-  postmsg "$jlogfile" "$msg"
-  postmsg "$nosjlogfile" "$msg"
-  err_chk
-else
-  echo "Execution of $pgm completed normally"
-  echo "Execution of $pgm completed normally" >> $cormslogfile
-  msg=" Execution of $pgm completed normally"
-  postmsg "$jlogfile" "$msg"
-  postmsg "$nosjlogfile" "$msg"
-fi
+if [ -s cmdfile _prep]; then rm cmdfile_prep; fi
+echo "Generating the river forcing"
+echo "$USHnos/nos_ofs_create_forcing_river.sh " >> cmdfile_prep
 
 echo "Generating the open boundary forcing"
-export pgm=nos_ofs_create_forcing_obc.sh
-. prep_step
-$USHnos/nos_ofs_create_forcing_obc.sh
-export err=$?
-if [ $err -ne 0 ]
-then
-  echo "Execution of $pgm did not complete normally, FATAL ERROR!"
-  echo "Execution of $pgm did not complete normally, FATAL ERROR!" >> $cormslogfile   
-  msg=" Execution of $pgm did not complete normally, FATAL ERROR!"
-  postmsg "$jlogfile" "$msg"
-  postmsg "$nosjlogfile" "$msg"
-  err_chk
-else
-  echo "Execution of $pgm completed normally"
-  echo "Execution of $pgm completed normally" >> $cormslogfile
-  msg=" Execution of $pgm completed normally"
-  postmsg "$jlogfile" "$msg"
-  postmsg "$nosjlogfile" "$msg"
-fi
+echo "$USHnos/nos_ofs_create_forcing_obc.sh" >> cmdfile_prep
 
 TS_NUDGING=${TS_NUDGING:-0}
 if [ $TS_NUDGING -eq 1 ]; then
   echo "Generating the forcing for T/S nudging fields"
-  export pgm=nos_ofs_create_forcing_nudg.sh
-  . prep_step
-  $USHnos/nos_ofs_create_forcing_nudg.sh
-  export err=$?
-  if [ $err -ne 0 ]
-  then
-    echo "Execution of $pgm did not complete normally, FATAL ERROR!"
-    echo "Execution of $pgm did not complete normally, FATAL ERROR!" >> $cormslogfile
-    msg=" Execution of $pgm did not complete normally, FATAL ERROR!"
-    postmsg "$jlogfile" "$msg"
-    postmsg "$nosjlogfile" "$msg"
-    err_chk
-  else
-    echo "Execution of $pgm completed normally"
-    echo "Execution of $pgm completed normally" >> $cormslogfile
-    msg=" Execution of $pgm completed normally"
-    postmsg "$jlogfile" "$msg"
-    postmsg "$nosjlogfile" "$msg"
-  fi
+  echo "$USHnos/nos_ofs_create_forcing_nudg.sh" >> cmdfile_prep
 fi
-
 
 echo "Generating the meteorological forcing for forecst"
+echo "$USHnos/nos_ofs_create_forcing_met.sh forecast" >> cmdfile_prep
 
-export pgm=nos_ofs_create_forcing_met.sh
-$USHnos/nos_ofs_create_forcing_met.sh forecast
-export err=$?
-if [ $err -ne 0 ]
-then
-  echo "Execution of $pgm did not complete normally, FATAL ERROR!"
-  echo "Execution of $pgm did not complete normally, FATAL ERROR!" >> $cormslogfile
-  msg=" Execution of $pgm did not complete normally, FATAL ERROR!"
-  postmsg "$jlogfile" "$msg"
-  postmsg "$nosjlogfile" "$msg"
-  err_chk
-else
-  echo "Execution of $pgm completed normally"
-  echo "Execution of $pgm completed normally" >> $cormslogfile
-  msg=" Execution of $pgm completed normally"
-  postmsg "$jlogfile" "$msg"
-  postmsg "$nosjlogfile" "$msg"
-fi
+mpirun.lsf cfp cmdfile_prep
+export err=$?; err_chk
 
 ## read in DBASE used in actual  met forcing generating
 if [ -s MET_DBASE.FORECAST ]; then

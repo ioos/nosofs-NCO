@@ -91,9 +91,8 @@ fi
 
 ###  archive nowcast outputs
 export pgm="$USHnos/nos_ofs_archive.sh $runtype"
-#$USHnos/nos_ofs_archive.sh $runtype
-#export err=$?
-err=0
+$USHnos/nos_ofs_archive.sh $runtype
+export err=$?
 if [ $err -ne 0 ]
 then
    echo "Execution of $pgm did not complete normally, FATAL ERROR!"
@@ -115,8 +114,7 @@ fi
 # fi
  echo "end of $runtype"
 
-
-####    Run forecast simulation
+#####    Run forecast simulation
 runtype='forecast'
 
 echo "     " >> $jlogfile 
@@ -149,8 +147,7 @@ echo "end of nos_ofs_nowcast_forecast.sh $runtype"
 
 ##  archive forecast outputs 
 export pgm="$USHnos/nos_ofs_archive.sh $runtype"
-#$USHnos/nos_ofs_archive.sh $runtype 
-export err=0
+$USHnos/nos_ofs_archive.sh $runtype 
 export err=$?
 if [ $err -ne 0 ]
 then
