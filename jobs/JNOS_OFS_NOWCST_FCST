@@ -53,6 +53,7 @@ fi
 #   Determine Job Output Name on System
 ############################################
 export pgmout="OUTPUT.$$"
+export jlogfile=${jlogfile:-${DATA}/jlogfile}
 
 ####################################
 # Specify Execution Areas
@@ -65,6 +66,9 @@ export PARMnos=${PARMnos:-${HOMEnos}/parm}
 export USHnos=${USHnos:-${HOMEnos}/ush}
 export SCRIPTSnos=${SCRIPTSnos:-${HOMEnos}/scripts}
 
+export LD_PRELOAD=/usrx/local/prod/packages/ips/18.0.1/netcdf/4.5.0/lib/libnetcdff.so.6:${LD_PRELOAD}
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${HOMEnos}/sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/lib
+
 ###########################################
 # Run setpdy and initialize PDY variables
 ###########################################
@@ -75,13 +79,22 @@ setpdy.sh
 ##############################################
 # Define COM directories
 ##############################################
-export COMIN=${COMIN:-${COMROOT}/${NET}/${envir}/${RUN}.${PDY}}          # input directory
+export COMROOT=${COMROOT:-/gpfs/dell1/nco/ops/com}
+export COMROOTp1=${COMROOTp1:-/gpfs/?p1/nco/ops/com}
+export COMROOTp2=${COMROOTp2:-/gpfs/?p2/nco/ops/com}
+export DCOMROOT=${DCOMROOT:-/gpfs/?p1/nco/ops/dcom}
 
+export COMIN=${COMIN:-${COMROOT}/${NET}/${envir}/${RUN}.${PDY}}          # input directory
 export COMOUTroot=${COMOUTroot:-${COMROOT}/${NET}/${envir}}              # output directory
 export COMOUT=${COMOUT:-${COMOUTroot}/${RUN}.${PDY}}                     # output directory
-
 mkdir -m 775 -p $COMOUT
 
+export DCOMINndfd=${DCOMROOT}/prod
+export DCOMINncom=${DCOMROOT}/prod
+export DCOMINusgs=${DCOMROOT}/prod
+export DCOMINports=${DCOMROOT}/prod
+export NOSBUFR=xx012
+export USGSBUFR=xx009
 ##############################################
 ####  Log File To Sys Report  
 ##############################################

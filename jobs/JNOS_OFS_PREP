@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -x
 
 ########################################
@@ -6,6 +6,7 @@ set -x
 ########################################
 export PS4=' $SECONDS + '
 date
+export LD_PRELOAD=/usrx/local/prod/packages/ips/18.0.1/netcdf/4.5.0/lib/libnetcdff.so.6:${LD_PRELOAD}
 
 ###################################
 # Specify NET and RUN Name and model
@@ -40,6 +41,7 @@ fi
 #   Determine Job Output Name on System
 ############################################
 export pgmout="OUTPUT.$$"
+export jlogfile=${jlogfile:-${DATA}/jlogfile}
 
 ####################################
 # Specify Execution Areas
@@ -62,8 +64,12 @@ setpdy.sh
 ##############################################
 # Define COM directories
 ##############################################
-export COMIN=${COMIN:-${COMROOT}/${NET}/${envir}/${RUN}.${PDY}}   # input directory
+export COMROOT=${COMROOT:-/gpfs/dell1/nco/ops/com}
+export COMROOTp1=${COMROOTp1:-/gpfs/?p1/nco/ops/com}
+export COMROOTp2=${COMROOTp2:-/gpfs/?p2/nco/ops/com}
+export DCOMROOT=${DCOMROOT:-/gpfs/?p1/nco/ops/dcom}
 
+export COMIN=${COMIN:-${COMROOT}/${NET}/${envir}/${RUN}.${PDY}}   # input directory
 export COMOUTroot=${COMOUTroot:-${COMROOT}/${NET}/${envir}}       # output directory
 export COMOUT=${COMOUT:-${COMOUTroot}/${RUN}.${PDY}}              # output directory
 
@@ -88,10 +94,10 @@ then
   export NESTED_PARENT_OFS=ngofs
 fi
 
-export DCOMINndfd=${DCOMINndfd:-${DCOMROOT}/us007003}
-export DCOMINncom=${DCOMINncom:-${DCOMROOT}/us007003}
-export DCOMINusgs=${DCOMINusgs:-${DCOMROOT}/us007003}
-export DCOMINports=${DCOMINports:-${DCOMROOT}/us007003}
+export DCOMINndfd=${DCOMROOT}/prod
+export DCOMINncom=${DCOMROOT}/prod
+export DCOMINusgs=${DCOMROOT}/prod
+export DCOMINports=${DCOMROOT}/prod
 export NOSBUFR=xx012
 export USGSBUFR=xx009
 
