@@ -42,8 +42,7 @@
 #ENV         = XEON
 #ENV         = CANOPUS
 #ENV         = SIRIUS
-#ENV         = NCEP
-ENV          = GCC
+ENV         = NCEP
 
 ################################################################################
 # Executable
@@ -134,33 +133,6 @@ EXEC   = selfe_creofs
 
 # Obsolete flags: use USE_WRAP flag to avoid problems in ParMetis lib (calling C from FORTRAN)
 # PPFLAGS := $(PPFLAGS) -DUSE_WRAP 
-
-################################################################################
-# Environment for GCC HPC
-# ################################################################################
-ifeq ($(ENV),GCC)
-  FCS = $(COMP_F)
-  FCP = $(COMP_F_MPI90)
-  FLD = $(FCP)
-  #####Flags for debug version
-  #PPFLAGS = -DDEBUG -DORDERED_SUM -DINCLUDE_TIMING -DMPIVERSION=2
-  #FCSFLAGS = -g
-  #FCPFLAGS = $(PPFLAGS) -g
-  #FLDFLAGS = -g
-  #####Flags for optimized version
-  FCSFLAGS =  #for serial code
-  FCPFLAGS = $(PPFLAGS) -O3 -ffree\-form  #MPI code
-  FLDFLAGS =  -O3 #for final linking of object files
-  #####Libraries
-  MTSLIBS = -L./ParMetis-3.1-64bit -lparmetis -lmetis
-#  MTSLIBS := $(MTSLIBS) -L/usrx/local/NetCDF/4.2/serial/lib -lnetcdff
-#  #AJ NETCDF4.0 library on CCS/NCEP
-#  CDFLIBS = -L/usrx/local/NetCDF/4.2/serial/lib -lnetcdff
-#  #  CDFMOD = -I/usrx/local/NetCDF/4.2/serial/include # modules for netcdf
-  MTSLIBS := $(MTSLIBS) $(NETCDF_LDFLAGS)
-  CDFLIBS = $(NETCDF_LDFLAGS)
-  CDFMOD = -I$(NETCDF)/include
-endif
 
 ################################################################################
 # Environment for NCEP HPC

@@ -15,18 +15,15 @@ OBJS=nos_ofs_combine_field_netcdf_selfe.o
 # PROFLIB	Library needed for profiling
 
 # NETCDF is specified in modulefiles
-#setenv NETCDF_INCDIR /usrx/local/NetCDF/4.2/serial/include
-#setenv NETCDF_LIBDIR /usrx/local/NetCDF/4.2/serial/lib
 NETCDF_INC = -I$(NETCDF)/include
-#NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
-NETCDF_LIB = $(NETCDF_LDFLAGS)
+NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
+
 #use for extensive compilation error reporting
 #LDFLAGS = -p -bnoquiet -bloadmap:mug
 LDFLAGS =	
 #INC = -I/nwprod/lib/incmod/g2_4
-INC = -I${G2_INC4}
-FC =            $(COMP_F)
-#FC =           ifort
+INC = -I$(G2_INC4)
+FC =            ifort
 
 
 ## NOS COMF unitility library
@@ -51,7 +48,7 @@ PROFLIB =       -lprof
 # To compile with flowtracing turned on, use the second line
 # To compile giving profile additonal information, use the third line
 # WARNING:  SIMULTANEOUSLY PROFILING AND FLOWTRACING IS NOT RECOMMENDED
-FFLAGS =        -O3 -ffree-form  $(INCS)
+FFLAGS =        -O3 -free -Bstatic -assume byterecl  $(INCS) 
 #FFLAGS =        -O3 -qnosave -qport=mod -qintsize=4 -qrealsize=4
 #FFLAGS =	 -F
 #FFLAGS =	 -Wf"-ez"

@@ -19,22 +19,32 @@ FC = $(COMP_F)
 #LDFLAGS = -p -bnoquiet -bloadmap:mug
 LDFLAGS =	
 
+
 INC = -I${G2_INC4}
+
+
 NETCDF_INC = -I$(NETCDF)/include
-NETCDF_LIB = -L$(NETCDF_LIBDIR) -lnetcdff -lnetcdf
+NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
 
 ## NOS COMF unitility library
 NOS_UTILITY_LIB = -L$(LIBnos) -lnosutil
-
 INCS  = $(INC) $(NETCDF_INC)
 
 ##LIB = -L/nwprod/lib -lg2_4  -lw3emc_4 -lw3nco_4 -lbacio_4 -lbufr_4_64\
 ##      -L/usrx/local/64bit/lib -ljasper -lpng -lz 
 
-LIB  =   ${G2_LIB4} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BACIO_LIB4} \
-   $(NOS_UTILITY_LIB) ${JASPER_LIB} ${PNG_LIB} ${Z_LIB4}
 
-LIBS  = $(NETCDF_LIB) $(LIB) 
+LIB  =   ${G2_LIB4} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BUFR_LIB4}\
+   $(NOS_UTILITY_LIB) ${JASPER_LIB} ${PNG_LIB}  ${Z_LIB4} ${BACIO_LIB4}
+
+
+
+
+LIBS  = $(NETCDF_LIB) $(LIB)
+
+
+
+
 
 CMD =            $(EXECnos)/nos_ofs_create_forcing_nudg
 PROFLIB =       -lprof
@@ -43,8 +53,7 @@ PROFLIB =       -lprof
 # To compile with flowtracing turned on, use the second line
 # To compile giving profile additonal information, use the third line
 # WARNING:  SIMULTANEOUSLY PROFILING AND FLOWTRACING IS NOT RECOMMENDED
-#FFLAGS =        -O3  $(INCS) -extend-source
-FFLAGS =        -O3  $(INCS) -ffixed-line-length-none
+FFLAGS =        -O3  $(INCS) -extend-source
 #FFLAGS =        -O3 -qnosave -qport=mod -qintsize=4 -qrealsize=4
 #FFLAGS =	 -F
 #FFLAGS =	 -Wf"-ez"

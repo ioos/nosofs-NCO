@@ -58,8 +58,8 @@
             INSTALLDIR    = $(TOPDIR)/libs/install
 #===========================================================================
 # PREPROCESSOR OPTIONS FOR CPP
-            DEF_FLAGS     = -P -C -traditional 
-#            DEF_FLAGS     = -P -C
+#            DEF_FLAGS     = -P -C -traditional 
+            DEF_FLAGS     = -P -traditional 
 #===========================================================================
 #
 ####################### MEDM ENVIRONMENT #####################################
@@ -83,10 +83,10 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #	STANDARD LIBRARIES FOR DATA AND TIME IN fVCOM:
 #
-#	    DTLIBS	= -L/gpfs/t3/nos/save/wx21rs/FVCOM3.1.6/FVCOM3.1.6_source/libs/julian -ljulian
-#	    DTINCS	= -I/gpfs/t3/nos/save/wx21rs/FVCOM3.1.6/FVCOM3.1.6_source/libs/julian 
-	    DTLIBS	= -L./libs/julian -ljulian
-	    DTINCS	= -I./libs/julian 
+            DTLIBS      = -L./libs/julian -ljulian
+            DTINCS      = -I./libs/julian
+#	    DTLIBS	= -ljulian
+#	    DTINCS	=  
 #
 #--------------------------------------------------------------------------
 #        NETCDF OUTPUT      NETCDF IS NOW REQUIRED TO COMPILE FVCOM
@@ -96,14 +96,10 @@ dashL= $(empty) -L
 #                           SET PATH TO LIBRARIES WITH IOLIBS      
 #                           SET PATH TO INCLUDE FILES (netcdf.mod) WITH IOINCS
 #--------------------------------------------------------------------------
-#             IOLIBS       =  -L/usrx/local/bin/lib -lnetcdf
-#             IOINCS       =  -I/usrx/local/bin/include
-#             IOLIBS       =  -L/usrx/local/NetCDF/4.2/serial/lib -lnetcdff
-#             IOINCS       =  -I/usrx/local/NetCDF/4.2/serial/include
-#             IOLIBS       =  -L${NETCDF_LIBDIR} -lnetcdff
-             IOLIBS       =  $(NETCDF_LDFLAGS)
-             IOINCS       =  -I${NETCDF_INCDIR}
-
+#             IOLIBS       =  -lnetcdff -lnetcdf #-lhdf5_hl -lhdf5 -lz -lcurl -lm
+#             IOINCS       =  #-I/hosts/mao/usr/medm/install/netcdf/3.6.3/em64t/include
+             IOLIBS       =  -L$(NETCDF)/lib -lnetcdff
+             IOINCS       =  -I${NETCDF}/include
 #--------------------------------------------------------------------------
 
 
@@ -126,7 +122,7 @@ dashL= $(empty) -L
 #            FLAG_1 =  -DDOUBLE_PRECISION 
 
 ## SINGLE PRECISION OUTPUT FOR VISIT
-             FLAG_1 =  -DDOUBLE_PRECISION -DSINGLE_OUTPUT
+            FLAG_1 =  -DDOUBLE_PRECISION -DSINGLE_OUTPUT
 
 #--------------------------------------------------------------------------
 #        SPHERICAL          SELECT SPHERICAL COORDINATES FOR INTEGRATION
@@ -134,7 +130,7 @@ dashL= $(empty) -L
 #                           UNCOMMENT TO SELECT SPHERICAL COORDINATES
 #--------------------------------------------------------------------------
 
-             FLAG_2 = -DSPHERICAL
+            FLAG_2 = -DSPHERICAL
 
 #--------------------------------------------------------------------------
 #        FLOODYING/DRYING   INCLUDE WET/DRY TREATMENT OF DOMAIN
@@ -156,6 +152,7 @@ dashL= $(empty) -L
 
              FLAG_4 = -DMULTIPROCESSOR
              PARLIB = -L../METIS_source -lmetis
+#             PARLIB = -lmetis  #-L/usr/local/lib -lmetis
 
 #--------------------------------------------------------------------------
 #        WATER_QUALITY      INCLUDE EPA WATER QUALITY MOD
@@ -182,6 +179,7 @@ dashL= $(empty) -L
 #                           LD_LIBRARY_PATH FOR DYNAMIC LOADING!!
 #
 #--------------------------------------------------------------------------
+
               FLAG_6 = -DPROJ
               PLIB1=-L./libs/proj.4-master/lib  -lproj -lm
               PLIB2=-L./libs/proj4-fortran-master/lib  -lfproj4 -lm
@@ -191,7 +189,7 @@ dashL= $(empty) -L
               PINC1=-I./libs/proj.4-master/include
               PINC2=-I./libs/proj4-fortran-master/include
               PROJINCS=$(PINC1) $(PINC2)
-
+#
 #             PROJLIBS       = -lfproj4 -lproj -lm
 #             PROJINCS       =
 
@@ -259,7 +257,7 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 
 #            FLAG_11 = -DGOTM
-#            GOTMLIB       = -L../GOTM_source -lturbulence -lutil -lmeanflow
+#            GOTMLIB       = -L../GOTM_source -lturbulence -lutil #-lmeanflow
 #            GOTMINCS      = -I../GOTM_source  
 
 #--------------------------------------------------------------------------
@@ -282,7 +280,7 @@ dashL= $(empty) -L
 #       RIVER INPUT FILES!
 #--------------------------------------------------------------------------
 
-             FLAG_14 = -DRIVER_FLOAT
+            FLAG_14 = -DRIVER_FLOAT
 
 #--------------------------------------------------------------------------
 #        Using A fully multidimensional positive definite advection
@@ -329,20 +327,28 @@ dashL= $(empty) -L
 
 #--------------------------------------------------------------------------
 #        SUSPENDED SEDIMENT MODEL:   UNCOMMENT TO INCLUDE MODEL
+# ORIG : the sediment transport model developed by Geoffey Cowles in v3.1-v3.2
+# CSTMS: Community Sediment Transport Modeling System with cohesive model
+# DELFT: Sediment modeling system as Delft Flow (not included)
+#
+# note: only one model should be chosen for modeling.
+#
+#  Utilities:
+#    OFFLINE_SEDIMENT : run sediment with offline hydrodynamic forcing
+#    FLUID_MUD : activate the 2-D fluid mud at bed-water interface
 #--------------------------------------------------------------------------
 
 #            FLAG_21 =  -DSEDIMENT
+#            FLAG_211 = -DORIG_SED
+#            FLAG_211 = -DCSTMS_SED
+#
 #            FLAG_22 =  -DOFFLINE_SEDIMENT
-
+#            FLAG_43 =  -DFLUID_MUD
+#
 #--------------------------------------------------------------------------
-#       Kalman Filters     TWO STEPS INCLUDED FOR REDUCED KALMAN FILTERS DATA
-#                          ASSIMILATION. FIRSTLY USERS SHOULD OPEN FLAG_22 IN
-#                          ORDER TO LET PROGRAM PREPARE INPUT DATA. AND THEN,
-#                          SECOND OPTION FLAG_12 NEED BY APPLIED FOR ASSIMILATION
-#                          BE NOTED: ONLY OPEN ONE OPTION AT ONE TIME                  
+#         KALMAN FILTERS
 #--------------------------------------------------------------------------
 
-#             FLAG_23 = -DRRK_PRE
 #              FLAG_23 = -DRRKF
 #              FLAG_23 = -DENKF
 #             include ${PETSC_DIR}/bmake/common/variables
@@ -364,28 +370,39 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #       GENERAL BIOLOGICAL MODEL:    UNCOMMENT TO INCLUDE MODEL
 #-------------------------------------------------------------------------- 
-#            FLAG_25 = -DBioGen
-#            BIOLIB       = -L$(TOPDIR)/BIO_source -lbiomodule
-#            BIOINCS      = -I$(TOPDIR)/BIO_source/
+#            FLAG_25  = -DBioGen
+#            FLAG_251 = -DOFFLINE_BIOLOGY
+#            BIOLIB   = -L$(TOPDIR)/BIO_source -lbiomodule
+#            BIOINCS  = -I$(TOPDIR)/BIO_source
+
 
 #--------------------------------------------------------------------------
 #         Dynamic/Thermodynamic Ice                     
 #--------------------------------------------------------------------------
 
-# NOTE: Must use -DSPHERICAL  and -DHEAT_FLUX ----- only for old version v2.7
+# NOTE: Must use -DSPHERICAL  and -DHEAT_FLUX ----- this note only for old version v2.7
 #            FLAG_26 = -DICE  
+#       ICE_EMBEDDING must with SEMI_IMPLICIT
+#            FLAG_261 = -DICE_EMBEDDING  
+#       ICE_FRESHWATER
+#       This flag adjusts the ice code to work for freshwater systems (Great Lakes) 
+#            FLAG_262 = -DICE_FRESHWATER  
 
 #--------------------------------------------------------------------------
-#         CALCULATE THE NET HEAT FLUX IN MODEL                           
+#         CALCULATE THE NET HEAT FLUX IN MODEL (TWO CHOICES):
+#         (IN CHOICE 1, THERE ARE OPTIONS FOR OCEAN WATER OR FRESH WATER)
+#         1. CALCULATE THE NET HEAT FLUX USING COARE26Z OR COARE40VN
+#         2. CALCULATE THE NET HEAT FLUX USING SOLAR HEATING MODULE                          
 #--------------------------------------------------------------------------
 
-             FLAG_27 = -DHEATING_CALCULATED
+            FLAG_27 = -DHEATING_CALCULATED  
+#            FLAG_27 = -DHEATING_SOLAR  
 
 #--------------------------------------------------------------------------
-#         AIR_PRESSURE FROM SURFACE FORCING
+#         AIR_PRESSURE FROM SURFACE FORCING                           
 #--------------------------------------------------------------------------
 
-             FLAG_28 = -DAIR_PRESSURE  
+            FLAG_28 = -DAIR_PRESSURE  
 
 #--------------------------------------------------------------------------
 # Visit online simulation mode
@@ -454,6 +471,12 @@ dashL= $(empty) -L
              FLAG_41 = -DOLD_PETSC
 
 #--------------------------------------------------------------------------
+#        SPECIAL PARTITION
+#        This flag can make sure the identical repeat run for same amount of CPUs 
+#--------------------------------------------------------------------------
+             FLAG_42 = -DPARTITION_SPECIAL
+
+#--------------------------------------------------------------------------
 #        DEVELOPMENT FLAGS
 #            FOR BETA WORK ONLY 
 #--------------------------------------------------------------------------
@@ -520,19 +543,19 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #  Intel/MPI Compiler Definitions (SMAST)      
 #--------------------------------------------------------------------------
-#         CPP      = /usr/bin/cpp
-#         COMPILER = -DIFORT  
-#         CC       = mpicc
-#         CXX      = mpicxx
-#         CFLAGS   = -O3 
-#         FC       = mpif90
-#         DEBFLGS  = -check all
+         CPP      = /usr/bin/cpp
+         COMPILER = -DIFORT  
+         CC       = mpicc
+         CXX      = mpicxx
+         CFLAGS   = -O3 
+         FC       = mpif90
+#         DEBFLGS  = -check all -traceback
 # Use 'OPT = -O0 -g'  for fast compile to test the make 
 # Use 'OPT = -xP' for fast run on em64t (Hydra and Guppy)
 # Use 'OPT = -xN' for fast run on ia32 (Salmon and Minke)
 #         OPT      = -O0 -g
 #         OPT      = -axN -xN
-#         OPT      = -O3
+         OPT      = -O3
 
 # Do not set static for use with visit!
 #         VISOPT   = -Wl,--export-dynamic
@@ -541,14 +564,10 @@ dashL= $(empty) -L
 #  gfortran defs 
 #--------------------------------------------------------------------------
 #         CPP      = /usr/bin/cpp 
-          DEF_FLAGS     = -P -traditional-cpp
-          COMPILER = -DGFORTRAN
-          FC       = $(COMP_F_MPI)
-          CC       = $(COMP_MPCC)
-          CPP      = $(COMP_CPP)
-          CXX      = $(COMP_CC)
-          OPT      = -O3
+#         COMPILER = -DGFORTRAN
+#         FC       = gfortran  -O3 
 #         DEBFLGS  = 
+#         OPT      = 
 #         CLIB     = 
 #--------------------------------------------------------------------------
 #  absoft / mac os x defs
@@ -560,15 +579,27 @@ dashL= $(empty) -L
 #         OPT      = 
 #         CLIB     = 
 #--------------------------------------------------------------------------
+#  IBM/AIX Definitions
+#--------------------------------------------------------------------------
+#         COMPILER = -DAIX 
+#         CPP      = /usr/local/bin/cpp
+#         FC       = mpxlf90 -qsuffix=f=f90
+#         DEBFLGS  =  # -qcheck -C -g
+#         OPT      = -O -qarch=pwr4 -qtune=pwr4  -bmaxdata:0x80000000 -qhot -qmaxmem=8096
+#--------------------------------------------------------------------------
 #  IBM/AIX Definitionss NOAA CCS (stratus and cirrus)
 #--------------------------------------------------------------------------
-#          CPPFLAGS = $(DEF_FLAGS) -DAIX
-#          COMPILER = -DIFORT
-#          FC       = $(COMP_F_MPI)
-#          CC       = $(COMP_MPCC)
-#          CPP      = $(COMP_CPP)
-#          CXX      = $(COMP_CC)
-#          OPT      = -O3  -fp-model precise
+          CPPFLAGS = $(DEF_FLAGS) -DAIX
+          COMPILER = -DIFORT
+          FC       = $(COMP_F_MPI)
+          CC       = $(COMP_MPCC)
+          CPP      = $(COMP_CPP)
+          CXX      = $(COMP_CC)
+          OPT      = -O3 -fp-model precise
+#          CC       = /usr/bin/mpcc
+#          CPP      = /usr/bin/cpp
+#          FC       = $(COMP_F_MPI) 
+#          OPT      = -O3 -fp-model precise -ftz -fast-transcendentals -no-prec-div -no-prec-sqrt -xHost
 
 #--------------------------------------------------------------------------
 #  APPLE OS X/XLF Definitions (G5)
@@ -597,7 +628,7 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #  CAT Preprocessing Flags
 #--------------------------------------------------------------------------
-           CPPARGS =  $(CPPFLAGS) $(DEF_FLAGS) $(FLAG_1) $(FLAG_2) \
+           CPPARGS =  $(CPPFLAGS) $(FLAG_1) $(FLAG_2) \
    $(FLAG_3) $(FLAG_4) $(FLAG_5) $(FLAG_6)  \
    $(FLAG_7) $(FLAG_8) $(FLAG_9) $(FLAG_10) \
    $(FLAG_11) $(FLAG_12) $(FLAG_13) $(FLAG_14) \
@@ -608,8 +639,9 @@ dashL= $(empty) -L
    $(FLAG_31) $(FLAG_32) $(FLAG_33) $(FLAG_34) \
    $(FLAG_35) $(FLAG_36) $(FLAG_37) $(FLAG_38) \
    $(FLAG_39) $(FLAG_40) $(FLAG_41) $(FLAG_42) \
-   $(FLAG_LAM)\
-   $(FLAG_101) $(FLAG_102) $(FLAG_103) $(FLAG_104) $(FLAG_105)
+   $(FLAG_43) $(FLAG_LAM)\
+   $(FLAG_101) $(FLAG_102) $(FLAG_103) $(FLAG_104) $(FLAG_105)\
+   $(FLAG_211) $(FLAG_212) $(FLAG_213) $(FLAG_251) $(FLAG_261) $(FLAG_262)
 #--------------------------------------------------------------------------
 #  Libraries           
 #--------------------------------------------------------------------------

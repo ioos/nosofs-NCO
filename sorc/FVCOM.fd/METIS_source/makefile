@@ -9,7 +9,7 @@
 
 
             LIB      = libmetis
-            MOPT     = -O2
+            MOPT     = -O3
             INCLUDES = -I.
             C_FLAGS    = $(COPTIONS) $(MOPT) $(INCLUDES)
 #--------------------------------------------------------------------------
