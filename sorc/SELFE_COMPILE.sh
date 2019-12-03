@@ -93,6 +93,10 @@ fi
 #gmake clean
 #gmake -f makefile
 
+#cd $SORCnos/nos_ofs_residual_water_calculation.fd
+#gmake clean
+#gmake -f makefile
+
 
 ##  Compile ocean model of SELFE.fd for CREOFS
 #cd $SORCnos/SELFE.fd/ParMetis-3.1-64bit

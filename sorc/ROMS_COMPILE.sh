@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
+export nosofs_ver=3.2.1
 HOMEnos=$(dirname $PWD)
 export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
 
@@ -94,6 +95,11 @@ gmake -f makefile
 
 # Unlear which model requires this
 cd $SORCnos/nos_ofs_create_forcing_nudg.fd
+gmake clean
+gmake -f makefile
+
+
+cd $SORCnos/nos_ofs_residual_water_calculation.fd
 gmake clean
 gmake -f makefile
 

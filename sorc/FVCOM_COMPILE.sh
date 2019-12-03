@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-nosofs_ver=v3.1.9.1
+nosofs_ver=v3.2.1
 
 HOMEnos=$(dirname $PWD)
 export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
@@ -14,7 +14,7 @@ fi
 
 module purge
 module use $HOMEnos/modulefiles
-module load nosofs
+module load nosofs/v3.2.1_aws
 export PATH=$PATH:/usrx/bin
 
 module list 2>&1
@@ -114,6 +114,9 @@ cd $SORCnos/nos_ofs_create_forcing_nudg.fd
 gmake clean
 gmake -f makefile
 
+cd $SORCnos/nos_ofs_residual_water_calculation.fd
+gmake clean
+gmake -f makefile
 
 fi  # IF BUILDPREP
 
@@ -191,6 +194,14 @@ exit
 #gmake -f makefile_LEOFS
 #if [ -s  fvcom_leofs ]; then
 #  mv fvcom_leofs $EXECnos/.
+#else
+#  echo 'fvcom executable is not created'
+#fi
+
+#gmake clean
+#gmake -f makefile_LMHOFS
+#if [ -s  fvcom_lmhofs ]; then
+#  mv fvcom_lmhofs $EXECnos/.
 #else
 #  echo 'fvcom executable is not created'
 #fi

@@ -250,7 +250,6 @@ else
   echo 'roms executable for CIOFS is not created'
 fi
 
-exit
 
 #  Compile ocean model of ROMS for WCOFS
 cd $SORCnos/ROMS.fd
