@@ -276,6 +276,12 @@ echo "Preparing input files for ${RUN} $RUNTYPE "
 echo '-----------------------'
 seton
 
+###############################################################################
+###############################################################################
+#### NOWCAST
+###############################################################################
+###############################################################################
+
 if [ $RUNTYPE == "NOWCAST" -o $RUNTYPE == "nowcast" ]
 then
   if [ ${OCEAN_MODEL} == "SELFE" -o ${OCEAN_MODEL} == "selfe" ]
@@ -620,6 +626,9 @@ then
     fi
   fi
 
+
+  ######## NOWCAST #########
+  ##########################
   echo 'Ocean Model run starts at time: ' `date `
 # --------------------------------------------------------------------------- #
 # 2   Execute ocean model of ROMS; where ${RUN}_roms_nowcast.in is created by nos_ofs_reformat_roms_ctl.sh
@@ -713,7 +722,9 @@ then
 
   elif [ ${OCEAN_MODEL} == "FVCOM" -o ${OCEAN_MODEL} == "fvcom" ]
   then
-    mpirun $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    # mpirun $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    mpirun -verbose -np $NPP -bind-to core:$NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
+    #mpirun -verbose -np $NPP -bind-to numa:2 -map-by C $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -1123,7 +1134,11 @@ then
 fi
 
 
+###############################################################################
+###############################################################################
 #### FORECAST
+###############################################################################
+###############################################################################
  
 if [ $RUNTYPE == "FORECAST" -o $RUNTYPE == "forecast" ]
 then
@@ -1461,10 +1476,14 @@ then
       err_exit "No restart file for forecast: $COMOUT/$RST_OUT_NOWCAST"
     fi
   fi 
+
+  ######## FORECAST #########
+  ##########################
 # --------------------------------------------------------------------------- #
 # 2   Execute ocean model of ROMS; where ${RUN}_roms_forecast.in is created by nos_ofs_reformat_roms_ctl.sh
   if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]; then
-     mpirun $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+     mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+     #mpirun $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -1551,10 +1570,13 @@ then
        (( I = I + 1 ))
     done
 
+  ######## FORECAST #########
+  ##########################
   elif [ ${OCEAN_MODEL} == "FVCOM" -o ${OCEAN_MODEL} == "fvcom" ]
   then
     rm -f $MODEL_LOG_FORECAST
-    mpirun $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
+    #mpirun $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
+    mpirun -np $NPP -ppn $PPN $mpiopts -bind-to core $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
     export err=$?
     if [ $err -ne 0 ]
     then

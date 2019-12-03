@@ -814,11 +814,13 @@ if [ $DBASE_WL == "ETSS" ]; then
    while (( N <= 97 ))
    do
      rm -f tmp${N}.csv
-     echo "$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp${N}.csv" >>cmdfile
+     #echo "$WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp${N}.csv" >>cmdfile
+     echo "-n 1 $WGRIB2 $GRB2FILE1 -d $N -undefine out-box ${MINLON}:${MAXLON} ${MINLAT}:${MAXLAT} -spread tmp${N}.csv" >>cmdfile
      (( N++ ))
    done
 
-   mpirun cfp cmdfile
+   #mpirun cfp cmdfile
+   mpirun -configfile cmdfile
    export err=$?; err_chk
 
    N=1
