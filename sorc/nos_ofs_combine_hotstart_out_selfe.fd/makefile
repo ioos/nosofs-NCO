@@ -17,7 +17,7 @@ OBJS=nos_ofs_combine_hotstart_out_selfe.o
 # CMD		Name of the executable
 # PROFLIB	Library needed for profiling
 FC =            ${COMP_F}
-#FC =           ifort 
+
 #use for extensive compilation error reporting
 #LDFLAGS = -p -bnoquiet -bloadmap:mug
 LDFLAGS =	
@@ -32,30 +32,10 @@ NOS_UTILITY_LIB = -L$(LIBnos) -lnosutil
 #NOS_UTILITY_LIB = -L../.. -lnosutil
 INCS  = $(INC) $(NETCDF_INC)
 
-#LIB = -L/nwprod/lib -lg2_4  -lw3emc_4 -lw3nco_4 -lbacio_4 -lbufr_4_64\
-#      -L/usrx/local/64bit/lib -ljasper -lpng -lz 
-#LIBS  = $(NETCDF_LIB) $(LIB) $(NOS_UTILITY_LIB)
-
-
-
 LIB  =   ${G2_LIB4} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BUFR_LIB4}\
    $(NOS_UTILITY_LIB) ${JASPER_LIB} ${PNG_LIB}  ${Z_LIB4} ${BACIO_LIB4}
 
-
-
-
 LIBS  = $(NETCDF_LIB) $(LIB)
-
-
-
-
-
-
-
-
-
-
-
 
 CMD =            $(EXECnos)/nos_ofs_combine_hotstart_out_selfe
 PROFLIB =       -lprof
@@ -64,10 +44,8 @@ PROFLIB =       -lprof
 # To compile with flowtracing turned on, use the second line
 # To compile giving profile additonal information, use the third line
 # WARNING:  SIMULTANEOUSLY PROFILING AND FLOWTRACING IS NOT RECOMMENDED
-FFLAGS =        -O3 -free  $(INCS)
-#FFLAGS =        -O3 -qnosave -qport=mod -qintsize=4 -qrealsize=4
-#FFLAGS =	 -F
-#FFLAGS =	 -Wf"-ez"
+FFLAGS =        -O3 -ffree-form  $(INCS)
+#FFLAGS =        -O3 -free  $(INCS)
 
 # Lines from here on down should not need to be changed.  They are the
 # actual rules which make uses to build a.out.

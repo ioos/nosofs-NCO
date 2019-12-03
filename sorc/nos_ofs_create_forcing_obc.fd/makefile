@@ -5,7 +5,7 @@ OBJS=nos_ofs_create_forcing_obc.o  nos_ofs_obc_write_netcdf_ROMS.o
 
 ## specify NetCDF directory use netcdf 4.0.1 zaj 07/24/2009
 EXECnos=../../exec
-lIBnos=../../lib
+LIBnos=../../lib
 
 # Tunable parameters
 # FC		Name of the fortran compiling system to use
@@ -13,7 +13,7 @@ lIBnos=../../lib
 # LIBS		List of libraries
 # CMD		Name of the executable
 # PROFLIB	Library needed for profiling
-FC =           ifort 
+FC = $(COMP_F)
 
 #use for extensive compilation error reporting
 LDFLAGS =	
@@ -34,7 +34,8 @@ PROFLIB = -lprof
 # To compile with flowtracing turned on, use the second line
 # To compile giving profile additonal information, use the third line
 # WARNING:  SIMULTANEOUSLY PROFILING AND FLOWTRACING IS NOT RECOMMENDED
-FFLAGS = -O3 $(INCS) -extend-source -no-wrap-margin
+#FFLAGS = -O3 $(INCS) -extend-source -no-wrap-margin
+FFLAGS = -O3 -g  $(INCS) -ffixed-line-length-none
 
 # Lines from here on down should not need to be changed.  They are the
 # actual rules which make uses to build a.out.

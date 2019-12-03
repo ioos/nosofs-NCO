@@ -15,7 +15,7 @@ OBJS=nos_creofs_wl_offset_correction.o
 EXECnos=../../exec
 LIBnos=../../lib
 
-FC =           ifort 
+FC = $(COMP_F)
 #use for extensive compilation error reporting
 #LDFLAGS = -p -bnoquiet -bloadmap:mug
 LDFLAGS =	
