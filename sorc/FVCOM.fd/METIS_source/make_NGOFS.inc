@@ -543,12 +543,15 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #  gfortran defs 
 #--------------------------------------------------------------------------
-#         CPP      = /usr/bin/cpp 
-#         COMPILER = -DGFORTRAN
-#         FC       = gfortran  -O3 
-#         DEBFLGS  = 
-#         OPT      = 
-#         CLIB     = 
+         CPP      = $(COMP_CPP)
+         COMPILER = -DGFORTRAN
+         FC       = $(COMP_F_MPI)
+         CC       = $(COMP_MPCC)
+         CPP      = $(COMP_CPP)
+         CXX      = $(COMP_CC)
+         OPT      = -O3
+         DEBFLGS  = -g -fcheck=all
+         #DEBFLGS  = -g -fno-automatic -frepack-arrays -fstack-arrays  -fcheck=all
 #--------------------------------------------------------------------------
 #  absoft / mac os x defs
 #--------------------------------------------------------------------------
@@ -561,12 +564,12 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #  IBM/AIX Definitionss NOAA CCS (stratus and cirrus)
 #--------------------------------------------------------------------------
-          CPPFLAGS = $(DEF_FLAGS) -DAIX
-          COMPILER = -DIFORT
-          FC       = $(COMP_F_MPI)
-          CC       = $(COMP_MPCC)
-          CPP      = $(COMP_CPP)
-          CXX      = $(COMP_CC)
+#          CPPFLAGS = $(DEF_FLAGS) -DAIX
+#          COMPILER = -DIFORT
+#          FC       = $(COMP_F_MPI)
+#          CC       = $(COMP_MPCC)
+#          CPP      = $(COMP_CPP)
+#          CXX      = $(COMP_CC)
 #          CC       = /usr/bin/mpcc
 #          CPP      = /usr/bin/cpp
 #          FC       = $(COMP_F_MPI) 

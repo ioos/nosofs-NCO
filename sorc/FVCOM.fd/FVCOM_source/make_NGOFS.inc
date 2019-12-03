@@ -58,8 +58,7 @@
             INSTALLDIR    = $(TOPDIR)/libs/install
 #===========================================================================
 # PREPROCESSOR OPTIONS FOR CPP
-#            DEF_FLAGS     = -P -C -traditional 
-            DEF_FLAGS     = -P -traditional 
+            DEF_FLAGS     = -P -traditional-cpp
 #===========================================================================
 #
 ####################### MEDM ENVIRONMENT #####################################
@@ -565,10 +564,16 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #         CPP      = /usr/bin/cpp 
 #         COMPILER = -DGFORTRAN
-#         FC       = gfortran  -O3 
-#         DEBFLGS  = 
-#         OPT      = 
-#         CLIB     = 
+          FC       = $(COMP_F_MPI) 
+          CC       = $(COMP_MPCC)
+          CPP      = $(COMP_CPP)
+          CXX      = $(COMP_CC)
+          OPT      = -O3
+          DEBFLGS  = -g
+          #DEBFLGS  = -g -frecursive
+          #DEBFLGS  = -g -fstack-arrays  -fcheck=all
+          #DEBFLGS  = -g -fcheck=all -Wall
+          #DEBFLGS  = -g -fcheck=all
 #--------------------------------------------------------------------------
 #  absoft / mac os x defs
 #--------------------------------------------------------------------------
@@ -589,13 +594,13 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #  IBM/AIX Definitionss NOAA CCS (stratus and cirrus)
 #--------------------------------------------------------------------------
-          CPPFLAGS = $(DEF_FLAGS) -DAIX
-          COMPILER = -DIFORT
-          FC       = $(COMP_F_MPI)
-          CC       = $(COMP_MPCC)
-          CPP      = $(COMP_CPP)
-          CXX      = $(COMP_CC)
-          OPT      = -O3 -fp-model precise -ftz -fast-transcendentals -no-prec-div -no-prec-sqrt
+#          CPPFLAGS = $(DEF_FLAGS) -DAIX
+#          COMPILER = -DIFORT
+#          FC       = $(COMP_F_MPI)
+#          CC       = $(COMP_MPCC)
+#          CPP      = $(COMP_CPP)
+#          CXX      = $(COMP_CC)
+#          OPT      = -O3 -fp-model precise -ftz -fast-transcendentals -no-prec-div -no-prec-sqrt
 #         OPT      = -O3 -fp-model precise
 #          CC       = /usr/bin/mpcc
 #          CPP      = /usr/bin/cpp

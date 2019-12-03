@@ -94,11 +94,11 @@ dashL= $(empty) -L
 #                           SET PATH TO LIBRARIES WITH IOLIBS      
 #                           SET PATH TO INCLUDE FILES (netcdf.mod) WITH IOINCS
 #--------------------------------------------------------------------------
-             IOLIBS       =  -L/usrx/local/prod/packages/ips/18.0.1/netcdf/4.5.0/lib -lnetcdff -lnetcdf
-#             IOLIBS       =  -lnetcdf #-L/hosts/mao/usr/medm/install/netcdf/3.6.3/em64t/lib -lnetcdf
-             IOINCS       =  -I/usrx/local/prod/packages/ips/18.0.1/netcdf/4.5.0/include
-#             IOLIBS       =  -L/usr/local/install/netcdf/gcc_ifort/3.6.2/lib  -lnetcdf
-#             IOINCS       =  -I/usr/local/install/netcdf/gcc_ifort/3.6.2/include
+
+#wcoss             IOLIBS       =  -L/usrx/local/prod/packages/ips/18.0.1/netcdf/4.5.0/lib -lnetcdff -lnetcdf
+#wcoss             IOINCS       =  -I/usrx/local/prod/packages/ips/18.0.1/netcdf/4.5.0/include
+              IOLIBS       =  -L${NETCDF}/lib64 -lnetcdf -lnetcdff
+              IOINCS       =  -I${NETCDF}/include 
 #--------------------------------------------------------------------------
 
 
