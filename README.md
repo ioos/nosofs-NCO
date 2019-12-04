@@ -1,6 +1,7 @@
 # nosofs-NCO
 
-This is a fork of NOAA's National Ocean Service Operational Forecast System obtained from the [NCO PMB Website](https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/). Note: NOAA does not maintain a publicly available source code repository.
+This is a fork of NOAA's National Ocean Service Operational Forecast System obtained from the [NCO PMB Website](https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/). 
+Note: NOAA does not maintain a publicly available source code repository.
 
 ### Directory structure
 
@@ -15,15 +16,26 @@ This is a fork of NOAA's National Ocean Service Operational Forecast System obta
     │   ├── FVCOM.fd
     │   ├── ROMS.fd
     │   ├── SELFE.fd
+    │   └── nos_*.fd      # Programs for preparing forcing data
     ├── ush               # Scripts containing the core logic
     └── README.md
 
 ## Getting Started
 
 ### Prerequisites
-    - MPI Library
-    - NCEPLibraries
-
+    - Fortran, C, and C++ compilers
+    - MPI library
+    - NetCDF4
+    - HDF5
+    - jasper library
+    - z library
+    - png library
+    - Environment module support (recommended)
+    
+    Required for prep steps:
+        - NCEPLibs
+        - WGRIB2
+    
 ### Building
 
 ### Running the tests
@@ -34,4 +46,5 @@ This is a fork of NOAA's National Ocean Service Operational Forecast System obta
 
 ## License
 
-https://confluence.ecmwf.int/display/ECFLOW/ecflow+home
+## Additional Links
+    https://confluence.ecmwf.int/display/ECFLOW/ecflow+home
