@@ -18,18 +18,20 @@ This is a fork of NOAA's National Ocean Service Operational Forecast System obta
     ├── ush               # Scripts containing the core logic
     └── README.md
 
-# Getting Started
+## Getting Started
 
-## Prerequisites
+### Prerequisites
+    - MPI Library
+    - NCEPLibraries
 
-## Building
+### Building
 
-## Running the tests
+### Running the tests
 
-# Tested Platforms
+## Tested Platforms
 
-# Changes
+## Changes
 
-# License
+## License
 
 https://confluence.ecmwf.int/display/ECFLOW/ecflow+home
