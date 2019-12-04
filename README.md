@@ -2,9 +2,9 @@
 
 v3.2.1
 
-This is a fork of NOAA's National Ocean Service Operational Forecast System obtained from https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/ [nosofs.VERSION]
+This is a fork of NOAA's National Ocean Service Operational Forecast System obtained from NOAA's PMB website:  https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/ /nosofs.v[VERSION]
 
-Note: NOAA does not maintain a publicly available source code repository.
+*NOAA does not maintain a publicly available source code repository.*
 
 ### Directory structure
 
@@ -47,7 +47,8 @@ Note: NOAA does not maintain a publicly available source code repository.
             ├── shared
             ├── cbofs | ngofs | etc.
    
-    Fixed fields can be obtained from the             
+    Fixed fields can be obtained from NOAA's PMB website:
+    https://www.nco.ncep.noaa.gov/pmb/codes/nwprod /nosofs.v[VERSION]
 
 ### Building
 
