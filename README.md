@@ -37,10 +37,14 @@ This is a fork of NOAA's National Ocean Service Operational Forecast System obta
 - Environment module support (recommended)
     
 Required for prep steps:
-    - NCEPLibs
-    - WGRIB2
+- NCEPLibs : https://github.com/NCAR/NCEPlibs
+- WGRIB2 : https://www.cpc.ncep.noaa.gov/products/wesley/wgrib.html
         
 Required to run:
+
+- Produtils - available on PMB website pmb/codes
+
+Also need fixed fields: 
     
     Download fixed field files and place them in the 'fix' directory. 
     .
@@ -48,9 +52,10 @@ Required to run:
         ├── shared
         ├── cbofs | ngofs | etc.
    
-    Fixed fields can be obtained from NOAA's PMB website:
-    https://www.nco.ncep.noaa.gov/pmb/codes/nwprod nosofs.v[VERSION]
-    Some are also available at https://ioos-cloud-sandbox.s3.amazonaws.com/public/nosofs/fix.
+Fixed fields can be obtained from NOAA's PMB website:
+https://www.nco.ncep.noaa.gov/pmb/codes/nwprod nosofs.v[VERSION]
+
+Some are also available at https://ioos-cloud-sandbox.s3.amazonaws.com/public/nosofs/fix.
     
 ### Building
 
