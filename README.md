@@ -1,6 +1,9 @@
 # nosofs-NCO
 
-This is a fork of NOAA's National Ocean Service Operational Forecast System obtained from the [NCO PMB Website](https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/). 
+v3.2.1
+
+This is a fork of NOAA's National Ocean Service Operational Forecast System obtained from https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/ [nosofs.VERSION]
+
 Note: NOAA does not maintain a publicly available source code repository.
 
 ### Directory structure
@@ -35,9 +38,26 @@ Note: NOAA does not maintain a publicly available source code repository.
     Required for prep steps:
         - NCEPLibs
         - WGRIB2
+        
+    Required to run:
     
+        Download fixed field files and place them in the 'fix' directory. 
+        .
+        ├── fix
+            ├── shared
+            ├── cbofs | ngofs | etc.
+   
+    Fixed fields can be obtained from the             
+
 ### Building
 
+To build everything:
+    
+```
+cd sorc
+./COMPILE.sh
+```
+    
 ### Running the tests
 
 ## Tested Platforms
