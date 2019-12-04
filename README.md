@@ -2,7 +2,7 @@
 
 v3.2.1
 
-This is a fork of NOAA's National Ocean Service Operational Forecast System obtained from NOAA's PMB website:  https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/ /nosofs.v[VERSION]
+This is a fork of NOAA's National Ocean Service Operational Forecast System obtained from NOAA's PMB website:  https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/ nosofs.v[VERSION]
 
 *NOAA does not maintain a publicly available source code repository.*
 
@@ -26,46 +26,113 @@ This is a fork of NOAA's National Ocean Service Operational Forecast System obta
 ## Getting Started
 
 ### Prerequisites
-    - Fortran, C, and C++ compilers
-    - MPI library
-    - NetCDF4
-    - HDF5
-    - jasper library
-    - z library
-    - png library
-    - Environment module support (recommended)
+
+- Fortran, C, and C++ compilers
+- MPI library
+- NetCDF4
+- HDF5
+- jasper library
+- z library
+- png library
+- Environment module support (recommended)
     
-    Required for prep steps:
-        - NCEPLibs
-        - WGRIB2
+Required for prep steps:
+    - NCEPLibs
+    - WGRIB2
         
-    Required to run:
+Required to run:
     
-        Download fixed field files and place them in the 'fix' directory. 
-        .
-        ├── fix
-            ├── shared
-            ├── cbofs | ngofs | etc.
+    Download fixed field files and place them in the 'fix' directory. 
+    .
+    ├── fix
+        ├── shared
+        ├── cbofs | ngofs | etc.
    
     Fixed fields can be obtained from NOAA's PMB website:
-    https://www.nco.ncep.noaa.gov/pmb/codes/nwprod /nosofs.v[VERSION]
-
+    https://www.nco.ncep.noaa.gov/pmb/codes/nwprod nosofs.v[VERSION]
+    Some are also available at https://ioos-cloud-sandbox.s3.amazonaws.com/public/nosofs/fix.
+    
 ### Building
 
-To build everything:
+To build:
     
 ```
 cd sorc
-./COMPILE.sh
+./ROMS_COMPILE.sh
+./FVCOM_COMPILE.sh
 ```
-    
+*(SELFE is untested.)*
+
 ### Running the tests
 
+CBOFS example:
+    
+    Obtain ICs from AWS public S3 bucket:
+        https://ioos-cloud-sandbox.s3.amazonaws.com/public/cbofs/ICs.cbofs.2019100100.tgz
+    Untar the ICs into /com/nos, cbofs.20191001 directory is in the tar ball.
+        
+    Edit ./jobs/fcstrun.sh to make sure the paths and other parameters are correct for your system.
+    Edit /com/nos/cbofs.20191001/nos.cbofs.forecast.20191001.t00z.in so that NtileI x NtileJ == number of CPUs available == NPP in fcstrun.sh
+    
+    ```
+    mkdir -p /com/nos
+    cd /com/nos
+    wget https://ioos-cloud-sandbox.s3.amazonaws.com/public/cbofs/ICs.cbofs.2019100100.tgz
+    tar -xvf ICs.cbofs.2019100100.tgz
+    vi ./cbofs.20191001/nos.cbofs.forecast.20191001.t00z.in
+    cd /save/nosofs-NCO/jobs
+    vi ./fcstrun.sh
+    ./fcstrun.sh 20191001 00
+    ```
+     
+### Running the model
+    
+    Nowcast/Forecast
+    
+    * Obtain initial conditions and required meteorological forcing 
+        NOAA maintains the past two days of NOS forecasts on the NOMADS server: 
+        https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/
+        ```
+        Example CBOFS:
+        cd ./jobs
+        ./getICs.sh 20191204 00
+        ```
+    * Run the model - follow the procedure in "Running the tests" above.
+    
+        
 ## Tested Platforms
 
-## Changes
+    Intel X86-64
+        GCC 6.5.0
+        IntelMPI 2018,2019,2020
+        OpenMPI 3,4
+        MPICH 2,3,4
+            CentOS7 - AWS EC2 and Docker
+            RHEL7   - AWS EC2
+            AmazonLinux - AWS EC2
 
-## License
+    
+## TODO List
+
+    Create test scripts that are decoupled from operational scripts and are easier to use.
+    Improve getICs.sh and other helper scripts.
+    Put prerequisite libraries RPMS in S3 bucket.
+    (... and much more)
+    
+## Gotchas
+    
+FVCOM based models hang when using HyperThreads on EC2 instances.
+Solution: Either disable HyperThreads or use specific mpirun bindings.
+    ```
+    Example:
+        mpirun -bind-to numa -map-by C
+    ```
+    
+
+## Licenses
+    Various - find details for specific components.
 
 ## Additional Links
-    https://confluence.ecmwf.int/display/ECFLOW/ecflow+home
+    ecFlow : https://confluence.ecmwf.int/display/ECFLOW/ecflow+home
+    NOMADS : https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/
+   
