@@ -67,12 +67,12 @@ cd sorc
 
 CBOFS example:
     
-    Obtain ICs from AWS public S3 bucket:
-        https://ioos-cloud-sandbox.s3.amazonaws.com/public/cbofs/ICs.cbofs.2019100100.tgz
-    Untar the ICs into /com/nos, cbofs.20191001 directory is in the tar ball.
+Obtain ICs from AWS public S3 bucket:
+    https://ioos-cloud-sandbox.s3.amazonaws.com/public/cbofs/ICs.cbofs.2019100100.tgz
+Untar the ICs into /com/nos, cbofs.20191001 directory is in the tar ball.
         
-    Edit ./jobs/fcstrun.sh to make sure the paths and other parameters are correct for your system.
-    Edit /com/nos/cbofs.20191001/nos.cbofs.forecast.20191001.t00z.in so that NtileI x NtileJ == number of CPUs available == NPP in fcstrun.sh
+Edit ./jobs/fcstrun.sh to make sure the paths and other parameters are correct for your system.
+Edit /com/nos/cbofs.20191001/nos.cbofs.forecast.20191001.t00z.in so that NtileI x NtileJ == number of CPUs available == NPP in fcstrun.sh
     
     ```
     mkdir -p /com/nos
@@ -87,52 +87,55 @@ CBOFS example:
      
 ### Running the model
     
-    Nowcast/Forecast
+Nowcast/Forecast
     
-    * Obtain initial conditions and required meteorological forcing 
-        NOAA maintains the past two days of NOS forecasts on the NOMADS server: 
-        https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/
-        ```
-        Example CBOFS:
-        cd ./jobs
-        ./getICs.sh 20191204 00
-        ```
-    * Run the model - follow the procedure in "Running the tests" above.
+* Obtain initial conditions and required meteorological forcing 
+    NOAA maintains the past two days of NOS forecasts on the NOMADS server: 
+    https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/
+```
+    Example CBOFS:
+    cd ./jobs
+    ./getICs.sh 20191204 00
+```
+* Run the model - follow the procedure in "Running the tests" above.
     
         
 ## Tested Platforms
 
-    Intel X86-64
-        GCC 6.5.0
-        IntelMPI 2018,2019,2020
-        OpenMPI 3,4
-        MPICH 2,3,4
-            CentOS7 - AWS EC2 and Docker
-            RHEL7   - AWS EC2
-            AmazonLinux - AWS EC2
-
-    
+Intel X86-64
+    GCC 6.5.0
+    IntelMPI 2018,2019,2020
+    OpenMPI 3,4
+    MPICH 2,3,4
+        CentOS7 - AWS EC2 and Docker
+        RHEL7   - AWS EC2
+        AmazonLinux - AWS EC2
+  
 ## TODO List
 
-    Create test scripts that are decoupled from operational scripts and are easier to use.
-    Improve getICs.sh and other helper scripts.
-    Put prerequisite libraries RPMS in S3 bucket.
-    (... and much more)
+Create test scripts that are decoupled from operational scripts and are easier to use.
+Improve getICs.sh and other helper scripts.
+Put prerequisite libraries RPMS in S3 bucket.
+(... and much more)
     
 ## Gotchas
     
 FVCOM based models hang when using HyperThreads on EC2 instances.
-Solution: Either disable HyperThreads or use specific mpirun bindings.
-    ```
-    Example:
-        mpirun -bind-to numa -map-by C
-    ```
-    
+Solution: Either disable HyperThreads or use non-default mpirun bindings.
+
+Example on 48core/96vcpu machine with 2 24 core numa regions:
+```
+mpirun -bind-to numa:2 -map-by C
+```
+Depending on the specific system architecture, the bindings needed may be different than the above.
 
 ## Licenses
-    Various - find details for specific components.
+
+Various - multiple components are contained herein.
 
 ## Additional Links
-    ecFlow : https://confluence.ecmwf.int/display/ECFLOW/ecflow+home
-    NOMADS : https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/
+
+ecFlow : https://confluence.ecmwf.int/display/ECFLOW/ecflow+home
+
+NOMADS : https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/
    
