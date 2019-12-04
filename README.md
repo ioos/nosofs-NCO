@@ -60,8 +60,9 @@ To build:
 cd sorc
 ./ROMS_COMPILE.sh
 ./FVCOM_COMPILE.sh
+
+SELFE is untested
 ```
-*(SELFE is untested.)*
 
 ### Running the tests
 
@@ -74,16 +75,16 @@ Untar the ICs into /com/nos, cbofs.20191001 directory is in the tar ball.
 Edit ./jobs/fcstrun.sh to make sure the paths and other parameters are correct for your system.
 Edit /com/nos/cbofs.20191001/nos.cbofs.forecast.20191001.t00z.in so that NtileI x NtileJ == number of CPUs available == NPP in fcstrun.sh
     
-    ```
-    mkdir -p /com/nos
-    cd /com/nos
-    wget https://ioos-cloud-sandbox.s3.amazonaws.com/public/cbofs/ICs.cbofs.2019100100.tgz
-    tar -xvf ICs.cbofs.2019100100.tgz
-    vi ./cbofs.20191001/nos.cbofs.forecast.20191001.t00z.in
-    cd /save/nosofs-NCO/jobs
-    vi ./fcstrun.sh
-    ./fcstrun.sh 20191001 00
-    ```
+```
+mkdir -p /com/nos
+cd /com/nos
+wget https://ioos-cloud-sandbox.s3.amazonaws.com/public/cbofs/ICs.cbofs.2019100100.tgz
+tar -xvf ICs.cbofs.2019100100.tgz
+vi ./cbofs.20191001/nos.cbofs.forecast.20191001.t00z.in
+cd /save/nosofs-NCO/jobs
+vi ./fcstrun.sh
+./fcstrun.sh 20191001 00
+```
      
 ### Running the model
     
@@ -92,10 +93,11 @@ Nowcast/Forecast
 * Obtain initial conditions and required meteorological forcing 
     NOAA maintains the past two days of NOS forecasts on the NOMADS server: 
     https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/
+
+Example CBOFS:
 ```
-    Example CBOFS:
-    cd ./jobs
-    ./getICs.sh 20191204 00
+cd ./jobs
+./getICs.sh 20191204 00
 ```
 * Run the model - follow the procedure in "Running the tests" above.
     
