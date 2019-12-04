@@ -68,13 +68,13 @@ SELFE is untested
 
 CBOFS example:
     
-Obtain ICs from AWS public S3 bucket:
-    https://ioos-cloud-sandbox.s3.amazonaws.com/public/cbofs/ICs.cbofs.2019100100.tgz
-Untar the ICs into /com/nos, cbofs.20191001 directory is in the tar ball.
-        
-Edit ./jobs/fcstrun.sh to make sure the paths and other parameters are correct for your system.
-Edit /com/nos/cbofs.20191001/nos.cbofs.forecast.20191001.t00z.in so that NtileI x NtileJ == number of CPUs available == NPP in fcstrun.sh
-    
+* Obtain ICs from AWS public S3 bucket:  
+  https://ioos-cloud-sandbox.s3.amazonaws.com/public/cbofs/ICs.cbofs.2019100100.tgz
+* Untar the ICs into /com/nos, cbofs.20191001 directory is in the tar ball.    
+* Edit ./jobs/fcstrun.sh to make sure the paths and other parameters are correct for your system.
+* Edit /com/nos/cbofs.20191001/nos.cbofs.forecast.20191001.t00z.in so that NtileI x NtileJ == number of CPUs available == NPP in fcstrun.sh
+  
+Example:
 ```
 mkdir -p /com/nos
 cd /com/nos
@@ -104,14 +104,14 @@ cd ./jobs
         
 ## Tested Platforms
 
-Intel X86-64
-    GCC 6.5.0
-    IntelMPI 2018,2019,2020
-    OpenMPI 3,4
-    MPICH 2,3,4
-        CentOS7 - AWS EC2 and Docker
-        RHEL7   - AWS EC2
-        AmazonLinux - AWS EC2
+    Intel X86-64
+        GCC 6.5.0
+        IntelMPI 2018,2019,2020
+        OpenMPI 3,4
+        MPICH 2,3,4
+            CentOS7 - AWS EC2 and Docker
+            RHEL7   - AWS EC2
+            AmazonLinux - AWS EC2
   
 ## TODO List
 
