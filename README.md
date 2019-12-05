@@ -27,6 +27,10 @@ This is a fork of NOAA's National Ocean Service Operational Forecast System obta
 
 ### Prerequisites
 
+Base: https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_base_rpms.gcc.6.5.0.el7.20191011.tgz
+
+All: https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_all_rpms.gcc.6.5.0.el7.20191011.tgz
+
 - Fortran, C, and C++ compilers
 - MPI library
 - NetCDF4
