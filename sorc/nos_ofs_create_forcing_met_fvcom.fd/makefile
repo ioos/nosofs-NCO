@@ -14,7 +14,7 @@ LIBnos=../../lib
 # CMD		Name of the executable
 # PROFLIB	Library needed for profiling
 
-FC = ${COMP_F} 
+FC = ${COMP_F}
 LDFLAGS =	
 INC = -I${G2_INC4}
 #NETCDF_INC = -I$(NETCDF)/include
@@ -35,7 +35,7 @@ PROFLIB = -lprof
 # To compile with flowtracing turned on, use the second line
 # To compile giving profile additonal information, use the third line
 # WARNING:  SIMULTANEOUSLY PROFILING AND FLOWTRACING IS NOT RECOMMENDED
-FFLAGS = -O3  -ffixed-line-length-none  $(INCS)
+FFLAGS =  -march=skylake-avx512  -O3  -ffixed-line-length-none  $(INCS)
 #FFLAGS = -O3  -extend-source  $(INCS) # -check all
 
 # Lines from here on down should not need to be changed.  They are the

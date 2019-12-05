@@ -40,16 +40,7 @@ INCS  = $(INC) $(NETCDF_INC)
 LIB  =   ${G2_LIB4} ${W3NCO_LIB4} ${W3EMC_LIB4} ${BUFR_LIB4}\
    $(NOS_UTILITY_LIB) ${JASPER_LIB} ${PNG_LIB}  ${Z_LIB4} ${BACIO_LIB4}
 
-
-
-
 LIBS  = $(NETCDF_LIB) $(LIB)
-
-
-
-
-
-
 
 CMD =            $(EXECnos)/nos_ofs_create_forcing_obc_fvcom_nest
 PROFLIB =       -lprof
@@ -58,7 +49,7 @@ PROFLIB =       -lprof
 # To compile with flowtracing turned on, use the second line
 # To compile giving profile additonal information, use the third line
 # WARNING:  SIMULTANEOUSLY PROFILING AND FLOWTRACING IS NOT RECOMMENDED
-FFLAGS =        -O3  $(INCS)
+FFLAGS = -march=skylake-avx512  -O3  $(INCS)
 #FFLAGS =        -O3 -qnosave -qport=mod -qintsize=4 -qrealsize=4
 #FFLAGS =	 -F
 #FFLAGS =	 -Wf"-ez"

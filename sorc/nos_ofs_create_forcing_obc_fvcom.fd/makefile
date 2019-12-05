@@ -45,7 +45,7 @@ PROFLIB =       -lprof
 # To compile giving profile additonal information, use the third line
 # WARNING:  SIMULTANEOUSLY PROFILING AND FLOWTRACING IS NOT RECOMMENDED
 #FFLAGS =        -O3   -extend-source $(INCS)
-FFLAGS =        -O3 -ffixed-line-length-none $(INCS)
+FFLAGS =  -march=skylake-avx512  -O3 -ffixed-line-length-none $(INCS)
 
 # Lines from here on down should not need to be changed.  They are the
 # actual rules which make uses to build a.out.

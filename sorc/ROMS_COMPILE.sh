@@ -29,7 +29,7 @@ cd $SORCnos
 
 
 onlymodel=no
-buildprep=no
+buildprep=yes
 
 if [[ $onlymodel == "yes" ]] ; then
   ##  Compile ocean model of ROMS for CBOFS

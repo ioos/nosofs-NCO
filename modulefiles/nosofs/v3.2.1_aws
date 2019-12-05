@@ -14,14 +14,14 @@ puts stderr "for the Intel Compiler Suite composer_xe_2011_sp1.11.339\n"
 module-whatis "This module sets the environment variables for \
                nosofs_shared production utilities:"
 
-setenv COMP_F gfortran
+#setenv COMP_F       "gfortran -march=skylake-avx512"
+setenv COMP_F       gfortran
 setenv COMP_F_MPI90 mpif90
-setenv COMP_F_MPI mpif90
-# COMP_ICC is only used by FVCOM.fd/FVCOM_source/libs/julian/makefile
-setenv COMP_ICC gcc
-setenv COMP_CC gcc
-setenv COMP_CPP cpp
-setenv COMP_MPCC mpicc
+setenv COMP_F_MPI   mpif90
+setenv COMP_ICC     gcc
+setenv COMP_CC      gcc
+setenv COMP_CPP     cpp
+setenv COMP_MPCC    mpicc
 
 module purge
 module load produtil
@@ -50,6 +50,6 @@ module load libpng/1.5.30
 #Set other library variables
 module load netcdf/4.5
 setenv NETCDF_INC "-I$env(NETCDF)/include"
-setenv NETCDF_LIB "-L$env(NETCDF)/lib64 -lnetcdf -lnetcdff"
+setenv NETCDF_LIB "-L$env(NETCDF)/lib -lnetcdf -lnetcdff"
 setenv NETCDF_INCDIR  "$env(NETCDF)/include"
 

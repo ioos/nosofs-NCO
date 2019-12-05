@@ -23,7 +23,7 @@
 # First the defaults
 #
                FC := gfortran
-           FFLAGS := -frepack-arrays
+           FFLAGS := -frepack-arrays -march=skylake-avx512
               CPP := cpp
          CPPFLAGS := -P -traditional
           LDFLAGS :=
