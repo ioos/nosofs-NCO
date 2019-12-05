@@ -24,7 +24,7 @@
 #
                FC := gfortran
            FFLAGS := -frepack-arrays
-              CPP := /usr/bin/cpp
+              CPP := cpp
          CPPFLAGS := -P -traditional
           LDFLAGS :=
                AR := ar
@@ -73,6 +73,24 @@ ifdef USE_OpenMP
          CPPFLAGS += -D_OPENMP
            FFLAGS += -fopenmp
 endif
+
+ifdef USE_AVX512
+         FFLAGS += -mavx512f -mavx512dq -mavx512cd -mavx512bw -mavx512vl
+         # -fopt-info-vec-all
+endif
+
+ifdef USE_AVX2
+         FFLAGS += -mavx2
+endif
+
+
+ifdef USE_MKL
+
+        LIBS += -L$(MKLROOT)/lib/intel64 -Wl,--no-as-needed -lmkl_scalapack_lp64 -lmkl_cdft_core -lmkl_gf_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lm -ldl
+
+        FFLAGS += -I$(MKLROOT)/include/intel64/lp64 -m64 -I$(MKLROOT)/include
+endif
+
 
 ifdef USE_DEBUG
            FFLAGS += -g -fbounds-check

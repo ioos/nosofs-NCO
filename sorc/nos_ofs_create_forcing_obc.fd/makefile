@@ -18,8 +18,8 @@ FC = $(COMP_F)
 #use for extensive compilation error reporting
 LDFLAGS =	
 INC = -I${G2_INC4}
-NETCDF_INC = -I$(NETCDF)/include
-NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
+#NETCDF_INC = -I$(NETCDF)/include
+#NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
 
 # NOS COMF unitility library
 NOS_UTILITY_LIB = -L$(LIBnos) -lnosutil

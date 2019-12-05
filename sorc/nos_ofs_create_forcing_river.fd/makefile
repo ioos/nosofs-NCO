@@ -19,10 +19,10 @@ FC = $(COMP_F)
 #use for extensive compilation error reporting
 #LDFLAGS = -p -bnoquiet -bloadmap:mug
 LDFLAGS =	
-#INC = -I/nwprod/lib/incmod/g2_4
 INC = -I${G2_INC4}
-NETCDF_INC = -I$(NETCDF)/include
-NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
+
+#NETCDF_INC = -I$(NETCDF)/include
+#NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
 
 ## NOS COMF unitility library
 NOS_UTILITY_LIB = -L$(LIBnos) -lnosutil
@@ -41,7 +41,7 @@ PROFLIB =       -lprof
 # To compile giving profile additonal information, use the third line
 # WARNING:  SIMULTANEOUSLY PROFILING AND FLOWTRACING IS NOT RECOMMENDED
 #FFLAGS =        -O3 -extend-source -no-wrap-margin $(INCS)
-FFLAGS =  -O3
+FFLAGS =  -O3 $(INCS)
 
 # Lines from here on down should not need to be changed.  They are the
 # actual rules which make uses to build a.out.

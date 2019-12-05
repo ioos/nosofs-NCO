@@ -15,8 +15,8 @@ OBJS=nos_ofs_combine_field_netcdf_selfe.o
 # PROFLIB	Library needed for profiling
 
 # NETCDF is specified in modulefiles
-NETCDF_INC = -I$(NETCDF)/include
-NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
+#NETCDF_INC = $(NETCDF)/include
+#NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
 
 #use for extensive compilation error reporting
 #LDFLAGS = -p -bnoquiet -bloadmap:mug

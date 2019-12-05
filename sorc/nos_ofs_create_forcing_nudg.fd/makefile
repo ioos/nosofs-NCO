@@ -23,8 +23,8 @@ LDFLAGS =
 INC = -I${G2_INC4}
 
 
-NETCDF_INC = -I$(NETCDF)/include
-NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
+#NETCDF_INC = -I$(NETCDF)/include
+#NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
 
 ## NOS COMF unitility library
 NOS_UTILITY_LIB = -L$(LIBnos) -lnosutil
@@ -47,7 +47,7 @@ PROFLIB =       -lprof
 # To compile giving profile additonal information, use the third line
 # WARNING:  SIMULTANEOUSLY PROFILING AND FLOWTRACING IS NOT RECOMMENDED
 # FFLAGS =        -O3  $(INCS) -extend-source
-FFLAGS = -O3  $(INCS) -ffixed-line-length-none
+FFLAGS = -O3 $(INCS) -ffixed-line-length-none
 
 # Lines from here on down should not need to be changed.  They are the
 # actual rules which make uses to build a.out.

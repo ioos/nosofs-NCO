@@ -21,8 +21,8 @@ FC = ${COMP_F}
 LDFLAGS =	
 #INC = -I/nwprod/lib/incmod/g2_4
 INC = -I${G2_INC4}
-NETCDF_INC = -I$(NETCDF)/include
-NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
+#NETCDF_INC = -I$(NETCDF)/include
+#NETCDF_LIB = -L$(NETCDF)/lib -lnetcdff
 
 ## NOS COMF unitility library
 NOS_UTILITY_LIB = -L$(LIBnos) -lnosutil

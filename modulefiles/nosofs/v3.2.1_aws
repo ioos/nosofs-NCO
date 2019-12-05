@@ -33,6 +33,7 @@ module load gcc/6.5.0
 #module load mpi/intel/2018.6.288
 #module load mpi/intel/2019.5.281
 module load mpi/intel/2020.0.154
+setenv MPI_INC "$env(I_MPI_ROOT)/intel64/include/gfortran/6.1.0"
 
 module load wgrib2
 # Loding nceplibs modules
@@ -44,11 +45,11 @@ module load g2/v3.1.0
 
 module load jasper/1.900.1
 #module load zlib/1.2.11
-#module load libpng/1.5.30
+module load libpng/1.5.30
 
 #Set other library variables
-module load netcdf/4.2
+module load netcdf/4.5
+setenv NETCDF_INC "-I$env(NETCDF)/include"
+setenv NETCDF_LIB "-L$env(NETCDF)/lib64 -lnetcdf -lnetcdff"
 setenv NETCDF_INCDIR  "$env(NETCDF)/include"
-setenv NETCDF_LIBDIR  "$env(NETCDF)/lib64"
-setenv NETCDF_LDFLAGS "-L$env(NETCDF_LIBDIR) -lnetcdf -lnetcdff"
 
