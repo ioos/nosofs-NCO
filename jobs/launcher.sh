@@ -1,6 +1,10 @@
 #!/bin/bash
 set -x
 
+# This was created to launch a job via Python
+# The Python scripts create the cluster on-demand 
+# and submits this job with the list of hosts available.
+
 if [ $# -ne 5 ] ; then
   echo "Usage: $0 YYYYMMDD HH NODES NP HOSTS"
   exit 1
@@ -31,9 +35,11 @@ cd $HOMEnos/jobs
 export HOSTFILE=$HOMEnos/jobs/hosts.launcher
 echo $HOSTS > $HOSTFILE
 
-host1=`awk -F, '{print $1}' hosts.launcher`
-localhost=`hostname`
+#host1=`awk -F, '{print $1}' hosts.launcher`
+#localhost=`hostname`
 #export mpiopts="-localhost $host1 -nolocal -launcher ssh -genvall "
 #export mpiopts="-localhost $localhost -nolocal -path /ptmp/ngofs.20191030 -bootstrap ssh" 
-export mpiopts="-hosts $HOSTS -nolocal -bootstrap ssh" 
+
+# The following will launch the job on a non-local cluster, e.g. from a head node
+export MPIOPTS="-np $NPP -ppn $PPN -hosts $HOSTS -nolocal -bootstrap ssh" 
 ./fcstrun.sh $CDATE $HH

@@ -12,6 +12,9 @@ if [ $# -ne 2 ] ; then
   exit 1
 fi
 
+export CDATE=$1
+HH=$2
+
 ########################################
 # NOS_OFS_PREP 
 ########################################
@@ -37,68 +40,69 @@ module purge
 export I_MPI_OFI_LIBRARY_INTERNAL=1
 module load gcc/6.5.0
 module load mpi/intel
+module load hdf5-impi
 module load netcdf
-
-#module load mpi/intel/2019.5.281-noefa
-#module load mpi/intel/2019.5.281-efa
 module load produtil
 
-#export NPP=140
+export I_MPI_DEBUG=1
+
 #printenv
+
+# This is needed for Intel MPI 2019+ with Docker
+#export I_MPI_FABRICS=shm
+
 #unset I_MPI_PMI_LIBRARY
 #export FI_PROVIDER=efa  # default if EFA is available
 #export FI_PROVIDER=sockets  # fall back to TCP instead
-
 #source /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/bin/mpivars.sh
-
-export I_MPI_DEBUG=1
 #export I_MPI_DEBUG=4,nobuf
 #export I_MPI_HYDRA_DEBUG=1
 #export I_MPI_HYDRA_ENV=all
 #export I_MPI_HYDRA_IFACE=ens5
 #export I_MPI_OFI_PROVIDER_DUMP=1
 #export I_MPI_EXTRA_FILESYSTEM=1
-
 #export I_MPI_FABRICS=shm:ofi
 #export I_MPI_FABRICS=shm
 #export I_MPI_FABRICS=efa
 #export I_MPI_FABRICS=verbs
-
 #export FI_PROVIDER=efa
-#export FI_PROVIDER=tcp
 #export FI_PROVIDER=sockets
 #export FI_PROVIDER=tcp
 #export FI_EFA_ENABLE_SHM_TRANSFER=1
 #export I_MPI_WAIT_MODE=1   #default is 0
 
-export NODES=${NODES:-1}
-export NPP=${NPP:-16}     # Number of processors
-HOMEnos=$(dirname $PWD)
-# This is needed for Intel MPI 2019+
+# This is needed for Intel MPI 2019+ with Docker
 #export I_MPI_FABRICS=shm
 
-export PPN=$((NPP/NODES))
+export OFS=cbofs
+export NPP=4
+
+NOWCAST=NO      # Run the nowcast?
+FORECAST=YES    # Run the forecast?
+
+export NODES=${NODES:-1}
+export NPP=${NPP:-16}     # Number of processors
+export PPN=${PPN:-$((NPP/NODES))}
 
 export HOSTFILE=${HOSTFILE:-$PWD/hosts}
-#export envir=ec2
 export SENDDBN=NO
 export KEEPDATA=YES
-#export OFS=cbofs
-export OFS=ngofs
 
-#export CDATE=20191001     # The hindcast date
-#export cyc='00'
-export CDATE=$1
-export cyc=$2
+export MPIEXEC=mpirun
+export MPIOPTS=${MPIOPTS:-"-np $NPP -ppn $PPN"}
+#     mpirun -np $NPP -ppn $PPN -f $HOSTFILE 
 
-export cycle=t${cyc}z
-export nosofs_ver=v3.1.9.1
+NOWCAST=NO      # Run the nowcast?
+FORECAST=YES    # Run the forecast?
+
+export cyc=${HH}
+export cycle=$cyc
+export nosofs_ver=v3.2.1
 export NWROOT=/save
 export COMROOT=/com
-#export COMROOT=/noscrub/com
-#export COMROOT=/data/com
 #export COMIN=$COMROOT
 export jobid=fcst.$$
+export HOMEnos=$(dirname $PWD)
 
 export LD_LIBRARY_PATH=$HOMEnos/lib:$LD_LIBRARY_PATH
 
@@ -116,7 +120,6 @@ fi
 
 #export DATA=/ptmp/$USER/$OFS.$PDY
 export DATA=/ptmp/$OFS.$PDY
-#export DATA=/data/temp/$OFS.$PDY
 
 export jlogfile=$DATA/jlogfile.$$
 
@@ -154,8 +157,9 @@ else
 fi
 
 # Copy exec to run directory, sorc/build directory is not on NFS
-export EXECnos=$DATA
-cp -p ${HOMEnos}/exec/*${OFS}* $EXECnos
+# This does not work as shared runtime libraries are still needed
+#export EXECnos=$DATA
+#cp -p ${HOMEnos}/exec/*${OFS}* $EXECnos
 
 ####################################
 # Specify Execution Areas
@@ -204,25 +208,24 @@ set -x
 
 env  
 
-NOWCAST=NO
-FORECAST=YES
+
 
 ########################################################
 # Execute the script.
 ########################################################
 if [[ $NOWCAST == "YES" ]] ; then
 
-$SCRIPTSnos/exnos_ofs_nowcast.sh $OFS
-
-echo "-----------------------------------------------------"
-echo "-----------------------------------------------------"
-echo "-----------------------------------------------------"
-echo "-----------------------------------------------------"
-#echo "    FINISHED NOWCAST FOR $CDATE $cycle               "
-echo "-----------------------------------------------------"
-echo "-----------------------------------------------------"
-echo "-----------------------------------------------------"
-echo "-----------------------------------------------------"
+  $SCRIPTSnos/exnos_ofs_nowcast.sh $OFS
+  
+  echo "-----------------------------------------------------"
+  echo "-----------------------------------------------------"
+  echo "-----------------------------------------------------"
+  echo "-----------------------------------------------------"
+  #echo "    FINISHED NOWCAST FOR $CDATE $cycle               "
+  echo "-----------------------------------------------------"
+  echo "-----------------------------------------------------"
+  echo "-----------------------------------------------------"
+  echo "-----------------------------------------------------"
 fi
 
 

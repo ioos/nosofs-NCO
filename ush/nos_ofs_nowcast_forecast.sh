@@ -634,7 +634,10 @@ then
 # 2   Execute ocean model of ROMS; where ${RUN}_roms_nowcast.in is created by nos_ofs_reformat_roms_ctl.sh
   if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]
   then 
-    mpirun $EXECnos/${RUN}_roms_mpi ${RUN}_${OCEAN_MODEL}_nowcast.in >> ${MODEL_LOG_NOWCAST}
+
+    ${MPIEXEC} ${MPIOPTS} $EXECnos/${RUN}_roms_mpi \
+        ${RUN}_${OCEAN_MODEL}_nowcast.in >> ${MODEL_LOG_NOWCAST}
+
     export err=$?
     if [ $err -ne 0 ]
     then
@@ -643,11 +646,6 @@ then
       postmsg "$jlogfile" "$msg"
       postmsg "$nosjlogfile" "$msg"
       err_exit "$msg"
-#    else
-#      echo "Running ocean model ${RUN}_roms_mpi for $RUNTYPE completed normally"
-#     msg="Running ocean model ${RUN}_roms_mpi for $RUNTYPE completed normally"
-#      postmsg "$jlogfile" "$msg"
-#      postmsg "$nosjlogfile" "$msg"
     fi
 
     rm -f corms.now corms.fcst 
@@ -1482,8 +1480,10 @@ then
 # --------------------------------------------------------------------------- #
 # 2   Execute ocean model of ROMS; where ${RUN}_roms_forecast.in is created by nos_ofs_reformat_roms_ctl.sh
   if [ ${OCEAN_MODEL} == "ROMS" -o ${OCEAN_MODEL} == "roms" ]; then
-     mpirun -np $NPP -ppn $PPN -f $HOSTFILE $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
-     #mpirun $EXECnos/${RUN}_roms_mpi ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+
+    ${MPIEXEC} ${MPIOPTS} $EXECnos/${RUN}_roms_mpi  \
+        ./${RUN}_${OCEAN_MODEL}_forecast.in >> ${MODEL_LOG_FORECAST}
+
     export err=$?
     if [ $err -ne 0 ]
     then

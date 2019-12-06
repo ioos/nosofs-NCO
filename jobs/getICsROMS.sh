@@ -5,22 +5,18 @@
 module load produtil
 module load gcc
 
-if [ $# -ne 2 ] ; then
-  echo "Usage: $0 YYYYMMDD HH"
+if [ $# -ne 3 ] ; then
+  echo "Usage: $0 YYYYMMDD HH cbofs|other ROMS model"
   exit 1
 fi
 
 CDATE=$1
 cyc=$2
+ofs=$3
 
-#cyc=00
-# https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/cbofs.20191001/
+url=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/${ofs}.$CDATE
 
-url=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/cbofs.$CDATE
-
-#ICDIR=/noscrub/$USER/ICs/cbofs.$CDATE
-#ICDIR=$COMIN
-ICDIR=/noscrub/com/nos/cbofs.$CDATE
+ICDIR=/com/nos/${ofs}.$CDATE
 mkdir -p $ICDIR
 cd $ICDIR
 
@@ -31,7 +27,7 @@ cd $ICDIR
 # nos.cbofs.rst.nowcast.20190906.t00z.nc
 # nos.cbofs.forecast.20191001.t00z.in 
 
-pfx=nos.cbofs
+pfx=nos.${ofs}
 sfx=${CDATE}.t${cyc}z.nc
 
 icfiles="
@@ -51,7 +47,7 @@ do
 done
 
 # Need to rename the tides file - roms is still using generic name
-cp -pf $pfx.roms.tides.$sfx nos.cbofs.roms.tides.nc 
+cp -pf $pfx.roms.tides.$sfx nos.${ofs}.roms.tides.nc 
 
 # Fetch the restart/init file
 # ININAME == nos.cbofs.rst.nowcast.20191001.t00z.nc
@@ -64,7 +60,7 @@ ncyc=`echo $NEXT | cut -c9-10`
 nsfx=${NCDATE}.t${ncyc}z.nc
 
 if [ $cyc == 18 ] ; then
-  url=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/cbofs.$NCDATE 
+  url=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/${ofs}.$NCDATE 
 fi
 
 ifile=${pfx}.init.nowcast.${nsfx}

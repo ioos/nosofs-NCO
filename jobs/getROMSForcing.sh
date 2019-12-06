@@ -1,6 +1,6 @@
 #!/bin/sh
-
-#https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/cbofs.$PDY/
+# This receives the forcing data required to run CBOFS prep step
+# It needs to be modified to support any ROMS based model
 
 NOMADS=https://nomads.ncep.noaa.gov/pub/data/nccf
 #cd $COMOUT
