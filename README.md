@@ -31,6 +31,16 @@ Base: https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_base_rpms.g
 
 All: https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_all_rpms.gcc.6.5.0.el7.20191011.tgz
 
+Updated RPMs: (NetCDF5, HDF5-IMPI, WGRIB2, Produtil) : 
+
+https://ioos-cloud-sandbox.s3.amazonaws.com/public/rpms/netcdf-4.5-1.el7.x86_64.rpm
+
+https://ioos-cloud-sandbox.s3.amazonaws.com/public/rpms/hdf5-impi-1.8.21-1.el7.x86_64.rpm
+
+https://ioos-cloud-sandbox.s3.amazonaws.com/public/rpms/wgrib2-2.0.8-2.el7.x86_64.rpm
+
+https://ioos-cloud-sandbox.s3.amazonaws.com/public/rpms/produtil-1.0.18-2.el7.x86_64.rpm
+
 - Fortran, C, and C++ compilers
 - MPI library
 - NetCDF4
@@ -39,7 +49,9 @@ All: https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_all_rpms.gcc
 - z library
 - png library
 - Environment module support (recommended)
-    
+
+If not using the RPMS above, other distributions can be found in the following:
+
 Required for prep steps:
 - NCEPLibs : https://github.com/NCAR/NCEPlibs
 - WGRIB2 : https://www.cpc.ncep.noaa.gov/products/wesley/wgrib.html
