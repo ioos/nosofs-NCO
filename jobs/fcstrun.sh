@@ -37,11 +37,11 @@ date
 #export MP_SHARED_MEMORY=yes
 
 module purge
-export I_MPI_OFI_LIBRARY_INTERNAL=1
+export I_MPI_OFI_LIBRARY_INTERNAL=${I_MPI_OFI_LIBRARY_INTERNAL:-1}
 module load gcc/6.5.0
 module load mpi/intel
 module load hdf5-impi
-module load netcdf
+module load netcdf/4.5
 module load produtil
 
 export I_MPI_DEBUG=1
@@ -61,7 +61,7 @@ export I_MPI_DEBUG=1
 #export I_MPI_HYDRA_IFACE=ens5
 #export I_MPI_OFI_PROVIDER_DUMP=1
 #export I_MPI_EXTRA_FILESYSTEM=1
-export I_MPI_FABRICS=shm:ofi
+#export I_MPI_FABRICS=shm:ofi
 #export I_MPI_FABRICS=shm
 #export I_MPI_FABRICS=efa
 #export I_MPI_FABRICS=verbs
@@ -72,7 +72,7 @@ export I_MPI_FABRICS=shm:ofi
 #export I_MPI_WAIT_MODE=1   #default is 0
 
 export OFS=ngofs
-export NPP=4
+#export NPP=4
 
 NOWCAST=NO      # Run the nowcast?
 FORECAST=YES    # Run the forecast?
@@ -90,7 +90,8 @@ export MPIEXEC=mpirun
 if [[ $OFS == "ngofs" ]] ; then
   #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to numa:1 -map-by C"}
   #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to core:2 -map-by C"}
-  export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to core:$NPP"}
+  #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to core:$NPP"}
+  export MPIOPTS=${MPIOPTS:-"-np $NPP -ppn $PPN -bind-to core"}
   #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to numa:1 -map-by C"}
 fi
 

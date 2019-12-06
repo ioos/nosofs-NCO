@@ -11,7 +11,7 @@ if [ $# -ne 5 ] ; then
 fi
 
 export HOMEnos=/save/nosofs-NCO
-export I_MPI_OFI_LIBRARY_INTERNAL=1
+export I_MPI_OFI_LIBRARY_INTERNAL=0
 export I_MPI_DEBUG=1
 
 #export I_MPI_FABRICS=shm:ofi
@@ -22,7 +22,7 @@ export I_MPI_DEBUG=1
 #export FI_EFA_ENABLE_SHM_TRANSFER=1
 
 export CDATE=$1
-export HH=$2
+       HH=$2
 export NODES=$3
 export NPP=$4
 
