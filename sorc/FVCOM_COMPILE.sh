@@ -31,7 +31,7 @@ then
 fi
 
 
-BUILDPREP=YES
+BUILDPREP=NO
 
 #cd $SORCnos/FVCOM.fd/METIS_source
 #gmake clean
@@ -53,99 +53,100 @@ BUILDPREP=YES
 
 if [[ $BUILDPREP == "YES" ]] ; then
 
-cd $SORCnos/nos_ofs_utility.fd
-rm -f *.o *.a
-gmake -f makefile
-if [ -s $SORCnos/nos_ofs_utility.fd/libnosutil.a ]
-then
-  chmod 755 $SORCnos/nos_ofs_utility.fd/libnosutil.a
-  mv $SORCnos/nos_ofs_utility.fd/libnosutil.a ${LIBnos}
-fi
+  cd $SORCnos/nos_ofs_utility.fd
+  rm -f *.o *.a
+  gmake -f makefile
+  if [ -s $SORCnos/nos_ofs_utility.fd/libnosutil.a ]
+  then
+    chmod 755 $SORCnos/nos_ofs_utility.fd/libnosutil.a
+    mv $SORCnos/nos_ofs_utility.fd/libnosutil.a ${LIBnos}
+  fi
+  
+  
+  cd $SORCnos/nos_ofs_create_forcing_met_fvcom.fd
+  rm -f *.o *.a
+  gmake -f makefile
+  
+  
+  cd $SORCnos/nos_ofs_create_forcing_obc_tides.fd
+  rm -f *.o *.a
+  gmake -f makefile
+  
+  
+  cd $SORCnos/nos_ofs_create_forcing_obc_fvcom.fd
+  rm -f *.o *.a
+  gmake -f makefile
+  
+  
+  cd $SORCnos/nos_ofs_create_forcing_obc_fvcom_gl.fd
+  rm -f *.o *.a
+  gmake -f makefile
+  
+  
+  cd $SORCnos/nos_ofs_create_forcing_obc_fvcom_nest.fd
+  rm -f *.o *.a
+  gmake -f makefile
+  
+   
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/RPSDEV/nceplibs/bufr/v11.0.2
+  cd $SORCnos/nos_ofs_create_forcing_river.fd
+  rm -f *.o *.a
+  gmake -f makefile
+  
+  cd $SORCnos/nos_ofs_met_file_search.fd
+  rm -f *.o *.a
+  gmake -f makefile
+  
+  
+  cd $SORCnos/nos_ofs_read_restart_fvcom.fd
+  rm -f *.o *.a
+  gmake -f makefile
+  
+  
+  cd $SORCnos/nos_ofs_create_forcing_nudg.fd
+  gmake clean
+  gmake -f makefile
+  
+  cd $SORCnos/nos_ofs_residual_water_calculation.fd
+  gmake clean
+  gmake -f makefile
+  
+ fi  # IF BUILDPREP
 
 
-cd $SORCnos/nos_ofs_create_forcing_met_fvcom.fd
-rm -f *.o *.a
-gmake -f makefile
-
-
-cd $SORCnos/nos_ofs_create_forcing_obc_tides.fd
-rm -f *.o *.a
-gmake -f makefile
-
-
-cd $SORCnos/nos_ofs_create_forcing_obc_fvcom.fd
-rm -f *.o *.a
-gmake -f makefile
-
-
-cd $SORCnos/nos_ofs_create_forcing_obc_fvcom_gl.fd
-rm -f *.o *.a
-gmake -f makefile
-
-
-cd $SORCnos/nos_ofs_create_forcing_obc_fvcom_nest.fd
-rm -f *.o *.a
-gmake -f makefile
-
-
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/RPSDEV/nceplibs/bufr/v11.0.2
-cd $SORCnos/nos_ofs_create_forcing_river.fd
-rm -f *.o *.a
-gmake -f makefile
-
-cd $SORCnos/nos_ofs_met_file_search.fd
-rm -f *.o *.a
-gmake -f makefile
-
-
-cd $SORCnos/nos_ofs_read_restart_fvcom.fd
-rm -f *.o *.a
-gmake -f makefile
-
-
-cd $SORCnos/nos_ofs_create_forcing_nudg.fd
-gmake clean
-gmake -f makefile
-
-cd $SORCnos/nos_ofs_residual_water_calculation.fd
-gmake clean
-gmake -f makefile
-
-fi  # IF BUILDPREP
-
-
-##  Compile ocean model of FVCOM for NGOFS
-cd  $SORCnos/FVCOM.fd/FVCOM_source/libs/julian
-gmake clean
-gmake -f makefile
-rm -f *.o
-
-
-cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
-gmake clean
-./configure  --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
-gmake
-gmake install
-# Copy shared libraries
-cp -Rp $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master/lib/* $LIBnos
-
-
-cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
-gmake clean
-./configure  CC=gcc FC=gfortran CFLAGS='-DGFORTRAN -g -O2' proj4=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
-gmake
-gmake install
-
-
-cd $SORCnos/FVCOM.fd/METIS_source
-gmake clean
-gmake -f makefile
-rm -f *.o
-
+###  Compile ocean model of FVCOM for NGOFS
+#cd  $SORCnos/FVCOM.fd/FVCOM_source/libs/julian
+#gmake clean
+#gmake -f makefile
+#rm -f *.o
+#
+# Proj.4 needs to be untarred before building proj4.zip
+#cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
+#gmake clean
+#./configure  --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
+#gmake
+#gmake install
+## Copy shared libraries
+#cp -Rp $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master/lib/* $LIBnos
+#
+#
+#
+#cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
+#gmake clean
+#./configure  CC=gcc FC=gfortran CFLAGS='-DGFORTRAN -g -O2' proj4=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
+#gmake
+#gmake install
+#
+#
+#cd $SORCnos/FVCOM.fd/METIS_source
+#gmake clean
+#gmake -f makefile
+#rm -f *.o
+#
 
 cd $SORCnos/FVCOM.fd/FVCOM_source
 
-gmake clean
+#gmake clean
 gmake -f makefile_NGOFS
 if [ -s  fvcom_ngofs ]; then
   mv fvcom_ngofs $EXECnos/.

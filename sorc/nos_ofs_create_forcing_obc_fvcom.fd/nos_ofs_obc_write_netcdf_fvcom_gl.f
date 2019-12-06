@@ -126,7 +126,8 @@ cc variable logical
       LOGICAL, SAVE ::  ELEVATION_L
 
 cc data variables
-      CHARACTER TIMES(TIME_LEN)*DATESTRLEN_LEN 
+      !PT syntax error CHARACTER TIMES(TIME_LEN)*DATESTRLEN_LEN
+      CHARACTER TIMES(TIME_LEN*DATESTRLEN_LEN)
       INTEGER  ITIME(TIME_LEN)
       INTEGER  ITIME2(TIME_LEN)
       INTEGER OBC_NODES(NODE_LEN)
@@ -169,7 +170,8 @@ CCCCCCCCCCCCC
           LATC_L = .FALSE.
           LONC_L = .FALSE.
         ENDIF
-        IF(NV(1,1)) NV_L = .FALSE.
+        !PT syntax error IF(NV(1,1)) NV_L = .FALSE.
+        IF(NV(1,1).LE.0) NV_L = .FALSE.
         IF(ELEVATION(1,1).LE.0) ELEVATION_L = .FALSE. 
         IF(OBC_TEMP(1,1,1).LE.0) OBC_TEMP_L = .FALSE.
         IF(OBC_SALINITY(1,1,1).LE.0) OBC_SALINITY_L = .FALSE.

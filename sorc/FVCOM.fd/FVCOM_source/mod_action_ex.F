@@ -561,7 +561,7 @@ MODULE MOD_ACTION_EX
 !# if defined (PLBC)
 !    UN =  - CANX*DLTYE(I)
 !# endif
-    EXFLUX=-UN*((1.0+SIGN(1.0,UN))*FIJ1(:,:,2)+(1.0-SIGN(1.0,UN))*FIJ1(:,:,1))*0.5
+    EXFLUX=-UN*((1.0+SIGN(REAL(1.0,SP),UN))*FIJ1(:,:,2)+(1.0-SIGN(REAL(1.0,SP),UN))*FIJ1(:,:,1))*0.5
 
 #   if defined (ICE)                                 
     C_ICE=(aice(IA,1)+aice(IB,1))/2.0_SP
@@ -660,8 +660,8 @@ MODULE MOD_ACTION_EX
             CGO_2D  ,SPCDIR2,SPCDIR3,UTMP ,VTMP,DLTYETMP,DLTXETMP,DLTXEA,DLTXEB)
     UNA = CANYA - CANXAB
     UNBB = CANYB - CANXAB
-    EXFLUXA=-UNA*((1.0+SIGN(1.0,UNA))*FIJ2A(:,:,IB)+(1.0-SIGN(1.0,UNA))*FIJ1A(:,:,IA))*0.5
-    EXFLUXB=-UNBB*((1.0+SIGN(1.0,UNBB))*FIJ2B(:,:,IB)+(1.0-SIGN(1.0,UNBB))*FIJ1B(:,:,IA))*0.5
+    EXFLUXA=-UNA*((1.0+SIGN(REAL(1.0),UNA))*FIJ2A(:,:,IB)+(1.0-SIGN(REAL(1.0),UNA))*FIJ1A(:,:,IA))*0.5
+    EXFLUXB=-UNBB*((1.0+SIGN(REAL(1.0),UNBB))*FIJ2B(:,:,IB)+(1.0-SIGN(REAL(1.0),UNBB))*FIJ1B(:,:,IA))*0.5
 
 #   if defined (ICE)                                 
     C_ICE=(aice(IA,1)+aice(IB,1))/2

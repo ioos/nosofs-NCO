@@ -564,7 +564,8 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #         CPP      = /usr/bin/cpp 
 #         COMPILER = -DGFORTRAN
-          FC       = $(COMP_F_MPI) 
+          #FC       = $(COMP_F_MPI) -ffixed-line-length-none -ffree-line-length-none
+          FC       = $(COMP_F_MPI) -ffree-line-length-none
           CC       = $(COMP_MPCC)
           CPP      = $(COMP_CPP)
           CXX      = $(COMP_CC)
