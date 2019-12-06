@@ -131,7 +131,7 @@ Put prerequisite libraries RPMS in S3 bucket.
     
 ## Gotchas
     
-FVCOM based models hang when using HyperThreads on EC2 instances.
+### FVCOM based models hang when using HyperThreads on EC2 instances.
 Solution: Either disable HyperThreads or use non-default mpirun bindings.
 
 Example on 48core/96vcpu machine with 2 24 core numa regions:
@@ -139,6 +139,12 @@ Example on 48core/96vcpu machine with 2 24 core numa regions:
 mpirun -bind-to numa:2 -map-by C
 ```
 Depending on the specific system architecture, the bindings needed may be different than the above.
+
+### FVCOM crashes with the nos.XXXX.now/forecast.X.X.in namelist file from NOAA's NOMADS daily forcing data
+Example: https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/ngofs.20191206/nos.ngofs.forecast.20191206.t03z.in
+Reason:  The following line is the culprit: ```NC_SUBDOMAIN_FILES = FVCOM,```
+
+Solution: Change the line to: ```NC_SUBDOMAIN_FILES = 'FVCOM',``` (string value must be in quotes)
 
 ## Licenses
 
