@@ -140,11 +140,13 @@ mpirun -bind-to numa:2 -map-by C
 ```
 Depending on the specific system architecture, the bindings needed may be different than the above.
 
-### FVCOM crashes when using the nos. ... .in namelist file from NOAA's NOMADS 
+### NGOFS crashes when using the namelist input file ```nos. ... .in```  from NOAA's NOMADS server.
 Example: https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/ngofs.20191206/nos.ngofs.forecast.20191206.t03z.in
-Reason:  The following line is the culprit: ```NC_SUBDOMAIN_FILES = FVCOM,```
 
-Solution: Change the line to: ```NC_SUBDOMAIN_FILES = 'FVCOM',``` (string value must be in quotes)
+Solution: Two changes are required.
+1. Change the following line: ```NC_SUBDOMAIN_FILES = FVCOM,```
+   to: ```NC_SUBDOMAIN_FILES = 'FVCOM',``` (string value must be in quotes)
+2. Change ``` NESTING_ON        = T,``` to ``` NESTING_ON        = F,```
 
 ## Licenses
 
