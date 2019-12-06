@@ -12,9 +12,6 @@ export PATH=$PATH:/usrx/bin
 
 module list 2>&1
 
-#export PATH=/usrx/glibc-2.27/bin:/usrx/glibc-2.27/sbin:$PATH
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usrx/glibc-2.27/lib
-
 export SORCnos=$HOMEnos/sorc
 export EXECnos=$HOMEnos/exec
 export LIBnos=$HOMEnos/lib
@@ -138,15 +135,14 @@ if [[ $BUILDPREP == "YES" ]] ; then
 #gmake install
 #
 #
-#cd $SORCnos/FVCOM.fd/METIS_source
-#gmake clean
-#gmake -f makefile
-#rm -f *.o
-#
+cd $SORCnos/FVCOM.fd/METIS_source
+gmake clean
+gmake -f makefile
+rm -f *.o
+
 
 cd $SORCnos/FVCOM.fd/FVCOM_source
-
-#gmake clean
+gmake clean
 gmake -f makefile_NGOFS
 if [ -s  fvcom_ngofs ]; then
   mv fvcom_ngofs $EXECnos/.

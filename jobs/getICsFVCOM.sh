@@ -14,7 +14,7 @@ cyc=$2
 
 # Need to create a single script that will do any ofs
 
-ICDIR=/noscrub/com/nos/ngofs.$CDATE
+ICDIR=/com/nos/ngofs.$CDATE
 mkdir -p $ICDIR
 cd $ICDIR
 

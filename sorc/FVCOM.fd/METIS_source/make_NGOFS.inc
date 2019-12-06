@@ -97,7 +97,7 @@ dashL= $(empty) -L
 #            IOINCS       =  -I/usrx/local/netcdf-4.1.3/include
 #             IOLIBS       =  -L/usrx/local/NetCDF/4.2/serial/lib -lnetcdff
 #             IOINCS       =  -I/usrx/local/NetCDF/4.2/serial/include
-             IOLIBS       =  -L${NETCDF_LIBDIR} -lnetcdff
+             IOLIBS       =  -L${NETCDF_LIBDIR} -lnetcdff -lnetcdf
              IOINCS       =  -I${NETCDF_INCDIR}
 
 #--------------------------------------------------------------------------
@@ -550,7 +550,8 @@ dashL= $(empty) -L
          CPP      = $(COMP_CPP)
          CXX      = $(COMP_CC)
          OPT      = -O3
-         DEBFLGS  = -g -fcheck=all
+         DEBFLGS  = -g
+         #DEBFLGS  = -g -fcheck=all
          #DEBFLGS  = -g -fno-automatic -frepack-arrays -fstack-arrays  -fcheck=all
 #--------------------------------------------------------------------------
 #  absoft / mac os x defs

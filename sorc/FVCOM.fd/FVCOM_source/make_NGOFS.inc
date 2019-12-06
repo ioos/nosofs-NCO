@@ -97,7 +97,7 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #             IOLIBS       =  -lnetcdff -lnetcdf #-lhdf5_hl -lhdf5 -lz -lcurl -lm
 #             IOINCS       =  #-I/hosts/mao/usr/medm/install/netcdf/3.6.3/em64t/include
-             IOLIBS       =  -L$(NETCDF)/lib -lnetcdff
+             IOLIBS       =  -L$(NETCDF)/lib -lnetcdff -lnetcdf
              IOINCS       =  -I${NETCDF}/include
 #--------------------------------------------------------------------------
 
@@ -570,11 +570,12 @@ dashL= $(empty) -L
           CPP      = $(COMP_CPP)
           CXX      = $(COMP_CC)
           OPT      = -O3
-          DEBFLGS  = -g
-          #DEBFLGS  = -g -frecursive
-          #DEBFLGS  = -g -fstack-arrays  -fcheck=all
-          #DEBFLGS  = -g -fcheck=all -Wall
-          #DEBFLGS  = -g -fcheck=all
+          DEBFLGS  = -g 
+
+          # DEBFLGS  = -g -frecursive -fcheck=all
+          # DEBFLGS  = -g -fstack-arrays  -fcheck=all
+          # DEBFLGS  = -g -fcheck=all -Wall
+          # DEBFLGS  = -g -fcheck=all
 #--------------------------------------------------------------------------
 #  absoft / mac os x defs
 #--------------------------------------------------------------------------

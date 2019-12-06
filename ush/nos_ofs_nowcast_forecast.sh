@@ -1576,8 +1576,23 @@ then
   then
     rm -f $MODEL_LOG_FORECAST
     #mpirun $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
-    mpirun -np $NPP -ppn $PPN $mpiopts -bind-to core $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
+    #mpirun -np $NPP -ppn $PPN $mpiopts -bind-to core $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
+
+    echo "***********************************************************"
+    echo "***********************************************************"
+    echo "***********************************************************"
+    echo ""
+    echo ""
+    echo ""
+    $MPIEXEC $MPIOPTS $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
     export err=$?
+    echo ""
+    echo ""
+    echo ""
+    echo "***********************************************************"
+    echo "***********************************************************"
+    echo "***********************************************************"
+
     if [ $err -ne 0 ]
     then
       echo "Running ocean model for $RUNTYPE did not complete normally"
@@ -1591,6 +1606,10 @@ then
 #      postmsg "$jlogfile" "$msg"
 #      postmsg "$nosjlogfile" "$msg"
     fi
+
+ 
+    # exit $err
+
     rm -f corms.fcst
     if [ -s ${MODEL_LOG_FORECAST} ]
     then

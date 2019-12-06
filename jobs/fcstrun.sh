@@ -61,7 +61,7 @@ export I_MPI_DEBUG=1
 #export I_MPI_HYDRA_IFACE=ens5
 #export I_MPI_OFI_PROVIDER_DUMP=1
 #export I_MPI_EXTRA_FILESYSTEM=1
-#export I_MPI_FABRICS=shm:ofi
+export I_MPI_FABRICS=shm:ofi
 #export I_MPI_FABRICS=shm
 #export I_MPI_FABRICS=efa
 #export I_MPI_FABRICS=verbs
@@ -71,10 +71,7 @@ export I_MPI_DEBUG=1
 #export FI_EFA_ENABLE_SHM_TRANSFER=1
 #export I_MPI_WAIT_MODE=1   #default is 0
 
-# This is needed for Intel MPI 2019+ with Docker
-#export I_MPI_FABRICS=shm
-
-export OFS=cbofs
+export OFS=ngofs
 export NPP=4
 
 NOWCAST=NO      # Run the nowcast?
@@ -89,7 +86,16 @@ export SENDDBN=NO
 export KEEPDATA=YES
 
 export MPIEXEC=mpirun
+
+if [[ $OFS == "ngofs" ]] ; then
+  #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to numa:1 -map-by C"}
+  #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to core:2 -map-by C"}
+  export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to core:$NPP"}
+  #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to numa:1 -map-by C"}
+fi
+
 export MPIOPTS=${MPIOPTS:-"-np $NPP -ppn $PPN"}
+
 #     mpirun -np $NPP -ppn $PPN -f $HOSTFILE 
 
 NOWCAST=NO      # Run the nowcast?
