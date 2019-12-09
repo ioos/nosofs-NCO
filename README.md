@@ -27,11 +27,25 @@ This is a fork of NOAA's National Ocean Service Operational Forecast System obta
 
 ### Prerequisites
 
-Base: https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_base_rpms.gcc.6.5.0.el7.20191011.tgz
+- Fortran, C, and C++ compilers
+- MPI library
+- NetCDF4
+- HDF5
+- NCO ProdUtils
+- Jasper library
+- Z library
+- PNG library
+- Environment module support (recommended)
+- NCEPLibs (required for prep of forcing data)
+- WGRIB2 (required for prep of forcing data)
 
-All: https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_all_rpms.gcc.6.5.0.el7.20191011.tgz
+RPMS of the above can be found in the following archives:
 
-Updated RPMs: (NetCDF5, HDF5-IMPI, WGRIB2, Produtil) : 
+https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_base_rpms.gcc.6.5.0.el7.20191011.tgz
+
+https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_all_rpms.gcc.6.5.0.el7.20191011.tgz
+
+Updated RPMs: (NetCDF5, HDF5-IMPI, WGRIB2, Produtil): 
 
 https://ioos-cloud-sandbox.s3.amazonaws.com/public/rpms/netcdf-4.5-1.el7.x86_64.rpm
 
@@ -41,16 +55,8 @@ https://ioos-cloud-sandbox.s3.amazonaws.com/public/rpms/wgrib2-2.0.8-2.el7.x86_6
 
 https://ioos-cloud-sandbox.s3.amazonaws.com/public/rpms/produtil-1.0.18-2.el7.x86_64.rpm
 
-- Fortran, C, and C++ compilers
-- MPI library
-- NetCDF4
-- HDF5
-- jasper library
-- z library
-- png library
-- Environment module support (recommended)
 
-If not using the RPMS above, other distributions can be found in the following:
+If not using the RPMS above, other distributions can be found at the following:
 
 Required for prep steps:
 - NCEPLibs : https://github.com/NCAR/NCEPlibs
@@ -60,7 +66,7 @@ Required to run:
 
 - Produtils - available on PMB website pmb/codes
 
-Also need fixed fields: 
+Fixed field files are also needed: 
     
     Download fixed field files and place them in the 'fix' directory. 
     .
@@ -81,8 +87,9 @@ To build:
 cd sorc
 ./ROMS_COMPILE.sh
 ./FVCOM_COMPILE.sh
+./SELFE_COMPILE.sh
 
-SELFE is untested
+(SELFE is untested)
 ```
 
 ### Running the tests
