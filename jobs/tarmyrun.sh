@@ -1,12 +1,17 @@
 #!/bin/sh
 
+if [ $# -ne 2 ] ; then
+  echo "Usage: $0 YYYYMMDD HH"
+  exit -1
+fi
+
 CDATE=$1
 CYC=$2
 
-COMDIR=/noscrub/com/nos/cbofs.$CDATE
+COMDIR=/com/nos/cbofs.$CDATE
 
-tarfile=cbofs.$CDATE.tgz
-tmpdir=/ptmp/$USER/cbofs.$CDATE
+tarfile=AWS.cbofs.$CDATE.tgz
+tmpdir=/ptmp/$USER/tmp/cbofs.$CDATE
 mkdir -p $tmpdir
 
 
@@ -20,4 +25,6 @@ done
 cd $tmpdir
 cd ..
 tar -czvf $tarfile cbofs.$CDATE/
+
+rm -Rf $tmpdir
 

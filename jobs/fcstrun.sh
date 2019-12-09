@@ -71,7 +71,7 @@ export I_MPI_DEBUG=1
 #export FI_EFA_ENABLE_SHM_TRANSFER=1
 #export I_MPI_WAIT_MODE=1   #default is 0
 
-export OFS=ngofs
+export OFS=${OFS:-ngofs}
 #export NPP=4
 
 NOWCAST=NO      # Run the nowcast?
@@ -83,7 +83,7 @@ export PPN=${PPN:-$((NPP/NODES))}
 
 export HOSTFILE=${HOSTFILE:-$PWD/hosts}
 export SENDDBN=NO
-export KEEPDATA=YES
+export KEEPDATA=NO
 
 export MPIEXEC=mpirun
 
