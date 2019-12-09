@@ -27,19 +27,37 @@ This is a fork of NOAA's National Ocean Service Operational Forecast System obta
 
 ### Prerequisites
 
-Base: https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_base_rpms.gcc.6.5.0.el7.20191011.tgz
-
-All: https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_all_rpms.gcc.6.5.0.el7.20191011.tgz
-
 - Fortran, C, and C++ compilers
 - MPI library
 - NetCDF4
 - HDF5
-- jasper library
-- z library
-- png library
+- NCO ProdUtils
+- Jasper library
+- Z library
+- PNG library
 - Environment module support (recommended)
-    
+- NCEPLibs (required for prep of forcing data)
+- WGRIB2 (required for prep of forcing data)
+
+RPMS of the above can be found in the following archives:
+
+https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_base_rpms.gcc.6.5.0.el7.20191011.tgz
+
+https://ioos-cloud-sandbox.s3.amazonaws.com/public/libs/nosofs_all_rpms.gcc.6.5.0.el7.20191011.tgz
+
+Updated RPMs: (NetCDF5, HDF5-IMPI, WGRIB2, Produtil): 
+
+https://ioos-cloud-sandbox.s3.amazonaws.com/public/rpms/netcdf-4.5-1.el7.x86_64.rpm
+
+https://ioos-cloud-sandbox.s3.amazonaws.com/public/rpms/hdf5-impi-1.8.21-1.el7.x86_64.rpm
+
+https://ioos-cloud-sandbox.s3.amazonaws.com/public/rpms/wgrib2-2.0.8-2.el7.x86_64.rpm
+
+https://ioos-cloud-sandbox.s3.amazonaws.com/public/rpms/produtil-1.0.18-2.el7.x86_64.rpm
+
+
+If not using the RPMS above, other distributions can be found at the following:
+
 Required for prep steps:
 - NCEPLibs : https://github.com/NCAR/NCEPlibs
 - WGRIB2 : https://www.cpc.ncep.noaa.gov/products/wesley/wgrib.html
@@ -48,7 +66,7 @@ Required to run:
 
 - Produtils - available on PMB website pmb/codes
 
-Also need fixed fields: 
+Fixed field files are also needed: 
     
     Download fixed field files and place them in the 'fix' directory. 
     .
@@ -69,8 +87,9 @@ To build:
 cd sorc
 ./ROMS_COMPILE.sh
 ./FVCOM_COMPILE.sh
+./SELFE_COMPILE.sh
 
-SELFE is untested
+(SELFE is untested)
 ```
 
 ### Running the tests
@@ -131,7 +150,7 @@ Put prerequisite libraries RPMS in S3 bucket.
     
 ## Gotchas
     
-FVCOM based models hang when using HyperThreads on EC2 instances.
+### FVCOM based models hang when using HyperThreads on EC2 instances.
 Solution: Either disable HyperThreads or use non-default mpirun bindings.
 
 Example on 48core/96vcpu machine with 2 24 core numa regions:
@@ -139,6 +158,14 @@ Example on 48core/96vcpu machine with 2 24 core numa regions:
 mpirun -bind-to numa:2 -map-by C
 ```
 Depending on the specific system architecture, the bindings needed may be different than the above.
+
+### NGOFS crashes when using the namelist input file ```nos. ... .in```  from NOAA's NOMADS server.
+Example: ngofs.20191206/nos.ngofs.forecast.20191206.t03z.in 
+
+Solution: Two changes are required.
+1. Change the following line: ```NC_SUBDOMAIN_FILES = FVCOM,```
+   to: ```NC_SUBDOMAIN_FILES = 'FVCOM',``` (string value must be in quotes)
+2. Change ``` NESTING_ON        = T,``` to ``` NESTING_ON        = F,```
 
 ## Licenses
 
