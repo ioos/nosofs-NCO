@@ -23,7 +23,8 @@
 # First the defaults
 #
                FC := gfortran
-           FFLAGS := -frepack-arrays -march=skylake-avx512
+           #FFLAGS := -frepack-arrays -march=skylake-avx512
+           FFLAGS := -march=skylake-avx512
               CPP := cpp
          CPPFLAGS := -P -traditional
           LDFLAGS :=
@@ -96,6 +97,7 @@ ifdef USE_DEBUG
            FFLAGS += -g -fbounds-check
 else
            FFLAGS += -O3 -ffast-math
+           #FFLAGS += -O3 -funsafe-math-optimizations
 endif
 
 ifdef USE_MCT

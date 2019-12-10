@@ -6,7 +6,7 @@ set -x
 # and submits this job with the list of hosts available.
 
 if [ $# -ne 6 ] ; then
-  echo "Usage: $0 YYYYMMDD HH NODES NP HOSTS <cbofs|ngofs>"
+  echo "Usage: $0 YYYYMMDD HH NP PPN HOSTS <cbofs|ngofs>"
   exit 1
 fi
 
@@ -23,12 +23,11 @@ export I_MPI_DEBUG=1
 
 export CDATE=$1
        HH=$2
-export NODES=$3
-export NPP=$4
+export NP=$3
+export PPN=$4
 HOSTS=$5
 export OFS=$6
 
-export PPN=$((NPP/NODES))
 export cyc=$HH
 
 cd $HOMEnos/jobs
@@ -40,14 +39,14 @@ echo $HOSTS > $HOSTFILE
 #export mpiopts="-localhost $host1 -nolocal -launcher ssh -genvall "
 #export mpiopts="-localhost $localhost -nolocal -path /ptmp/ngofs.20191030 -bootstrap ssh" 
 
-export NPP=140
-export PPN=36
+#export NP=140
+#export PPN=28
 
 # The following will launch the job on a non-local cluster, e.g. from a head node
-#export MPIOPTS="-np $NPP -ppn $PPN -hosts $HOSTS -nolocal -bootstrap ssh -iface ens5" 
-#export MPIOPTS="-verbose -np $NPP -ppn $PPN -hosts $HOSTS -nolocal -launcher ssh -iface ens5" 
+#export MPIOPTS="-np $NP -ppn $PPN -hosts $HOSTS -nolocal -bootstrap ssh -iface ens5" 
+#export MPIOPTS="-verbose -np $NP -ppn $PPN -hosts $HOSTS -nolocal -launcher ssh -iface ens5" 
 
-export MPIOPTS="-nolocal -hosts $HOSTS -launcher ssh -np $NPP -ppn $PPN " 
+export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN " 
 ./fcstrun.sh $CDATE $HH
 
 
