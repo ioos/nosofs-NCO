@@ -97,7 +97,8 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #             IOLIBS       =  -lnetcdff -lnetcdf #-lhdf5_hl -lhdf5 -lz -lcurl -lm
 #             IOINCS       =  #-I/hosts/mao/usr/medm/install/netcdf/3.6.3/em64t/include
-             IOLIBS       =  -L$(NETCDF)/lib -lnetcdff -lnetcdf
+#             IOLIBS       =  -L$(NETCDF)/lib -lnetcdff -lnetcdf
+             IOLIBS       =  -L$(NETCDF)/lib -lnetcdff
              IOINCS       =  -I${NETCDF}/include
 #--------------------------------------------------------------------------
 

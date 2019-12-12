@@ -4,23 +4,24 @@
 module load produtil
 module load gcc
 
-if [ $# -ne 2 ] ; then
-  echo "Usage: $0 YYYYMMDD HH"
+if [ $# -lt 2 ] ; then
+  echo "Usage: $0 YYYYMMDD HH [ngofs|negofs|etc.]"
   exit 1
 fi
 
 CDATE=$1
 cyc=$2
+ofs=${3:-ngofs}
 
 # Need to create a single script that will do any ofs
 
-ICDIR=/com/nos/ngofs.$CDATE
+ICDIR=/com/nos/${ofs}.$CDATE
 mkdir -p $ICDIR
 cd $ICDIR
 
-nomads=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/ngofs.${CDATE}
+nomads=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/${ofs}.${CDATE}
 
-pfx=nos.ngofs
+pfx=nos.$ofs
 sfx=${CDATE}.t${cyc}z.nc
 
 flist="
@@ -32,8 +33,6 @@ flist="
   $pfx.init.nowcast.$sfx
 "
 
-#mkdir ngofs.$CDATE
-#cd ngofs.$CDATE
 
 for file in $flist
 do
@@ -42,6 +41,7 @@ do
 done
 
 # Fetch the restart/init file
+# The restart file is the next cycle's 'init' file
 
 # Get $cdate$cyc +6 hours init file, rename it to $cdate$cyc restart file
 NEXT=`$NDATE +6 ${CDATE}${cyc}`
@@ -50,18 +50,20 @@ ncyc=`echo $NEXT | cut -c9-10`
 
 nsfx=${NCDATE}.t${ncyc}z.nc
 
+# if current cycle is '21' the next cycle will be during the next day
 if [ $cyc == 21 ] ; then
-  nomads=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/ngofs.$NCDATE
+  nomads=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/${ofs}.$NCDATE
 fi
 
-# nos.ngofs.forecast.20191025.tz.in
+
 ifile=${pfx}.init.nowcast.${nsfx}
 rfile=${pfx}.rst.nowcast.${sfx}
 
 wget -nc ${nomads}/$ifile
 if [[ $? -ne 0 ]] ; then
-  echo "ERROR: Unable to retrieve $file from $nomads"
+  echo "ERROR: Unable to retrieve $ifile from $nomads"
 fi
 
 # Rename it
 cp -p $ifile $rfile
+

@@ -10,7 +10,7 @@ CYC=$2
 
 COMDIR=/com/nos/cbofs.$CDATE
 
-tmpdir=AWS.cbofs.${CDATE}.28ppn.140cpu
+tmpdir=AWS.cbofs.${CDATE}.O2.nofast.28ppn.140cpu
 tarfile=${tmpdir}.tgz
 tmproot=/ptmp/$USER/tmp
 mkdir -p $tmproot/$tmpdir

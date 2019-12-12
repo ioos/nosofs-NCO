@@ -46,7 +46,13 @@ echo $HOSTS > $HOSTFILE
 #export MPIOPTS="-np $NP -ppn $PPN -hosts $HOSTS -nolocal -bootstrap ssh -iface ens5" 
 #export MPIOPTS="-verbose -np $NP -ppn $PPN -hosts $HOSTS -nolocal -launcher ssh -iface ens5" 
 
-export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN " 
+if [[ $OFS == "ngofs" ]] ; then
+  #export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN -bind-to numa -map-by C" 
+  export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN -bind-to core -map-by C" 
+else
+  export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN " 
+fi
+
 ./fcstrun.sh $CDATE $HH
 
 

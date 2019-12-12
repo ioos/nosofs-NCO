@@ -83,7 +83,7 @@ export PPN=${PPN:-$((NPP/NODES))}
 
 export HOSTFILE=${HOSTFILE:-$PWD/hosts}
 export SENDDBN=NO
-export KEEPDATA=NO
+export KEEPDATA=YES
 
 export MPIEXEC=mpirun
 
