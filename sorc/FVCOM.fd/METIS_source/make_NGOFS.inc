@@ -549,7 +549,7 @@ dashL= $(empty) -L
          CC       = $(COMP_MPCC)
          CPP      = $(COMP_CPP)
          CXX      = $(COMP_CC)
-         OPT      = -O2
+         OPT      = -O3
          DEBFLGS  = -g
          #DEBFLGS  = -g -fcheck=all
          #DEBFLGS  = -g -fno-automatic -frepack-arrays -fstack-arrays  -fcheck=all

@@ -143,7 +143,7 @@ if [[ $BUILDPREP == "YES" ]] ; then
 
 
 cd $SORCnos/FVCOM.fd/FVCOM_source
-#gmake clean
+gmake clean
 gmake -f makefile_NGOFS
 if [ -s  fvcom_ngofs ]; then
   mv fvcom_ngofs $EXECnos/.

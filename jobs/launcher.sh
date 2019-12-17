@@ -50,7 +50,8 @@ echo $HOSTS > $HOSTFILE
 if [[ $OFS == "ngofs" ]] ; then
   #export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN -bind-to numa -map-by C" 
   #export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN -bind-to core -map-by C" 
-  export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN  -disable-auto-cleanup" 
+  #export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN  -disable-auto-cleanup" 
+  export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN"
 else
   export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN " 
 fi

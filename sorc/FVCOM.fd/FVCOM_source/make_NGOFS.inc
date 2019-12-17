@@ -570,10 +570,10 @@ dashL= $(empty) -L
           CC       = $(COMP_MPCC)
           CPP      = $(COMP_CPP)
           CXX      = $(COMP_CC)
-          #OPT      = -O3
-          OPT      = 
-
-          DEBFLGS  = -g -Og
+          OPT      = -O2
+          #OPT      = 
+          DEBFLGS  = -g
+          #DEBFLGS  = -g -Og
           # DEBFLGS  = -g -fcheck=all
 #--------------------------------------------------------------------------
 #  absoft / mac os x defs
