@@ -167,7 +167,7 @@ Solution: Two changes are required.
    to: ```NC_SUBDOMAIN_FILES = 'FVCOM',``` (string value must be in quotes)
 2. Change ``` NESTING_ON        = T,``` to ``` NESTING_ON        = F,```
 
-### NGOFS crashes when writing the ```nos_ngofs_nestnode_*.nc``` files, when ```NCNEST_ON = T```
+### NGOFS crashes when writing the ```*_nestnode_*.nc``` files when ```NCNEST_ON = T```
 
 Some compilers will nullify pointers when they are declared. GFortran does not.
 
