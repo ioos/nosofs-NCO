@@ -167,6 +167,12 @@ Solution: Two changes are required.
    to: ```NC_SUBDOMAIN_FILES = 'FVCOM',``` (string value must be in quotes)
 2. Change ``` NESTING_ON        = T,``` to ``` NESTING_ON        = F,```
 
+### NGOFS crashes when writing the ```*_nestnode_*.nc``` files when ```NCNEST_ON = T```
+
+Some compilers will nullify pointers when they are declared. GFortran does not.
+
+Solution: in ```sorc/FVCOM.fd/FVCOM_source/mod_nesting.F``` in ```SUBROUTINE DUMP_NCNEST_FILE``` add ```NULLIFY(TEMP1)``` after the variable declarations and re-build. This is the proper way to declare and initialize pointer variables.
+
 ## Licenses
 
 Various - multiple components are contained herein.
