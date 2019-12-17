@@ -135,14 +135,15 @@ if [[ $BUILDPREP == "YES" ]] ; then
 #gmake install
 #
 #
-cd $SORCnos/FVCOM.fd/METIS_source
-gmake clean
-gmake -f makefile
-rm -f *.o
+#cd $SORCnos/FVCOM.fd/METIS_source
+#gmake clean
+#rm -f *.o
+#gmake -f makefile
+##rm -f *.o
 
 
 cd $SORCnos/FVCOM.fd/FVCOM_source
-gmake clean
+#gmake clean
 gmake -f makefile_NGOFS
 if [ -s  fvcom_ngofs ]; then
   mv fvcom_ngofs $EXECnos/.

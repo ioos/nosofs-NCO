@@ -719,6 +719,7 @@ then
     done
 
   elif [ ${OCEAN_MODEL} == "FVCOM" -o ${OCEAN_MODEL} == "fvcom" ]
+  # NOWCAST
   then
     # mpirun $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
     mpirun -verbose -np $NPP -bind-to core:$NPP $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_NOWCAST
@@ -1584,6 +1585,7 @@ then
     echo ""
     echo ""
     echo ""
+    #$MPIEXEC $MPIOPTS $EXECnos/fvcom_${RUN} --casename=$RUN --DBG_PAR > $MODEL_LOG_FORECAST
     $MPIEXEC $MPIOPTS $EXECnos/fvcom_${RUN} --casename=$RUN > $MODEL_LOG_FORECAST
     export err=$?
     echo ""
@@ -1608,7 +1610,7 @@ then
     fi
 
  
-    # exit $err
+    exit $err
 
     rm -f corms.fcst
     if [ -s ${MODEL_LOG_FORECAST} ]

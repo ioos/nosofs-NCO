@@ -128,23 +128,27 @@ then
     echo " ${HOMEnos}/sorc/ROMS.fd/ROMS/External/varinfo.dat was copied into working dir"
   fi
 fi
+
+
 if [ $CREATE_TIDEFORCING -gt 0 -a $DBASE_WL_NOW != "OBS" ]
 then
 
-if [ ! -s ${FIXofs}/$HC_FILE_OBC ]
-then
-  echo '${FIXofs}/$HC_FILE_OBC is not found'
-  echo 'please provide file of ${FIXofs}/$HC_FILE_OBC'
-  echo 'please provide file of ${FIXofs}/$HC_FILE_OBC' >> $cormslogfile
-  msg="FATAL ERROR: ${FIXofs}/$HC_FILE_OBC does not exist, FATAL ERROR!"
-  postmsg "$jlogfile" "$msg"
-  postmsg "$nosjlogfile" "$msg"
-  exit 3
-else
-  cp -p ${FIXofs}/$HC_FILE_OBC $DATA/.
-  export err=$?; err_chk
+  if [ ! -s ${FIXofs}/$HC_FILE_OBC ]
+  then
+    echo '${FIXofs}/$HC_FILE_OBC is not found'
+    echo 'please provide file of ${FIXofs}/$HC_FILE_OBC'
+    echo 'please provide file of ${FIXofs}/$HC_FILE_OBC' >> $cormslogfile
+    msg="FATAL ERROR: ${FIXofs}/$HC_FILE_OBC does not exist, FATAL ERROR!"
+    postmsg "$jlogfile" "$msg"
+    postmsg "$nosjlogfile" "$msg"
+    exit 3
+  else
+    cp -p ${FIXofs}/$HC_FILE_OBC $DATA/.
+    export err=$?; err_chk
+  fi
 fi
-fi
+
+
 if [ ${OCEAN_MODEL} != "ROMS" -a ${OCEAN_MODEL} != "roms" ]; then
  if [ -d ${FIXofs}/$VGRID_CTL -o ! -s ${FIXofs}/$VGRID_CTL ]
  then
@@ -183,10 +187,10 @@ then
      postmsg "$jlogfile" "$msg"
      postmsg "$nosjlogfile" "$msg"
      exit 4
-else
-     cp -p ${FIXofs}/$RUNTIME_CTL $DATA/. 
-     export err=$?; err_chk
-     echo "${FIXofs}/$RUNTIME_CTL was copied into working dir"
+#else
+#     cp -p ${FIXofs}/$RUNTIME_CTL $DATA/. 
+#     export err=$?; err_chk
+#     echo "${FIXofs}/$RUNTIME_CTL was copied into working dir"
 fi
 if [ -s ${FIXofs}/$RUNTIME_CTL_FOR -a -f   ${FIXofs}/$RUNTIME_CTL_FOR  ]; then
      cp -p ${FIXofs}/$RUNTIME_CTL_FOR $DATA/.

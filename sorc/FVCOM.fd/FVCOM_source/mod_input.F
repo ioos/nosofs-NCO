@@ -81,7 +81,8 @@ CONTAINS
     ! Initialize values from in variables 
     CaseName="empty"//nlc ! declared in mod_main - all_vars
     dbg_lvl=0 ! declared in mod_dbg
-    ! dbg_lvl=7 ! declared in mod_dbg
+    dbg_lvl=4 ! subroutine entry/exit
+    !dbg_lvl=7 ! declared in mod_dbg
     INFOFILE="screen"//nlc ! Get output file parameter
     NameList_Name = "empty"//nlc ! Name of blank name list file-
     ! declared in mod_main

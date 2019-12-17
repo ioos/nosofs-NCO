@@ -1,5 +1,6 @@
 #!/bin/bash
 set -x
+ulimit -c unlimited
 
 # This was created to launch a job via Python
 # The Python scripts create the cluster on-demand 
@@ -48,7 +49,8 @@ echo $HOSTS > $HOSTFILE
 
 if [[ $OFS == "ngofs" ]] ; then
   #export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN -bind-to numa -map-by C" 
-  export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN -bind-to core -map-by C" 
+  #export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN -bind-to core -map-by C" 
+  export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN  -disable-auto-cleanup" 
 else
   export MPIOPTS="-nolocal -launcher ssh -hosts $HOSTS -np $NP -ppn $PPN " 
 fi
