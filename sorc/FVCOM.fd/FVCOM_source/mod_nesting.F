@@ -2180,7 +2180,9 @@ END SUBROUTINE GENMAP_NESTING
           ! ADJUST THE STACK RANGE
           NCNEST_DATA(I)%RNG(2) = NCNEST_DATA(I)%RNG(1)+NCNEST_DATA(I)%IDX-1
 
-          IF(.NOT. ASSOCIATED(TEMP1))THEN
+          ! It will never be associated now
+          ! IF(.NOT. ASSOCIATED(TEMP1))THEN
+
              ALLOCATE(TEMP1(NCNEST_DATA(I)%IDX))
              DO J=1,NCNEST_DATA(I)%IDX
                 TEMP1(J)=J
@@ -2215,7 +2217,7 @@ END SUBROUTINE GENMAP_NESTING
              !      &("DUMP_NCNEST_FILE: ERROR WHILE DUMPING DATA:",&
              !      & "THE DATA INDEX SHOULD BE EQUAL FOR ALL FILES?")
              ! END IF
-          END IF
+          ! END IF
        END IF
 
 
