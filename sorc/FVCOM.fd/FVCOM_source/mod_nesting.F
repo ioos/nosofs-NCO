@@ -2149,7 +2149,6 @@ END SUBROUTINE GENMAP_NESTING
   !==========================================================================!
   !
   !========================================================================!
-
   SUBROUTINE DUMP_NCNEST_FILE
     IMPLICIT NONE
     INTEGER ::I,J,IERR
@@ -2174,46 +2173,52 @@ END SUBROUTINE GENMAP_NESTING
        END IF
 
        ! MAKE MAP FOR SPECIAL END OF RUN CASE IF NEEDED
-       IF(NCNEST_DATA(I)%IDX /=NCNEST_BLOCKSIZE) THEN
+
+       !PT There may be fewer than BLOCKSIZE in the last segment
+       IF(NCNEST_DATA(I)%IDX /= NCNEST_BLOCKSIZE) THEN
           
           ! ADJUST THE STACK RANGE
           NCNEST_DATA(I)%RNG(2) = NCNEST_DATA(I)%RNG(1)+NCNEST_DATA(I)%IDX-1
 
-          ALLOCATE(TEMP1(NCNEST_DATA(I)%IDX))
-          DO J=1,NCNEST_DATA(I)%IDX
-             TEMP1(J)=J
-          END DO
+          IF(.NOT. ASSOCIATED(TEMP1))THEN
+             ALLOCATE(TEMP1(NCNEST_DATA(I)%IDX))
+             DO J=1,NCNEST_DATA(I)%IDX
+                TEMP1(J)=J
+             END DO
 
-          ALLOCATE(TEMP2(NPROCS)); TEMP2= NCNEST_DATA(I)%IDX
+             ALLOCATE(TEMP2(NPROCS))
+             TEMP2= NCNEST_DATA(I)%IDX
 
-          GMAP => FIND_MAP(INTERNAL_MAPS,NCNEST_DATA(I)%IDX,TEMP2,FOUND)
+             GMAP => FIND_MAP(INTERNAL_MAPS,NCNEST_DATA(I)%IDX,TEMP2,FOUND)
 
-          IF(.NOT. FOUND) THEN
-            IF(DBG_SET(DBG_LOG))WRITE(IPT,*) &
-           & "! CREATE SPECIAL MAP FOR TIME DATA IN NESTING FILE: map size", NCNEST_DATA(I)%IDX
+             IF(.NOT. FOUND) THEN
+                IF(DBG_SET(DBG_LOG))WRITE(IPT,*) &
+                  & "! CREATE SPECIAL MAP FOR TIME DATA IN NESTING FILE: map size", NCNEST_DATA(I)%IDX
 
-            CALL ADD_MAP2LIST(INTERNAL_MAPS,MAKE_MAP(MYID,NPROCS,NCNEST_DATA(I)%IDX, &
-           &   NCNEST_BLOCKSIZE,TEMP1))
-          END IF
+                CALL ADD_MAP2LIST(INTERNAL_MAPS,MAKE_MAP(MYID,NPROCS,NCNEST_DATA(I)%IDX, &
+                  & NCNEST_BLOCKSIZE,TEMP1))
+             END IF
 
-          NULLIFY(GMAP)
-          DEALLOCATE(TEMP2)
-
-          ! SINCE TEMP1 STAYS ALLOCATED, IT IS A RECORD OF THE
-          ! OTHER PROCESSORS VALUES FOR IDX - CHECK IT!
-          ! PT BUGGY - 
-          ! PT 12/17/2019 FIXED - deallocate bug, TEMP1 never used as pointer
-          IF(SIZE(TEMP1) /= NCNEST_DATA(I)%IDX) THEN
+             NULLIFY(GMAP)
+             DEALLOCATE(TEMP2)
              DEALLOCATE(TEMP1)
-             CALL FATAL_ERROR &
-               &("DUMP_NCNEST_FILE: ERROR WHILE DUMPING DATA:",&
-               & "THE DATA INDEX SHOULD BE EQUAL FOR ALL FILES?")
-          ENDIF
 
-          DEALLOCATE(TEMP1)
+          ! PT 12/17/2019 - this is prone to errors, crashes with gfortran 6.5
+          ! ELSE 
+             ! SINCE TEMP1 STAYS ALLOCATED, IT IS A RECORD OF THE
+             ! OTHER PROCESSORS VALUES FOR IDX - CHECK IT!
+             ! PT 12/17/2019 - THIS IS FUNKY! WHAT IS THE PURPOSE?
+             ! PT 12/17/2019 - We should never reach this now
+             ! IF(SIZE(TEMP1) /= NCNEST_DATA(I)%IDX) THEN
+             !    DEALLOCATE(TEMP1)
+             !    CALL FATAL_ERROR &
+             !      &("DUMP_NCNEST_FILE: ERROR WHILE DUMPING DATA:",&
+             !      & "THE DATA INDEX SHOULD BE EQUAL FOR ALL FILES?")
+             ! END IF
+          END IF
        END IF
 
-       
+
        NCF => FIND_FILE(FILEHEAD,NCNEST_FNAMES(I),FOUND)
        IF(.NOT. FOUND) CALL FATAL_ERROR&
             &("DUMP_NCNEST_FILE: COULD NOT FIND FILE IN LIST:"//TRIM(NCNEST_FNAMES(I)))
@@ -2246,7 +2251,6 @@ END SUBROUTINE GENMAP_NESTING
                 END DO
              END IF
           END IF
-          
           
           VAR1 => FIND_VAR(NCF,"time",FOUND)
           IF(FOUND) THEN
@@ -2297,9 +2301,10 @@ END SUBROUTINE GENMAP_NESTING
        D%RNG(1)=D%RNG(1)+D%IDX
        D%RNG(2)=D%RNG(1)+NCNEST_BLOCKSIZE-1
        
-
     END DO
 
+    ! PT 12/17/2019 - CRASHES
+    ! IF(ASSOCIATED(TEMP1)) DEALLOCATE(TEMP1)
 
     IF(DBG_SET(DBG_SBR))WRITE(IPT,*) "END DUMP_NCNEST_FILE" 
 
