@@ -173,6 +173,9 @@ Some compilers will nullify pointers when they are declared. GFortran does not.
 
 Solution: in ```sorc/FVCOM.fd/FVCOM_source/mod_nesting.F``` in ```SUBROUTINE DUMP_NCNEST_FILE``` add ```NULLIFY(TEMP1)``` after the variable declarations and re-build. This is the proper way to declare and initialize pointer variables.
 
+### NGOFS and likely any FVCOM model outputs a lot of NaNs when using the -march=skylake-avx512 build flag 
+Solution: Don't use that flag or test using a subset of the avx flags.
+
 ## Licenses
 
 Various - multiple components are contained herein.
