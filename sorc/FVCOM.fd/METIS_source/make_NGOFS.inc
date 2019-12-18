@@ -545,10 +545,10 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
          CPP      = $(COMP_CPP)
          COMPILER = -DGFORTRAN
-         FC       = $(COMP_F_MPI)
-         CC       = $(COMP_MPCC)
+         FC       = $(COMP_F_MPI) -frepack-arrays -march=skylake-avx512
+         CC       = $(COMP_MPCC) -frepack-arrays -march=skylake-avx512
          CPP      = $(COMP_CPP)
-         CXX      = $(COMP_CC)
+         CXX      = $(COMP_CC) -frepack-arrays -march=skylake-avx512
          OPT      = -O3
          DEBFLGS  = -g
          #DEBFLGS  = -g -fcheck=all

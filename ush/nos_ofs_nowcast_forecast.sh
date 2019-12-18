@@ -1609,8 +1609,9 @@ then
 #      postmsg "$nosjlogfile" "$msg"
     fi
 
- 
-    exit $err
+
+    # TESTING Skip the combine and save to COM
+    # exit $err
 
     rm -f corms.fcst
     if [ -s ${MODEL_LOG_FORECAST} ]

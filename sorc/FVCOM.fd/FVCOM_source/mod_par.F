@@ -6179,13 +6179,13 @@ MODULE MOD_PAR
         IF(.NOT. ASSOCIATED(CURRENT%MAP))&
              CALL FATAL_ERROR("FIND_MAP: MAP LIST LINK HAS UNASSOCIATED MAP!")
 
-        !PT IF(DBG_SET(DBG_MPI))THEN
-        !PT    WRITE(IPT,*) "========================================================="
-        !PT    WRITE(IPT,*) "SEARCHING MAPS: MAP GLOBAL_SIZEs= ",CURRENT%MAP%GSIZE
-        !PT    WRITE(IPT,*) "SEARCHING MAPS for Gsize= ",Gsize
-        !PT    WRITE(IPT,*) "SEARCHING MAPS: MAP LOCAL_SIZEs= ",CURRENT%MAP%LSIZE
-        !PT    WRITE(IPT,*) "SEARCHING MAPS for Lsize= ",Lsize
-        !PT END IF
+        IF(DBG_SET(DBG_MPI))THEN
+           WRITE(IPT,*) "========================================================="
+           WRITE(IPT,*) "SEARCHING MAPS: MAP GLOBAL_SIZEs= ",CURRENT%MAP%GSIZE
+           WRITE(IPT,*) "SEARCHING MAPS for Gsize= ",Gsize
+           WRITE(IPT,*) "SEARCHING MAPS: MAP LOCAL_SIZEs= ",CURRENT%MAP%LSIZE
+           WRITE(IPT,*) "SEARCHING MAPS for Lsize= ",Lsize
+        END IF
 
         if(ALL(CURRENT%MAP%GSIZE == GSIZE) .and. SUM(abs(Lsize-CURRENT%MAP%LSIZE)) == 0 ) then
            MP => CURRENT%MAP
