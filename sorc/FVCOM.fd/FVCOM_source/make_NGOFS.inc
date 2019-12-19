@@ -565,15 +565,14 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #         CPP      = /usr/bin/cpp 
 #         COMPILER = -DGFORTRAN
-          #FC       = $(COMP_F_MPI) -ffixed-line-length-none -ffree-line-length-none
-          FC       = $(COMP_F_MPI) -ffree-line-length-none -frepack-arrays -march=skylake-avx512
-          CC       = $(COMP_MPCC) -march=skylake-avx512
+          FC       = $(COMP_F_MPI) -ffree-line-length-none -frepack-arrays # -march=skylake-avx512
+          CC       = $(COMP_MPCC) # -march=skylake-avx512
           CPP      = $(COMP_CPP)
-          CXX      = $(COMP_CC) -march=skylake-avx512
+          CXX      = $(COMP_CC) # -march=skylake-avx512
           OPT      = -O3
           #OPT      = 
-          DEBFLGS  = -g
-          #DEBFLGS  = -g -Og
+          DEBFLGS  = -g -ffpe-summary=invalid,zero,overflow  # ignore underflow and denormal
+          #DEBFLGS  = -g -Og -fbacktrace
           # DEBFLGS  = -g -fcheck=all
 #--------------------------------------------------------------------------
 #  absoft / mac os x defs
