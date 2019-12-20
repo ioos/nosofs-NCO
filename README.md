@@ -178,7 +178,7 @@ Fixed in:
 
 https://github.com/asascience/nosofs-NCO/commit/2e100c5215686e665a7583de06d0509e5b3987de#diff-156b4161630fca9e4c5e34c15dcc91d5
 
-### FIXED: FVCOM crashes when ```NC_NESTING = T```
+### FIXED: FVCOM crashes when ```NESTING_ON = T```
 
 This is the same issue as above. 
 
