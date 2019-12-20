@@ -167,11 +167,26 @@ Solution: Two changes are required.
    to: ```NC_SUBDOMAIN_FILES = 'FVCOM',``` (string value must be in quotes)
 2. Change ``` NESTING_ON        = T,``` to ``` NESTING_ON        = F,```
 
-### NGOFS crashes when writing the ```*_nestnode_*.nc``` files when ```NCNEST_ON = T```
+### FIXED: FVCOM crashes when ```NCNEST_ON = T``` 
 
-Some compilers will nullify pointers when they are declared. GFortran does not.
+Reason: Some compilers (Intel Fortran e.g.) seem to nullify pointers when they are declared. GFortran does not.
+Note: Per the Fortran spec, associated status is undefined until allocated or explicitly assigned.
 
 Solution: in ```sorc/FVCOM.fd/FVCOM_source/mod_nesting.F``` in ```SUBROUTINE DUMP_NCNEST_FILE``` add ```NULLIFY(TEMP1)``` after the variable declarations and re-build. This is the proper way to declare and initialize pointer variables.
+
+Fixed in: 
+
+https://github.com/asascience/nosofs-NCO/commit/2e100c5215686e665a7583de06d0509e5b3987de#diff-156b4161630fca9e4c5e34c15dcc91d5
+
+### FIXED: FVCOM crashes when ```NESTING_ON = T```
+
+This is the same issue as above. 
+
+Solution: In derived type definitions, pointer varialbes should be declared with => null()
+
+Fixed in:
+
+https://github.com/asascience/nosofs-NCO/commit/1d5c932a1b15ebe65fc6c4c467f769ab85789201#diff-d20389d6bfa6f7380dca4aa7cae421b6
 
 ### NGOFS and likely any FVCOM model outputs a lot of NaNs when using the -march=skylake-avx512 build flag 
 Solution: Don't use that flag or test using a subset of the avx flags.
