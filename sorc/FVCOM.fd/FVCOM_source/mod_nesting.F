@@ -1311,6 +1311,7 @@ SUBROUTINE GENMAP_NESTING(NG,LG)
            write(IPT,*) "! NESTING GRID MATCH IS EXACT!"
         end if
      END if
+
      DEALLOCATE(E_MAX,N_MAX)
      
      
@@ -1332,8 +1333,8 @@ SUBROUTINE GENMAP_NESTING(NG,LG)
            NCNT = NCNT + 1
            TEMP1(NCNT) = NID(I)
            TEMP2(NCNT) = I
-	   TEMP3(NCNT)   = NG%H(I)
-	   TEMP4(NCNT,:) = NG%ZZ(I,:)
+           TEMP3(NCNT)   = NG%H(I)
+           TEMP4(NCNT,:) = NG%ZZ(I,:)
         END IF
      END DO
      
@@ -1385,7 +1386,7 @@ SUBROUTINE GENMAP_NESTING(NG,LG)
            TEMP1(NCNT) = EID(I)
            TEMP2(NCNT) = I
            TEMP3(NCNT)   = NG%H1(I)
-	   TEMP4(NCNT,:) = NG%ZZ1(I,:)
+           TEMP4(NCNT,:) = NG%ZZ1(I,:)
         END IF
      END DO
      

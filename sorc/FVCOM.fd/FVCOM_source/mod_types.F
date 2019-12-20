@@ -34,9 +34,9 @@ MODULE MOD_TYPES
      INTEGER :: GSIZE ! GLOBAL SIZE (SIZE OF GLOBAL DATA)
      INTEGER :: LSIZE ! SIZE OF LOCAL ARRAY (Usually ==nsize or MT,NT)
      ! INDEX FROM LOCAL ARRAY TO GLOBAL ARRAY
-     INTEGER, POINTER,  DIMENSION(:) :: LOC_2_GL
+     INTEGER, POINTER,  DIMENSION(:) :: LOC_2_GL => null()
      ! INDEX FROM LOCAL ARRAY TO LOCAL GRID
-     INTEGER, POINTER,  DIMENSION(:) :: LOC_2_Grid
+     INTEGER, POINTER,  DIMENSION(:) :: LOC_2_Grid => null()
   END TYPE MAP
 
   TYPE COMM
@@ -52,13 +52,13 @@ MODULE MOD_TYPES
 
      !  LOGICAL :: SND,RCV
      INTEGER  NSND,NRCV,RCPT
-     INTEGER, POINTER,  DIMENSION(:) :: SNDP,RCVP
-     REAL(SP), POINTER,   DIMENSION(:) :: MLTP
+     INTEGER, POINTER,  DIMENSION(:) :: SNDP,RCVP => null()
+     REAL(SP), POINTER,   DIMENSION(:) :: MLTP => null()
   END TYPE COMM
 
   TYPE BC
      INTEGER NTIMES
-     REAL(SP), POINTER,  DIMENSION(:) :: TIMES
+     REAL(SP), POINTER,  DIMENSION(:) :: TIMES => null()
      CHARACTER(LEN=80) :: LABEL
   END TYPE BC
 
@@ -82,31 +82,31 @@ MODULE MOD_TYPES
      ! PARALLEL STUFF
 !     INTEGER, POINTER :: EL_PID(:) !!PROCESSOR OWNER OF GLOBAL ELEMENT
 
-     INTEGER, POINTER :: egid(:) !!GLOBAL ID OF LOCAL ELEMENT
-     INTEGER, POINTER :: ngid(:) !!GLOBAL ID OF LOCAL NODE 
-     INTEGER, POINTER :: elid(:) !!LOCAL ID OF GLOBAL ELEMENT
-     INTEGER, POINTER :: nlid(:) !!LOCAL ID OF GLOBAL NODE 
+     INTEGER, POINTER :: egid(:) => null() !!GLOBAL ID OF LOCAL ELEMENT
+     INTEGER, POINTER :: ngid(:) => null() !!GLOBAL ID OF LOCAL NODE 
+     INTEGER, POINTER :: elid(:) => null() !!LOCAL ID OF GLOBAL ELEMENT
+     INTEGER, POINTER :: nlid(:) => null() !!LOCAL ID OF GLOBAL NODE 
 
      ! TRANSFER INDEX INCLUDING HALO
-     INTEGER, POINTER :: egid_X(:)
-     INTEGER, POINTER :: ngid_X(:)
-     INTEGER, POINTER :: elid_X(:)
-     INTEGER, POINTER :: nlid_X(:)
+     INTEGER, POINTER :: egid_X(:) => null()
+     INTEGER, POINTER :: ngid_X(:) => null()
+     INTEGER, POINTER :: elid_X(:) => null()
+     INTEGER, POINTER :: nlid_X(:) => null()
 
      ! GRID DATA POINTERS
 
-     INTEGER, POINTER :: NV(:,:)
+     INTEGER, POINTER :: NV(:,:) => null()
 
 
-     REAL(SP),POINTER :: XM(:)
-     REAL(SP),POINTER :: YM(:)
-     REAL(SP),POINTER :: LON(:)
-     REAL(SP),POINTER :: LAT(:)
+     REAL(SP),POINTER :: XM(:) => null()
+     REAL(SP),POINTER :: YM(:) => null()
+     REAL(SP),POINTER :: LON(:) => null()
+     REAL(SP),POINTER :: LAT(:) => null()
 
-     REAL(SP),POINTER :: XMC(:)
-     REAL(SP),POINTER :: YMC(:)
-     REAL(SP),POINTER :: LONC(:)
-     REAL(SP),POINTER :: LATC(:)
+     REAL(SP),POINTER :: XMC(:) => null()
+     REAL(SP),POINTER :: YMC(:) => null()
+     REAL(SP),POINTER :: LONC(:) => null()
+     REAL(SP),POINTER :: LATC(:) => null()
 
      ! NOTES: SHOULD MAKE AN ARRAY TO STORE 1/ART, 1/ART2 and 1/ART2
      ! IT is faster and safer
@@ -118,7 +118,7 @@ MODULE MOD_TYPES
      !----------------Node, Boundary Condition, and Control Volume-----------------------!
 
 
-     INTEGER, POINTER :: NBE(:,:)            !!INDICES OF ELMNT NEIGHBORS
+     INTEGER, POINTER :: NBE(:,:) => null()            !!INDICES OF ELMNT NEIGHBORS
  !    INTEGER, POINTER :: NTVE(:)             !! NUMBER OF ELEMENTS SURROUNDING EACH NODE
  !    INTEGER, POINTER :: NTSN(:)             !! NUMBER OF NODES SURROUNDING EACH NODE
  !    INTEGER, POINTER :: ISONB(:)            !!NODE MARKER = 0,1,2
@@ -126,20 +126,20 @@ MODULE MOD_TYPES
  !    INTEGER, POINTER :: ISBCE(:)     
  !    INTEGER, POINTER :: IEC(:,:)
  !    INTEGER, POINTER :: IENODE(:,:)
-     INTEGER, POINTER :: NBSN(:,:)            !! INDICES OF NODES SURROUNDING EACH NODE
+     INTEGER, POINTER :: NBSN(:,:) => null()           !! INDICES OF NODES SURROUNDING EACH NODE
 !     INTEGER, POINTER :: NIEC(:,:)
 !     INTEGER, POINTER :: NTRG(:)
-     INTEGER, POINTER :: NBVE(:,:)            !! INDICIES OF ELEMENTS SURROUNDING EACH NODE
+     INTEGER, POINTER :: NBVE(:,:) => null()            !! INDICIES OF ELEMENTS SURROUNDING EACH NODE
 !     INTEGER, POINTER :: NBVT(:,:)
 
      !----------------2-d arrays for the general vertical coordinate -------------------------------!
 
-     REAL(SP), POINTER :: H(:)                      !!BATHYMETRY 
-     REAL(SP), POINTER :: Z(:,:)                    !!SIGMA COORDINATE VALUE 
-     REAL(SP), POINTER :: ZZ(:,:)                   !!INTRA LEVEL SIGMA VALUE
-     REAL(SP), POINTER :: H1(:)                      !!BATHYMETRY 
-     REAL(SP), POINTER :: Z1(:,:)                    !!SIGMA COORDINATE VALUE 
-     REAL(SP), POINTER :: ZZ1(:,:)                   !!INTRA LEVEL SIGMA VALUE
+     REAL(SP), POINTER :: H(:) => null()                     !!BATHYMETRY 
+     REAL(SP), POINTER :: Z(:,:) => null()                    !!SIGMA COORDINATE VALUE 
+     REAL(SP), POINTER :: ZZ(:,:) => null()                   !!INTRA LEVEL SIGMA VALUE
+     REAL(SP), POINTER :: H1(:) => null()                      !!BATHYMETRY 
+     REAL(SP), POINTER :: Z1(:,:) => null()                    !!SIGMA COORDINATE VALUE 
+     REAL(SP), POINTER :: ZZ1(:,:) => null()                   !!INTRA LEVEL SIGMA VALUE
 
      !------------shape coefficient arrays and control volume metrics--------------------!
      
@@ -180,19 +180,16 @@ MODULE MOD_TYPES
       IF(ASSOCIATED(G%ngid)) DEALLOCATE(G%ngid)
       IF(ASSOCIATED(G%elid)) DEALLOCATE(G%elid)
       IF(ASSOCIATED(G%nlid)) DEALLOCATE(G%nlid)
-
       IF(ASSOCIATED(G%egid_X)) DEALLOCATE(G%egid_X)
       IF(ASSOCIATED(G%elid_X)) DEALLOCATE(G%elid_X)
       IF(ASSOCIATED(G%ngid_X)) DEALLOCATE(G%ngid_X)
       IF(ASSOCIATED(G%nlid_X)) DEALLOCATE(G%nlid_X)
 
       IF(ASSOCIATED(G%NV)) DEALLOCATE(G%NV)
-
       IF(ASSOCIATED(G%XM)) DEALLOCATE(G%XM)
       IF(ASSOCIATED(G%YM)) DEALLOCATE(G%YM)
       IF(ASSOCIATED(G%LON)) DEALLOCATE(G%LON)
       IF(ASSOCIATED(G%LAT)) DEALLOCATE(G%LAT)
-
       IF(ASSOCIATED(G%XMC)) DEALLOCATE(G%XMC)
       IF(ASSOCIATED(G%YMC)) DEALLOCATE(G%YMC)
       IF(ASSOCIATED(G%LONC)) DEALLOCATE(G%LONC)
@@ -203,16 +200,17 @@ MODULE MOD_TYPES
 !      IF(ASSOCIATED(G%ART2)) DEALLOCATE(G%ART2)
 
       IF(ASSOCIATED(G%NBE)) DEALLOCATE(G%NBE)
+      IF(ASSOCIATED(G%NBSN)) DEALLOCATE(G%NBSN)
+      IF(ASSOCIATED(G%NBVE)) DEALLOCATE(G%NBVE)
+
 !      IF(ASSOCIATED(G%NTVE)) DEALLOCATE(G%NTVE)
 !      IF(ASSOCIATED(G%NTSN)) DEALLOCATE(G%NTSN)
 !      IF(ASSOCIATED(G%ISONB)) DEALLOCATE(G%ISONB)
 !      IF(ASSOCIATED(G%ISBC)) DEALLOCATE(G%ISBC)
 !      IF(ASSOCIATED(G%IEC)) DEALLOCATE(G%IEC)
 !      IF(ASSOCIATED(G%IENODE)) DEALLOCATE(G%IENODE)
-      IF(ASSOCIATED(G%NBSN)) DEALLOCATE(G%NBSN)
 !      IF(ASSOCIATED(G%NIEC)) DEALLOCATE(G%NIEC)
 !      IF(ASSOCIATED(G%NTRG)) DEALLOCATE(G%NTRG)
-      IF(ASSOCIATED(G%NBVE)) DEALLOCATE(G%NBVE)
 !      IF(ASSOCIATED(G%NBVT)) DEALLOCATE(G%NBVT)
 
 !      IF(ASSOCIATED(G%Z)) DEALLOCATE(G%Z)
@@ -227,7 +225,6 @@ MODULE MOD_TYPES
 
 !      IF(ASSOCIATED(G%I_OBC_N)) DEALLOCATE(G%I_OBC_N)
 !      IF(ASSOCIATED(G%TYPE_OBC)) DEALLOCATE(G%TYPE_OBC)
-
       
       DEALLOCATE(G)
 

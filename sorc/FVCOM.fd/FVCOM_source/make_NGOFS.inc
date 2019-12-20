@@ -565,15 +565,18 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #         CPP      = /usr/bin/cpp 
 #         COMPILER = -DGFORTRAN
+          # avx512 option causes NaN errors, not sure which one specifically
           FC       = $(COMP_F_MPI) -ffree-line-length-none -frepack-arrays # -march=skylake-avx512
           CC       = $(COMP_MPCC) # -march=skylake-avx512
           CPP      = $(COMP_CPP)
           CXX      = $(COMP_CC) # -march=skylake-avx512
           OPT      = -O3
-          #OPT      = 
           DEBFLGS  = -g -ffpe-summary=invalid,zero,overflow  # ignore underflow and denormal
-          #DEBFLGS  = -g -Og -fbacktrace
-          # DEBFLGS  = -g -fcheck=all
+
+          # Use these settings when debugging
+          #OPT      = 
+          #DEBFLGS  = -g -Og -fbacktrace 
+          #DEBFLGS  = -g -Og -fbacktrace -fcheck=all
 #--------------------------------------------------------------------------
 #  absoft / mac os x defs
 #--------------------------------------------------------------------------
