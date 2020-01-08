@@ -304,7 +304,12 @@ contains
   integer           :: ntemp
   real(sp)          :: ftemp
   real(sp)          :: REALVEC(150)
+  integer :: n
+  CHARACTER(LEN=30) :: FFMT
 
+  ! GFORTRAN does not support variable format specifier <>
+  WRITE(FFMT,'("(A20,",I0,"F10.4)")') SIZE
+ 
   if(dbg_set(dbg_sbr)) write(ipt,*) "Start:Get_Float_Val_Array "
 
   !make sure file exists
@@ -340,10 +345,10 @@ contains
   ! echo to screen 
   if(present(echo))then
     if(echo)then 
-      write(*,'(A20,F10.4)')trim(argname)//': ',fval(1:SIZE)
+      write(*,FFMT) trim(argname)//': ', fval(1:SIZE)
     endif
   end if
-    
+
   if(dbg_set(dbg_sbr)) write(ipt,*) "End: Get_Float_Val_Array "  
 
   End Subroutine Get_Float_Val_Array
@@ -373,6 +378,10 @@ contains
   integer           :: ntemp
   real(sp)          :: ftemp
   real(sp)          :: REALVEC(150)
+  CHARACTER(LEN=30) :: FFMT
+
+  ! GFORTRAN does not support variable format specifier <>
+  WRITE(FFMT,'("(A20,",I0,"I10)")') SIZE
 
   if(dbg_set(dbg_sbr)) write(ipt,*) "Start: Get_Integer_Val_Array"
 
@@ -409,7 +418,7 @@ contains
   ! echo to screen 
   if(present(echo))then
     if(echo)then 
-      write(*,'(A20,I10)')trim(argname)//': ',ival(1:SIZE)
+      write(*,FFMT) trim(argname)//': ',ival(1:SIZE)
     endif
   end if
 
@@ -441,6 +450,10 @@ contains
   integer           :: ntemp
   real(sp)          :: ftemp
   character(len=80), dimension(100):: CHARVEC
+  CHARACTER(LEN=30) :: FFMT
+
+  ! GFORTRAN does not support variable format specifier <>
+  WRITE(FFMT,'("(A20,",I0,"L10)")') SIZE
 
   if(dbg_set(dbg_sbr)) write(ipt,*) "Start: Get_Logical_Val_Array" 
 
@@ -482,7 +495,7 @@ contains
   ! echo to screen 
   if(present(echo))then
     if(echo)then 
-      write(*,'(A20,L10)')trim(argname)//': ',cval(1:SIZE)
+      write(*,FFMT) trim(argname)//': ',cval(1:SIZE)
     endif
   end if
     
@@ -518,6 +531,10 @@ contains
   integer           :: ntemp
   real(sp)          :: ftemp
   character(len=80), dimension(100):: CHARVEC
+  CHARACTER(LEN=30) :: FFMT
+
+  ! GFORTRAN does not support variable format specifier <>
+  WRITE(FFMT,'("(A20,",I0,"A10)")') SIZE
 
   if(dbg_set(dbg_sbr)) write(ipt,*) "Start: Get_String_Val_Array" 
 
@@ -555,7 +572,7 @@ contains
   ! echo to screen 
   if(present(echo))then
     if(echo)then 
-      write(*,'(A20,A10)')trim(argname)//': ',sval(1:SIZE)
+      write(*,FFMT) trim(argname)//': ',sval(1:SIZE)
     endif
   end if
     
