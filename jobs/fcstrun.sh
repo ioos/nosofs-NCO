@@ -36,11 +36,13 @@ date
 #export MP_TIMEOUT=9000
 #export MP_SHARED_MEMORY=yes
 
+. /usr/share/Modules/init/bash
+
 module purge
 export I_MPI_OFI_LIBRARY_INTERNAL=${I_MPI_OFI_LIBRARY_INTERNAL:-1}
 module load gcc/6.5.0
-module load mpi/intel
-module load hdf5-impi
+module load mpi/intel/2020.0.154
+module load hdf5
 module load netcdf/4.5
 module load produtil
 

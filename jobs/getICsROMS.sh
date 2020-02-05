@@ -13,10 +13,11 @@ fi
 CDATE=$1
 cyc=$2
 ofs=$3
+ICDIR=$4
 
 url=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nos/prod/${ofs}.$CDATE
 
-ICDIR=/com/nos/${ofs}.$CDATE
+#ICDIR=/com/nos/${ofs}.$CDATE
 mkdir -p $ICDIR
 cd $ICDIR
 
@@ -43,6 +44,7 @@ do
   wget -nc ${url}/$file
   if [[ $? -ne 0 ]] ; then
     echo "ERROR: Unable to retrieve $file from $url"
+    exit -1
   fi
 done
 
@@ -69,6 +71,7 @@ rfile=${pfx}.rst.nowcast.${sfx}
 wget -nc ${url}/$ifile
 if [[ $? -ne 0 ]] ; then
   echo "ERROR: Unable to retrieve $file from \n $url"
+  exit -1
 fi
 
 # Rename it

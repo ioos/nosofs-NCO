@@ -32,6 +32,18 @@ onlymodel=yes
 buildprep=no
 
 if [[ $onlymodel == "yes" ]] ; then
+
+  #  Compile ocean model of ROMS for DBOFS
+  cd $SORCnos/ROMS.fd
+  gmake clean
+  gmake -f makefile_dbofs
+  if [ -s  dbofs_roms_mpi ]; then
+    mv dbofs_roms_mpi $EXECnos/.
+  else
+    echo 'roms executable for DBOFS is not created'
+  fi
+  exit 0
+  
   ##  Compile ocean model of ROMS for CBOFS
   cd $SORCnos/ROMS.fd
   gmake clean
