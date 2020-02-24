@@ -564,7 +564,7 @@ dashL= $(empty) -L
 #  gfortran defs 
 #--------------------------------------------------------------------------
 #         CPP      = /usr/bin/cpp 
-#         COMPILER = -DGFORTRAN
+          COMPILER = -DGFORTRAN
           # avx512 option causes NaN errors, not sure which one specifically
           FC       = $(COMP_F_MPI) -ffree-line-length-none -frepack-arrays # -march=skylake-avx512
           CC       = $(COMP_MPCC) # -march=skylake-avx512

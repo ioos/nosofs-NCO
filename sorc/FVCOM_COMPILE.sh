@@ -135,23 +135,27 @@ if [[ $BUILDPREP == "YES" ]] ; then
 #gmake install
 #
 #
-cd $SORCnos/FVCOM.fd/METIS_source
-gmake clean
-rm -f *.o
-gmake -f makefile
-rm -f *.o
+
+#cd $SORCnos/FVCOM.fd/METIS_source
+#gmake clean
+#rm -f *.o
+#gmake -f makefile
+#rm -f *.o
 
 
 cd $SORCnos/FVCOM.fd/FVCOM_source
-gmake clean
-gmake -f makefile_NGOFS
-if [ -s  fvcom_ngofs ]; then
-  mv fvcom_ngofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi  
 
-exit
+
+
+#gmake clean
+#gmake -f makefile_NGOFS
+#if [ -s  fvcom_ngofs ]; then
+#  mv fvcom_ngofs $EXECnos/.
+#else
+#  echo 'fvcom executable is not created'
+#fi  
+#
+#exit 0
 
 #gmake clean
 #gmake -f makefile_NEGOFS
@@ -180,13 +184,13 @@ exit
 #fi
 
 
-#gmake clean
-#gmake -f makefile_LEOFS
-#if [ -s  fvcom_leofs ]; then
-#  mv fvcom_leofs $EXECnos/.
-#else
-#  echo 'fvcom executable is not created'
-#fi
+gmake clean
+gmake -f makefile_LEOFS
+if [ -s  fvcom_leofs ]; then
+  mv fvcom_leofs $EXECnos/.
+else
+  echo 'fvcom executable is not created'
+fi
 
 #gmake clean
 #gmake -f makefile_LMHOFS

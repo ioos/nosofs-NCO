@@ -513,13 +513,13 @@ MODULE MOD_SOLAR
       UST1 = 0.04 * UM
       H = ZM
       DTHETA = TD
-      IF (ABS(DTHETA) .LT. 1.E-7) DTHETA = SIGN(1.E-7,DTHETA)
+      IF (ABS(DTHETA) .LT. 1.E-7_SP) DTHETA = SIGN(1.E-7_SP,DTHETA)
 !
 ! INITIAL GUESS FOR Z0
 !
       Z0 = .00459 * UST1 * UST1
       S = UM * UM * TBAR / (9.8*DTHETA)
-      IF (ABS(S) .GT. 1.E6) S = SIGN(1.E6,S)
+      IF (ABS(S) .GT. 1.E6_SP) S = SIGN(1.E6_SP,S)
 # if defined (DOUBLE_PRECISION)
       X = DLOG(H/Z0)
 # else
@@ -535,7 +535,7 @@ MODULE MOD_SOLAR
 # else
         X = ALOG(H/Z0)
 # endif      
-        IF (ABS(FL) .GT. 500.) FL = SIGN(500.,FL)
+        IF (ABS(FL) .GT. 500.0_SP) FL = SIGN(500.0_SP,FL)
         IF (FL .GT. 0.) GO TO 20
 !
 ! UNSTABLE SECTION (L LT 0 OR DT LT 0)
@@ -554,7 +554,7 @@ MODULE MOD_SOLAR
           ARG2 = (1. - X1*Z0) ** (.25)
           B = LOG((ARG1 - 1.)*(ARG2 + 1.)/((ARG1 + 1.)*(ARG2 - 0.999999))) +2. * (ATAN(ARG1) - ATAN(ARG2))
           FL = S * A / (B*B)
-          IF (ABS(FL) .GT. 500.) FL = SIGN(500.,FL)
+          IF (ABS(FL) .GT. 500.0_SP) FL = SIGN(500.0_SP,FL)
           FLI = 1. / FL
    10   CONTINUE
         GO TO 50
