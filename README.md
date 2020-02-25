@@ -165,7 +165,6 @@ Example: ngofs.20191206/nos.ngofs.forecast.20191206.t03z.in
 Solution: Two changes are required.
 1. Change the following line: ```NC_SUBDOMAIN_FILES = FVCOM,```
    to: ```NC_SUBDOMAIN_FILES = 'FVCOM',``` (string value must be in quotes)
-2. Change ``` NESTING_ON        = T,``` to ``` NESTING_ON        = F,```
 
 ### FIXED: FVCOM crashes when ```NCNEST_ON = T``` 
 
