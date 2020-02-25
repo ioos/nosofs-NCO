@@ -46,7 +46,7 @@ module load hdf5
 module load netcdf/4.5
 module load produtil
 
-export I_MPI_DEBUG=1
+export I_MPI_DEBUG=0
 
 #printenv
 
@@ -89,7 +89,7 @@ export KEEPDATA=YES
 
 export MPIEXEC=mpirun
 
-if [[ $OFS == "ngofs" ]] ; then
+if [[ "$OFS" == "ngofs" || "$OFS" == "nwgofs" ]] ; then
   #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to numa:1 -map-by C"}
   #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to core:2 -map-by C"}
   #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to core:$NPP"}

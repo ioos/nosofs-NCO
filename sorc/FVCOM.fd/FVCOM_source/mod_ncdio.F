@@ -126,46 +126,46 @@ MODULE MOD_NCDIO
   LOGICAL, private :: FOUND
   logical, private :: NEED_INIT = .TRUE.
 
-  TYPE(NCDIM), POINTER :: DIM_nele
-  TYPE(NCDIM), POINTER :: DIM_node
-  TYPE(NCDIM), POINTER :: DIM_three
-  TYPE(NCDIM), POINTER :: DIM_four
+  TYPE(NCDIM), POINTER :: DIM_nele => null()
+  TYPE(NCDIM), POINTER :: DIM_node => null()
+  TYPE(NCDIM), POINTER :: DIM_three => null()
+  TYPE(NCDIM), POINTER :: DIM_four => null()
 
-  TYPE(NCDIM), POINTER :: DIM_siglay
-  TYPE(NCDIM), POINTER :: DIM_siglev
+  TYPE(NCDIM), POINTER :: DIM_siglay => null()
+  TYPE(NCDIM), POINTER :: DIM_siglev => null()
 
 # if defined (SEDIMENT)
-  TYPE(NCDIM), POINTER :: DIM_bedlay
+  TYPE(NCDIM), POINTER :: DIM_bedlay => null()
 # endif
 
-  TYPE(NCDIM), POINTER :: DIM_time
-  TYPE(NCDIM), POINTER :: DIM_DateStrLen
+  TYPE(NCDIM), POINTER :: DIM_time => null()
+  TYPE(NCDIM), POINTER :: DIM_DateStrLen => null()
 
-  TYPE(NCDIM), POINTER :: DIM_nobc
-  TYPE(NCDIM), POINTER :: DIM_nlsf
+  TYPE(NCDIM), POINTER :: DIM_nobc => null()
+  TYPE(NCDIM), POINTER :: DIM_nlsf => null()
 
-  TYPE(NCDIM), POINTER :: DIM_MaxNode
-  TYPE(NCDIM), POINTER :: DIM_MaxElem
+  TYPE(NCDIM), POINTER :: DIM_MaxNode => null()
+  TYPE(NCDIM), POINTER :: DIM_MaxElem => null()
 
-  TYPE(NCDIM), POINTER :: DIM_GRID
-  TYPE(NCDIM), POINTER :: DIM_NCAT
-  TYPE(NCDIM), POINTER :: DIM_ntilay
+  TYPE(NCDIM), POINTER :: DIM_GRID => null()
+  TYPE(NCDIM), POINTER :: DIM_NCAT => null()
+  TYPE(NCDIM), POINTER :: DIM_ntilay => null()
 
 # if defined (WAVE_CURRENT_INTERACTION)    
-  TYPE(NCDIM), POINTER :: DIM_MSC
-  TYPE(NCDIM), POINTER :: DIM_MDC
+  TYPE(NCDIM), POINTER :: DIM_MSC => null()
+  TYPE(NCDIM), POINTER :: DIM_MDC => null()
 # endif
 
   ! FILE POINTERS FOR NETCDF AVERAGE OUTPUT
-  TYPE(NCFILE), POINTER :: NC_AVG_DATA
-  TYPE(NCFILE), POINTER :: NC_AVG_SUM
+  TYPE(NCFILE), POINTER :: NC_AVG_DATA => null()
+  TYPE(NCFILE), POINTER :: NC_AVG_SUM => null()
 
 
   ! GRID TYPES FOR DATA AND AVERAGE OUTPUT
-  TYPE(GRID), POINTER :: NC_DAT_GRIDS(:)
-  TYPE(GRID), POINTER :: NC_SF_GRIDS(:)
+  TYPE(GRID), POINTER :: NC_DAT_GRIDS(:) => null()
+  TYPE(GRID), POINTER :: NC_SF_GRIDS(:) => null()
 
-  TYPE(GRID), POINTER :: NC_AVG_GRIDS(:)
+  TYPE(GRID), POINTER :: NC_AVG_GRIDS(:) => null()
 
 
   save

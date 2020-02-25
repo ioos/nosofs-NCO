@@ -146,7 +146,6 @@ if [[ $BUILDPREP == "YES" ]] ; then
 cd $SORCnos/FVCOM.fd/FVCOM_source
 
 
-
 #gmake clean
 #gmake -f makefile_NGOFS
 #if [ -s  fvcom_ngofs ]; then
@@ -154,16 +153,16 @@ cd $SORCnos/FVCOM.fd/FVCOM_source
 #else
 #  echo 'fvcom executable is not created'
 #fi  
-#
+
 #exit 0
 
-gmake clean
-gmake -f makefile_NEGOFS
-if [ -s  fvcom_negofs ]; then
-  mv fvcom_negofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
+#gmake clean
+#gmake -f makefile_NEGOFS
+#if [ -s  fvcom_negofs ]; then
+#  mv fvcom_negofs $EXECnos/.
+#else
+#  echo 'fvcom executable is not created'
+#fi
 
 
 gmake clean

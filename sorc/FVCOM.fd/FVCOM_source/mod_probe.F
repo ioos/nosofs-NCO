@@ -96,8 +96,8 @@ MODULE PROBES
      REAL(SP) :: LONLOC                                       !!LON POSITION OF DATA LOCATION
      REAL(SP) :: LATLOC                                       !!LAT POSITION OF DATA LOCATION
      REAL(SP) :: DPTH                                         !!BATHYMETRIC DEPTH AT DATA LOC
-     REAL(SP), POINTER, DIMENSION(:)              :: VEC      !!USED FOR STORING DATA 
-     REAL(SP), POINTER                            :: SCL      !!USED FOR STORING DATA 
+     REAL(SP), POINTER, DIMENSION(:)              :: VEC => null()   !!USED FOR STORING DATA 
+     REAL(SP), POINTER                            :: SCL => null()   !!USED FOR STORING DATA 
      CHARACTER(LEN=80)                            :: D_TIT    !!OBJECT TITLE (FOR FILENAMING) 
      CHARACTER(LEN=80)                            :: D_DES    !!OBJECT DESCRIPTION
      CHARACTER(LEN=80)                            :: VAR      !!VARIABLE TO DUMP

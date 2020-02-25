@@ -236,6 +236,7 @@ MODULE MOD_STATION_TIMESERIES
    END IF    
      
    FNAME = trim(input_dir)//"/"//trim(STATION_FILE)
+
    CALL FOPEN(127,trim(FNAME),'cfr')
 
    IF(MSR)THEN
