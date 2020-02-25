@@ -59,7 +59,8 @@
 #===========================================================================
 # PREPROCESSOR OPTIONS FOR CPP
 #            DEF_FLAGS     = -P -C -traditional 
-            DEF_FLAGS     = -P -traditional 
+#            DEF_FLAGS     = -P -traditional 
+            DEF_FLAGS     = -P -traditional-cpp
 #===========================================================================
 #
 ####################### MEDM ENVIRONMENT #####################################
@@ -99,7 +100,7 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #             IOLIBS       =  -lnetcdff -lnetcdf #-lhdf5_hl -lhdf5 -lz -lcurl -lm
 #             IOINCS       =  #-I/hosts/mao/usr/medm/install/netcdf/3.6.3/em64t/include
-             IOLIBS       =  -L$(NETCDF)/lib -lnetcdff
+             IOLIBS       =  -L$(NETCDF)/lib -lnetcdff -ldl -lm
              IOINCS       =  -I$(NETCDF)/include
 #--------------------------------------------------------------------------
 
@@ -565,10 +566,14 @@ dashL= $(empty) -L
 #  gfortran defs 
 #--------------------------------------------------------------------------
 #         CPP      = /usr/bin/cpp 
-#         COMPILER = -DGFORTRAN
-#         FC       = gfortran  -O3 
-#         DEBFLGS  = 
-#         OPT      = 
+          COMPILER = -DGFORTRAN
+          # avx512 option causes NaN errors, not sure which one specifically
+          FC       = $(COMP_F_MPI) -ffree-line-length-none -frepack-arrays # -march=skylake-avx512
+          CC       = $(COMP_MPCC) # -march=skylake-avx512
+          CPP      = $(COMP_CPP)
+          CXX      = $(COMP_CC) # -march=skylake-avx512
+          OPT      = -O3
+          DEBFLGS  = -g -ffpe-summary=invalid,zero,overflow  # ignore underflow and denormal
 #         CLIB     = 
 #--------------------------------------------------------------------------
 #  absoft / mac os x defs
@@ -590,13 +595,13 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #  IBM/AIX Definitionss NOAA CCS (stratus and cirrus)
 #--------------------------------------------------------------------------
-          CPPFLAGS = $(DEF_FLAGS) -DAIX
-          COMPILER = -DIFORT
-          FC       = $(COMP_F_MPI)
-          CC       = $(COMP_MPCC)
-          CPP      = $(COMP_CPP)
-          CXX      = $(COMP_CC)
-          OPT      = -O3 -fp-model precise -ftz -fast-transcendentals -no-prec-div -no-prec-sqrt -xHost
+#          CPPFLAGS = $(DEF_FLAGS) -DAIX
+#          COMPILER = -DIFORT
+#          FC       = $(COMP_F_MPI)
+#          CC       = $(COMP_MPCC)
+#          CPP      = $(COMP_CPP)
+#          CXX      = $(COMP_CC)
+#          OPT      = -O3 -fp-model precise -ftz -fast-transcendentals -no-prec-div -no-prec-sqrt -xHost
 #          OPT      = -O3 -fp-model precise -ftz -fast-transcendentals -no-prec-div -no-prec-sqrt 
 #          OPT      = -O3 -fp-model precise  -ftz -fast-transcendentals -no-prec-div #good
 #           OPT      = -O3 -fp-model precise  -ftz -fast-transcendentals #good

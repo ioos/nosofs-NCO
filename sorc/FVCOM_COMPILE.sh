@@ -157,22 +157,22 @@ cd $SORCnos/FVCOM.fd/FVCOM_source
 #
 #exit 0
 
-#gmake clean
-#gmake -f makefile_NEGOFS
-#if [ -s  fvcom_negofs ]; then
-#  mv fvcom_negofs $EXECnos/.
-#else
-#  echo 'fvcom executable is not created'
-#fi
+gmake clean
+gmake -f makefile_NEGOFS
+if [ -s  fvcom_negofs ]; then
+  mv fvcom_negofs $EXECnos/.
+else
+  echo 'fvcom executable is not created'
+fi
 
 
-#gmake clean
-#gmake -f makefile_NWGOFS
-#if [ -s  fvcom_nwgofs ]; then
-#  mv fvcom_nwgofs $EXECnos/.
-#else
-#  echo 'fvcom executable is not created'
-#fi
+gmake clean
+gmake -f makefile_NWGOFS
+if [ -s  fvcom_nwgofs ]; then
+  mv fvcom_nwgofs $EXECnos/.
+else
+  echo 'fvcom executable is not created'
+fi
 
 
 #gmake clean
@@ -184,13 +184,13 @@ cd $SORCnos/FVCOM.fd/FVCOM_source
 #fi
 
 
-gmake clean
-gmake -f makefile_LEOFS
-if [ -s  fvcom_leofs ]; then
-  mv fvcom_leofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
+#gmake clean
+#gmake -f makefile_LEOFS
+#if [ -s  fvcom_leofs ]; then
+#  mv fvcom_leofs $EXECnos/.
+#else
+#  echo 'fvcom executable is not created'
+#fi
 
 #gmake clean
 #gmake -f makefile_LMHOFS

@@ -279,7 +279,7 @@ endef
 # $(call one-compile-rule, binary-file, f90-file, source-files)
 define one-compile-rule
   $1: $2 $3
-	cd $$(SCRATCH_DIR); $$(FC) -c $$(FFLAGS) $(notdir $2) -I/usrx/local/intel/impi/4.0.3.008/intel64/include
+	cd $$(SCRATCH_DIR); $$(FC) -c $$(FFLAGS) $(notdir $2) -I$$(MPI_INC)
 
   $2: $3
 	$$(CPP) $$(CPPFLAGS) $$(MY_CPP_FLAGS) $$< > $$@
