@@ -1474,6 +1474,19 @@ then
       seton
       err_exit "No restart file for forecast: $COMOUT/$RST_OUT_NOWCAST"
     fi
+
+    #1.j Nudging file
+    TS_NUDGING=${TS_NUDGING:-0}
+    if [ $TS_NUDGING -eq 1 ]; then
+      if [ -f $COMOUT/$NUDG_FORCING_FILE ]; then
+        cp -p $COMOUT/$NUDG_FORCING_FILE $NUDG_FORCING_FILE
+      else
+        echo "$COMOUT/$NUDG_FORCING_FILE is not found"
+        msg="FATAL ERROR: T/S nudging is on but the forcing file is not found"
+        postmsg "$jlogfile" "$msg"
+        postmsg "$nosjlogfile" "$msg"
+      fi
+    fi
   fi 
 
   ######## FORECAST #########
