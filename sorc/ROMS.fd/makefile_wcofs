@@ -104,7 +104,7 @@ MY_CPP_FLAGS ?=
 #  In this, case the user need to select the desired compiler below and
 #  turn on both USE_MPI and USE_MPIF90 macros.
 
-  USE_MPIF90 ?= on 
+  USE_MPIF90 ?= on
 
 #  If applicable, activate 64-bit compilation:
 

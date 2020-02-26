@@ -28,7 +28,7 @@ fi
 cd $SORCnos
 
 
-onlymodel=yes
+onlymodel=no
 buildprep=no
 
 if [[ $onlymodel == "yes" ]] ; then
@@ -133,14 +133,14 @@ fi  # end if buildprep
 
 
 ##  Compile ocean model of ROMS for CBOFS
-cd $SORCnos/ROMS.fd
-gmake clean
-gmake -f makefile_cbofs
-if [ -s  cbofs_roms_mpi ]; then
-  mv cbofs_roms_mpi $EXECnos/.
-else
-  echo 'roms executable for CBOFS is not created'
-fi
+#cd $SORCnos/ROMS.fd
+#gmake clean
+#gmake -f makefile_cbofs
+#if [ -s  cbofs_roms_mpi ]; then
+#  mv cbofs_roms_mpi $EXECnos/.
+#else
+#  echo 'roms executable for CBOFS is not created'
+#fi
 
 ##  Compile ocean model of ROMS for DBOFS
 #cd $SORCnos/ROMS.fd
@@ -152,17 +152,17 @@ fi
 #  echo 'roms executable for DBOFS is not created'
 #fi
 #
-##  Compile ocean model of ROMS for TBOFS
-#cd $SORCnos/ROMS.fd
-#gmake clean
-#gmake -f makefile_tbofs
-#if [ -s  tbofs_roms_mpi ]; then
-#  mv tbofs_roms_mpi $EXECnos/.
-#else
-#  echo 'roms executable for TBOFS is not created'
-#fi
-#
-##  Compile ocean model of ROMS for GoMOFS
+#  Compile ocean model of ROMS for TBOFS
+cd $SORCnos/ROMS.fd
+gmake clean
+gmake -f makefile_tbofs
+if [ -s  tbofs_roms_mpi ]; then
+  mv tbofs_roms_mpi $EXECnos/.
+else
+  echo 'roms executable for TBOFS is not created'
+fi
+
+#  Compile ocean model of ROMS for GoMOFS
 #cd $SORCnos/ROMS.fd
 #gmake clean
 #gmake -f makefile_gomofs
