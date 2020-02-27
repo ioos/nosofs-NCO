@@ -147,6 +147,15 @@ cd $SORCnos/FVCOM.fd/FVCOM_source
 
 
 gmake clean
+gmake -f makefile_LMHOFS
+if [ -s  fvcom_lmhofs ]; then
+  mv fvcom_lmhofs $EXECnos/.
+else
+  echo 'fvcom executable is not created'
+fi
+exit 0
+
+gmake clean
 gmake -f makefile_NGOFS
 if [ -s  fvcom_ngofs ]; then
   mv fvcom_ngofs $EXECnos/.

@@ -572,9 +572,13 @@ dashL= $(empty) -L
           CC       = $(COMP_MPCC) # -march=skylake-avx512
           CPP      = $(COMP_CPP)
           CXX      = $(COMP_CC) # -march=skylake-avx512
-          OPT      = -O3
-          DEBFLGS  = -g -ffpe-summary=invalid,zero,overflow  # ignore underflow and denormal
-#         CLIB     = 
+          #OPT      = -O3
+          #DEBFLGS  = -g -ffpe-summary=invalid,zero,overflow  # ignore underflow and denormal
+
+          # Use these settings when debugging
+          #OPT      =
+          #DEBFLGS  = -g -Og -fbacktrace
+#         #CLIB     = 
 #--------------------------------------------------------------------------
 #  absoft / mac os x defs
 #--------------------------------------------------------------------------

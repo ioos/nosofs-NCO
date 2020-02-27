@@ -151,16 +151,16 @@ fi  # end if buildprep
 #else
 #  echo 'roms executable for DBOFS is not created'
 #fi
-#
+
 #  Compile ocean model of ROMS for TBOFS
-cd $SORCnos/ROMS.fd
-gmake clean
-gmake -f makefile_tbofs
-if [ -s  tbofs_roms_mpi ]; then
-  mv tbofs_roms_mpi $EXECnos/.
-else
-  echo 'roms executable for TBOFS is not created'
-fi
+#cd $SORCnos/ROMS.fd
+#gmake clean
+#gmake -f makefile_tbofs
+#if [ -s  tbofs_roms_mpi ]; then
+#  mv tbofs_roms_mpi $EXECnos/.
+#else
+#  echo 'roms executable for TBOFS is not created'
+#fi
 
 #  Compile ocean model of ROMS for GoMOFS
 #cd $SORCnos/ROMS.fd
@@ -171,12 +171,13 @@ fi
 #else
 #  echo 'roms executable for GoMOFS is not created'
 #fi
-#
-## The makefiles for these last two are not available on noaa pmb 
-## https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/nosofs.v3.1.9.1/sorc/ROMS.fd/
-#
-####  Compile ocean model of ROMS for WCOFS
-## West Coast - Developmental non-operational
+
+
+# The makefiles for these last two are not available on noaa pmb 
+# https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/nosofs.v3.1.9.1/sorc/ROMS.fd/
+
+###  Compile ocean model of ROMS for WCOFS
+# West Coast - Developmental non-operational
 #cd $SORCnos/ROMS.fd
 #gmake clean
 #gmake -f makefile_wcofs
@@ -185,15 +186,15 @@ fi
 #else
 #  echo 'roms executable for WCOFS is not created'
 #fi
-#
-####  Compile ocean model of ROMS for CIOFS
-## Cook Inlet Alaska - Is an operational product
-#cd $SORCnos/ROMS.fd
-#gmake clean
-#gmake -f makefile_ciofs
-#if [ -s  ciofs_roms_mpi ]; then
-#  mv ciofs_roms_mpi $EXECnos/.
-#else
-#  echo 'roms executable for CIOFS is not created'
-#fi
-#
+
+###  Compile ocean model of ROMS for CIOFS
+# Cook Inlet Alaska - Is an operational product
+cd $SORCnos/ROMS.fd
+gmake clean
+gmake -f makefile_ciofs
+if [ -s  ciofs_roms_mpi ]; then
+  mv ciofs_roms_mpi $EXECnos/.
+else
+  echo 'roms executable for CIOFS is not created'
+fi
+

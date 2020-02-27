@@ -15,6 +15,10 @@ fi
 export CDATE=$1
 HH=$2
 
+# YES will not delete /ptmp run directory, useful when debugging
+#export KEEPDATA=NO
+export KEEPDATA=YES
+
 ########################################
 # NOS_OFS_PREP 
 ########################################
@@ -85,7 +89,6 @@ export PPN=${PPN:-$((NPP/NODES))}
 
 export HOSTFILE=${HOSTFILE:-$PWD/hosts}
 export SENDDBN=NO
-export KEEPDATA=YES
 
 export MPIEXEC=mpirun
 
