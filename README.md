@@ -150,6 +150,10 @@ Put prerequisite libraries RPMS in S3 bucket.
     
 ## Gotchas
     
+### FVCOM based models will abort with little or no information when encountering a problem in the namelist
+The output log file will only show the "FVCOM" text graphics header.
+Solution: Run the model with a single core so the error is output to the log. Then make the required fix to the namelist file or template.
+
 ### FVCOM based models hang when using HyperThreads on EC2 instances.
 Solution: Either disable HyperThreads or use non-default mpirun bindings.
 
