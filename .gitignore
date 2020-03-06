@@ -9,6 +9,7 @@ sorc/ROMS.fd/Build/
 **/config.log
 **/config.status
 jobs/hosts.launcher
+sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/libtool
 sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/cmake/
 sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/com/
 sorc/FVCOM.fd/FVCOM_source/libs/proj.4-master/docs/

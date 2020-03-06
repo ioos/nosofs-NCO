@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 nosofs_ver=v3.2.1
 
@@ -30,24 +31,6 @@ fi
 
 BUILDPREP=NO
 
-#cd $SORCnos/FVCOM.fd/METIS_source
-#gmake clean
-#gmake -f makefile
-#rm -f *.o
-
-# Just build the model - debugging
-
-#cd $SORCnos/FVCOM.fd/FVCOM_source
-#gmake clean
-#gmake -f makefile_NGOFS
-#if [ -s  fvcom_ngofs ]; then
-#  mv fvcom_ngofs $EXECnos/.
-#else
-#  echo 'fvcom executable is not created'
-#fi
-#
-#exit 
-
 if [[ $BUILDPREP == "YES" ]] ; then
 
   cd $SORCnos/nos_ofs_utility.fd
@@ -64,7 +47,7 @@ if [[ $BUILDPREP == "YES" ]] ; then
   rm -f *.o *.a
   gmake -f makefile
   
-  
+
   cd $SORCnos/nos_ofs_create_forcing_obc_tides.fd
   rm -f *.o *.a
   gmake -f makefile
@@ -108,52 +91,43 @@ if [[ $BUILDPREP == "YES" ]] ; then
   gmake clean
   gmake -f makefile
   
- fi  # IF BUILDPREP
+fi  # IF BUILDPREP
 
 
-###  Compile ocean model of FVCOM for NGOFS
-#cd  $SORCnos/FVCOM.fd/FVCOM_source/libs/julian
-#gmake clean
-#gmake -f makefile
-#rm -f *.o
-#
-# Proj.4 needs to be untarred before building proj4.zip
-#cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
-#gmake clean
-#./configure  --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
-#gmake
-#gmake install
-## Copy shared libraries
-#cp -Rp $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master/lib/* $LIBnos
-#
-#
-#
-#cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
-#gmake clean
-#./configure  CC=gcc FC=gfortran CFLAGS='-DGFORTRAN -g -O2' proj4=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
-#gmake
-#gmake install
-#
-#
+##  Compile ocean model of FVCOM for NGOFS
+cd  $SORCnos/FVCOM.fd/FVCOM_source/libs/julian
+gmake clean
+gmake -f makefile
+rm -f *.o
 
-#cd $SORCnos/FVCOM.fd/METIS_source
-#gmake clean
-#rm -f *.o
-#gmake -f makefile
-#rm -f *.o
+# Proj4 needs to be unzipped before building proj4.zip
+cd $SORCnos/FVCOM.fd/FVCOM_source/libs
+unzip -n proj4.zip
 
+cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
+gmake clean
+./configure  --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master
+gmake
+gmake install
+
+# Copy shared libraries
+cp -Rp $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master/lib/* $LIBnos
+
+# Note: Automake tools must be installed 
+cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
+gmake clean
+./configure  CC=gcc FC=gfortran CFLAGS='-DGFORTRAN -g -O2' proj4=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
+gmake
+gmake install
+
+
+cd $SORCnos/FVCOM.fd/METIS_source
+gmake clean
+rm -f *.o
+gmake -f makefile
+rm -f *.o
 
 cd $SORCnos/FVCOM.fd/FVCOM_source
-
-
-gmake clean
-gmake -f makefile_LMHOFS
-if [ -s  fvcom_lmhofs ]; then
-  mv fvcom_lmhofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-exit 0
 
 gmake clean
 gmake -f makefile_NGOFS
@@ -162,8 +136,6 @@ if [ -s  fvcom_ngofs ]; then
 else
   echo 'fvcom executable is not created'
 fi  
-
-#exit 0
 
 gmake clean
 gmake -f makefile_NEGOFS
