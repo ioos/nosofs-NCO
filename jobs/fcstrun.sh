@@ -15,9 +15,11 @@ fi
 export CDATE=$1
 HH=$2
 
+export HOMEnos=$(dirname $PWD)
+
 # YES will not delete /ptmp run directory, useful when debugging
-#export KEEPDATA=NO
-export KEEPDATA=YES
+export KEEPDATA=NO
+#export KEEPDATA=YES
 
 ########################################
 # NOS_OFS_PREP 
@@ -44,11 +46,9 @@ date
 
 module purge
 export I_MPI_OFI_LIBRARY_INTERNAL=${I_MPI_OFI_LIBRARY_INTERNAL:-1}
-module load gcc/6.5.0
-module load mpi/intel/2020.0.154
-module load hdf5
-module load netcdf/4.5
-module load produtil
+
+module use -a $HOMEnos/modulefiles
+module load nosofs/v3.2.1_aws
 
 export I_MPI_DEBUG=0
 
@@ -114,7 +114,6 @@ export NWROOT=/save
 export COMROOT=/com
 #export COMIN=$COMROOT
 export jobid=fcst.$$
-export HOMEnos=$(dirname $PWD)
 
 export LD_LIBRARY_PATH=$HOMEnos/lib:$LD_LIBRARY_PATH
 
