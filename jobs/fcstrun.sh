@@ -50,13 +50,10 @@ export I_MPI_OFI_LIBRARY_INTERNAL=${I_MPI_OFI_LIBRARY_INTERNAL:-1}
 module use -a $HOMEnos/modulefiles
 module load nosofs/v3.2.1_aws
 
-export I_MPI_DEBUG=0
-
 #printenv
-
+#export I_MPI_DEBUG=1
 # This is needed for Intel MPI 2019+ with Docker
 #export I_MPI_FABRICS=shm
-
 #unset I_MPI_PMI_LIBRARY
 #export FI_PROVIDER=efa  # default if EFA is available
 #export FI_PROVIDER=sockets  # fall back to TCP instead
