@@ -2,7 +2,7 @@
 
 v3.2.1
 
-This is a fork of NOAA's National Ocean Service Operational Forecast System obtained from NOAA's PMB website:  https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/ nosofs.v[VERSION]
+This is a copy of NOAA's National Ocean Service Operational Forecast System obtained from NOAA's PMB website:  https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/ nosofs.v[VERSION]
 
 *NOAA does not maintain a publicly available source code repository.*
 
@@ -142,11 +142,6 @@ cd ./jobs
             AmazonLinux - AWS EC2
   
 ## TODO List
-
-Create test scripts that are decoupled from operational scripts and are easier to use.
-Improve getICs.sh and other helper scripts.
-Put prerequisite libraries RPMS in S3 bucket.
-(... and much more)
     
 ## Gotchas
     
