@@ -217,6 +217,7 @@ set -x
 env  
 
 
+result=0
 
 ########################################################
 # Execute the script.
@@ -224,7 +225,8 @@ env
 if [[ $NOWCAST == "YES" ]] ; then
 
   $SCRIPTSnos/exnos_ofs_nowcast.sh $OFS
-  
+  ((result+=$?))
+ 
   echo "-----------------------------------------------------"
   echo "-----------------------------------------------------"
   echo "-----------------------------------------------------"
@@ -240,6 +242,7 @@ fi
 if [[ $FORECAST == "YES" ]] ; then
 
   $SCRIPTSnos/exnos_ofs_forecast.sh $OFS
+  ((result+=$?))
 
   echo "-----------------------------------------------------"
   echo "-----------------------------------------------------"
@@ -257,6 +260,9 @@ cat $pgmout
 
 postmsg "$jlogfile" "$0 completed normally"
 
+# Save the log file
+cp -p $DATA/nos.*.log $COMOUT
+
 ##############################
 # Remove the Temporary working directory
 ##############################
@@ -265,3 +271,4 @@ if [ "${KEEPDATA}" != YES ]; then
 fi
 
 date
+exit $result
