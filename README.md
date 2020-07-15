@@ -3,8 +3,10 @@
 v3.2.1
 
 This is a copy of NOAA's National Ocean Service Operational Forecast System obtained from NOAA's PMB website:  https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/ nosofs.v[VERSION]
+This repository contains updates needed to run using GCC/GFortran compilers.
 
 *NOAA does not maintain a publicly available source code repository.*
+
 
 ### Directory structure
 
