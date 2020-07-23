@@ -127,7 +127,8 @@ else
 fi
 
 #export DATA=/ptmp/$USER/$OFS.$PDY
-export DATA=/ptmp/$OFS.$PDY
+
+export DATA=/ptmp/$OFS.${CDATE}${HH}
 
 export jlogfile=$DATA/jlogfile.$$
 
@@ -186,9 +187,9 @@ export SCRIPTSnos=${SCRIPTSnos:-${HOMEnos}/scripts}
 ##############################################
 # Define COM directories
 ##############################################
-export COMIN=${COMIN:-${COMROOT}/${NET}/${RUN}.${PDY}}          # input directory
+export COMIN=${COMIN:-${COMROOT}/${NET}/${RUN}.${PDY}${HH}}          # input directory
 export COMOUTroot=${COMOUTroot:-${COMROOT}/${NET}}              # output directory
-export COMOUT=${COMOUT:-${COMOUTroot}/${RUN}.${PDY}}                     # output directory
+export COMOUT=${COMOUT:-${COMOUTroot}/${RUN}.${PDY}${HH}}                     # output directory
 
 echo $COMIN
 echo $COMOUT
