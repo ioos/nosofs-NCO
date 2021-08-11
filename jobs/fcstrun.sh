@@ -51,7 +51,7 @@ module use -a $HOMEnos/modulefiles
 module load nosofs/v3.2.1_aws
 
 #printenv
-#export I_MPI_DEBUG=1
+export I_MPI_DEBUG=1
 # This is needed for Intel MPI 2019+ with Docker
 #export I_MPI_FABRICS=shm
 #unset I_MPI_PMI_LIBRARY
@@ -74,7 +74,7 @@ module load nosofs/v3.2.1_aws
 #export FI_EFA_ENABLE_SHM_TRANSFER=1
 #export I_MPI_WAIT_MODE=1   #default is 0
 
-export OFS=${OFS:-ngofs}
+export OFS=${OFS:-cbofs}
 #export NPP=4
 
 NOWCAST=NO      # Run the nowcast?
