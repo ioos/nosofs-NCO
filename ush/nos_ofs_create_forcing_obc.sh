@@ -720,13 +720,13 @@ if [ $DBASE_WL == "ETSS" ]; then
   CURRENTTIME=$INPUTTIME
   while [ ! -s $GRB2FILE ]
   do
-    if [ $envir == "dev" ]; then
+    if [[ $envir == "dev" ]]; then
       echo 'grib2 file is ' $GRB2FILE 'not found'
     fi
     CURRENTTIME=`$NDATE -1 $CURRENTTIME `
     if [ $CURRENTTIME -le ` $NDATE -60 $INPUTTIME ` ]
     then
-     if [ $DBASE_WL == "ETSS" ]; then
+     if [[ $DBASE_WL == "ETSS" ]]; then
        echo 'FATAL ERROR: no valid ETSS operational products is available for the given time period'
        msg="FATAL ERROR: no valid ETSS operational products is available for the given time period   "
        postmsg "$jlogfile" "$msg"
@@ -745,7 +745,7 @@ if [ $DBASE_WL == "ETSS" ]; then
     CYCLE=`echo $CURRENTTIME |cut -c9-10 `
     NCEPPRODDIR=${COMINetss}'/etss.'$YYYY$MM$DD
     GRB2FILE=${NCEPPRODDIR}/"etss.t"${CYCLE}"z.stormsurge.con2p5km.grib2"
-    if [ ${OFS} == "ciofs" ]; then
+    if [[ ${OFS} == "ciofs" ]]; then
       GRB2FILE=${NCEPPRODDIR}/"etss.t"${CYCLE}"z.stormsurge.ala3km.grib2"
     fi
 
@@ -820,6 +820,7 @@ if [ $DBASE_WL == "ETSS" ]; then
    done
 
    #mpirun cfp cmdfile
+   chmod u+x cmdfile
    mpirun -configfile cmdfile
    export err=$?; err_chk
 

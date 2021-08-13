@@ -78,7 +78,6 @@ echo "Starting nos_ofs_nowcast_forecast.sh at : `date`"
 
 
 #export MP_PGMMODEL=mpmd
-#export MP_CMDFILE=cmdfile
 
 RUNTYPE=$1 
 RUN=$OFS 

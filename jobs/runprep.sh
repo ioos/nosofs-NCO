@@ -16,31 +16,33 @@ export KEEPDATA=YES
 ###################################
 # Specify NET and RUN Name and model
 ####################################
-export OFS=ngofs
+export OFS=ciofs
 export NET=${NET:-nos}
 export RUN=${RUN:-$OFS}
 export envir=''
 
 module load gcc/6.5.0
 module load netcdf
-#module load mpi/intel
-module load mpi/mpich
+module load mpi/intel
+#module load mpi/mpich
 module load produtil
 module load wgrib2
 export NPP=8
 
-export CDATE=20191030
-export cyc='09'
+export CDATE=20210217
+export cyc='06'
 
 #export CDATE=20190905     # The hindcast date
 #export cyc='18'
 
 export cycle=t${cyc}z
-export nosofs_ver=v3.1.9.1
-export NWROOT=/save/$USER
-export COMROOT=/data/com
-export COMIN=$COMROOT
-export jobid=test
+#export nosofs_ver=v3.2.1_aws
+#export NWROOT=/save/$USER
+
+export HOMEnos=/save/nosofs-NCO
+export COMROT=/com
+export COMOUTroot=/com/nos
+export jobid=${OFS}_prep_${CDATE}${cyc}
 
 # If CDATE is defined, use it (hindcast)
 if [[ $CDATE ]] ; then
@@ -50,7 +52,7 @@ else
   . ./PDY
 fi
 
-export DATA=/data/temp/$OFS.$PDY
+export DATA=/ptmp/$OFS.$PDY$cyc
 
 ###############################################################
 # Specify DBN_ALERT_TYPE_???? for different Production envir.
@@ -105,11 +107,11 @@ export SCRIPTSnos=${SCRIPTSnos:-${HOMEnos}/scripts}
 # Define COM directories
 ##############################################
 
-export COMIN=${COMIN:-${COMROOT}/${NET}/${envir}/${RUN}.${PDY}}   # input directory
-export COMOUTroot=${COMOUTroot:-${COMROOT}/${NET}/${envir}}       # output directory
-export COMOUT=${COMOUT:-${COMOUTroot}/${RUN}.${PDY}}              # output directory
+export COMIN=$COMROT/forcing
+#export COMIN=${COMIN:-${COMROT}/${NET}/${RUN}.${PDY}${cyc}}   # input directory
+export COMOUT=${COMROT}/${NET}/${RUN}.${PDY}${cyc}              # output directory
 
-export COMINnestedparent=${COMINnestedparent:-${COMROOT}/${NET}/${envir}}
+export COMINnestedparent=${COMINnestedparent:-${COMROT}/${NET}}
 
 mkdir -m 775 -p $COMOUT
 
@@ -117,14 +119,14 @@ mkdir -m 775 -p $COMOUT
 ### Set up input data path
 ##############################################
 
-export COMINnam=$COMIN/nam/${envir}
+export COMINnam=$COMIN/nam
 export COMINhrrr=$COMIN/hrrr
 export COMINrap=$COMIN/rap
 export COMINgfs=$COMIN/gfs
 export COMINrtma=$COMIN/rtma
-export COMINetss=$COMIN/etss/${envir}
-export COMINrtofs_2d=$COMIN/rtofs/${envir}
-export COMINrtofs_3d=$COMIN/rtofs/${envir}
+export COMINetss=$COMIN/etss
+export COMINrtofs_2d=$COMIN/rtofs
+export COMINrtofs_3d=$COMIN/rtofs
 
 
 export COMINnam=${COMINnam:-$(compath.py nam/prod)}
@@ -142,10 +144,10 @@ then
   export NESTED_PARENT_OFS=ngofs
 fi
 
-export DCOMINndfd=${DCOMINndfd:-${DCOMROOT}/us007003}
-export DCOMINncom=${DCOMINncom:-${DCOMROOT}/us007003}
-export DCOMINusgs=${DCOMINusgs:-${DCOMROOT}/us007003}
-export DCOMINports=${DCOMINports:-${DCOMROOT}/us007003}
+export DCOMINndfd=${DCOMINndfd:-${DCOMROT}/us007003}
+export DCOMINncom=${DCOMINncom:-${DCOMROT}/us007003}
+export DCOMINusgs=${DCOMINusgs:-${DCOMROT}/us007003}
+export DCOMINports=${DCOMINports:-${DCOMROT}/us007003}
 export NOSBUFR=xx012
 export USGSBUFR=xx009
 

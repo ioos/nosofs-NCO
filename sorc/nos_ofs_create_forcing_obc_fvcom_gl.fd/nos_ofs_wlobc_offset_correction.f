@@ -94,6 +94,9 @@ c variables for real time observations
       real*8 xlocat(5)
       DATA BMISS /10E10/                                                
       DATA NDAYS /2/
+
+      character*128 filename
+
 c ----------------------------------------------------------------------------
 c  Process real time observations in BUFR files of NCEP data tank at NWLON stations
 c ----------------------------------------------------------------------------
@@ -421,6 +424,7 @@ c  ----------------------------------------------------------------------------
       IF(ALLOCATED(oned2)) DEALLOCATE(oned2)
       allocate(oned1(NMAX))
       allocate(oned2(NMAX))
+
       DO I=1,NSTA
         IF(NTR(I).GE.2) THEN
           avg=0.0
@@ -492,7 +496,9 @@ c Gradient change checking  Dh/Dt < 0.7 meters/hour, and assume first data is go
 
         avg=0.0
         NTMP=0
-	close(44)
+
+        write(filename,*) trim(NOS_ID(I))//'.obs'
+        write(*,*) 'PT DEBUG: file is: ', filename
 	OPEN(44,file=trim(NOS_ID(I))//'.obs')
         DO N=1,NTR(I)
           AVG=AVG+WL_OBS(I,N)
@@ -506,6 +512,9 @@ c Gradient change checking  Dh/Dt < 0.7 meters/hour, and assume first data is go
           IMN=INT((hourb-IHH)*60+0.1)
           write(44,*) trim(NOS_ID(I)),IYR,IMM,IDD,IHH,IMN,WL_OBS(I,N)
         ENDDO 
+        FLUSH(44)
+        CLOSE(44) 
+
         IF(NTMP.GT.0) THEN
           AVG=AVG/NTMP
         ELSE
@@ -514,8 +523,8 @@ c Gradient change checking  Dh/Dt < 0.7 meters/hour, and assume first data is go
         AVG_OBS(I)=AVG
         write(*,*) ' MEAN WL OBS.= ',AVG,' num. of obs=',NTMP
       ENDDO
+
       CLOSE(15) 
-      CLOSE(44) 
 
       INQUIRE(FILE=TRIM(FOUT),EXIST=FEXIST)
       IF(FEXIST) THEN
