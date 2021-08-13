@@ -70,7 +70,6 @@ ifdef USE_MPI
          CPPFLAGS += -DMPI
  ifdef USE_MPIF90
                FC := mpif90
-#               FC := mpfort
  else
              LIBS += -lfmpi-pgi -lmpi-pgi
  endif
@@ -118,7 +117,7 @@ endif
 #
 # Use full path of compiler.
 #
-               FC := $(shell which ${FC})
+               FC := $(shell which ${FC})  -fc=ifort
                LD := $(FC)
 
 #

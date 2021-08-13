@@ -6,7 +6,7 @@ export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
 
 module purge
 module use $HOMEnos/modulefiles
-module load nosofs/v3.2.1_aws
+module load nosofs/v3.2.1-intel
 
 module list 2>&1
 
@@ -29,6 +29,7 @@ cd $SORCnos
 
 buildprep=no
 
+#models='cbofs'
 models='ciofs'
 
 for model in $models
@@ -39,7 +40,7 @@ do
   if [ -s ${model}_roms_mpi ]; then
     mv ${model}_roms_mpi $EXECnos/.
   else
-    echo 'roms executable for ${model} is not created'
+    echo "roms executable for ${model} is not created"
   fi
 done
 

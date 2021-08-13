@@ -94,7 +94,9 @@ if [[ $BUILDPREP == "YES" ]] ; then
 fi  # IF BUILDPREP
 
 
-##  Compile ocean model of FVCOM for NGOFS
+##  Compile prerequisite libraries
+#####################################
+
 cd  $SORCnos/FVCOM.fd/FVCOM_source/libs/julian
 gmake clean
 gmake -f makefile
@@ -120,64 +122,27 @@ gmake clean
 gmake
 gmake install
 
-
 cd $SORCnos/FVCOM.fd/METIS_source
 gmake clean
 rm -f *.o
 gmake -f makefile
 rm -f *.o
 
+
+# Build the model(s)
 cd $SORCnos/FVCOM.fd/FVCOM_source
 
-gmake clean
-gmake -f makefile_NGOFS
-if [ -s  fvcom_ngofs ]; then
-  mv fvcom_ngofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi  
+models='leofs lmhofs ngofs negofs nwgofs sfbofs'
+models='leofs'
 
-gmake clean
-gmake -f makefile_NEGOFS
-if [ -s  fvcom_negofs ]; then
-  mv fvcom_negofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-
-
-gmake clean
-gmake -f makefile_NWGOFS
-if [ -s  fvcom_nwgofs ]; then
-  mv fvcom_nwgofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-
-
-gmake clean
-gmake -f makefile_SFBOFS
-if [ -s  fvcom_sfbofs ]; then
-  mv fvcom_sfbofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-
-
-gmake clean
-gmake -f makefile_LEOFS
-if [ -s  fvcom_leofs ]; then
-  mv fvcom_leofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-
-gmake clean
-gmake -f makefile_LMHOFS
-if [ -s  fvcom_lmhofs ]; then
-  mv fvcom_lmhofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-
+for model in $models
+do
+  gmake clean
+  gmake -f makefile_${model^^}
+  if [ -s  fvcom_${model} ]; then
+    mv fvcom_${model} $EXECnos/.
+  else
+    echo 'fvcom executable is not created'
+  fi  
+done
 

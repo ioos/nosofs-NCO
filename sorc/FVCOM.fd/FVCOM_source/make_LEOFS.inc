@@ -567,10 +567,10 @@ dashL= $(empty) -L
 #         CPP      = /usr/bin/cpp 
           COMPILER = -DGFORTRAN
           # avx512 option causes NaN errors, not sure which one specifically
-          FC       = $(COMP_F_MPI) -ffree-line-length-none -frepack-arrays # -march=skylake-avx512
-          CC       = $(COMP_MPCC) # -march=skylake-avx512
+          FC       = $(COMP_F_MPI) -ffree-line-length-none -frepack-arrays
+          CC       = $(COMP_MPCC)
           CPP      = $(COMP_CPP)
-          CXX      = $(COMP_CC) # -march=skylake-avx512
+          CXX      = $(COMP_CC)
           OPT      = -O3
           DEBFLGS  = -g -ffpe-summary=invalid,zero,overflow  # ignore underflow and denormal
 #         CLIB     = 
