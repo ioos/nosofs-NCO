@@ -653,6 +653,7 @@ do
 
   if [ $DBASE != "NDFD" ]; then
     rm -f *.$DBASE
+    MET_FILE=${DBASE}_FILE_${RUNTYPE}.dat
     if [ -s $MET_FILE ]; then
       cp -p $MET_FILE $COMOUT/met_files_used_${RUNTYPE}_${CYCLE_ORI}_${DBASE}.dat
       if [ -s cmdfile ]; then rm cmdfile; fi
@@ -669,7 +670,8 @@ do
       declare -p VARNAME LEV > var_lev_arrays
 
       # mpirun cfp cmdfile
-      mpirun $PWD/cmdfile
+      chmod u+x $PWD/cmdfile
+      mpirun -configfile $PWD/cmdfile
       export err=$?; err_chk
 
       LAST_TMPDIR=""

@@ -29,6 +29,12 @@ then
 fi
 
 
+  cd $SORCnos/nos_ofs_create_forcing_obc_fvcom_gl.fd
+  rm -f *.o *.a
+  gmake -f makefile
+
+exit
+
 BUILDPREP=NO
 
 if [[ $BUILDPREP == "YES" ]] ; then
@@ -93,7 +99,7 @@ if [[ $BUILDPREP == "YES" ]] ; then
   
 fi  # IF BUILDPREP
 
-
+exit
 ##  Compile ocean model of FVCOM for NGOFS
 cd  $SORCnos/FVCOM.fd/FVCOM_source/libs/julian
 gmake clean

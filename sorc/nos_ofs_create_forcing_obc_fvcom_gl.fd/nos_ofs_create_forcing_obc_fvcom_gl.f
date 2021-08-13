@@ -1442,7 +1442,6 @@ c  -------------------o---------------------------------------------------------
 
       DO I=1,NSTA
         FOUT=TRIM(NOS_ID(I))//'.obs'
-        CLOSE(10)
         OPEN(10,file=TRIM(FOUT))
         DO N=1,NTR(I)
           IF(ABS(WL_OBS(I,N)).LT.10.0) THEN
@@ -1453,6 +1452,7 @@ c  -------------------o---------------------------------------------------------
      &        WL_PRD(I,N),WL_OBS(I,N),SWL_OBS(I,N),T_OBS(I,N)
           ENDIF
         ENDDO   !N=1,NTR
+        CLOSE(10)
         write(*,*) 'STA= ',trim(NOS_ID(I)),' Number of WL obs= ',
      &    NTR(I)
         WRITE(ICORMS,*) 'STA= ',trim(NOS_ID(I)),
