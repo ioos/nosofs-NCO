@@ -416,7 +416,7 @@ fi
      MM=`echo $CURRENTTIME |cut -c5-6 `
      DD=`echo $CURRENTTIME |cut -c7-8 `
      HH=`echo $CURRENTTIME |cut -c9-10 `
-   RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.nc
+   RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD$cyc/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.nc
    if [ ! -s $RST_FILE ]; then
       COLD_START="T"
    fi
@@ -427,10 +427,10 @@ fi
      MM=`echo $CURRENTTIME |cut -c5-6 `
      DD=`echo $CURRENTTIME |cut -c7-8 `
      HH=`echo $CURRENTTIME |cut -c9-10 `
-   RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.nc
+   RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD$cyc/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.nc
    if [ $OCEAN_MODEL == "SELFE" ]
    then
-     RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.bin
+     RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD$cyc/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.bin
    fi 
    while [ ! -s $RST_FILE ]
    do
@@ -445,10 +445,10 @@ fi
      MM=`echo $CURRENTTIME |cut -c5-6 `
      DD=`echo $CURRENTTIME |cut -c7-8 `
      HH=`echo $CURRENTTIME |cut -c9-10 `
-     RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.nc
+     RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD$cyc/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.nc
      if [ $OCEAN_MODEL == "SELFE" ]
      then
-       RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.bin
+       RST_FILE=$COMOUTroot/${RUN}.$YYYY$MM$DD$cyc/${NET}.${RUN}.rst.nowcast.$YYYY$MM$DD.t${HH}z.bin
      fi 
    done
  fi

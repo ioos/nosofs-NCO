@@ -77,8 +77,8 @@ export I_MPI_DEBUG=1
 export OFS=${OFS:-cbofs}
 #export NPP=4
 
-NOWCAST=NO      # Run the nowcast?
-FORECAST=YES    # Run the forecast?
+NOWCAST=${NOWCAST:-NO}      # Run the nowcast?
+FORECAST=${FORECAST:-YES}    # Run the forecast?
 
 export NODES=${NODES:-1}
 export NPP=${NPP:-16}     # Number of processors
@@ -198,7 +198,6 @@ mkdir -m 775 -p $COMOUT
 
 # Fetch/Copy the ICs
 # ./getICs.sh
-
 
 ##############################################
 ####  Log File To Sys Report  

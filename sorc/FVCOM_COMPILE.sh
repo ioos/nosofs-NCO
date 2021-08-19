@@ -28,7 +28,6 @@ then
   mkdir -p $LIBnos
 fi
 
-
 BUILDPREP=NO
 
 if [[ $BUILDPREP == "YES" ]] ; then
@@ -92,7 +91,6 @@ if [[ $BUILDPREP == "YES" ]] ; then
   gmake -f makefile
   
 fi  # IF BUILDPREP
-
 
 ##  Compile prerequisite libraries
 #####################################
