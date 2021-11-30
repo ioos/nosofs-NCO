@@ -5,8 +5,14 @@ HOMEnos=$(dirname $PWD)
 export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
 
 module purge
+#scl enable devtoolset-8 bash
+. /save/builds/spack/share/spack/setup-env.sh
+
 module use $HOMEnos/modulefiles
-module load nosofs/v3.2.1-intel
+module load nosofs/v3.2.1_intel_skylake_512
+#module load nosofs/v3.2.1_intel_zen
+#module load nosofs/v3.2.1_gcc8_zen
+#module load nosofs/v3.2.1_gcc8_skylake_512
 
 module list 2>&1
 
@@ -29,8 +35,7 @@ cd $SORCnos
 
 buildprep=no
 
-#models='cbofs'
-models='ciofs'
+models='cbofs'
 
 for model in $models
 do

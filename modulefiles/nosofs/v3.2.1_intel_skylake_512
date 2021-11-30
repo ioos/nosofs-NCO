@@ -22,18 +22,18 @@ setenv COMP_CC cc
 setenv COMP_CPP cpp
 setenv COMP_MPCC mpicc
 
+
 module purge
-module load produtil
+module use -a /mnt/efs/fs1/save/builds/spack/share/spack/modules/linux-centos7-skylake_avx512
+module load gcc/8.3.1
 module load compiler/2021.3.0
 module load mpi/2021.3.0
-module load gcc/6.5.0
+
+module load produtil
 setenv MPI_INC "$env(I_MPI_ROOT)/include"
-#module load gcc/6.5.0
-#module load mpi/intel/2019.12.320
-#setenv MPI_INC "$env(I_MPI_ROOT)/intel64/include/gfortran/6.1.0"
 
 # Loding nceplibs modules
-module load wgrib2
+#module load wgrib2
 module load bacio/v2.1.0
 module load bufr/v11.0.2
 module load w3nco/v2.0.6
@@ -42,11 +42,14 @@ module load g2/v3.1.0
 module load libpng/1.5.30
 
 #Set other library variables
-module load hdf5
-module load netcdf/4.5
+module load hdf5-1.10.7-intel-2021.3.0-hgbrwsl
+module load netcdf-fortran-4.5.3-intel-2021.3.0-4kxhw4e
+
+## HACK HERE WITH SPACK
+setenv NETCDF "/mnt/efs/fs1/save/builds/spack/opt/spack/linux-centos7-skylake_avx512/intel-2021.3.0/netcdf-fortran-4.5.3-4kxhw4e7zg5y5cpr2hyeixevq5mrw3aq"
+
 setenv NETCDF_INC "-I$env(NETCDF)/include"
 setenv NETCDF_LIB "-L$env(NETCDF)/lib -lnetcdf -lnetcdff"
 setenv NETCDF_INCDIR  "$env(NETCDF)/include"
-
 
 setenv JASPER_LIB "-L/lib64 -ljasper"

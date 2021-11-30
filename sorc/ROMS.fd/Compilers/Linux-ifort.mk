@@ -82,16 +82,15 @@ endif
 
 ifdef USE_DEBUG
            FFLAGS += -g
-#          FFLAGS += -O3
 #          FFLAGS += -check all
+#          FFLAGS += -fp-stack-check
            FFLAGS += -check bounds
            FFLAGS += -check uninit
-#          FFLAGS += -fp-stack-check
            FFLAGS += -traceback
            FFLAGS += -warn interfaces,nouncalled -gen-interfaces
-           FFLAGS += -Wl,-no_compact_unwind
+#           FFLAGS += -Wl,-no_compact_unwind
 else
-           FFLAGS += -O3 -ftz -fast-transcendentals -no-prec-div -no-prec-sqrt -xHost
+           FFLAGS += -march=core-avx2 -O3 -ftz -fast-transcendentals -no-prec-div -no-prec-sqrt
 #           FFLAGS += -check all
 #           FFLAGS += -xSSE4.2 -lifcoremt -lirc   ## Lyon uses on jet
 endif
