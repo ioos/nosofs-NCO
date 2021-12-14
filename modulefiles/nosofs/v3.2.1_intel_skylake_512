@@ -18,22 +18,22 @@ setenv COMP_F ifort
 setenv COMP_F_MPI90 mpif90
 setenv COMP_F_MPI mpif90
 setenv COMP_ICC icc
-setenv COMP_CC cc
+setenv COMP_CC  icc
 setenv COMP_CPP cpp
 setenv COMP_MPCC mpicc
 
 
 module purge
-module use -a /mnt/efs/fs1/save/builds/spack/share/spack/modules/linux-centos7-skylake_avx512
-module load gcc/8.3.1
-module load compiler/2021.3.0
-module load mpi/2021.3.0
+module use -a /mnt/efs/fs1/save/environments/spack/share/spack/modules/linux-centos7-skylake_avx512
+module load gcc-8.5.0-gcc-8.5.0-jruc55y
+module load intel-oneapi-compilers-2021.3.0-gcc-8.5.0-gp3iweu
+module load intel-oneapi-mpi-2021.3.0-intel-2021.3.0-bixgqcx
 
 module load produtil
 setenv MPI_INC "$env(I_MPI_ROOT)/include"
 
 # Loding nceplibs modules
-#module load wgrib2
+module load wgrib2
 module load bacio/v2.1.0
 module load bufr/v11.0.2
 module load w3nco/v2.0.6
@@ -42,11 +42,12 @@ module load g2/v3.1.0
 module load libpng/1.5.30
 
 #Set other library variables
-module load hdf5-1.10.7-intel-2021.3.0-hgbrwsl
-module load netcdf-fortran-4.5.3-intel-2021.3.0-4kxhw4e
+module load hdf5-1.10.7-intel-2021.3.0-qfvg7gc
+module load netcdf-c-4.8.0-intel-2021.3.0-yynmjgt
+module load netcdf-fortran-4.5.3-intel-2021.3.0-l7wuzk4
 
 ## HACK HERE WITH SPACK
-setenv NETCDF "/mnt/efs/fs1/save/builds/spack/opt/spack/linux-centos7-skylake_avx512/intel-2021.3.0/netcdf-fortran-4.5.3-4kxhw4e7zg5y5cpr2hyeixevq5mrw3aq"
+setenv NETCDF "/mnt/efs/fs1/save/environments/spack/opt/spack/linux-centos7-skylake_avx512/intel-2021.3.0/netcdf-fortran-4.5.3-l7wuzk4zgmrhf2hdavegsubjwi6gw5ov"
 
 setenv NETCDF_INC "-I$env(NETCDF)/include"
 setenv NETCDF_LIB "-L$env(NETCDF)/lib -lnetcdf -lnetcdff"

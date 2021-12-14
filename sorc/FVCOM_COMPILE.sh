@@ -8,7 +8,8 @@ export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
 
 module purge
 module use $HOMEnos/modulefiles
-module load nosofs/v3.2.1_aws
+module load nosofs/v3.2.1_intel_skylake_512
+
 export PATH=$PATH:/usrx/bin
 
 module list 2>&1
@@ -117,6 +118,7 @@ cp -Rp $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master/lib/* $LIBnos
 cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
 gmake clean
 ./configure  CC=gcc FC=gfortran CFLAGS='-DGFORTRAN -g -O2' proj4=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
+#./configure CFLAGS='-g -O2' proj4=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
 gmake
 gmake install
 
@@ -126,11 +128,11 @@ rm -f *.o
 gmake -f makefile
 rm -f *.o
 
-
 # Build the model(s)
 cd $SORCnos/FVCOM.fd/FVCOM_source
 
 models='leofs lmhofs ngofs negofs nwgofs sfbofs'
+models='leofs'
 
 for model in $models
 do
