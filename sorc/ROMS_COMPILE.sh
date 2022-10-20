@@ -38,7 +38,7 @@ models='cbofs'
 for model in $models
 do
   cd $SORCnos/ROMS.fd
-  gmake clean
+# PT test  gmake clean
   gmake -f makefile_${model}
   if [ -s ${model}_roms_mpi ]; then
     mv ${model}_roms_mpi $EXECnos/.

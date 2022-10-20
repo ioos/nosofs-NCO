@@ -46,12 +46,13 @@
 
 ifdef USE_NETCDF4
         NF_CONFIG ?= nf-config
-    NETCDF_INCDIR ?= $(shell $(NF_CONFIG) --prefix)/include
-             LIBS := $(shell $(NF_CONFIG) --flibs)
+    # NETCDF_INCDIR ?= $(shell $(NF_CONFIG) --prefix)/include
+             LIBS += $(shell $(NF_CONFIG) --flibs)
+
+        NC_CONFIG ?= nc-config
+    # NETCDF_C_INCDIR ?= $(shell $(NC_CONFIG) --prefix)/include
+             LIBS += $(shell $(NC_CONFIG) --libs)
 else
-#    NETCDF_INCDIR ?= /usr/local/include
-#    NETCDF_LIBDIR ?= /usr/local/lib
-#             LIBS := -L$(NETCDF_LIBDIR) -lnetcdf
       NETCDF_INCDIR ?= /usrx/local/NetCDF/4.2/serial/include
       NETCDF_LIBDIR ?= /usrx/local/NetCDF/4.2/serial/lib
       LIBS := -L$(NETCDF_LIBDIR) -lnetcdff
