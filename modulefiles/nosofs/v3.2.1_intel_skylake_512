@@ -33,9 +33,6 @@ module load intel-oneapi-mpi-2021.3.0-intel-2021.3.0-bixgqcx
 module load zlib-1.2.11-intel-2021.3.0-gcfkvht
 module load libszip-2.1.1-intel-2021.3.0-pzpdymm
 
-# need szip
-
-
 module load produtil
 setenv MPI_INC "$env(I_MPI_ROOT)/include"
 
