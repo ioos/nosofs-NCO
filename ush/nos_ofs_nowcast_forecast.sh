@@ -1873,7 +1873,7 @@ then
         DD=`echo $time_nowcastend |cut -c7-8 `
         HH=`echo $time_nowcastend |cut -c9-10 `
        echo $YYYY$MM$DD$HH > ${OFS}.status
-       cp ${OFS}.status $COMOUT/.
+       mv ${OFS}.status $COMOUT/.
   
   fi
 #save 3D forecast field output file into COMOUT
@@ -1881,7 +1881,7 @@ then
   for combinefields in `ls ${DATA}/nos.${OFS}.fields.f*.nc`
   do
     if [ -s ${combinefields} ]; then
-      cp -p ${combinefields} ${COMOUT}/.
+      mv ${combinefields} ${COMOUT}/.
     fi
   done
 
@@ -1890,14 +1890,14 @@ then
    for combinefields in `ls ${DATA}/nos.${OFS}.2ds.f*.nc`
    do
     if [ -s ${combinefields} ]; then
-      cp -p ${combinefields} ${COMOUT}/.
+      mv ${combinefields} ${COMOUT}/.
     fi
    done
   fi
 #save forecast station output file into COMOUT
-  cp -p $DATA/$STA_OUT_FORECAST  ${COMOUT}/$STA_OUT_FORECAST
+  mv $DATA/$STA_OUT_FORECAST  ${COMOUT}/$STA_OUT_FORECAST
   if [ -s $DATA/nos.${OFS}.avg.forecast.$PDY.t${cyc}z.nc ]; then
-    cp -p $DATA/nos.${OFS}.avg.f*.nc $COMOUT/
+    mv $DATA/nos.${OFS}.avg.f*.nc $COMOUT/
   fi 
 
 fi 

@@ -23,8 +23,9 @@
 # First the defaults
 #
                FC := gfortran
-           #FFLAGS := -frepack-arrays -march=skylake-avx512
            FFLAGS := -frepack-arrays -march=skylake-avx512
+           #FFLAGS := -frepack-arrays -march=native
+           #FFLAGS := -frepack-arrays -march=znver1
               CPP := cpp
          CPPFLAGS := -P -traditional
           LDFLAGS :=
@@ -77,7 +78,6 @@ endif
 
 ifdef USE_AVX512
          FFLAGS += -mavx512f -mavx512dq -mavx512cd -mavx512bw -mavx512vl
-         # -fopt-info-vec-all
 endif
 
 ifdef USE_AVX2

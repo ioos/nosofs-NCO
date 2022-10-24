@@ -46,12 +46,13 @@
 
 ifdef USE_NETCDF4
         NF_CONFIG ?= nf-config
-    NETCDF_INCDIR ?= $(shell $(NF_CONFIG) --prefix)/include
-             LIBS := $(shell $(NF_CONFIG) --flibs)
+    # NETCDF_INCDIR ?= $(shell $(NF_CONFIG) --prefix)/include
+             LIBS += $(shell $(NF_CONFIG) --flibs)
+
+        NC_CONFIG ?= nc-config
+    # NETCDF_C_INCDIR ?= $(shell $(NC_CONFIG) --prefix)/include
+             LIBS += $(shell $(NC_CONFIG) --libs)
 else
-#    NETCDF_INCDIR ?= /usr/local/include
-#    NETCDF_LIBDIR ?= /usr/local/lib
-#             LIBS := -L$(NETCDF_LIBDIR) -lnetcdf
       NETCDF_INCDIR ?= /usrx/local/NetCDF/4.2/serial/include
       NETCDF_LIBDIR ?= /usrx/local/NetCDF/4.2/serial/lib
       LIBS := -L$(NETCDF_LIBDIR) -lnetcdff
@@ -70,7 +71,6 @@ ifdef USE_MPI
          CPPFLAGS += -DMPI
  ifdef USE_MPIF90
                FC := mpif90
-#               FC := mpfort
  else
              LIBS += -lfmpi-pgi -lmpi-pgi
  endif
@@ -83,16 +83,15 @@ endif
 
 ifdef USE_DEBUG
            FFLAGS += -g
-#          FFLAGS += -O3
 #          FFLAGS += -check all
+#          FFLAGS += -fp-stack-check
            FFLAGS += -check bounds
            FFLAGS += -check uninit
-#          FFLAGS += -fp-stack-check
            FFLAGS += -traceback
            FFLAGS += -warn interfaces,nouncalled -gen-interfaces
-           FFLAGS += -Wl,-no_compact_unwind
+#           FFLAGS += -Wl,-no_compact_unwind
 else
-           FFLAGS += -O3 -ftz -fast-transcendentals -no-prec-div -no-prec-sqrt -xHost
+           FFLAGS += -march=core-avx2 -O3 -ftz -fast-transcendentals -no-prec-div -no-prec-sqrt
 #           FFLAGS += -check all
 #           FFLAGS += -xSSE4.2 -lifcoremt -lirc   ## Lyon uses on jet
 endif
@@ -118,7 +117,7 @@ endif
 #
 # Use full path of compiler.
 #
-               FC := $(shell which ${FC})
+               FC := $(shell which ${FC})  -fc=ifort
                LD := $(FC)
 
 #

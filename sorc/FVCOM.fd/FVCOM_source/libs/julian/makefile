@@ -8,23 +8,16 @@
 ###
 
 
-          FC       = $(COMP_F)
-          CC       = $(COMP_ICC)
-          CPP      = $(COMP_CPP)
-          CXX      = $(COMP_CC)
+    FC       = $(COMP_F)
+    CC       = $(COMP_ICC)
+    CPP      = $(COMP_CPP)
+    CXX      = $(COMP_CC)
+    AR       = ar rc
+    RANLIB   = ranlib
 
-#		FC=ifort
-		AR = ar rc
-		RANLIB=ranlib
-
-		# TRY gcc first... 
-#		CC=icc
-		#CC=icc		
-
-
-            EXEC     = tconvert
-            LIB      = libjulian
-            JOPT     = -O3
+    EXEC     = tconvert
+    LIB      = libjulian
+    JOPT     = -O3
 
 #--------------------------------------------------------------------------
 #  Preprocessing and Compilation Directives
@@ -122,4 +115,3 @@ Makefiles::
 includes::
 #include ../../make.inc
 #include ./makedepends
-# DO NOT DELETE

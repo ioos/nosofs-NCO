@@ -3,10 +3,6 @@ set -x
 ulimit -s unlimited
 ulimit -c unlimited
 
-#export HYDRA_TOPO_DEBUG=1
-
-# NGOFS 20191017 03
-
 if [ $# -ne 2 ] ; then
   echo "Usage: $0 YYYYMMDD HH"
   exit 1
@@ -37,45 +33,23 @@ date
 #export SENDECF=${SENDECF:-YES}
 #export SENDDBN=${SENDDBN:-YES}
 
-# IBM POE settings
-#export MP_PULSE=0
-#export MP_TIMEOUT=9000
-#export MP_SHARED_MEMORY=yes
-
 . /usr/share/Modules/init/bash
 
 module purge
-export I_MPI_OFI_LIBRARY_INTERNAL=${I_MPI_OFI_LIBRARY_INTERNAL:-1}
+export I_MPI_OFI_LIBRARY_INTERNAL=1
 
-module use -a $HOMEnos/modulefiles
-module load nosofs/v3.2.1_aws
+module use -a $HOMEnos/modulefiles/nosofs
 
-#printenv
-#export I_MPI_DEBUG=1
-# This is needed for Intel MPI 2019+ with Docker
-#export I_MPI_FABRICS=shm
-#unset I_MPI_PMI_LIBRARY
-#export FI_PROVIDER=efa  # default if EFA is available
+#module load v3.2.1_gcc8_skylake_512
+module load v3.2.1_intel_skylake_512
+
+export I_MPI_DEBUG=1
+#export I_MPI_FABRICS=shm    # This is needed for Intel MPI 2019+ with Docker
+#export FI_PROVIDER=efa      # default if EFA is available
 #export FI_PROVIDER=sockets  # fall back to TCP instead
-#source /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/bin/mpivars.sh
-#export I_MPI_DEBUG=4,nobuf
-#export I_MPI_HYDRA_DEBUG=1
-#export I_MPI_HYDRA_ENV=all
-#export I_MPI_HYDRA_IFACE=ens5
-#export I_MPI_OFI_PROVIDER_DUMP=1
-#export I_MPI_EXTRA_FILESYSTEM=1
-#export I_MPI_FABRICS=shm:ofi
-#export I_MPI_FABRICS=shm
-#export I_MPI_FABRICS=efa
-#export I_MPI_FABRICS=verbs
-#export FI_PROVIDER=efa
-#export FI_PROVIDER=sockets
 #export FI_PROVIDER=tcp
-#export FI_EFA_ENABLE_SHM_TRANSFER=1
-#export I_MPI_WAIT_MODE=1   #default is 0
 
-export OFS=${OFS:-ngofs}
-#export NPP=4
+export OFS=${OFS:-cbofs}
 
 NOWCAST=${NOWCAST:-NO}      # Run the nowcast?
 FORECAST=${FORECAST:-YES}    # Run the forecast?
@@ -90,16 +64,10 @@ export SENDDBN=NO
 export MPIEXEC=mpirun
 
 if [[ "$OFS" == "ngofs" || "$OFS" == "nwgofs" ]] ; then
-  #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to numa:1 -map-by C"}
-  #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to core:2 -map-by C"}
-  #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to core:$NPP"}
   export MPIOPTS=${MPIOPTS:-"-np $NPP -ppn $PPN -bind-to core"}
-  #export MPIOPTS=${MPIOPTS:-"-np $NPP -bind-to numa:1 -map-by C"}
 fi
 
 export MPIOPTS=${MPIOPTS:-"-np $NPP -ppn $PPN"}
-
-#     mpirun -np $NPP -ppn $PPN -f $HOSTFILE 
 
 NOWCAST=NO      # Run the nowcast?
 FORECAST=YES    # Run the forecast?
@@ -109,7 +77,6 @@ export cycle=$cyc
 export nosofs_ver=v3.2.1
 export NWROOT=/save
 export COMROOT=/com
-#export COMIN=$COMROOT
 export jobid=fcst.$$
 
 export LD_LIBRARY_PATH=$HOMEnos/lib:$LD_LIBRARY_PATH
@@ -117,7 +84,6 @@ export LD_LIBRARY_PATH=$HOMEnos/lib:$LD_LIBRARY_PATH
 ###########################################
 # Run setpdy and initialize PDY variables
 ###########################################
-#sh setpdy.sh
 # If CDATE is defined, use it (hindcast)
 if [[ $CDATE ]] ; then
   export PDY=$CDATE
@@ -125,8 +91,6 @@ else
   setpdy.sh
   . ./PDY
 fi
-
-#export DATA=/ptmp/$USER/$OFS.$PDY
 
 export DATA=/ptmp/$OFS.${CDATE}${HH}
 
@@ -173,7 +137,6 @@ fi
 ####################################
 # Specify Execution Areas
 ####################################
-#export HOMEnos=${NWROOT}/nosofs-cbofs.${nosofs_ver:?}
 
 export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
 export EXECnos=${EXECnos:-${HOMEnos}/exec}
@@ -196,9 +159,6 @@ echo $COMOUT
 
 mkdir -m 775 -p $COMOUT
 
-# Fetch/Copy the ICs
-# ./getICs.sh
-
 ##############################################
 ####  Log File To Sys Report  
 ##############################################
@@ -215,7 +175,6 @@ echo "Start ${RUN} " >> $cormslogfile
 set -x
 
 env  
-
 
 result=0
 

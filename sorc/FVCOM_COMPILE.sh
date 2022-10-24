@@ -8,7 +8,8 @@ export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
 
 module purge
 module use $HOMEnos/modulefiles
-module load nosofs/v3.2.1_aws
+module load nosofs/v3.2.1_intel_skylake_512
+
 export PATH=$PATH:/usrx/bin
 
 module list 2>&1
@@ -92,7 +93,9 @@ if [[ $BUILDPREP == "YES" ]] ; then
   
 fi  # IF BUILDPREP
 
-##  Compile ocean model of FVCOM for NGOFS
+##  Compile prerequisite libraries
+#####################################
+
 cd  $SORCnos/FVCOM.fd/FVCOM_source/libs/julian
 gmake clean
 gmake -f makefile
@@ -115,9 +118,9 @@ cp -Rp $SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master/lib/* $LIBnos
 cd $SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
 gmake clean
 ./configure  CC=gcc FC=gfortran CFLAGS='-DGFORTRAN -g -O2' proj4=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
+#./configure CFLAGS='-g -O2' proj4=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj.4-master --prefix=$SORCnos/FVCOM.fd/FVCOM_source/libs/proj4-fortran-master
 gmake
 gmake install
-
 
 cd $SORCnos/FVCOM.fd/METIS_source
 gmake clean
@@ -125,57 +128,20 @@ rm -f *.o
 gmake -f makefile
 rm -f *.o
 
+# Build the model(s)
 cd $SORCnos/FVCOM.fd/FVCOM_source
 
-gmake clean
-gmake -f makefile_NGOFS
-if [ -s  fvcom_ngofs ]; then
-  mv fvcom_ngofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi  
+models='leofs lmhofs ngofs negofs nwgofs sfbofs'
+models='leofs'
 
-gmake clean
-gmake -f makefile_NEGOFS
-if [ -s  fvcom_negofs ]; then
-  mv fvcom_negofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-
-
-gmake clean
-gmake -f makefile_NWGOFS
-if [ -s  fvcom_nwgofs ]; then
-  mv fvcom_nwgofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-
-
-gmake clean
-gmake -f makefile_SFBOFS
-if [ -s  fvcom_sfbofs ]; then
-  mv fvcom_sfbofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-
-
-gmake clean
-gmake -f makefile_LEOFS
-if [ -s  fvcom_leofs ]; then
-  mv fvcom_leofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-
-gmake clean
-gmake -f makefile_LMHOFS
-if [ -s  fvcom_lmhofs ]; then
-  mv fvcom_lmhofs $EXECnos/.
-else
-  echo 'fvcom executable is not created'
-fi
-
+for model in $models
+do
+  gmake clean
+  gmake -f makefile_${model^^}
+  if [ -s  fvcom_${model} ]; then
+    mv fvcom_${model} $EXECnos/.
+  else
+    echo 'fvcom executable is not created'
+  fi  
+done
 

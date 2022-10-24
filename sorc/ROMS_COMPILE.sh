@@ -5,8 +5,11 @@ HOMEnos=$(dirname $PWD)
 export HOMEnos=${HOMEnos:-${NWROOT:?}/nosofs.${nosofs_ver:?}}
 
 module purge
+#scl enable devtoolset-8 bash
+. /save/environments/spack/share/spack/setup-env.sh
+
 module use $HOMEnos/modulefiles
-module load nosofs/v3.2.1_aws
+module load nosofs/v3.2.1_intel_skylake_512
 
 module list 2>&1
 
@@ -27,25 +30,22 @@ fi
 
 cd $SORCnos
 
-onlycbofs=no
 buildprep=no
 
-if [[ $onlycbofs == "yes" ]] ; then
+#models='cbofs ciofs dbofs gomofs tbofs'
+models='cbofs'
 
-  ##  Compile ocean model of ROMS for CBOFS
+for model in $models
+do
   cd $SORCnos/ROMS.fd
   gmake clean
-  gmake -f makefile_cbofs
-  if [ -s  cbofs_roms_mpi ]; then
-    mv cbofs_roms_mpi $EXECnos/.
+  gmake -f makefile_${model}
+  if [ -s ${model}_roms_mpi ]; then
+    mv ${model}_roms_mpi $EXECnos/.
   else
-    echo 'roms executable for CBOFS is not created'
+    echo "roms executable for ${model} is not created"
   fi
-
-  echo "Only compiling ROMS model for cbofs"
-  exit 0
-fi
-
+done
 
 
 if [[ $buildprep == "yes" ]] ; then
@@ -58,7 +58,7 @@ if [[ $buildprep == "yes" ]] ; then
     chmod 755 $SORCnos/nos_ofs_utility.fd/libnosutil.a
     mv $SORCnos/nos_ofs_utility.fd/libnosutil.a ${LIBnos}
   fi
- 
+
  
   cd $SORCnos/nos_ofs_create_forcing_met.fd
   rm -f *.o *.a
@@ -106,68 +106,3 @@ if [[ $buildprep == "yes" ]] ; then
   gmake -f makefile
 
 fi  # end if buildprep
-
-
-#  Compile ocean model of ROMS for CBOFS
-cd $SORCnos/ROMS.fd
-gmake clean
-gmake -f makefile_cbofs
-if [ -s  cbofs_roms_mpi ]; then
-  mv cbofs_roms_mpi $EXECnos/.
-else
-  echo 'roms executable for CBOFS is not created'
-fi
-
-#  Compile ocean model of ROMS for DBOFS
-cd $SORCnos/ROMS.fd
-gmake clean
-gmake -f makefile_dbofs
-if [ -s  dbofs_roms_mpi ]; then
-  mv dbofs_roms_mpi $EXECnos/.
-else
-  echo 'roms executable for DBOFS is not created'
-fi
-
-#  Compile ocean model of ROMS for TBOFS
-cd $SORCnos/ROMS.fd
-gmake clean
-gmake -f makefile_tbofs
-if [ -s  tbofs_roms_mpi ]; then
-  mv tbofs_roms_mpi $EXECnos/.
-else
-  echo 'roms executable for TBOFS is not created'
-fi
-
-#  Compile ocean model of ROMS for GoMOFS
-cd $SORCnos/ROMS.fd
-gmake clean
-gmake -f makefile_gomofs
-if [ -s  gomofs_roms_mpi ]; then
-  mv gomofs_roms_mpi $EXECnos/.
-else
-  echo 'roms executable for GoMOFS is not created'
-fi
-
-#  Compile ocean model of ROMS for Cook Inlet AK
-cd $SORCnos/ROMS.fd
-gmake clean
-gmake -f makefile_ciofs
-if [ -s  ciofs_roms_mpi ]; then
-  mv ciofs_roms_mpi $EXECnos/.
-else
-  echo 'roms executable for CIOFS is not created'
-fi
-
-
-# The makefile for wcofs is not available on noaa pmb 
-###  Compile ocean model of ROMS for WCOFS
-# West Coast - Developmental non-operational
-#cd $SORCnos/ROMS.fd
-#gmake clean
-#gmake -f makefile_wcofs
-#if [ -s  wcofs_roms_mpi ]; then
-#  mv wcofs_roms_mpi $EXECnos/.
-#else
-#  echo 'roms executable for WCOFS is not created'
-#fi
-
